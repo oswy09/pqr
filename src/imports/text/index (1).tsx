@@ -1,0 +1,5117 @@
+import svgPaths from "./svg-12hiapt3yr";
+import imgContainer from "./6f4ba96413e46dacaf3d839ce0fe4f5e45c47899.png";
+import imgContainer1 from "./425a5effc23df1222c570d0a2b6761c47e1a9af2.png";
+
+function LogoAndFoundation() {
+  return (
+    <div className="content-stretch flex gap-[16px] items-center relative shrink-0" data-name="Logo and Foundation">
+      <div className="h-[32px] overflow-clip relative shrink-0 w-[35.753px]" data-name="axa-mini-switch">
+        <svg className="absolute block inset-0 size-full" fill="none" preserveAspectRatio="none" viewBox="0 0 35.7531 32">
+          <path d={svgPaths.p171a2c00} fill="var(--fill-0, #FF1721)" id="Vector" />
+        </svg>
+      </div>
+      <p className="[word-break:break-word] font-['Source_Sans_3:Regular',sans-serif] font-normal leading-[28px] relative shrink-0 text-[#606776] text-[20px] whitespace-nowrap">v.1.1</p>
+      <p className="[word-break:break-word] font-['Source_Sans_3:Regular',sans-serif] font-normal leading-[28px] relative shrink-0 text-[#606776] text-[20px] whitespace-nowrap">/</p>
+      <p className="[word-break:break-word] font-['Source_Sans_3:Regular',sans-serif] font-normal leading-[28px] relative shrink-0 text-[#606776] text-[20px] whitespace-nowrap">Colors</p>
+    </div>
+  );
+}
+
+function Frame() {
+  return <div className="content-stretch flex flex-col h-[28px] items-start relative shrink-0 w-[136px]" />;
+}
+
+function Header() {
+  return (
+    <div className="content-stretch flex items-start justify-between relative shrink-0 w-full" data-name="Header">
+      <LogoAndFoundation />
+      <Frame />
+    </div>
+  );
+}
+
+function Container() {
+  return (
+    <div className="content-stretch flex flex-col items-start relative shrink-0 w-full" data-name="Container">
+      <p className="[word-break:break-word] font-['Publico:Light',sans-serif] leading-[64px] not-italic relative shrink-0 text-[#1a1d21] text-[64px] w-full">Text colors</p>
+    </div>
+  );
+}
+
+function HeadingAndSupportingText() {
+  return (
+    <div className="content-stretch flex flex-col gap-[16px] items-start relative shrink-0 w-[800px]" data-name="Heading and supporting text">
+      <Container />
+      <p className="[word-break:break-word] font-['Source_Sans_3:Regular',sans-serif] font-normal leading-[28px] relative shrink-0 text-[#606776] text-[20px] w-full">The choice of text color depends on the background it appears on, ensuring clarity and contrast. Typography can be applied to neutral backgrounds, emphasis colors, or even images. For further details on type sizing and formatting, please refer to our typography guidelines.</p>
+    </div>
+  );
+}
+
+function Content() {
+  return (
+    <div className="bg-white relative rounded-[12px] shrink-0 w-full" data-name="Content">
+      <div className="content-stretch flex flex-col gap-[48px] items-start p-[64px] relative size-full">
+        <Header />
+        <HeadingAndSupportingText />
+      </div>
+    </div>
+  );
+}
+
+function DesignSystemHeader() {
+  return (
+    <div className="relative rounded-[12px] shrink-0 w-full" data-name="_Design system header">
+      <div className="overflow-clip rounded-[inherit] size-full">
+        <div className="content-stretch flex flex-col items-start p-[4px] relative size-full">
+          <Content />
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function ColorInfo() {
+  return (
+    <div className="content-stretch flex flex-col items-start relative shrink-0 w-full" data-name="Color Info">
+      <p className="[word-break:break-word] font-['Publico:Bold',sans-serif] leading-[46px] not-italic relative shrink-0 text-[#1a1d21] text-[40px] w-full">Static</p>
+    </div>
+  );
+}
+
+function Description() {
+  return (
+    <div className="content-stretch flex flex-col items-start relative shrink-0 w-full" data-name="Description">
+      <ColorInfo />
+    </div>
+  );
+}
+
+function DocsTableHeader() {
+  return (
+    <div className="content-stretch flex flex-col h-[48px] items-start justify-center overflow-clip relative shrink-0 w-[264px]" data-name=".Docs/Table/Header">
+      <p className="[word-break:break-word] font-['Source_Sans_Pro:SemiBold',sans-serif] leading-[16px] not-italic relative shrink-0 text-[#606776] text-[12px] tracking-[1px] uppercase whitespace-pre">{`TOKEN  `}</p>
+    </div>
+  );
+}
+
+function DocsTableHeader1() {
+  return (
+    <div className="content-stretch flex flex-col h-[48px] items-start justify-center overflow-clip px-[16px] relative shrink-0 w-[340px]" data-name=".Docs/Table/Header">
+      <p className="[word-break:break-word] font-['Source_Sans_Pro:SemiBold',sans-serif] leading-[16px] not-italic relative shrink-0 text-[#606776] text-[12px] tracking-[1px] uppercase whitespace-nowrap">DESCRIPTION</p>
+    </div>
+  );
+}
+
+function DocsTableHeader2() {
+  return (
+    <div className="content-stretch flex flex-col h-[48px] items-start justify-center overflow-clip relative shrink-0 w-[146px]" data-name=".Docs/Table/Header">
+      <p className="[word-break:break-word] font-['Source_Sans_Pro:SemiBold',sans-serif] leading-[16px] not-italic relative shrink-0 text-[#606776] text-[12px] tracking-[1px] uppercase w-full">VALUE (RGBA/HEX)</p>
+    </div>
+  );
+}
+
+function DocsTableHeader3() {
+  return (
+    <div className="content-stretch flex flex-col h-[48px] items-start justify-center max-w-[96px] overflow-clip relative shrink-0 w-[96px]" data-name=".Docs/Table/Header">
+      <p className="[word-break:break-word] font-['Source_Sans_Pro:SemiBold',sans-serif] leading-[16px] not-italic relative shrink-0 text-[#606776] text-[12px] tracking-[1px] uppercase whitespace-nowrap">LIGHT MODE</p>
+    </div>
+  );
+}
+
+function TableHeader() {
+  return (
+    <div className="content-stretch flex items-center relative shrink-0 w-full" data-name="Table Header">
+      <div aria-hidden className="absolute border-[rgba(0,0,0,0.2)] border-b border-solid inset-[0_0_-0.5px_0] pointer-events-none" />
+      <DocsTableHeader />
+      <DocsTableHeader1 />
+      <DocsTableHeader2 />
+      <DocsTableHeader3 />
+    </div>
+  );
+}
+
+function Token() {
+  return (
+    <div className="bg-[#efeff1] content-stretch flex items-center justify-center px-[8px] py-[4px] relative rounded-[4px] shrink-0" data-name="token">
+      <p className="[word-break:break-word] font-['Source_Sans_3:SemiBold',sans-serif] font-semibold leading-[20px] max-w-[230px] relative shrink-0 text-[#434956] text-[14px] whitespace-nowrap">color-text-primary</p>
+    </div>
+  );
+}
+
+function DocsTableCell() {
+  return (
+    <div className="flex-[1_0_0] max-w-[264px] min-w-px relative" data-name=".Docs/Table/Cell">
+      <div className="flex flex-col justify-center max-w-[inherit] overflow-clip rounded-[inherit] size-full">
+        <div className="content-stretch flex flex-col items-start justify-center max-w-[inherit] pr-[16px] relative size-full">
+          <Token />
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function DocsTableCell1() {
+  return (
+    <div className="content-stretch flex flex-col h-[72px] items-start justify-center overflow-clip p-[16px] relative shrink-0 w-[340px]" data-name=".Docs/Table/Cell">
+      <p className="[word-break:break-word] flex-[1_0_0] font-['Source_Sans_3:Regular',sans-serif] font-normal leading-[20px] min-h-px relative text-[#1a1d21] text-[14px] w-full">{`Use for main body text and primary content that requires the highest visibility on light background. `}</p>
+    </div>
+  );
+}
+
+function ColumnLabel() {
+  return (
+    <div className="relative shrink-0 w-full" data-name="Column Label">
+      <div className="content-stretch flex flex-col items-start px-[8px] relative size-full">
+        <p className="[word-break:break-word] font-['Source_Sans_3:SemiBold',sans-serif] font-semibold leading-[20px] overflow-hidden relative shrink-0 text-[#1a1d21] text-[14px] text-center text-ellipsis whitespace-nowrap">{` `}</p>
+      </div>
+    </div>
+  );
+}
+
+function DocsTableCell2() {
+  return (
+    <div className="content-stretch flex flex-col items-center justify-center overflow-clip relative shrink-0 w-[146px]" data-name=".Docs/Table/Cell">
+      <ColumnLabel />
+    </div>
+  );
+}
+
+function Container2() {
+  return (
+    <div className="bg-white relative rounded-[8px] shrink-0 size-[48px]" data-name="container">
+      <div className="content-stretch flex flex-col items-center justify-center overflow-clip px-[16px] py-[12px] relative rounded-[inherit] size-full">
+        <p className="[word-break:break-word] font-['Publico:Bold',sans-serif] leading-[24px] not-italic relative shrink-0 text-[#1a1d21] text-[20px] w-[25px]">Aa</p>
+      </div>
+      <div aria-hidden className="absolute border border-[rgba(0,0,0,0.1)] border-solid inset-0 pointer-events-none rounded-[8px]" />
+    </div>
+  );
+}
+
+function Container1() {
+  return (
+    <div className="content-stretch flex flex-col items-center justify-center overflow-clip relative rounded-[8px] shrink-0" data-name="container">
+      <Container2 />
+    </div>
+  );
+}
+
+function ColumnLabel1() {
+  return (
+    <div className="content-stretch flex items-center justify-center relative shrink-0" data-name="Column Label">
+      <Container1 />
+    </div>
+  );
+}
+
+function Container4() {
+  return (
+    <div className="relative rounded-[8px] shrink-0 size-[48px]" data-name="container">
+      <img alt="" className="absolute inset-0 max-w-none object-bottom pointer-events-none rounded-[8px] size-full" src={imgContainer} />
+      <div className="content-stretch flex flex-col items-center justify-center overflow-clip px-[16px] py-[12px] relative rounded-[inherit] size-full">
+        <p className="[word-break:break-word] font-['Publico:Bold',sans-serif] leading-[24px] not-italic relative shrink-0 text-[#1a1d21] text-[20px] whitespace-nowrap">Aa</p>
+      </div>
+      <div aria-hidden className="absolute border border-[rgba(0,0,0,0.1)] border-solid inset-0 pointer-events-none rounded-[8px]" />
+    </div>
+  );
+}
+
+function Container3() {
+  return (
+    <div className="content-stretch flex flex-col items-center justify-center overflow-clip relative rounded-[8px] shrink-0" data-name="container">
+      <Container4 />
+    </div>
+  );
+}
+
+function ColumnLabel2() {
+  return (
+    <div className="content-stretch flex items-center justify-center relative shrink-0" data-name="Column Label">
+      <Container3 />
+    </div>
+  );
+}
+
+function DocsTableCell3() {
+  return (
+    <div className="content-stretch flex gap-[4px] items-center justify-end overflow-clip relative shrink-0" data-name=".Docs/Table/Cell">
+      <ColumnLabel1 />
+      <ColumnLabel2 />
+    </div>
+  );
+}
+
+function StyleProperty() {
+  return (
+    <div className="content-stretch flex items-center min-h-[88px] py-[12px] relative shrink-0 w-full" data-name="Style Property">
+      <div aria-hidden className="absolute border-[rgba(0,0,0,0.1)] border-b border-solid inset-[0_0_-0.5px_0] pointer-events-none" />
+      <DocsTableCell />
+      <DocsTableCell1 />
+      <DocsTableCell2 />
+      <DocsTableCell3 />
+    </div>
+  );
+}
+
+function Token1() {
+  return (
+    <div className="bg-[#efeff1] content-stretch flex items-center justify-center px-[8px] py-[4px] relative rounded-[4px] shrink-0" data-name="token">
+      <p className="[word-break:break-word] font-['Source_Sans_3:SemiBold',sans-serif] font-semibold leading-[20px] max-w-[230px] relative shrink-0 text-[#434956] text-[14px] whitespace-nowrap">color-text-secondary</p>
+    </div>
+  );
+}
+
+function DocsTableCell4() {
+  return (
+    <div className="flex-[1_0_0] max-w-[264px] min-w-px relative" data-name=".Docs/Table/Cell">
+      <div className="flex flex-col justify-center max-w-[inherit] overflow-clip rounded-[inherit] size-full">
+        <div className="content-stretch flex flex-col items-start justify-center max-w-[inherit] pr-[16px] relative size-full">
+          <Token1 />
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function DocsTableCell5() {
+  return (
+    <div className="content-stretch flex flex-col h-[72px] items-start justify-center overflow-clip p-[16px] relative shrink-0 w-[340px]" data-name=".Docs/Table/Cell">
+      <p className="[word-break:break-word] flex-[1_0_0] font-['Source_Sans_3:Regular',sans-serif] font-normal leading-[20px] min-h-px relative text-[#1a1d21] text-[14px] w-full">{`Use for supporting text, subtitles, or less prominent information on light background. `}</p>
+    </div>
+  );
+}
+
+function ColumnLabel3() {
+  return (
+    <div className="relative shrink-0 w-full" data-name="Column Label">
+      <div className="content-stretch flex flex-col items-start px-[8px] relative size-full">
+        <p className="[word-break:break-word] font-['Source_Sans_3:SemiBold',sans-serif] font-semibold leading-[20px] overflow-hidden relative shrink-0 text-[#1a1d21] text-[14px] text-center text-ellipsis whitespace-nowrap">#434956</p>
+      </div>
+    </div>
+  );
+}
+
+function DocsTableCell6() {
+  return (
+    <div className="content-stretch flex flex-col items-center justify-center overflow-clip relative shrink-0 w-[146px]" data-name=".Docs/Table/Cell">
+      <ColumnLabel3 />
+    </div>
+  );
+}
+
+function Container5() {
+  return (
+    <div className="bg-white relative rounded-[8px] shrink-0 size-[48px]" data-name="container">
+      <div className="content-stretch flex flex-col items-center justify-center overflow-clip px-[16px] py-[12px] relative rounded-[inherit] size-full">
+        <p className="[word-break:break-word] font-['Publico:Bold',sans-serif] leading-[24px] not-italic relative shrink-0 text-[#434956] text-[20px] whitespace-nowrap">Aa</p>
+      </div>
+      <div aria-hidden className="absolute border border-[rgba(0,0,0,0.1)] border-solid inset-0 pointer-events-none rounded-[8px]" />
+    </div>
+  );
+}
+
+function ColumnLabel4() {
+  return (
+    <div className="content-stretch flex items-center justify-center relative shrink-0" data-name="Column Label">
+      <Container5 />
+    </div>
+  );
+}
+
+function Container7() {
+  return (
+    <div className="relative rounded-[8px] shrink-0 size-[48px]" data-name="container">
+      <img alt="" className="absolute inset-0 max-w-none object-bottom pointer-events-none rounded-[8px] size-full" src={imgContainer} />
+      <div className="content-stretch flex flex-col items-center justify-center overflow-clip px-[16px] py-[12px] relative rounded-[inherit] size-full">
+        <p className="[word-break:break-word] font-['Publico:Bold',sans-serif] leading-[24px] not-italic relative shrink-0 text-[#434956] text-[20px] whitespace-nowrap">Aa</p>
+      </div>
+      <div aria-hidden className="absolute border border-[rgba(0,0,0,0.1)] border-solid inset-0 pointer-events-none rounded-[8px]" />
+    </div>
+  );
+}
+
+function Container6() {
+  return (
+    <div className="content-stretch flex flex-col items-center justify-center overflow-clip relative rounded-[8px] shrink-0" data-name="container">
+      <Container7 />
+    </div>
+  );
+}
+
+function ColumnLabel5() {
+  return (
+    <div className="content-stretch flex items-center justify-center relative shrink-0" data-name="Column Label">
+      <Container6 />
+    </div>
+  );
+}
+
+function DocsTableCell7() {
+  return (
+    <div className="content-stretch flex gap-[4px] items-center justify-end overflow-clip relative shrink-0" data-name=".Docs/Table/Cell">
+      <ColumnLabel4 />
+      <ColumnLabel5 />
+    </div>
+  );
+}
+
+function StyleProperty1() {
+  return (
+    <div className="content-stretch flex items-center min-h-[88px] py-[12px] relative shrink-0 w-full" data-name="Style Property">
+      <div aria-hidden className="absolute border-[rgba(0,0,0,0.1)] border-b border-solid inset-[0_0_-0.5px_0] pointer-events-none" />
+      <DocsTableCell4 />
+      <DocsTableCell5 />
+      <DocsTableCell6 />
+      <DocsTableCell7 />
+    </div>
+  );
+}
+
+function Token2() {
+  return (
+    <div className="bg-[#efeff1] content-stretch flex items-center justify-center px-[8px] py-[4px] relative rounded-[4px] shrink-0" data-name="token">
+      <p className="[word-break:break-word] font-['Source_Sans_3:SemiBold',sans-serif] font-semibold leading-[20px] max-w-[230px] relative shrink-0 text-[#434956] text-[14px] whitespace-nowrap">color-text-tertiary</p>
+    </div>
+  );
+}
+
+function DocsTableCell8() {
+  return (
+    <div className="flex-[1_0_0] max-w-[264px] min-w-px relative" data-name=".Docs/Table/Cell">
+      <div className="flex flex-col justify-center max-w-[inherit] overflow-clip rounded-[inherit] size-full">
+        <div className="content-stretch flex flex-col items-start justify-center max-w-[inherit] pr-[16px] relative size-full">
+          <Token2 />
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function DocsTableCell9() {
+  return (
+    <div className="content-stretch flex flex-col h-[72px] items-start justify-center overflow-clip p-[16px] relative shrink-0 w-[340px]" data-name=".Docs/Table/Cell">
+      <p className="[word-break:break-word] flex-[1_0_0] font-['Source_Sans_3:Regular',sans-serif] font-normal leading-[20px] min-h-px relative text-[#1a1d21] text-[14px] w-full">{`Use for tertiary content, or low-priority text with reduced visibility on light background. `}</p>
+    </div>
+  );
+}
+
+function ColumnLabel6() {
+  return (
+    <div className="relative shrink-0 w-full" data-name="Column Label">
+      <div className="content-stretch flex flex-col items-start px-[8px] relative size-full">
+        <p className="[word-break:break-word] font-['Source_Sans_3:SemiBold',sans-serif] font-semibold leading-[20px] overflow-hidden relative shrink-0 text-[#1a1d21] text-[14px] text-center text-ellipsis whitespace-nowrap">#606776</p>
+      </div>
+    </div>
+  );
+}
+
+function DocsTableCell10() {
+  return (
+    <div className="content-stretch flex flex-col items-center justify-center overflow-clip relative shrink-0 w-[146px]" data-name=".Docs/Table/Cell">
+      <ColumnLabel6 />
+    </div>
+  );
+}
+
+function Container9() {
+  return (
+    <div className="bg-white relative rounded-[8px] shrink-0 size-[48px]" data-name="container">
+      <div className="content-stretch flex flex-col items-center justify-center overflow-clip px-[16px] py-[12px] relative rounded-[inherit] size-full">
+        <p className="[word-break:break-word] font-['Publico:Bold',sans-serif] leading-[24px] not-italic relative shrink-0 text-[#606776] text-[20px] w-[25px]">Aa</p>
+      </div>
+      <div aria-hidden className="absolute border border-[rgba(0,0,0,0.1)] border-solid inset-0 pointer-events-none rounded-[8px]" />
+    </div>
+  );
+}
+
+function Container8() {
+  return (
+    <div className="content-stretch flex flex-col items-center justify-center overflow-clip relative rounded-[8px] shrink-0" data-name="container">
+      <Container9 />
+    </div>
+  );
+}
+
+function ColumnLabel7() {
+  return (
+    <div className="content-stretch flex items-center justify-center relative shrink-0" data-name="Column Label">
+      <Container8 />
+    </div>
+  );
+}
+
+function Container11() {
+  return (
+    <div className="relative rounded-[8px] shrink-0 size-[48px]" data-name="container">
+      <img alt="" className="absolute inset-0 max-w-none object-bottom pointer-events-none rounded-[8px] size-full" src={imgContainer} />
+      <div className="content-stretch flex flex-col items-center justify-center overflow-clip px-[16px] py-[12px] relative rounded-[inherit] size-full">
+        <p className="[word-break:break-word] font-['Publico:Bold',sans-serif] leading-[24px] not-italic relative shrink-0 text-[#606776] text-[20px] whitespace-nowrap">Aa</p>
+      </div>
+      <div aria-hidden className="absolute border border-[rgba(0,0,0,0.1)] border-solid inset-0 pointer-events-none rounded-[8px]" />
+    </div>
+  );
+}
+
+function Container10() {
+  return (
+    <div className="content-stretch flex flex-col items-center justify-center overflow-clip relative rounded-[8px] shrink-0" data-name="container">
+      <Container11 />
+    </div>
+  );
+}
+
+function ColumnLabel8() {
+  return (
+    <div className="content-stretch flex items-center justify-center relative shrink-0" data-name="Column Label">
+      <Container10 />
+    </div>
+  );
+}
+
+function DocsTableCell11() {
+  return (
+    <div className="content-stretch flex gap-[4px] items-center justify-end overflow-clip relative shrink-0" data-name=".Docs/Table/Cell">
+      <ColumnLabel7 />
+      <ColumnLabel8 />
+    </div>
+  );
+}
+
+function StyleProperty2() {
+  return (
+    <div className="content-stretch flex items-center min-h-[88px] py-[12px] relative shrink-0 w-full" data-name="Style Property">
+      <div aria-hidden className="absolute border-[rgba(0,0,0,0.1)] border-b border-solid inset-[0_0_-0.5px_0] pointer-events-none" />
+      <DocsTableCell8 />
+      <DocsTableCell9 />
+      <DocsTableCell10 />
+      <DocsTableCell11 />
+    </div>
+  );
+}
+
+function Token3() {
+  return (
+    <div className="bg-[#efeff1] content-stretch flex items-center justify-center px-[8px] py-[4px] relative rounded-[4px] shrink-0" data-name="token">
+      <p className="[word-break:break-word] font-['Source_Sans_3:SemiBold',sans-serif] font-semibold leading-[20px] max-w-[230px] relative shrink-0 text-[#434956] text-[14px] whitespace-nowrap">color-text-disabled</p>
+    </div>
+  );
+}
+
+function DocsTableCell12() {
+  return (
+    <div className="flex-[1_0_0] max-w-[264px] min-w-px relative" data-name=".Docs/Table/Cell">
+      <div className="flex flex-col justify-center max-w-[inherit] overflow-clip rounded-[inherit] size-full">
+        <div className="content-stretch flex flex-col items-start justify-center max-w-[inherit] pr-[16px] relative size-full">
+          <Token3 />
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function DocsTableCell13() {
+  return (
+    <div className="content-stretch flex flex-col h-[72px] items-start justify-center overflow-clip p-[16px] relative shrink-0 w-[340px]" data-name=".Docs/Table/Cell">
+      <p className="[word-break:break-word] flex-[1_0_0] font-['Source_Sans_3:Regular',sans-serif] font-normal leading-[20px] min-h-px relative text-[#1a1d21] text-[14px] w-full">Use for text in a disabled state or unavailable actions on light background, ensuring it looks inactive.</p>
+    </div>
+  );
+}
+
+function ColumnLabel9() {
+  return (
+    <div className="relative shrink-0 w-full" data-name="Column Label">
+      <div className="[word-break:break-word] content-stretch flex flex-col font-['Source_Sans_3:SemiBold',sans-serif] font-semibold gap-[4px] items-start leading-[20px] px-[8px] relative size-full text-[#1a1d21] text-[14px] text-center whitespace-nowrap">
+        <p className="overflow-hidden relative shrink-0 text-ellipsis">#000000 (30%)</p>
+        <p className="overflow-hidden relative shrink-0 text-ellipsis">0, 0, 0, 0.3</p>
+      </div>
+    </div>
+  );
+}
+
+function DocsTableCell14() {
+  return (
+    <div className="content-stretch flex flex-col items-center justify-center overflow-clip relative shrink-0 w-[146px]" data-name=".Docs/Table/Cell">
+      <ColumnLabel9 />
+    </div>
+  );
+}
+
+function Container13() {
+  return (
+    <div className="bg-white relative rounded-[8px] shrink-0 size-[48px]" data-name="container">
+      <div className="content-stretch flex flex-col items-center justify-center overflow-clip px-[16px] py-[12px] relative rounded-[inherit] size-full">
+        <p className="[word-break:break-word] font-['Publico:Bold',sans-serif] leading-[24px] not-italic relative shrink-0 text-[20px] text-[rgba(0,0,0,0.3)] w-[25px]">Aa</p>
+      </div>
+      <div aria-hidden className="absolute border border-[rgba(0,0,0,0.1)] border-solid inset-0 pointer-events-none rounded-[8px]" />
+    </div>
+  );
+}
+
+function Container12() {
+  return (
+    <div className="content-stretch flex flex-col items-center justify-center overflow-clip relative rounded-[8px] shrink-0" data-name="container">
+      <Container13 />
+    </div>
+  );
+}
+
+function ColumnLabel10() {
+  return (
+    <div className="content-stretch flex items-center justify-center relative shrink-0" data-name="Column Label">
+      <Container12 />
+    </div>
+  );
+}
+
+function Container15() {
+  return (
+    <div className="relative rounded-[8px] shrink-0 size-[48px]" data-name="container">
+      <img alt="" className="absolute inset-0 max-w-none object-bottom pointer-events-none rounded-[8px] size-full" src={imgContainer} />
+      <div className="content-stretch flex flex-col items-center justify-center overflow-clip px-[16px] py-[12px] relative rounded-[inherit] size-full">
+        <p className="[word-break:break-word] font-['Publico:Bold',sans-serif] leading-[24px] not-italic relative shrink-0 text-[20px] text-[rgba(0,0,0,0.3)] whitespace-nowrap">Aa</p>
+      </div>
+      <div aria-hidden className="absolute border border-[rgba(0,0,0,0.1)] border-solid inset-0 pointer-events-none rounded-[8px]" />
+    </div>
+  );
+}
+
+function Container14() {
+  return (
+    <div className="content-stretch flex flex-col items-center justify-center overflow-clip relative rounded-[8px] shrink-0" data-name="container">
+      <Container15 />
+    </div>
+  );
+}
+
+function ColumnLabel11() {
+  return (
+    <div className="content-stretch flex items-center justify-center relative shrink-0" data-name="Column Label">
+      <Container14 />
+    </div>
+  );
+}
+
+function DocsTableCell15() {
+  return (
+    <div className="content-stretch flex gap-[4px] items-center justify-end overflow-clip relative shrink-0" data-name=".Docs/Table/Cell">
+      <ColumnLabel10 />
+      <ColumnLabel11 />
+    </div>
+  );
+}
+
+function StyleProperty3() {
+  return (
+    <div className="content-stretch flex items-center min-h-[88px] py-[12px] relative shrink-0 w-full" data-name="Style Property">
+      <div aria-hidden className="absolute border-[rgba(0,0,0,0.1)] border-b border-solid inset-[0_0_-0.5px_0] pointer-events-none" />
+      <DocsTableCell12 />
+      <DocsTableCell13 />
+      <DocsTableCell14 />
+      <DocsTableCell15 />
+    </div>
+  );
+}
+
+function Token4() {
+  return (
+    <div className="bg-[#efeff1] content-stretch flex items-center justify-center px-[8px] py-[4px] relative rounded-[4px] shrink-0" data-name="token">
+      <p className="[word-break:break-word] font-['Source_Sans_3:SemiBold',sans-serif] font-semibold leading-[20px] max-w-[230px] relative shrink-0 text-[#434956] text-[14px] whitespace-nowrap">color-text-primary-inverse</p>
+    </div>
+  );
+}
+
+function DocsTableCell16() {
+  return (
+    <div className="flex-[1_0_0] max-w-[264px] min-w-px relative" data-name=".Docs/Table/Cell">
+      <div className="flex flex-col justify-center max-w-[inherit] overflow-clip rounded-[inherit] size-full">
+        <div className="content-stretch flex flex-col items-start justify-center max-w-[inherit] pr-[16px] relative size-full">
+          <Token4 />
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function DocsTableCell17() {
+  return (
+    <div className="content-stretch flex flex-col h-[72px] items-start justify-center overflow-clip p-[16px] relative shrink-0 w-[340px]" data-name=".Docs/Table/Cell">
+      <p className="[word-break:break-word] flex-[1_0_0] font-['Source_Sans_3:Regular',sans-serif] font-normal leading-[20px] min-h-px relative text-[#1a1d21] text-[14px] w-full">{`Use for primary text on dark or colored backgrounds to ensure clear visibility. `}</p>
+    </div>
+  );
+}
+
+function ColumnLabel12() {
+  return (
+    <div className="relative shrink-0 w-full" data-name="Column Label">
+      <div className="content-stretch flex flex-col items-start px-[8px] relative size-full">
+        <p className="[word-break:break-word] font-['Source_Sans_3:SemiBold',sans-serif] font-semibold leading-[20px] overflow-hidden relative shrink-0 text-[#1a1d21] text-[14px] text-center text-ellipsis whitespace-nowrap">#FFFFFF</p>
+      </div>
+    </div>
+  );
+}
+
+function DocsTableCell18() {
+  return (
+    <div className="content-stretch flex flex-col items-center justify-center overflow-clip relative shrink-0 w-[146px]" data-name=".Docs/Table/Cell">
+      <ColumnLabel12 />
+    </div>
+  );
+}
+
+function Container17() {
+  return (
+    <div className="bg-[#070e40] relative rounded-[8px] shrink-0 size-[48px]" data-name="container">
+      <div className="content-stretch flex flex-col items-center justify-center overflow-clip px-[16px] py-[12px] relative rounded-[inherit] size-full">
+        <p className="[word-break:break-word] font-['Publico:Bold',sans-serif] leading-[24px] not-italic relative shrink-0 text-[20px] text-white whitespace-nowrap">Aa</p>
+      </div>
+      <div aria-hidden className="absolute border border-[rgba(0,0,0,0.1)] border-solid inset-0 pointer-events-none rounded-[8px]" />
+    </div>
+  );
+}
+
+function Container16() {
+  return (
+    <div className="content-stretch flex flex-col items-center justify-center overflow-clip relative rounded-[8px] shrink-0" data-name="container">
+      <Container17 />
+    </div>
+  );
+}
+
+function ColumnLabel13() {
+  return (
+    <div className="content-stretch flex items-center justify-center relative shrink-0" data-name="Column Label">
+      <Container16 />
+    </div>
+  );
+}
+
+function Container19() {
+  return (
+    <div className="relative rounded-[8px] shrink-0 size-[48px]" data-name="container">
+      <div className="absolute inset-0 overflow-hidden pointer-events-none rounded-[8px]">
+        <img alt="" className="absolute h-[723.48%] left-[-472.81%] max-w-none top-[-196.15%] w-[1285.52%]" src={imgContainer1} />
+      </div>
+      <div className="content-stretch flex flex-col items-center justify-center overflow-clip px-[16px] py-[12px] relative rounded-[inherit] size-full">
+        <p className="[word-break:break-word] font-['Publico:Bold',sans-serif] leading-[24px] not-italic relative shrink-0 text-[20px] text-white whitespace-nowrap">Aa</p>
+      </div>
+      <div aria-hidden className="absolute border border-[rgba(0,0,0,0.1)] border-solid inset-0 pointer-events-none rounded-[8px]" />
+    </div>
+  );
+}
+
+function Container18() {
+  return (
+    <div className="content-stretch flex flex-col items-center justify-center overflow-clip relative rounded-[8px] shrink-0" data-name="container">
+      <Container19 />
+    </div>
+  );
+}
+
+function ColumnLabel14() {
+  return (
+    <div className="content-stretch flex items-center justify-center relative shrink-0" data-name="Column Label">
+      <Container18 />
+    </div>
+  );
+}
+
+function DocsTableCell19() {
+  return (
+    <div className="content-stretch flex gap-[4px] items-center justify-end overflow-clip relative shrink-0" data-name=".Docs/Table/Cell">
+      <ColumnLabel13 />
+      <ColumnLabel14 />
+    </div>
+  );
+}
+
+function StyleProperty4() {
+  return (
+    <div className="content-stretch flex items-center min-h-[88px] py-[12px] relative shrink-0 w-full" data-name="Style Property">
+      <div aria-hidden className="absolute border-[rgba(0,0,0,0.1)] border-b border-solid inset-[0_0_-0.5px_0] pointer-events-none" />
+      <DocsTableCell16 />
+      <DocsTableCell17 />
+      <DocsTableCell18 />
+      <DocsTableCell19 />
+    </div>
+  );
+}
+
+function Token5() {
+  return (
+    <div className="bg-[#efeff1] content-stretch flex items-center justify-center px-[8px] py-[4px] relative rounded-[4px] shrink-0" data-name="token">
+      <p className="[word-break:break-word] font-['Source_Sans_3:SemiBold',sans-serif] font-semibold leading-[20px] max-w-[230px] relative shrink-0 text-[#434956] text-[14px] whitespace-nowrap">color-text-secondary-inverse</p>
+    </div>
+  );
+}
+
+function DocsTableCell20() {
+  return (
+    <div className="flex-[1_0_0] max-w-[264px] min-w-px relative" data-name=".Docs/Table/Cell">
+      <div className="flex flex-col justify-center max-w-[inherit] overflow-clip rounded-[inherit] size-full">
+        <div className="content-stretch flex flex-col items-start justify-center max-w-[inherit] pr-[16px] relative size-full">
+          <Token5 />
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function DocsTableCell21() {
+  return (
+    <div className="content-stretch flex flex-col h-[92px] items-start justify-center overflow-clip p-[16px] relative shrink-0 w-[340px]" data-name=".Docs/Table/Cell">
+      <p className="[word-break:break-word] flex-[1_0_0] font-['Source_Sans_3:Regular',sans-serif] font-normal leading-[20px] min-h-px relative text-[#1a1d21] text-[14px] w-full">{`Use for secondary text on dark or colored backgrounds to ensure lower visibility than primary text. `}</p>
+    </div>
+  );
+}
+
+function ColumnLabel15() {
+  return (
+    <div className="relative shrink-0 w-full" data-name="Column Label">
+      <div className="[word-break:break-word] content-stretch flex flex-col font-['Source_Sans_3:SemiBold',sans-serif] font-semibold gap-[4px] items-start leading-[20px] px-[8px] relative size-full text-[#1a1d21] text-[14px] text-center whitespace-nowrap">
+        <p className="overflow-hidden relative shrink-0 text-ellipsis">#FFFFFF (60%)</p>
+        <p className="overflow-hidden relative shrink-0 text-ellipsis">255, 255, 255, 0.6</p>
+      </div>
+    </div>
+  );
+}
+
+function DocsTableCell22() {
+  return (
+    <div className="content-stretch flex flex-col items-center justify-center overflow-clip relative shrink-0 w-[146px]" data-name=".Docs/Table/Cell">
+      <ColumnLabel15 />
+    </div>
+  );
+}
+
+function Container21() {
+  return (
+    <div className="bg-[#070e40] relative rounded-[8px] shrink-0 size-[48px]" data-name="container">
+      <div className="content-stretch flex flex-col items-center justify-center overflow-clip px-[16px] py-[12px] relative rounded-[inherit] size-full">
+        <p className="[word-break:break-word] font-['Publico:Bold',sans-serif] leading-[24px] not-italic relative shrink-0 text-[20px] text-[rgba(255,255,255,0.8)] whitespace-nowrap">Aa</p>
+      </div>
+      <div aria-hidden className="absolute border border-[rgba(0,0,0,0.1)] border-solid inset-0 pointer-events-none rounded-[8px]" />
+    </div>
+  );
+}
+
+function Container20() {
+  return (
+    <div className="content-stretch flex flex-col items-center justify-center overflow-clip relative rounded-[8px] shrink-0" data-name="container">
+      <Container21 />
+    </div>
+  );
+}
+
+function ColumnLabel16() {
+  return (
+    <div className="content-stretch flex items-center justify-center relative shrink-0" data-name="Column Label">
+      <Container20 />
+    </div>
+  );
+}
+
+function Container23() {
+  return (
+    <div className="relative rounded-[8px] shrink-0 size-[48px]" data-name="container">
+      <div className="absolute inset-0 overflow-hidden pointer-events-none rounded-[8px]">
+        <img alt="" className="absolute h-[723.48%] left-[-472.81%] max-w-none top-[-196.15%] w-[1285.52%]" src={imgContainer1} />
+      </div>
+      <div className="content-stretch flex flex-col items-center justify-center overflow-clip px-[16px] py-[12px] relative rounded-[inherit] size-full">
+        <p className="[word-break:break-word] font-['Publico:Bold',sans-serif] leading-[24px] not-italic relative shrink-0 text-[20px] text-[rgba(255,255,255,0.8)] whitespace-nowrap">Aa</p>
+      </div>
+      <div aria-hidden className="absolute border border-[rgba(0,0,0,0.1)] border-solid inset-0 pointer-events-none rounded-[8px]" />
+    </div>
+  );
+}
+
+function Container22() {
+  return (
+    <div className="content-stretch flex flex-col items-center justify-center overflow-clip relative rounded-[8px] shrink-0" data-name="container">
+      <Container23 />
+    </div>
+  );
+}
+
+function ColumnLabel17() {
+  return (
+    <div className="content-stretch flex items-center justify-center relative shrink-0" data-name="Column Label">
+      <Container22 />
+    </div>
+  );
+}
+
+function DocsTableCell23() {
+  return (
+    <div className="content-stretch flex gap-[4px] items-center justify-end overflow-clip relative shrink-0" data-name=".Docs/Table/Cell">
+      <ColumnLabel16 />
+      <ColumnLabel17 />
+    </div>
+  );
+}
+
+function StyleProperty5() {
+  return (
+    <div className="content-stretch flex items-center min-h-[88px] py-[12px] relative shrink-0 w-full" data-name="Style Property">
+      <div aria-hidden className="absolute border-[rgba(0,0,0,0.1)] border-b border-solid inset-[0_0_-0.5px_0] pointer-events-none" />
+      <DocsTableCell20 />
+      <DocsTableCell21 />
+      <DocsTableCell22 />
+      <DocsTableCell23 />
+    </div>
+  );
+}
+
+function Token6() {
+  return (
+    <div className="bg-[#efeff1] content-stretch flex items-center justify-center px-[8px] py-[4px] relative rounded-[4px] shrink-0" data-name="token">
+      <p className="[word-break:break-word] font-['Source_Sans_3:SemiBold',sans-serif] font-semibold leading-[20px] max-w-[230px] relative shrink-0 text-[#434956] text-[14px] whitespace-nowrap">color-text-tertiary-inverse</p>
+    </div>
+  );
+}
+
+function DocsTableCell24() {
+  return (
+    <div className="flex-[1_0_0] max-w-[264px] min-w-px relative" data-name=".Docs/Table/Cell">
+      <div className="flex flex-col justify-center max-w-[inherit] overflow-clip rounded-[inherit] size-full">
+        <div className="content-stretch flex flex-col items-start justify-center max-w-[inherit] pr-[16px] relative size-full">
+          <Token6 />
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function DocsTableCell25() {
+  return (
+    <div className="content-stretch flex flex-col h-[72px] items-start justify-center overflow-clip p-[16px] relative shrink-0 w-[340px]" data-name=".Docs/Table/Cell">
+      <p className="[word-break:break-word] flex-[1_0_0] font-['Source_Sans_3:Regular',sans-serif] font-normal leading-[20px] min-h-px relative text-[#1a1d21] text-[14px] w-full">{`Use for tertiary text on dark or colored backgrounds to ensure subtle visibility. `}</p>
+    </div>
+  );
+}
+
+function ColumnLabel18() {
+  return (
+    <div className="relative shrink-0 w-full" data-name="Column Label">
+      <div className="[word-break:break-word] content-stretch flex flex-col font-['Source_Sans_3:SemiBold',sans-serif] font-semibold gap-[4px] items-start leading-[20px] px-[8px] relative size-full text-[#1a1d21] text-[14px] text-center whitespace-nowrap">
+        <p className="overflow-hidden relative shrink-0 text-ellipsis">#FFFFFF (40%)</p>
+        <p className="overflow-hidden relative shrink-0 text-ellipsis">255, 255, 255, 0.4</p>
+      </div>
+    </div>
+  );
+}
+
+function DocsTableCell26() {
+  return (
+    <div className="content-stretch flex flex-col items-center justify-center overflow-clip relative shrink-0 w-[146px]" data-name=".Docs/Table/Cell">
+      <ColumnLabel18 />
+    </div>
+  );
+}
+
+function Container25() {
+  return (
+    <div className="bg-[#070e40] relative rounded-[8px] shrink-0 size-[48px]" data-name="container">
+      <div className="content-stretch flex flex-col items-center justify-center overflow-clip px-[16px] py-[12px] relative rounded-[inherit] size-full">
+        <p className="[word-break:break-word] font-['Publico:Bold',sans-serif] leading-[24px] not-italic relative shrink-0 text-[20px] text-[rgba(255,255,255,0.6)] whitespace-nowrap">Aa</p>
+      </div>
+      <div aria-hidden className="absolute border border-[rgba(0,0,0,0.1)] border-solid inset-0 pointer-events-none rounded-[8px]" />
+    </div>
+  );
+}
+
+function Container24() {
+  return (
+    <div className="content-stretch flex flex-col items-center justify-center overflow-clip relative rounded-[8px] shrink-0" data-name="container">
+      <Container25 />
+    </div>
+  );
+}
+
+function ColumnLabel19() {
+  return (
+    <div className="content-stretch flex items-center justify-center relative shrink-0" data-name="Column Label">
+      <Container24 />
+    </div>
+  );
+}
+
+function Container27() {
+  return (
+    <div className="relative rounded-[8px] shrink-0 size-[48px]" data-name="container">
+      <div className="absolute inset-0 overflow-hidden pointer-events-none rounded-[8px]">
+        <img alt="" className="absolute h-[723.48%] left-[-472.81%] max-w-none top-[-196.15%] w-[1285.52%]" src={imgContainer1} />
+      </div>
+      <div className="content-stretch flex flex-col items-center justify-center overflow-clip px-[16px] py-[12px] relative rounded-[inherit] size-full">
+        <p className="[word-break:break-word] font-['Publico:Bold',sans-serif] leading-[24px] not-italic relative shrink-0 text-[20px] text-[rgba(255,255,255,0.6)] whitespace-nowrap">Aa</p>
+      </div>
+      <div aria-hidden className="absolute border border-[rgba(0,0,0,0.1)] border-solid inset-0 pointer-events-none rounded-[8px]" />
+    </div>
+  );
+}
+
+function Container26() {
+  return (
+    <div className="content-stretch flex flex-col items-center justify-center overflow-clip relative rounded-[8px] shrink-0" data-name="container">
+      <Container27 />
+    </div>
+  );
+}
+
+function ColumnLabel20() {
+  return (
+    <div className="content-stretch flex items-center justify-center relative shrink-0" data-name="Column Label">
+      <Container26 />
+    </div>
+  );
+}
+
+function DocsTableCell27() {
+  return (
+    <div className="content-stretch flex gap-[4px] items-center justify-end overflow-clip relative shrink-0" data-name=".Docs/Table/Cell">
+      <ColumnLabel19 />
+      <ColumnLabel20 />
+    </div>
+  );
+}
+
+function StyleProperty6() {
+  return (
+    <div className="content-stretch flex items-center min-h-[88px] py-[12px] relative shrink-0 w-full" data-name="Style Property">
+      <div aria-hidden className="absolute border-[rgba(0,0,0,0.1)] border-b border-solid inset-[0_0_-0.5px_0] pointer-events-none" />
+      <DocsTableCell24 />
+      <DocsTableCell25 />
+      <DocsTableCell26 />
+      <DocsTableCell27 />
+    </div>
+  );
+}
+
+function Token7() {
+  return (
+    <div className="bg-[#efeff1] content-stretch flex items-center justify-center px-[8px] py-[4px] relative rounded-[4px] shrink-0" data-name="token">
+      <p className="[word-break:break-word] font-['Source_Sans_3:SemiBold',sans-serif] font-semibold leading-[20px] max-w-[230px] relative shrink-0 text-[#434956] text-[14px] whitespace-nowrap">color-text-disabled-inverse</p>
+    </div>
+  );
+}
+
+function DocsTableCell28() {
+  return (
+    <div className="flex-[1_0_0] max-w-[264px] min-w-px relative" data-name=".Docs/Table/Cell">
+      <div className="flex flex-col justify-center max-w-[inherit] overflow-clip rounded-[inherit] size-full">
+        <div className="content-stretch flex flex-col items-start justify-center max-w-[inherit] pr-[16px] relative size-full">
+          <Token7 />
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function DocsTableCell29() {
+  return (
+    <div className="content-stretch flex flex-col h-[72px] items-start justify-center overflow-clip p-[16px] relative shrink-0 w-[340px]" data-name=".Docs/Table/Cell">
+      <p className="[word-break:break-word] flex-[1_0_0] font-['Source_Sans_3:Regular',sans-serif] font-normal leading-[20px] min-h-px relative text-[#1a1d21] text-[14px] w-full">Use for disabled text on dark or colored backgrounds to make it look unavailable.</p>
+    </div>
+  );
+}
+
+function ColumnLabel21() {
+  return (
+    <div className="relative shrink-0 w-full" data-name="Column Label">
+      <div className="[word-break:break-word] content-stretch flex flex-col font-['Source_Sans_3:SemiBold',sans-serif] font-semibold gap-[4px] items-start leading-[20px] px-[8px] relative size-full text-[#1a1d21] text-[14px] text-center whitespace-nowrap">
+        <p className="overflow-hidden relative shrink-0 text-ellipsis">#FFFFFF (30%)</p>
+        <p className="overflow-hidden relative shrink-0 text-ellipsis">255, 255, 255, 0.3</p>
+      </div>
+    </div>
+  );
+}
+
+function DocsTableCell30() {
+  return (
+    <div className="content-stretch flex flex-col items-center justify-center overflow-clip relative shrink-0 w-[146px]" data-name=".Docs/Table/Cell">
+      <ColumnLabel21 />
+    </div>
+  );
+}
+
+function Container29() {
+  return (
+    <div className="bg-[#070e40] relative rounded-[8px] shrink-0 size-[48px]" data-name="container">
+      <div className="content-stretch flex flex-col items-center justify-center overflow-clip px-[16px] py-[12px] relative rounded-[inherit] size-full">
+        <p className="[word-break:break-word] font-['Publico:Bold',sans-serif] leading-[24px] not-italic relative shrink-0 text-[20px] text-[rgba(255,255,255,0.3)] whitespace-nowrap">Aa</p>
+      </div>
+      <div aria-hidden className="absolute border border-[rgba(0,0,0,0.1)] border-solid inset-0 pointer-events-none rounded-[8px]" />
+    </div>
+  );
+}
+
+function Container28() {
+  return (
+    <div className="content-stretch flex flex-col items-center justify-center overflow-clip relative rounded-[8px] shrink-0" data-name="container">
+      <Container29 />
+    </div>
+  );
+}
+
+function ColumnLabel22() {
+  return (
+    <div className="content-stretch flex items-center justify-center relative shrink-0" data-name="Column Label">
+      <Container28 />
+    </div>
+  );
+}
+
+function Container31() {
+  return (
+    <div className="relative rounded-[8px] shrink-0 size-[48px]" data-name="container">
+      <div className="absolute inset-0 overflow-hidden pointer-events-none rounded-[8px]">
+        <img alt="" className="absolute h-[723.48%] left-[-472.81%] max-w-none top-[-196.15%] w-[1285.52%]" src={imgContainer1} />
+      </div>
+      <div className="content-stretch flex flex-col items-center justify-center overflow-clip px-[16px] py-[12px] relative rounded-[inherit] size-full">
+        <p className="[word-break:break-word] font-['Publico:Bold',sans-serif] leading-[24px] not-italic relative shrink-0 text-[20px] text-[rgba(255,255,255,0.3)] whitespace-nowrap">Aa</p>
+      </div>
+      <div aria-hidden className="absolute border border-[rgba(0,0,0,0.1)] border-solid inset-0 pointer-events-none rounded-[8px]" />
+    </div>
+  );
+}
+
+function Container30() {
+  return (
+    <div className="content-stretch flex flex-col items-center justify-center overflow-clip relative rounded-[8px] shrink-0" data-name="container">
+      <Container31 />
+    </div>
+  );
+}
+
+function ColumnLabel23() {
+  return (
+    <div className="content-stretch flex items-center justify-center relative shrink-0" data-name="Column Label">
+      <Container30 />
+    </div>
+  );
+}
+
+function DocsTableCell31() {
+  return (
+    <div className="content-stretch flex gap-[4px] items-center justify-end overflow-clip relative shrink-0" data-name=".Docs/Table/Cell">
+      <ColumnLabel22 />
+      <ColumnLabel23 />
+    </div>
+  );
+}
+
+function StyleProperty7() {
+  return (
+    <div className="content-stretch flex items-center min-h-[88px] py-[12px] relative shrink-0 w-full" data-name="Style Property">
+      <div aria-hidden className="absolute border-[rgba(0,0,0,0.1)] border-b border-solid inset-[0_0_-0.5px_0] pointer-events-none" />
+      <DocsTableCell28 />
+      <DocsTableCell29 />
+      <DocsTableCell30 />
+      <DocsTableCell31 />
+    </div>
+  );
+}
+
+function Table() {
+  return (
+    <div className="content-stretch flex flex-col items-start relative shrink-0 w-full" data-name="table">
+      <TableHeader />
+      <StyleProperty />
+      <StyleProperty1 />
+      <StyleProperty2 />
+      <StyleProperty3 />
+      <StyleProperty4 />
+      <StyleProperty5 />
+      <StyleProperty6 />
+      <StyleProperty7 />
+    </div>
+  );
+}
+
+function Tabs() {
+  return (
+    <div className="content-stretch flex flex-col items-start relative shrink-0 w-[848px]" data-name="Tabs">
+      <Table />
+    </div>
+  );
+}
+
+function ColorBrand() {
+  return (
+    <div className="bg-white relative rounded-[12px] shrink-0 w-full" data-name="color-brand">
+      <div className="overflow-clip rounded-[inherit] size-full">
+        <div className="content-stretch flex flex-col gap-[48px] items-start p-[40px] relative size-full">
+          <Description />
+          <Tabs />
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function ColorInfo1() {
+  return (
+    <div className="content-stretch flex flex-col items-start relative shrink-0 w-full" data-name="Color Info">
+      <p className="[word-break:break-word] font-['Publico:Bold',sans-serif] leading-[46px] not-italic relative shrink-0 text-[#1a1d21] text-[40px] w-full">Interaction</p>
+    </div>
+  );
+}
+
+function Description1() {
+  return (
+    <div className="content-stretch flex flex-col items-start relative shrink-0 w-full" data-name="Description">
+      <ColorInfo1 />
+    </div>
+  );
+}
+
+function DocsTableHeader4() {
+  return (
+    <div className="content-stretch flex flex-col h-[48px] items-start justify-center overflow-clip relative shrink-0 w-[264px]" data-name=".Docs/Table/Header">
+      <p className="[word-break:break-word] font-['Source_Sans_Pro:SemiBold',sans-serif] leading-[16px] not-italic relative shrink-0 text-[#606776] text-[12px] tracking-[1px] uppercase whitespace-pre">{`TOKEN  `}</p>
+    </div>
+  );
+}
+
+function DocsTableHeader5() {
+  return (
+    <div className="content-stretch flex flex-col h-[48px] items-start justify-center overflow-clip px-[16px] relative shrink-0 w-[340px]" data-name=".Docs/Table/Header">
+      <p className="[word-break:break-word] font-['Source_Sans_Pro:SemiBold',sans-serif] leading-[16px] not-italic relative shrink-0 text-[#606776] text-[12px] tracking-[1px] uppercase whitespace-nowrap">DESCRIPTION</p>
+    </div>
+  );
+}
+
+function DocsTableHeader6() {
+  return (
+    <div className="content-stretch flex flex-col h-[48px] items-start justify-center overflow-clip relative shrink-0 w-[146px]" data-name=".Docs/Table/Header">
+      <p className="[word-break:break-word] font-['Source_Sans_Pro:SemiBold',sans-serif] leading-[16px] not-italic relative shrink-0 text-[#606776] text-[12px] tracking-[1px] uppercase w-full">VALUE (RGBA/HEX)</p>
+    </div>
+  );
+}
+
+function DocsTableHeader7() {
+  return (
+    <div className="content-stretch flex flex-col h-[48px] items-start justify-center max-w-[96px] overflow-clip relative shrink-0 w-[96px]" data-name=".Docs/Table/Header">
+      <p className="[word-break:break-word] font-['Source_Sans_Pro:SemiBold',sans-serif] leading-[16px] not-italic relative shrink-0 text-[#606776] text-[12px] tracking-[1px] uppercase whitespace-nowrap">LIGHT MODE</p>
+    </div>
+  );
+}
+
+function TableHeader1() {
+  return (
+    <div className="content-stretch flex items-center relative shrink-0 w-full" data-name="Table Header">
+      <div aria-hidden className="absolute border-[rgba(0,0,0,0.2)] border-b border-solid inset-[0_0_-0.5px_0] pointer-events-none" />
+      <DocsTableHeader4 />
+      <DocsTableHeader5 />
+      <DocsTableHeader6 />
+      <DocsTableHeader7 />
+    </div>
+  );
+}
+
+function Token8() {
+  return (
+    <div className="bg-[#efeff1] content-stretch flex items-center justify-center px-[8px] py-[4px] relative rounded-[4px] shrink-0" data-name="token">
+      <p className="[word-break:break-word] font-['Source_Sans_3:SemiBold',sans-serif] font-semibold leading-[20px] max-w-[230px] relative shrink-0 text-[#434956] text-[14px] whitespace-nowrap">color-text-interaction-primary-default</p>
+    </div>
+  );
+}
+
+function DocsTableCell32() {
+  return (
+    <div className="flex-[1_0_0] max-w-[264px] min-w-px relative" data-name=".Docs/Table/Cell">
+      <div className="flex flex-col justify-center max-w-[inherit] overflow-clip rounded-[inherit] size-full">
+        <div className="content-stretch flex flex-col items-start justify-center max-w-[inherit] pr-[16px] relative size-full">
+          <Token8 />
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function DocsTableCell33() {
+  return (
+    <div className="content-stretch flex flex-col h-[72px] items-start justify-center overflow-clip p-[16px] relative shrink-0 w-[340px]" data-name=".Docs/Table/Cell">
+      <p className="[word-break:break-word] flex-[1_0_0] font-['Source_Sans_3:Regular',sans-serif] font-normal leading-[20px] min-h-px relative text-[#1a1d21] text-[14px] w-full">{`Use for primary interactive text in its default state, such as links or main actions, on light background. `}</p>
+    </div>
+  );
+}
+
+function ColumnLabel24() {
+  return (
+    <div className="relative shrink-0 w-full" data-name="Column Label">
+      <div className="content-stretch flex flex-col items-start px-[8px] relative size-full">
+        <p className="[word-break:break-word] font-['Source_Sans_3:SemiBold',sans-serif] font-semibold leading-[20px] overflow-hidden relative shrink-0 text-[#1a1d21] text-[14px] text-center text-ellipsis whitespace-nowrap">#00008F</p>
+      </div>
+    </div>
+  );
+}
+
+function DocsTableCell34() {
+  return (
+    <div className="content-stretch flex flex-col items-center justify-center overflow-clip relative shrink-0 w-[146px]" data-name=".Docs/Table/Cell">
+      <ColumnLabel24 />
+    </div>
+  );
+}
+
+function Container33() {
+  return (
+    <div className="bg-white relative rounded-[8px] shrink-0 size-[48px]" data-name="container">
+      <div className="content-stretch flex flex-col items-center justify-center overflow-clip px-[16px] py-[12px] relative rounded-[inherit] size-full">
+        <p className="[word-break:break-word] font-['Publico:Bold',sans-serif] leading-[24px] not-italic relative shrink-0 text-[#00008f] text-[20px] w-[25px]">Aa</p>
+      </div>
+      <div aria-hidden className="absolute border border-[rgba(0,0,0,0.1)] border-solid inset-0 pointer-events-none rounded-[8px]" />
+    </div>
+  );
+}
+
+function Container32() {
+  return (
+    <div className="content-stretch flex flex-col items-center justify-center overflow-clip relative rounded-[8px] shrink-0" data-name="container">
+      <Container33 />
+    </div>
+  );
+}
+
+function ColumnLabel25() {
+  return (
+    <div className="content-stretch flex items-center justify-center relative shrink-0" data-name="Column Label">
+      <Container32 />
+    </div>
+  );
+}
+
+function Container35() {
+  return (
+    <div className="relative rounded-[8px] shrink-0 size-[48px]" data-name="container">
+      <img alt="" className="absolute inset-0 max-w-none object-bottom pointer-events-none rounded-[8px] size-full" src={imgContainer} />
+      <div className="content-stretch flex flex-col items-center justify-center overflow-clip px-[16px] py-[12px] relative rounded-[inherit] size-full">
+        <p className="[word-break:break-word] font-['Publico:Bold',sans-serif] leading-[24px] not-italic relative shrink-0 text-[#00008f] text-[20px] whitespace-nowrap">Aa</p>
+      </div>
+      <div aria-hidden className="absolute border border-[rgba(0,0,0,0.1)] border-solid inset-0 pointer-events-none rounded-[8px]" />
+    </div>
+  );
+}
+
+function Container34() {
+  return (
+    <div className="content-stretch flex flex-col items-center justify-center overflow-clip relative rounded-[8px] shrink-0" data-name="container">
+      <Container35 />
+    </div>
+  );
+}
+
+function ColumnLabel26() {
+  return (
+    <div className="content-stretch flex items-center justify-center relative shrink-0" data-name="Column Label">
+      <Container34 />
+    </div>
+  );
+}
+
+function DocsTableCell35() {
+  return (
+    <div className="content-stretch flex gap-[4px] items-center justify-end overflow-clip relative shrink-0" data-name=".Docs/Table/Cell">
+      <ColumnLabel25 />
+      <ColumnLabel26 />
+    </div>
+  );
+}
+
+function StyleProperty8() {
+  return (
+    <div className="content-stretch flex items-center min-h-[88px] py-[12px] relative shrink-0 w-full" data-name="Style Property">
+      <div aria-hidden className="absolute border-[rgba(0,0,0,0.1)] border-b border-solid inset-[0_0_-0.5px_0] pointer-events-none" />
+      <DocsTableCell32 />
+      <DocsTableCell33 />
+      <DocsTableCell34 />
+      <DocsTableCell35 />
+    </div>
+  );
+}
+
+function Token9() {
+  return (
+    <div className="bg-[#efeff1] content-stretch flex items-center justify-center px-[8px] py-[4px] relative rounded-[4px] shrink-0" data-name="token">
+      <p className="[word-break:break-word] font-['Source_Sans_3:SemiBold',sans-serif] font-semibold leading-[20px] max-w-[230px] relative shrink-0 text-[#434956] text-[14px] whitespace-nowrap">color-text-interaction-primary-hover</p>
+    </div>
+  );
+}
+
+function DocsTableCell36() {
+  return (
+    <div className="flex-[1_0_0] max-w-[264px] min-w-px relative" data-name=".Docs/Table/Cell">
+      <div className="flex flex-col justify-center max-w-[inherit] overflow-clip rounded-[inherit] size-full">
+        <div className="content-stretch flex flex-col items-start justify-center max-w-[inherit] pr-[16px] relative size-full">
+          <Token9 />
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function DocsTableCell37() {
+  return (
+    <div className="content-stretch flex flex-col h-[72px] items-start justify-center overflow-clip p-[16px] relative shrink-0 w-[340px]" data-name=".Docs/Table/Cell">
+      <p className="[word-break:break-word] flex-[1_0_0] font-['Source_Sans_3:Regular',sans-serif] font-normal leading-[20px] min-h-px relative text-[#1a1d21] text-[14px] w-full">{`Use for primary interactive text when hovered, to indicate interactivity, on light background. `}</p>
+    </div>
+  );
+}
+
+function ColumnLabel27() {
+  return (
+    <div className="relative shrink-0 w-full" data-name="Column Label">
+      <div className="content-stretch flex flex-col items-start px-[8px] relative size-full">
+        <p className="[word-break:break-word] font-['Source_Sans_3:SemiBold',sans-serif] font-semibold leading-[20px] overflow-hidden relative shrink-0 text-[#1a1d21] text-[14px] text-center text-ellipsis whitespace-nowrap">#0000F7</p>
+      </div>
+    </div>
+  );
+}
+
+function DocsTableCell38() {
+  return (
+    <div className="content-stretch flex flex-col items-center justify-center overflow-clip relative shrink-0 w-[146px]" data-name=".Docs/Table/Cell">
+      <ColumnLabel27 />
+    </div>
+  );
+}
+
+function Container36() {
+  return (
+    <div className="bg-white relative rounded-[8px] shrink-0 size-[48px]" data-name="container">
+      <div className="content-stretch flex flex-col items-center justify-center overflow-clip px-[16px] py-[12px] relative rounded-[inherit] size-full">
+        <p className="[word-break:break-word] font-['Publico:Bold',sans-serif] leading-[24px] not-italic relative shrink-0 text-[#0000f7] text-[20px] w-[25px]">Aa</p>
+      </div>
+      <div aria-hidden className="absolute border border-[rgba(0,0,0,0.1)] border-solid inset-0 pointer-events-none rounded-[8px]" />
+    </div>
+  );
+}
+
+function ColumnLabel28() {
+  return (
+    <div className="content-stretch flex items-center justify-center relative shrink-0" data-name="Column Label">
+      <Container36 />
+    </div>
+  );
+}
+
+function Container38() {
+  return (
+    <div className="relative rounded-[8px] shrink-0 size-[48px]" data-name="container">
+      <img alt="" className="absolute inset-0 max-w-none object-bottom pointer-events-none rounded-[8px] size-full" src={imgContainer} />
+      <div className="content-stretch flex flex-col items-center justify-center overflow-clip px-[16px] py-[12px] relative rounded-[inherit] size-full">
+        <p className="[word-break:break-word] font-['Publico:Bold',sans-serif] leading-[24px] not-italic relative shrink-0 text-[#0000f7] text-[20px] whitespace-nowrap">Aa</p>
+      </div>
+      <div aria-hidden className="absolute border border-[rgba(0,0,0,0.1)] border-solid inset-0 pointer-events-none rounded-[8px]" />
+    </div>
+  );
+}
+
+function Container37() {
+  return (
+    <div className="content-stretch flex flex-col items-center justify-center overflow-clip relative rounded-[8px] shrink-0" data-name="container">
+      <Container38 />
+    </div>
+  );
+}
+
+function ColumnLabel29() {
+  return (
+    <div className="content-stretch flex items-center justify-center relative shrink-0" data-name="Column Label">
+      <Container37 />
+    </div>
+  );
+}
+
+function DocsTableCell39() {
+  return (
+    <div className="content-stretch flex gap-[4px] items-center justify-end overflow-clip relative shrink-0" data-name=".Docs/Table/Cell">
+      <ColumnLabel28 />
+      <ColumnLabel29 />
+    </div>
+  );
+}
+
+function StyleProperty9() {
+  return (
+    <div className="content-stretch flex items-center min-h-[88px] py-[12px] relative shrink-0 w-full" data-name="Style Property">
+      <div aria-hidden className="absolute border-[rgba(0,0,0,0.1)] border-b border-solid inset-[0_0_-0.5px_0] pointer-events-none" />
+      <DocsTableCell36 />
+      <DocsTableCell37 />
+      <DocsTableCell38 />
+      <DocsTableCell39 />
+    </div>
+  );
+}
+
+function Token10() {
+  return (
+    <div className="bg-[#efeff1] content-stretch flex items-center justify-center px-[8px] py-[4px] relative rounded-[4px] shrink-0" data-name="token">
+      <p className="[word-break:break-word] font-['Source_Sans_3:SemiBold',sans-serif] font-semibold leading-[20px] max-w-[230px] relative shrink-0 text-[#434956] text-[14px] whitespace-nowrap">color-text-interaction-primary-active</p>
+    </div>
+  );
+}
+
+function DocsTableCell40() {
+  return (
+    <div className="flex-[1_0_0] max-w-[264px] min-w-px relative" data-name=".Docs/Table/Cell">
+      <div className="flex flex-col justify-center max-w-[inherit] overflow-clip rounded-[inherit] size-full">
+        <div className="content-stretch flex flex-col items-start justify-center max-w-[inherit] pr-[16px] relative size-full">
+          <Token10 />
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function DocsTableCell41() {
+  return (
+    <div className="content-stretch flex flex-col h-[92px] items-start justify-center overflow-clip p-[16px] relative shrink-0 w-[340px]" data-name=".Docs/Table/Cell">
+      <p className="[word-break:break-word] flex-[1_0_0] font-['Source_Sans_3:Regular',sans-serif] font-normal leading-[20px] min-h-px relative text-[#1a1d21] text-[14px] w-full">{`Use for primary interactive text when active or pressed, signaling user engagement, on light background. `}</p>
+    </div>
+  );
+}
+
+function ColumnLabel30() {
+  return (
+    <div className="relative shrink-0 w-full" data-name="Column Label">
+      <div className="content-stretch flex flex-col items-start px-[8px] relative size-full">
+        <p className="[word-break:break-word] font-['Source_Sans_3:SemiBold',sans-serif] font-semibold leading-[20px] overflow-hidden relative shrink-0 text-[#1a1d21] text-[14px] text-center text-ellipsis whitespace-nowrap">#0000D2</p>
+      </div>
+    </div>
+  );
+}
+
+function DocsTableCell42() {
+  return (
+    <div className="content-stretch flex flex-col items-center justify-center overflow-clip relative shrink-0 w-[146px]" data-name=".Docs/Table/Cell">
+      <ColumnLabel30 />
+    </div>
+  );
+}
+
+function Container40() {
+  return (
+    <div className="bg-white relative rounded-[8px] shrink-0 size-[48px]" data-name="container">
+      <div className="content-stretch flex flex-col items-center justify-center overflow-clip px-[16px] py-[12px] relative rounded-[inherit] size-full">
+        <p className="[word-break:break-word] font-['Publico:Bold',sans-serif] leading-[24px] not-italic relative shrink-0 text-[#0000d2] text-[20px] w-[25px]">Aa</p>
+      </div>
+      <div aria-hidden className="absolute border border-[rgba(0,0,0,0.1)] border-solid inset-0 pointer-events-none rounded-[8px]" />
+    </div>
+  );
+}
+
+function Container39() {
+  return (
+    <div className="content-stretch flex flex-col items-center justify-center overflow-clip relative rounded-[8px] shrink-0" data-name="container">
+      <Container40 />
+    </div>
+  );
+}
+
+function ColumnLabel31() {
+  return (
+    <div className="content-stretch flex items-center justify-center relative shrink-0" data-name="Column Label">
+      <Container39 />
+    </div>
+  );
+}
+
+function Container42() {
+  return (
+    <div className="relative rounded-[8px] shrink-0 size-[48px]" data-name="container">
+      <img alt="" className="absolute inset-0 max-w-none object-bottom pointer-events-none rounded-[8px] size-full" src={imgContainer} />
+      <div className="content-stretch flex flex-col items-center justify-center overflow-clip px-[16px] py-[12px] relative rounded-[inherit] size-full">
+        <p className="[word-break:break-word] font-['Publico:Bold',sans-serif] leading-[24px] not-italic relative shrink-0 text-[#0000d2] text-[20px] whitespace-nowrap">Aa</p>
+      </div>
+      <div aria-hidden className="absolute border border-[rgba(0,0,0,0.1)] border-solid inset-0 pointer-events-none rounded-[8px]" />
+    </div>
+  );
+}
+
+function Container41() {
+  return (
+    <div className="content-stretch flex flex-col items-center justify-center overflow-clip relative rounded-[8px] shrink-0" data-name="container">
+      <Container42 />
+    </div>
+  );
+}
+
+function ColumnLabel32() {
+  return (
+    <div className="content-stretch flex items-center justify-center relative shrink-0" data-name="Column Label">
+      <Container41 />
+    </div>
+  );
+}
+
+function DocsTableCell43() {
+  return (
+    <div className="content-stretch flex gap-[4px] items-center justify-end overflow-clip relative shrink-0" data-name=".Docs/Table/Cell">
+      <ColumnLabel31 />
+      <ColumnLabel32 />
+    </div>
+  );
+}
+
+function StyleProperty10() {
+  return (
+    <div className="content-stretch flex items-center min-h-[88px] py-[12px] relative shrink-0 w-full" data-name="Style Property">
+      <div aria-hidden className="absolute border-[rgba(0,0,0,0.1)] border-b border-solid inset-[0_0_-0.5px_0] pointer-events-none" />
+      <DocsTableCell40 />
+      <DocsTableCell41 />
+      <DocsTableCell42 />
+      <DocsTableCell43 />
+    </div>
+  );
+}
+
+function Token11() {
+  return (
+    <div className="bg-[#efeff1] content-stretch flex items-center justify-center px-[8px] py-[4px] relative rounded-[4px] shrink-0" data-name="token">
+      <p className="[word-break:break-word] font-['Source_Sans_3:SemiBold',sans-serif] font-semibold leading-[20px] max-w-[230px] relative shrink-0 text-[#434956] text-[14px] whitespace-nowrap">color-text-interaction-primary-default-inverse</p>
+    </div>
+  );
+}
+
+function DocsTableCell44() {
+  return (
+    <div className="flex-[1_0_0] max-w-[264px] min-w-px relative" data-name=".Docs/Table/Cell">
+      <div className="flex flex-col justify-center max-w-[inherit] overflow-clip rounded-[inherit] size-full">
+        <div className="content-stretch flex flex-col items-start justify-center max-w-[inherit] pr-[16px] relative size-full">
+          <Token11 />
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function DocsTableCell45() {
+  return (
+    <div className="content-stretch flex flex-col h-[92px] items-start justify-center overflow-clip p-[16px] relative shrink-0 w-[340px]" data-name=".Docs/Table/Cell">
+      <p className="[word-break:break-word] flex-[1_0_0] font-['Source_Sans_3:Regular',sans-serif] font-normal leading-[20px] min-h-px relative text-[#1a1d21] text-[14px] w-full">{`Use for primary interactive text in its default state on dark or colored background. For example, use it for the label on primary buttons. `}</p>
+    </div>
+  );
+}
+
+function ColumnLabel33() {
+  return (
+    <div className="relative shrink-0 w-full" data-name="Column Label">
+      <div className="content-stretch flex flex-col items-start px-[8px] relative size-full">
+        <p className="[word-break:break-word] font-['Source_Sans_3:SemiBold',sans-serif] font-semibold leading-[20px] overflow-hidden relative shrink-0 text-[#1a1d21] text-[14px] text-center text-ellipsis whitespace-nowrap">#FFFFFF</p>
+      </div>
+    </div>
+  );
+}
+
+function DocsTableCell46() {
+  return (
+    <div className="content-stretch flex flex-col items-center justify-center overflow-clip relative shrink-0 w-[146px]" data-name=".Docs/Table/Cell">
+      <ColumnLabel33 />
+    </div>
+  );
+}
+
+function Container44() {
+  return (
+    <div className="bg-[#070e40] relative rounded-[8px] shrink-0 size-[48px]" data-name="container">
+      <div className="content-stretch flex flex-col items-center justify-center overflow-clip px-[16px] py-[12px] relative rounded-[inherit] size-full">
+        <p className="[word-break:break-word] font-['Publico:Bold',sans-serif] leading-[24px] not-italic relative shrink-0 text-[20px] text-white whitespace-nowrap">Aa</p>
+      </div>
+      <div aria-hidden className="absolute border border-[rgba(0,0,0,0.1)] border-solid inset-0 pointer-events-none rounded-[8px]" />
+    </div>
+  );
+}
+
+function Container43() {
+  return (
+    <div className="content-stretch flex flex-col items-center justify-center overflow-clip relative rounded-[8px] shrink-0" data-name="container">
+      <Container44 />
+    </div>
+  );
+}
+
+function ColumnLabel34() {
+  return (
+    <div className="content-stretch flex items-center justify-center relative shrink-0" data-name="Column Label">
+      <Container43 />
+    </div>
+  );
+}
+
+function Container46() {
+  return (
+    <div className="relative rounded-[8px] shrink-0 size-[48px]" data-name="container">
+      <div className="absolute inset-0 overflow-hidden pointer-events-none rounded-[8px]">
+        <img alt="" className="absolute h-[723.48%] left-[-472.81%] max-w-none top-[-196.15%] w-[1285.52%]" src={imgContainer1} />
+      </div>
+      <div className="content-stretch flex flex-col items-center justify-center overflow-clip px-[16px] py-[12px] relative rounded-[inherit] size-full">
+        <p className="[word-break:break-word] font-['Publico:Bold',sans-serif] leading-[24px] not-italic relative shrink-0 text-[20px] text-white whitespace-nowrap">Aa</p>
+      </div>
+      <div aria-hidden className="absolute border border-[rgba(0,0,0,0.1)] border-solid inset-0 pointer-events-none rounded-[8px]" />
+    </div>
+  );
+}
+
+function Container45() {
+  return (
+    <div className="content-stretch flex flex-col items-center justify-center overflow-clip relative rounded-[8px] shrink-0" data-name="container">
+      <Container46 />
+    </div>
+  );
+}
+
+function ColumnLabel35() {
+  return (
+    <div className="content-stretch flex items-center justify-center relative shrink-0" data-name="Column Label">
+      <Container45 />
+    </div>
+  );
+}
+
+function DocsTableCell47() {
+  return (
+    <div className="content-stretch flex gap-[4px] items-center justify-end overflow-clip relative shrink-0" data-name=".Docs/Table/Cell">
+      <ColumnLabel34 />
+      <ColumnLabel35 />
+    </div>
+  );
+}
+
+function StyleProperty11() {
+  return (
+    <div className="content-stretch flex items-center min-h-[88px] py-[12px] relative shrink-0 w-full" data-name="Style Property">
+      <div aria-hidden className="absolute border-[rgba(0,0,0,0.1)] border-b border-solid inset-[0_0_-0.5px_0] pointer-events-none" />
+      <DocsTableCell44 />
+      <DocsTableCell45 />
+      <DocsTableCell46 />
+      <DocsTableCell47 />
+    </div>
+  );
+}
+
+function Token12() {
+  return (
+    <div className="bg-[#efeff1] content-stretch flex items-center justify-center px-[8px] py-[4px] relative rounded-[4px] shrink-0" data-name="token">
+      <p className="[word-break:break-word] font-['Source_Sans_3:SemiBold',sans-serif] font-semibold leading-[20px] max-w-[230px] relative shrink-0 text-[#434956] text-[14px] whitespace-nowrap">color-text-interaction-primary-hover-inverse</p>
+    </div>
+  );
+}
+
+function DocsTableCell48() {
+  return (
+    <div className="flex-[1_0_0] max-w-[264px] min-w-px relative" data-name=".Docs/Table/Cell">
+      <div className="flex flex-col justify-center max-w-[inherit] overflow-clip rounded-[inherit] size-full">
+        <div className="content-stretch flex flex-col items-start justify-center max-w-[inherit] pr-[16px] relative size-full">
+          <Token12 />
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function DocsTableCell49() {
+  return (
+    <div className="content-stretch flex flex-col h-[92px] items-start justify-center overflow-clip p-[16px] relative shrink-0 w-[340px]" data-name=".Docs/Table/Cell">
+      <p className="[word-break:break-word] flex-[1_0_0] font-['Source_Sans_3:Regular',sans-serif] font-normal leading-[20px] min-h-px relative text-[#1a1d21] text-[14px] w-full">Use for primary interactive text when hovered on dark or colored background. For example, use it for the label on primary buttons when hovered.</p>
+    </div>
+  );
+}
+
+function ColumnLabel36() {
+  return (
+    <div className="relative shrink-0 w-full" data-name="Column Label">
+      <div className="content-stretch flex flex-col items-start px-[8px] relative size-full">
+        <p className="[word-break:break-word] font-['Source_Sans_3:SemiBold',sans-serif] font-semibold leading-[20px] overflow-hidden relative shrink-0 text-[#1a1d21] text-[14px] text-center text-ellipsis whitespace-nowrap">#E8EAED</p>
+      </div>
+    </div>
+  );
+}
+
+function DocsTableCell50() {
+  return (
+    <div className="content-stretch flex flex-col items-center justify-center overflow-clip relative shrink-0 w-[146px]" data-name=".Docs/Table/Cell">
+      <ColumnLabel36 />
+    </div>
+  );
+}
+
+function Container48() {
+  return (
+    <div className="bg-[#070e40] relative rounded-[8px] shrink-0 size-[48px]" data-name="container">
+      <div className="content-stretch flex flex-col items-center justify-center overflow-clip px-[16px] py-[12px] relative rounded-[inherit] size-full">
+        <p className="[word-break:break-word] font-['Publico:Bold',sans-serif] leading-[24px] not-italic relative shrink-0 text-[#e8eaed] text-[20px] whitespace-nowrap">Aa</p>
+      </div>
+      <div aria-hidden className="absolute border border-[rgba(0,0,0,0.1)] border-solid inset-0 pointer-events-none rounded-[8px]" />
+    </div>
+  );
+}
+
+function Container47() {
+  return (
+    <div className="content-stretch flex flex-col items-center justify-center overflow-clip relative rounded-[8px] shrink-0" data-name="container">
+      <Container48 />
+    </div>
+  );
+}
+
+function ColumnLabel37() {
+  return (
+    <div className="content-stretch flex items-center justify-center relative shrink-0" data-name="Column Label">
+      <Container47 />
+    </div>
+  );
+}
+
+function Container50() {
+  return (
+    <div className="relative rounded-[8px] shrink-0 size-[48px]" data-name="container">
+      <div className="absolute inset-0 overflow-hidden pointer-events-none rounded-[8px]">
+        <img alt="" className="absolute h-[723.48%] left-[-472.81%] max-w-none top-[-196.15%] w-[1285.52%]" src={imgContainer1} />
+      </div>
+      <div className="content-stretch flex flex-col items-center justify-center overflow-clip px-[16px] py-[12px] relative rounded-[inherit] size-full">
+        <p className="[word-break:break-word] font-['Publico:Bold',sans-serif] leading-[24px] not-italic relative shrink-0 text-[#e8eaed] text-[20px] whitespace-nowrap">Aa</p>
+      </div>
+      <div aria-hidden className="absolute border border-[rgba(0,0,0,0.1)] border-solid inset-0 pointer-events-none rounded-[8px]" />
+    </div>
+  );
+}
+
+function Container49() {
+  return (
+    <div className="content-stretch flex flex-col items-center justify-center overflow-clip relative rounded-[8px] shrink-0" data-name="container">
+      <Container50 />
+    </div>
+  );
+}
+
+function ColumnLabel38() {
+  return (
+    <div className="content-stretch flex items-center justify-center relative shrink-0" data-name="Column Label">
+      <Container49 />
+    </div>
+  );
+}
+
+function DocsTableCell51() {
+  return (
+    <div className="content-stretch flex gap-[4px] items-center justify-end overflow-clip relative shrink-0" data-name=".Docs/Table/Cell">
+      <ColumnLabel37 />
+      <ColumnLabel38 />
+    </div>
+  );
+}
+
+function StyleProperty12() {
+  return (
+    <div className="content-stretch flex items-center min-h-[88px] py-[12px] relative shrink-0 w-full" data-name="Style Property">
+      <div aria-hidden className="absolute border-[rgba(0,0,0,0.1)] border-b border-solid inset-[0_0_-0.5px_0] pointer-events-none" />
+      <DocsTableCell48 />
+      <DocsTableCell49 />
+      <DocsTableCell50 />
+      <DocsTableCell51 />
+    </div>
+  );
+}
+
+function Token13() {
+  return (
+    <div className="bg-[#efeff1] content-stretch flex items-center justify-center px-[8px] py-[4px] relative rounded-[4px] shrink-0" data-name="token">
+      <p className="[word-break:break-word] font-['Source_Sans_3:SemiBold',sans-serif] font-semibold leading-[20px] max-w-[230px] relative shrink-0 text-[#434956] text-[14px] whitespace-nowrap">color-text-interaction-primary-active-inverse</p>
+    </div>
+  );
+}
+
+function DocsTableCell52() {
+  return (
+    <div className="flex-[1_0_0] max-w-[264px] min-w-px relative" data-name=".Docs/Table/Cell">
+      <div className="flex flex-col justify-center max-w-[inherit] overflow-clip rounded-[inherit] size-full">
+        <div className="content-stretch flex flex-col items-start justify-center max-w-[inherit] pr-[16px] relative size-full">
+          <Token13 />
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function DocsTableCell53() {
+  return (
+    <div className="content-stretch flex flex-col h-[112px] items-start justify-center overflow-clip p-[16px] relative shrink-0 w-[340px]" data-name=".Docs/Table/Cell">
+      <p className="[word-break:break-word] flex-[1_0_0] font-['Source_Sans_3:Regular',sans-serif] font-normal leading-[20px] min-h-px relative text-[#1a1d21] text-[14px] w-full">{`Use for primary interactive text when active or pressed on dark or colored background. For example, use it for the label on primary buttons when active. `}</p>
+    </div>
+  );
+}
+
+function ColumnLabel39() {
+  return (
+    <div className="relative shrink-0 w-full" data-name="Column Label">
+      <div className="content-stretch flex flex-col items-start px-[8px] relative size-full">
+        <p className="[word-break:break-word] font-['Source_Sans_3:SemiBold',sans-serif] font-semibold leading-[20px] overflow-hidden relative shrink-0 text-[#1a1d21] text-[14px] text-center text-ellipsis whitespace-nowrap">#D4D7DD</p>
+      </div>
+    </div>
+  );
+}
+
+function DocsTableCell54() {
+  return (
+    <div className="content-stretch flex flex-col items-center justify-center overflow-clip relative shrink-0 w-[146px]" data-name=".Docs/Table/Cell">
+      <ColumnLabel39 />
+    </div>
+  );
+}
+
+function Container52() {
+  return (
+    <div className="bg-[#070e40] relative rounded-[8px] shrink-0 size-[48px]" data-name="container">
+      <div className="content-stretch flex flex-col items-center justify-center overflow-clip px-[16px] py-[12px] relative rounded-[inherit] size-full">
+        <p className="[word-break:break-word] font-['Publico:Bold',sans-serif] leading-[24px] not-italic relative shrink-0 text-[#d4d7dd] text-[20px] whitespace-nowrap">Aa</p>
+      </div>
+      <div aria-hidden className="absolute border border-[rgba(0,0,0,0.1)] border-solid inset-0 pointer-events-none rounded-[8px]" />
+    </div>
+  );
+}
+
+function Container51() {
+  return (
+    <div className="content-stretch flex flex-col items-center justify-center overflow-clip relative rounded-[8px] shrink-0" data-name="container">
+      <Container52 />
+    </div>
+  );
+}
+
+function ColumnLabel40() {
+  return (
+    <div className="content-stretch flex items-center justify-center relative shrink-0" data-name="Column Label">
+      <Container51 />
+    </div>
+  );
+}
+
+function Container54() {
+  return (
+    <div className="relative rounded-[8px] shrink-0 size-[48px]" data-name="container">
+      <div className="absolute inset-0 overflow-hidden pointer-events-none rounded-[8px]">
+        <img alt="" className="absolute h-[723.48%] left-[-472.81%] max-w-none top-[-196.15%] w-[1285.52%]" src={imgContainer1} />
+      </div>
+      <div className="content-stretch flex flex-col items-center justify-center overflow-clip px-[16px] py-[12px] relative rounded-[inherit] size-full">
+        <p className="[word-break:break-word] font-['Publico:Bold',sans-serif] leading-[24px] not-italic relative shrink-0 text-[#d4d7dd] text-[20px] whitespace-nowrap">Aa</p>
+      </div>
+      <div aria-hidden className="absolute border border-[rgba(0,0,0,0.1)] border-solid inset-0 pointer-events-none rounded-[8px]" />
+    </div>
+  );
+}
+
+function Container53() {
+  return (
+    <div className="content-stretch flex flex-col items-center justify-center overflow-clip relative rounded-[8px] shrink-0" data-name="container">
+      <Container54 />
+    </div>
+  );
+}
+
+function ColumnLabel41() {
+  return (
+    <div className="content-stretch flex items-center justify-center relative shrink-0" data-name="Column Label">
+      <Container53 />
+    </div>
+  );
+}
+
+function DocsTableCell55() {
+  return (
+    <div className="content-stretch flex gap-[4px] items-center justify-end overflow-clip relative shrink-0" data-name=".Docs/Table/Cell">
+      <ColumnLabel40 />
+      <ColumnLabel41 />
+    </div>
+  );
+}
+
+function StyleProperty13() {
+  return (
+    <div className="content-stretch flex items-center min-h-[88px] py-[12px] relative shrink-0 w-full" data-name="Style Property">
+      <div aria-hidden className="absolute border-[rgba(0,0,0,0.1)] border-b border-solid inset-[0_0_-0.5px_0] pointer-events-none" />
+      <DocsTableCell52 />
+      <DocsTableCell53 />
+      <DocsTableCell54 />
+      <DocsTableCell55 />
+    </div>
+  );
+}
+
+function Token14() {
+  return (
+    <div className="bg-[#efeff1] content-stretch flex items-center justify-center px-[8px] py-[4px] relative rounded-[4px] shrink-0" data-name="token">
+      <p className="[word-break:break-word] font-['Source_Sans_3:SemiBold',sans-serif] font-semibold leading-[20px] max-w-[230px] relative shrink-0 text-[#434956] text-[14px] whitespace-nowrap">color-text-interaction-secondary-default</p>
+    </div>
+  );
+}
+
+function DocsTableCell56() {
+  return (
+    <div className="flex-[1_0_0] max-w-[264px] min-w-px relative" data-name=".Docs/Table/Cell">
+      <div className="flex flex-col justify-center max-w-[inherit] overflow-clip rounded-[inherit] size-full">
+        <div className="content-stretch flex flex-col items-start justify-center max-w-[inherit] pr-[16px] relative size-full">
+          <Token14 />
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function DocsTableCell57() {
+  return (
+    <div className="content-stretch flex flex-col h-[92px] items-start justify-center overflow-clip p-[16px] relative shrink-0 w-[340px]" data-name=".Docs/Table/Cell">
+      <p className="[word-break:break-word] flex-[1_0_0] font-['Source_Sans_3:Regular',sans-serif] font-normal leading-[20px] min-h-px relative text-[#1a1d21] text-[14px] w-full">{`Use for secondary interactive text in its default state, such as secondary links or actions, on light background. `}</p>
+    </div>
+  );
+}
+
+function ColumnLabel42() {
+  return (
+    <div className="relative shrink-0 w-full" data-name="Column Label">
+      <div className="content-stretch flex flex-col items-start px-[8px] relative size-full">
+        <p className="[word-break:break-word] font-['Source_Sans_3:SemiBold',sans-serif] font-semibold leading-[20px] overflow-hidden relative shrink-0 text-[#1a1d21] text-[14px] text-center text-ellipsis whitespace-nowrap">#606776</p>
+      </div>
+    </div>
+  );
+}
+
+function DocsTableCell58() {
+  return (
+    <div className="content-stretch flex flex-col items-center justify-center overflow-clip relative shrink-0 w-[146px]" data-name=".Docs/Table/Cell">
+      <ColumnLabel42 />
+    </div>
+  );
+}
+
+function Container56() {
+  return (
+    <div className="bg-white relative rounded-[8px] shrink-0 size-[48px]" data-name="container">
+      <div className="content-stretch flex flex-col items-center justify-center overflow-clip px-[16px] py-[12px] relative rounded-[inherit] size-full">
+        <p className="[word-break:break-word] font-['Publico:Bold',sans-serif] leading-[24px] not-italic relative shrink-0 text-[#606776] text-[20px] w-[25px]">Aa</p>
+      </div>
+      <div aria-hidden className="absolute border border-[rgba(0,0,0,0.1)] border-solid inset-0 pointer-events-none rounded-[8px]" />
+    </div>
+  );
+}
+
+function Container55() {
+  return (
+    <div className="content-stretch flex flex-col items-center justify-center overflow-clip relative rounded-[8px] shrink-0" data-name="container">
+      <Container56 />
+    </div>
+  );
+}
+
+function ColumnLabel43() {
+  return (
+    <div className="content-stretch flex items-center justify-center relative shrink-0" data-name="Column Label">
+      <Container55 />
+    </div>
+  );
+}
+
+function Container58() {
+  return (
+    <div className="relative rounded-[8px] shrink-0 size-[48px]" data-name="container">
+      <img alt="" className="absolute inset-0 max-w-none object-bottom pointer-events-none rounded-[8px] size-full" src={imgContainer} />
+      <div className="content-stretch flex flex-col items-center justify-center overflow-clip px-[16px] py-[12px] relative rounded-[inherit] size-full">
+        <p className="[word-break:break-word] font-['Publico:Bold',sans-serif] leading-[24px] not-italic relative shrink-0 text-[#606776] text-[20px] whitespace-nowrap">Aa</p>
+      </div>
+      <div aria-hidden className="absolute border border-[rgba(0,0,0,0.1)] border-solid inset-0 pointer-events-none rounded-[8px]" />
+    </div>
+  );
+}
+
+function Container57() {
+  return (
+    <div className="content-stretch flex flex-col items-center justify-center overflow-clip relative rounded-[8px] shrink-0" data-name="container">
+      <Container58 />
+    </div>
+  );
+}
+
+function ColumnLabel44() {
+  return (
+    <div className="content-stretch flex items-center justify-center relative shrink-0" data-name="Column Label">
+      <Container57 />
+    </div>
+  );
+}
+
+function DocsTableCell59() {
+  return (
+    <div className="content-stretch flex gap-[4px] items-center justify-end overflow-clip relative shrink-0" data-name=".Docs/Table/Cell">
+      <ColumnLabel43 />
+      <ColumnLabel44 />
+    </div>
+  );
+}
+
+function StyleProperty14() {
+  return (
+    <div className="content-stretch flex items-center min-h-[88px] py-[12px] relative shrink-0 w-full" data-name="Style Property">
+      <div aria-hidden className="absolute border-[rgba(0,0,0,0.1)] border-b border-solid inset-[0_0_-0.5px_0] pointer-events-none" />
+      <DocsTableCell56 />
+      <DocsTableCell57 />
+      <DocsTableCell58 />
+      <DocsTableCell59 />
+    </div>
+  );
+}
+
+function Token15() {
+  return (
+    <div className="bg-[#efeff1] content-stretch flex items-center justify-center px-[8px] py-[4px] relative rounded-[4px] shrink-0" data-name="token">
+      <p className="[word-break:break-word] font-['Source_Sans_3:SemiBold',sans-serif] font-semibold leading-[20px] max-w-[230px] relative shrink-0 text-[#434956] text-[14px] whitespace-nowrap">color-text-interaction-secondary-hover</p>
+    </div>
+  );
+}
+
+function DocsTableCell60() {
+  return (
+    <div className="flex-[1_0_0] max-w-[264px] min-w-px relative" data-name=".Docs/Table/Cell">
+      <div className="flex flex-col justify-center max-w-[inherit] overflow-clip rounded-[inherit] size-full">
+        <div className="content-stretch flex flex-col items-start justify-center max-w-[inherit] pr-[16px] relative size-full">
+          <Token15 />
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function DocsTableCell61() {
+  return (
+    <div className="content-stretch flex flex-col h-[72px] items-start justify-center overflow-clip p-[16px] relative shrink-0 w-[340px]" data-name=".Docs/Table/Cell">
+      <p className="[word-break:break-word] flex-[1_0_0] font-['Source_Sans_3:Regular',sans-serif] font-normal leading-[20px] min-h-px relative text-[#1a1d21] text-[14px] w-full">{`Use for secondary interactive text when hovered, to highlight interactivity, on light background. `}</p>
+    </div>
+  );
+}
+
+function ColumnLabel45() {
+  return (
+    <div className="relative shrink-0 w-full" data-name="Column Label">
+      <div className="content-stretch flex flex-col items-start px-[8px] relative size-full">
+        <p className="[word-break:break-word] font-['Source_Sans_3:SemiBold',sans-serif] font-semibold leading-[20px] overflow-hidden relative shrink-0 text-[#1a1d21] text-[14px] text-center text-ellipsis whitespace-nowrap">#2B303B</p>
+      </div>
+    </div>
+  );
+}
+
+function DocsTableCell62() {
+  return (
+    <div className="content-stretch flex flex-col items-center justify-center overflow-clip relative shrink-0 w-[146px]" data-name=".Docs/Table/Cell">
+      <ColumnLabel45 />
+    </div>
+  );
+}
+
+function Container60() {
+  return (
+    <div className="bg-white relative rounded-[8px] shrink-0 size-[48px]" data-name="container">
+      <div className="content-stretch flex flex-col items-center justify-center overflow-clip px-[16px] py-[12px] relative rounded-[inherit] size-full">
+        <p className="[word-break:break-word] font-['Publico:Bold',sans-serif] leading-[24px] not-italic relative shrink-0 text-[#2b303b] text-[20px] w-[25px]">Aa</p>
+      </div>
+      <div aria-hidden className="absolute border border-[rgba(0,0,0,0.1)] border-solid inset-0 pointer-events-none rounded-[8px]" />
+    </div>
+  );
+}
+
+function Container59() {
+  return (
+    <div className="content-stretch flex flex-col items-center justify-center overflow-clip relative rounded-[8px] shrink-0" data-name="container">
+      <Container60 />
+    </div>
+  );
+}
+
+function ColumnLabel46() {
+  return (
+    <div className="content-stretch flex items-center justify-center relative shrink-0" data-name="Column Label">
+      <Container59 />
+    </div>
+  );
+}
+
+function Container62() {
+  return (
+    <div className="relative rounded-[8px] shrink-0 size-[48px]" data-name="container">
+      <img alt="" className="absolute inset-0 max-w-none object-bottom pointer-events-none rounded-[8px] size-full" src={imgContainer} />
+      <div className="content-stretch flex flex-col items-center justify-center overflow-clip px-[16px] py-[12px] relative rounded-[inherit] size-full">
+        <p className="[word-break:break-word] font-['Publico:Bold',sans-serif] leading-[24px] not-italic relative shrink-0 text-[#2b303b] text-[20px] whitespace-nowrap">Aa</p>
+      </div>
+      <div aria-hidden className="absolute border border-[rgba(0,0,0,0.1)] border-solid inset-0 pointer-events-none rounded-[8px]" />
+    </div>
+  );
+}
+
+function Container61() {
+  return (
+    <div className="content-stretch flex flex-col items-center justify-center overflow-clip relative rounded-[8px] shrink-0" data-name="container">
+      <Container62 />
+    </div>
+  );
+}
+
+function ColumnLabel47() {
+  return (
+    <div className="content-stretch flex items-center justify-center relative shrink-0" data-name="Column Label">
+      <Container61 />
+    </div>
+  );
+}
+
+function DocsTableCell63() {
+  return (
+    <div className="content-stretch flex gap-[4px] items-center justify-end overflow-clip relative shrink-0" data-name=".Docs/Table/Cell">
+      <ColumnLabel46 />
+      <ColumnLabel47 />
+    </div>
+  );
+}
+
+function StyleProperty15() {
+  return (
+    <div className="content-stretch flex items-center min-h-[88px] py-[12px] relative shrink-0 w-full" data-name="Style Property">
+      <div aria-hidden className="absolute border-[rgba(0,0,0,0.1)] border-b border-solid inset-[0_0_-0.5px_0] pointer-events-none" />
+      <DocsTableCell60 />
+      <DocsTableCell61 />
+      <DocsTableCell62 />
+      <DocsTableCell63 />
+    </div>
+  );
+}
+
+function Token16() {
+  return (
+    <div className="bg-[#efeff1] content-stretch flex items-center justify-center px-[8px] py-[4px] relative rounded-[4px] shrink-0" data-name="token">
+      <p className="[word-break:break-word] font-['Source_Sans_3:SemiBold',sans-serif] font-semibold leading-[20px] max-w-[230px] relative shrink-0 text-[#434956] text-[14px] whitespace-nowrap">color-text-interaction-secondary-active</p>
+    </div>
+  );
+}
+
+function DocsTableCell64() {
+  return (
+    <div className="flex-[1_0_0] max-w-[264px] min-w-px relative" data-name=".Docs/Table/Cell">
+      <div className="flex flex-col justify-center max-w-[inherit] overflow-clip rounded-[inherit] size-full">
+        <div className="content-stretch flex flex-col items-start justify-center max-w-[inherit] pr-[16px] relative size-full">
+          <Token16 />
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function DocsTableCell65() {
+  return (
+    <div className="content-stretch flex flex-col h-[92px] items-start justify-center overflow-clip p-[16px] relative shrink-0 w-[340px]" data-name=".Docs/Table/Cell">
+      <p className="[word-break:break-word] flex-[1_0_0] font-['Source_Sans_3:Regular',sans-serif] font-normal leading-[20px] min-h-px relative text-[#1a1d21] text-[14px] w-full">{`Use for secondary interactive text when active or pressed, signaling user engagement, on light background. `}</p>
+    </div>
+  );
+}
+
+function ColumnLabel48() {
+  return (
+    <div className="relative shrink-0 w-full" data-name="Column Label">
+      <div className="content-stretch flex flex-col items-start px-[8px] relative size-full">
+        <p className="[word-break:break-word] font-['Source_Sans_3:SemiBold',sans-serif] font-semibold leading-[20px] overflow-hidden relative shrink-0 text-[#1a1d21] text-[14px] text-center text-ellipsis whitespace-nowrap">#1A1D21</p>
+      </div>
+    </div>
+  );
+}
+
+function DocsTableCell66() {
+  return (
+    <div className="content-stretch flex flex-col items-center justify-center overflow-clip relative shrink-0 w-[146px]" data-name=".Docs/Table/Cell">
+      <ColumnLabel48 />
+    </div>
+  );
+}
+
+function Container64() {
+  return (
+    <div className="bg-white relative rounded-[8px] shrink-0 size-[48px]" data-name="container">
+      <div className="content-stretch flex flex-col items-center justify-center overflow-clip px-[16px] py-[12px] relative rounded-[inherit] size-full">
+        <p className="[word-break:break-word] font-['Publico:Bold',sans-serif] leading-[24px] not-italic relative shrink-0 text-[#1a1d21] text-[20px] w-[25px]">Aa</p>
+      </div>
+      <div aria-hidden className="absolute border border-[rgba(0,0,0,0.1)] border-solid inset-0 pointer-events-none rounded-[8px]" />
+    </div>
+  );
+}
+
+function Container63() {
+  return (
+    <div className="content-stretch flex flex-col items-center justify-center overflow-clip relative rounded-[8px] shrink-0" data-name="container">
+      <Container64 />
+    </div>
+  );
+}
+
+function ColumnLabel49() {
+  return (
+    <div className="content-stretch flex items-center justify-center relative shrink-0" data-name="Column Label">
+      <Container63 />
+    </div>
+  );
+}
+
+function Container66() {
+  return (
+    <div className="relative rounded-[8px] shrink-0 size-[48px]" data-name="container">
+      <img alt="" className="absolute inset-0 max-w-none object-bottom pointer-events-none rounded-[8px] size-full" src={imgContainer} />
+      <div className="content-stretch flex flex-col items-center justify-center overflow-clip px-[16px] py-[12px] relative rounded-[inherit] size-full">
+        <p className="[word-break:break-word] font-['Publico:Bold',sans-serif] leading-[24px] not-italic relative shrink-0 text-[#1a1d21] text-[20px] whitespace-nowrap">Aa</p>
+      </div>
+      <div aria-hidden className="absolute border border-[rgba(0,0,0,0.1)] border-solid inset-0 pointer-events-none rounded-[8px]" />
+    </div>
+  );
+}
+
+function Container65() {
+  return (
+    <div className="content-stretch flex flex-col items-center justify-center overflow-clip relative rounded-[8px] shrink-0" data-name="container">
+      <Container66 />
+    </div>
+  );
+}
+
+function ColumnLabel50() {
+  return (
+    <div className="content-stretch flex items-center justify-center relative shrink-0" data-name="Column Label">
+      <Container65 />
+    </div>
+  );
+}
+
+function DocsTableCell67() {
+  return (
+    <div className="content-stretch flex gap-[4px] items-center justify-end overflow-clip relative shrink-0" data-name=".Docs/Table/Cell">
+      <ColumnLabel49 />
+      <ColumnLabel50 />
+    </div>
+  );
+}
+
+function StyleProperty16() {
+  return (
+    <div className="content-stretch flex items-center min-h-[88px] py-[12px] relative shrink-0 w-full" data-name="Style Property">
+      <div aria-hidden className="absolute border-[rgba(0,0,0,0.1)] border-b border-solid inset-[0_0_-0.5px_0] pointer-events-none" />
+      <DocsTableCell64 />
+      <DocsTableCell65 />
+      <DocsTableCell66 />
+      <DocsTableCell67 />
+    </div>
+  );
+}
+
+function Token17() {
+  return (
+    <div className="bg-[#efeff1] content-stretch flex items-center justify-center px-[8px] py-[4px] relative rounded-[4px] shrink-0" data-name="token">
+      <p className="[word-break:break-word] font-['Source_Sans_3:SemiBold',sans-serif] font-semibold leading-[20px] max-w-[230px] relative shrink-0 text-[#434956] text-[14px] whitespace-nowrap">color-text-interaction-secondary-default-inverse</p>
+    </div>
+  );
+}
+
+function DocsTableCell68() {
+  return (
+    <div className="flex-[1_0_0] max-w-[264px] min-w-px relative" data-name=".Docs/Table/Cell">
+      <div className="flex flex-col justify-center max-w-[inherit] overflow-clip rounded-[inherit] size-full">
+        <div className="content-stretch flex flex-col items-start justify-center max-w-[inherit] pr-[16px] relative size-full">
+          <Token17 />
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function DocsTableCell69() {
+  return (
+    <div className="content-stretch flex flex-col h-[72px] items-start justify-center overflow-clip p-[16px] relative shrink-0 w-[340px]" data-name=".Docs/Table/Cell">
+      <p className="[word-break:break-word] flex-[1_0_0] font-['Source_Sans_3:Regular',sans-serif] font-normal leading-[20px] min-h-px relative text-[#1a1d21] text-[14px] w-full">{`Use for secondary interactive text in its default state on dark or colored background. `}</p>
+    </div>
+  );
+}
+
+function ColumnLabel51() {
+  return (
+    <div className="relative shrink-0 w-full" data-name="Column Label">
+      <div className="[word-break:break-word] content-stretch flex flex-col font-['Source_Sans_3:SemiBold',sans-serif] font-semibold gap-[4px] items-start leading-[20px] px-[8px] relative size-full text-[#1a1d21] text-[14px] text-center whitespace-nowrap">
+        <p className="overflow-hidden relative shrink-0 text-ellipsis">#FFFFFF (80%)</p>
+        <p className="overflow-hidden relative shrink-0 text-ellipsis">255, 255, 255, 0.8</p>
+      </div>
+    </div>
+  );
+}
+
+function DocsTableCell70() {
+  return (
+    <div className="content-stretch flex flex-col items-center justify-center overflow-clip relative shrink-0 w-[146px]" data-name=".Docs/Table/Cell">
+      <ColumnLabel51 />
+    </div>
+  );
+}
+
+function Container68() {
+  return (
+    <div className="bg-[#070e40] relative rounded-[8px] shrink-0 size-[48px]" data-name="container">
+      <div className="content-stretch flex flex-col items-center justify-center overflow-clip px-[16px] py-[12px] relative rounded-[inherit] size-full">
+        <p className="[word-break:break-word] font-['Publico:Bold',sans-serif] leading-[24px] not-italic relative shrink-0 text-[20px] text-[rgba(255,255,255,0.8)] whitespace-nowrap">Aa</p>
+      </div>
+      <div aria-hidden className="absolute border border-[rgba(0,0,0,0.1)] border-solid inset-0 pointer-events-none rounded-[8px]" />
+    </div>
+  );
+}
+
+function Container67() {
+  return (
+    <div className="content-stretch flex flex-col items-center justify-center overflow-clip relative rounded-[8px] shrink-0" data-name="container">
+      <Container68 />
+    </div>
+  );
+}
+
+function ColumnLabel52() {
+  return (
+    <div className="content-stretch flex items-center justify-center relative shrink-0" data-name="Column Label">
+      <Container67 />
+    </div>
+  );
+}
+
+function Container70() {
+  return (
+    <div className="relative rounded-[8px] shrink-0 size-[48px]" data-name="container">
+      <div className="absolute inset-0 overflow-hidden pointer-events-none rounded-[8px]">
+        <img alt="" className="absolute h-[723.48%] left-[-472.81%] max-w-none top-[-196.15%] w-[1285.52%]" src={imgContainer1} />
+      </div>
+      <div className="content-stretch flex flex-col items-center justify-center overflow-clip px-[16px] py-[12px] relative rounded-[inherit] size-full">
+        <p className="[word-break:break-word] font-['Publico:Bold',sans-serif] leading-[24px] not-italic relative shrink-0 text-[20px] text-[rgba(255,255,255,0.8)] whitespace-nowrap">Aa</p>
+      </div>
+      <div aria-hidden className="absolute border border-[rgba(0,0,0,0.1)] border-solid inset-0 pointer-events-none rounded-[8px]" />
+    </div>
+  );
+}
+
+function Container69() {
+  return (
+    <div className="content-stretch flex flex-col items-center justify-center overflow-clip relative rounded-[8px] shrink-0" data-name="container">
+      <Container70 />
+    </div>
+  );
+}
+
+function ColumnLabel53() {
+  return (
+    <div className="content-stretch flex items-center justify-center relative shrink-0" data-name="Column Label">
+      <Container69 />
+    </div>
+  );
+}
+
+function DocsTableCell71() {
+  return (
+    <div className="content-stretch flex gap-[4px] items-center justify-end overflow-clip relative shrink-0" data-name=".Docs/Table/Cell">
+      <ColumnLabel52 />
+      <ColumnLabel53 />
+    </div>
+  );
+}
+
+function StyleProperty17() {
+  return (
+    <div className="content-stretch flex items-center min-h-[88px] py-[12px] relative shrink-0 w-full" data-name="Style Property">
+      <div aria-hidden className="absolute border-[rgba(0,0,0,0.1)] border-b border-solid inset-[0_0_-0.5px_0] pointer-events-none" />
+      <DocsTableCell68 />
+      <DocsTableCell69 />
+      <DocsTableCell70 />
+      <DocsTableCell71 />
+    </div>
+  );
+}
+
+function Token18() {
+  return (
+    <div className="bg-[#efeff1] content-stretch flex items-center justify-center px-[8px] py-[4px] relative rounded-[4px] shrink-0" data-name="token">
+      <p className="[word-break:break-word] font-['Source_Sans_3:SemiBold',sans-serif] font-semibold leading-[20px] max-w-[230px] relative shrink-0 text-[#434956] text-[14px] whitespace-nowrap">color-text-interaction-secondary-hover-inverse</p>
+    </div>
+  );
+}
+
+function DocsTableCell72() {
+  return (
+    <div className="flex-[1_0_0] max-w-[264px] min-w-px relative" data-name=".Docs/Table/Cell">
+      <div className="flex flex-col justify-center max-w-[inherit] overflow-clip rounded-[inherit] size-full">
+        <div className="content-stretch flex flex-col items-start justify-center max-w-[inherit] pr-[16px] relative size-full">
+          <Token18 />
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function DocsTableCell73() {
+  return (
+    <div className="content-stretch flex flex-col h-[72px] items-start justify-center overflow-clip p-[16px] relative shrink-0 w-[340px]" data-name=".Docs/Table/Cell">
+      <p className="[word-break:break-word] flex-[1_0_0] font-['Source_Sans_3:Regular',sans-serif] font-normal leading-[20px] min-h-px relative text-[#1a1d21] text-[14px] w-full">{`Use for secondary interactive text when hovered on dark or colored background. `}</p>
+    </div>
+  );
+}
+
+function ColumnLabel54() {
+  return (
+    <div className="relative shrink-0 w-full" data-name="Column Label">
+      <div className="content-stretch flex flex-col items-start px-[8px] relative size-full">
+        <p className="[word-break:break-word] font-['Source_Sans_3:SemiBold',sans-serif] font-semibold leading-[20px] overflow-hidden relative shrink-0 text-[#1a1d21] text-[14px] text-center text-ellipsis whitespace-nowrap">#FFFFFF</p>
+      </div>
+    </div>
+  );
+}
+
+function DocsTableCell74() {
+  return (
+    <div className="content-stretch flex flex-col items-center justify-center overflow-clip relative shrink-0 w-[146px]" data-name=".Docs/Table/Cell">
+      <ColumnLabel54 />
+    </div>
+  );
+}
+
+function Container72() {
+  return (
+    <div className="bg-[#070e40] relative rounded-[8px] shrink-0 size-[48px]" data-name="container">
+      <div className="content-stretch flex flex-col items-center justify-center overflow-clip px-[16px] py-[12px] relative rounded-[inherit] size-full">
+        <p className="[word-break:break-word] font-['Publico:Bold',sans-serif] leading-[24px] not-italic relative shrink-0 text-[20px] text-white whitespace-nowrap">Aa</p>
+      </div>
+      <div aria-hidden className="absolute border border-[rgba(0,0,0,0.1)] border-solid inset-0 pointer-events-none rounded-[8px]" />
+    </div>
+  );
+}
+
+function Container71() {
+  return (
+    <div className="content-stretch flex flex-col items-center justify-center overflow-clip relative rounded-[8px] shrink-0" data-name="container">
+      <Container72 />
+    </div>
+  );
+}
+
+function ColumnLabel55() {
+  return (
+    <div className="content-stretch flex items-center justify-center relative shrink-0" data-name="Column Label">
+      <Container71 />
+    </div>
+  );
+}
+
+function Container74() {
+  return (
+    <div className="relative rounded-[8px] shrink-0 size-[48px]" data-name="container">
+      <div className="absolute inset-0 overflow-hidden pointer-events-none rounded-[8px]">
+        <img alt="" className="absolute h-[723.48%] left-[-472.81%] max-w-none top-[-196.15%] w-[1285.52%]" src={imgContainer1} />
+      </div>
+      <div className="content-stretch flex flex-col items-center justify-center overflow-clip px-[16px] py-[12px] relative rounded-[inherit] size-full">
+        <p className="[word-break:break-word] font-['Publico:Bold',sans-serif] leading-[24px] not-italic relative shrink-0 text-[20px] text-white whitespace-nowrap">Aa</p>
+      </div>
+      <div aria-hidden className="absolute border border-[rgba(0,0,0,0.1)] border-solid inset-0 pointer-events-none rounded-[8px]" />
+    </div>
+  );
+}
+
+function Container73() {
+  return (
+    <div className="content-stretch flex flex-col items-center justify-center overflow-clip relative rounded-[8px] shrink-0" data-name="container">
+      <Container74 />
+    </div>
+  );
+}
+
+function ColumnLabel56() {
+  return (
+    <div className="content-stretch flex items-center justify-center relative shrink-0" data-name="Column Label">
+      <Container73 />
+    </div>
+  );
+}
+
+function DocsTableCell75() {
+  return (
+    <div className="content-stretch flex gap-[4px] items-center justify-end overflow-clip relative shrink-0" data-name=".Docs/Table/Cell">
+      <ColumnLabel55 />
+      <ColumnLabel56 />
+    </div>
+  );
+}
+
+function StyleProperty18() {
+  return (
+    <div className="content-stretch flex items-center min-h-[88px] py-[12px] relative shrink-0 w-full" data-name="Style Property">
+      <div aria-hidden className="absolute border-[rgba(0,0,0,0.1)] border-b border-solid inset-[0_0_-0.5px_0] pointer-events-none" />
+      <DocsTableCell72 />
+      <DocsTableCell73 />
+      <DocsTableCell74 />
+      <DocsTableCell75 />
+    </div>
+  );
+}
+
+function Token19() {
+  return (
+    <div className="bg-[#efeff1] content-stretch flex items-center justify-center px-[8px] py-[4px] relative rounded-[4px] shrink-0" data-name="token">
+      <p className="[word-break:break-word] font-['Source_Sans_3:SemiBold',sans-serif] font-semibold leading-[20px] max-w-[230px] relative shrink-0 text-[#434956] text-[14px] whitespace-nowrap">color-text-interaction-secondary-active-inverse</p>
+    </div>
+  );
+}
+
+function DocsTableCell76() {
+  return (
+    <div className="flex-[1_0_0] max-w-[264px] min-w-px relative" data-name=".Docs/Table/Cell">
+      <div className="flex flex-col justify-center max-w-[inherit] overflow-clip rounded-[inherit] size-full">
+        <div className="content-stretch flex flex-col items-start justify-center max-w-[inherit] pr-[16px] relative size-full">
+          <Token19 />
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function DocsTableCell77() {
+  return (
+    <div className="content-stretch flex flex-col h-[72px] items-start justify-center overflow-clip p-[16px] relative shrink-0 w-[340px]" data-name=".Docs/Table/Cell">
+      <p className="[word-break:break-word] flex-[1_0_0] font-['Source_Sans_3:Regular',sans-serif] font-normal leading-[20px] min-h-px relative text-[#1a1d21] text-[14px] w-full">{`Use for secondary interactive text when active or pressed on dark or colored background. `}</p>
+    </div>
+  );
+}
+
+function ColumnLabel57() {
+  return (
+    <div className="relative shrink-0 w-full" data-name="Column Label">
+      <div className="content-stretch flex flex-col items-start px-[8px] relative size-full">
+        <p className="[word-break:break-word] font-['Source_Sans_3:SemiBold',sans-serif] font-semibold leading-[20px] overflow-hidden relative shrink-0 text-[#1a1d21] text-[14px] text-center text-ellipsis whitespace-nowrap">#FFFFFF</p>
+      </div>
+    </div>
+  );
+}
+
+function DocsTableCell78() {
+  return (
+    <div className="content-stretch flex flex-col items-center justify-center overflow-clip relative shrink-0 w-[146px]" data-name=".Docs/Table/Cell">
+      <ColumnLabel57 />
+    </div>
+  );
+}
+
+function Container76() {
+  return (
+    <div className="bg-[#070e40] relative rounded-[8px] shrink-0 size-[48px]" data-name="container">
+      <div className="content-stretch flex flex-col items-center justify-center overflow-clip px-[16px] py-[12px] relative rounded-[inherit] size-full">
+        <p className="[word-break:break-word] font-['Publico:Bold',sans-serif] leading-[24px] not-italic relative shrink-0 text-[20px] text-white whitespace-nowrap">Aa</p>
+      </div>
+      <div aria-hidden className="absolute border border-[rgba(0,0,0,0.1)] border-solid inset-0 pointer-events-none rounded-[8px]" />
+    </div>
+  );
+}
+
+function Container75() {
+  return (
+    <div className="content-stretch flex flex-col items-center justify-center overflow-clip relative rounded-[8px] shrink-0" data-name="container">
+      <Container76 />
+    </div>
+  );
+}
+
+function ColumnLabel58() {
+  return (
+    <div className="content-stretch flex items-center justify-center relative shrink-0" data-name="Column Label">
+      <Container75 />
+    </div>
+  );
+}
+
+function Container78() {
+  return (
+    <div className="relative rounded-[8px] shrink-0 size-[48px]" data-name="container">
+      <div className="absolute inset-0 overflow-hidden pointer-events-none rounded-[8px]">
+        <img alt="" className="absolute h-[723.48%] left-[-472.81%] max-w-none top-[-196.15%] w-[1285.52%]" src={imgContainer1} />
+      </div>
+      <div className="content-stretch flex flex-col items-center justify-center overflow-clip px-[16px] py-[12px] relative rounded-[inherit] size-full">
+        <p className="[word-break:break-word] font-['Publico:Bold',sans-serif] leading-[24px] not-italic relative shrink-0 text-[20px] text-white whitespace-nowrap">Aa</p>
+      </div>
+      <div aria-hidden className="absolute border border-[rgba(0,0,0,0.1)] border-solid inset-0 pointer-events-none rounded-[8px]" />
+    </div>
+  );
+}
+
+function Container77() {
+  return (
+    <div className="content-stretch flex flex-col items-center justify-center overflow-clip relative rounded-[8px] shrink-0" data-name="container">
+      <Container78 />
+    </div>
+  );
+}
+
+function ColumnLabel59() {
+  return (
+    <div className="content-stretch flex items-center justify-center relative shrink-0" data-name="Column Label">
+      <Container77 />
+    </div>
+  );
+}
+
+function DocsTableCell79() {
+  return (
+    <div className="content-stretch flex gap-[4px] items-center justify-end overflow-clip relative shrink-0" data-name=".Docs/Table/Cell">
+      <ColumnLabel58 />
+      <ColumnLabel59 />
+    </div>
+  );
+}
+
+function StyleProperty19() {
+  return (
+    <div className="content-stretch flex items-center min-h-[88px] py-[12px] relative shrink-0 w-full" data-name="Style Property">
+      <div aria-hidden className="absolute border-[rgba(0,0,0,0.1)] border-b border-solid inset-[0_0_-0.5px_0] pointer-events-none" />
+      <DocsTableCell76 />
+      <DocsTableCell77 />
+      <DocsTableCell78 />
+      <DocsTableCell79 />
+    </div>
+  );
+}
+
+function Token20() {
+  return (
+    <div className="bg-[#efeff1] content-stretch flex items-center justify-center px-[8px] py-[4px] relative rounded-[4px] shrink-0" data-name="token">
+      <p className="[word-break:break-word] font-['Source_Sans_3:SemiBold',sans-serif] font-semibold leading-[20px] max-w-[230px] relative shrink-0 text-[#434956] text-[14px] whitespace-nowrap">color-text-interaction-strong-default</p>
+    </div>
+  );
+}
+
+function DocsTableCell80() {
+  return (
+    <div className="flex-[1_0_0] max-w-[264px] min-w-px relative" data-name=".Docs/Table/Cell">
+      <div className="flex flex-col justify-center max-w-[inherit] overflow-clip rounded-[inherit] size-full">
+        <div className="content-stretch flex flex-col items-start justify-center max-w-[inherit] pr-[16px] relative size-full">
+          <Token20 />
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function DocsTableCell81() {
+  return (
+    <div className="content-stretch flex flex-col h-[92px] items-start justify-center overflow-clip p-[16px] relative shrink-0 w-[340px]" data-name=".Docs/Table/Cell">
+      <p className="[word-break:break-word] flex-[1_0_0] font-['Source_Sans_3:Regular',sans-serif] font-normal leading-[20px] min-h-px relative text-[#1a1d21] text-[14px] w-full">{`Use for important interactive text in its default state, such as requesting assistance or critical actions, on light background. `}</p>
+    </div>
+  );
+}
+
+function ColumnLabel60() {
+  return (
+    <div className="relative shrink-0 w-full" data-name="Column Label">
+      <div className="content-stretch flex flex-col items-start px-[8px] relative size-full">
+        <p className="[word-break:break-word] font-['Source_Sans_3:SemiBold',sans-serif] font-semibold leading-[20px] overflow-hidden relative shrink-0 text-[#1a1d21] text-[14px] text-center text-ellipsis whitespace-nowrap">#FF1721</p>
+      </div>
+    </div>
+  );
+}
+
+function DocsTableCell82() {
+  return (
+    <div className="content-stretch flex flex-col items-center justify-center overflow-clip relative shrink-0 w-[146px]" data-name=".Docs/Table/Cell">
+      <ColumnLabel60 />
+    </div>
+  );
+}
+
+function Container80() {
+  return (
+    <div className="bg-white relative rounded-[8px] shrink-0 size-[48px]" data-name="container">
+      <div className="content-stretch flex flex-col items-center justify-center overflow-clip px-[16px] py-[12px] relative rounded-[inherit] size-full">
+        <p className="[word-break:break-word] font-['Publico:Bold',sans-serif] leading-[24px] not-italic relative shrink-0 text-[#ff1721] text-[20px] w-[25px]">Aa</p>
+      </div>
+      <div aria-hidden className="absolute border border-[rgba(0,0,0,0.1)] border-solid inset-0 pointer-events-none rounded-[8px]" />
+    </div>
+  );
+}
+
+function Container79() {
+  return (
+    <div className="content-stretch flex flex-col items-center justify-center overflow-clip relative rounded-[8px] shrink-0" data-name="container">
+      <Container80 />
+    </div>
+  );
+}
+
+function ColumnLabel61() {
+  return (
+    <div className="content-stretch flex items-center justify-center relative shrink-0" data-name="Column Label">
+      <Container79 />
+    </div>
+  );
+}
+
+function Container82() {
+  return (
+    <div className="relative rounded-[8px] shrink-0 size-[48px]" data-name="container">
+      <img alt="" className="absolute inset-0 max-w-none object-bottom pointer-events-none rounded-[8px] size-full" src={imgContainer} />
+      <div className="content-stretch flex flex-col items-center justify-center overflow-clip px-[16px] py-[12px] relative rounded-[inherit] size-full">
+        <p className="[word-break:break-word] font-['Publico:Bold',sans-serif] leading-[24px] not-italic relative shrink-0 text-[#ff1721] text-[20px] whitespace-nowrap">Aa</p>
+      </div>
+      <div aria-hidden className="absolute border border-[rgba(0,0,0,0.1)] border-solid inset-0 pointer-events-none rounded-[8px]" />
+    </div>
+  );
+}
+
+function Container81() {
+  return (
+    <div className="content-stretch flex flex-col items-center justify-center overflow-clip relative rounded-[8px] shrink-0" data-name="container">
+      <Container82 />
+    </div>
+  );
+}
+
+function ColumnLabel62() {
+  return (
+    <div className="content-stretch flex items-center justify-center relative shrink-0" data-name="Column Label">
+      <Container81 />
+    </div>
+  );
+}
+
+function DocsTableCell83() {
+  return (
+    <div className="content-stretch flex gap-[4px] items-center justify-end overflow-clip relative shrink-0" data-name=".Docs/Table/Cell">
+      <ColumnLabel61 />
+      <ColumnLabel62 />
+    </div>
+  );
+}
+
+function StyleProperty20() {
+  return (
+    <div className="content-stretch flex items-center min-h-[88px] py-[12px] relative shrink-0 w-full" data-name="Style Property">
+      <div aria-hidden className="absolute border-[rgba(0,0,0,0.1)] border-b border-solid inset-[0_0_-0.5px_0] pointer-events-none" />
+      <DocsTableCell80 />
+      <DocsTableCell81 />
+      <DocsTableCell82 />
+      <DocsTableCell83 />
+    </div>
+  );
+}
+
+function Token21() {
+  return (
+    <div className="bg-[#efeff1] content-stretch flex items-center justify-center px-[8px] py-[4px] relative rounded-[4px] shrink-0" data-name="token">
+      <p className="[word-break:break-word] font-['Source_Sans_3:SemiBold',sans-serif] font-semibold leading-[20px] max-w-[230px] relative shrink-0 text-[#434956] text-[14px] whitespace-nowrap">color-text-interaction-strong-hover</p>
+    </div>
+  );
+}
+
+function DocsTableCell84() {
+  return (
+    <div className="flex-[1_0_0] max-w-[264px] min-w-px relative" data-name=".Docs/Table/Cell">
+      <div className="flex flex-col justify-center max-w-[inherit] overflow-clip rounded-[inherit] size-full">
+        <div className="content-stretch flex flex-col items-start justify-center max-w-[inherit] pr-[16px] relative size-full">
+          <Token21 />
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function DocsTableCell85() {
+  return (
+    <div className="content-stretch flex flex-col h-[72px] items-start justify-center overflow-clip p-[16px] relative shrink-0 w-[340px]" data-name=".Docs/Table/Cell">
+      <p className="[word-break:break-word] flex-[1_0_0] font-['Source_Sans_3:Regular',sans-serif] font-normal leading-[20px] min-h-px relative text-[#1a1d21] text-[14px] w-full">{`Use for important interactive text when hovered, to indicate interactivity, on light background. `}</p>
+    </div>
+  );
+}
+
+function ColumnLabel63() {
+  return (
+    <div className="relative shrink-0 w-full" data-name="Column Label">
+      <div className="content-stretch flex flex-col items-start px-[8px] relative size-full">
+        <p className="[word-break:break-word] font-['Source_Sans_3:SemiBold',sans-serif] font-semibold leading-[20px] overflow-hidden relative shrink-0 text-[#1a1d21] text-[14px] text-center text-ellipsis whitespace-nowrap">#CC0009</p>
+      </div>
+    </div>
+  );
+}
+
+function DocsTableCell86() {
+  return (
+    <div className="content-stretch flex flex-col items-center justify-center overflow-clip relative shrink-0 w-[146px]" data-name=".Docs/Table/Cell">
+      <ColumnLabel63 />
+    </div>
+  );
+}
+
+function Container84() {
+  return (
+    <div className="bg-white relative rounded-[8px] shrink-0 size-[48px]" data-name="container">
+      <div className="content-stretch flex flex-col items-center justify-center overflow-clip px-[16px] py-[12px] relative rounded-[inherit] size-full">
+        <p className="[word-break:break-word] font-['Publico:Bold',sans-serif] leading-[24px] not-italic relative shrink-0 text-[#cc0009] text-[20px] w-[25px]">Aa</p>
+      </div>
+      <div aria-hidden className="absolute border border-[rgba(0,0,0,0.1)] border-solid inset-0 pointer-events-none rounded-[8px]" />
+    </div>
+  );
+}
+
+function Container83() {
+  return (
+    <div className="content-stretch flex flex-col items-center justify-center overflow-clip relative rounded-[8px] shrink-0" data-name="container">
+      <Container84 />
+    </div>
+  );
+}
+
+function ColumnLabel64() {
+  return (
+    <div className="content-stretch flex items-center justify-center relative shrink-0" data-name="Column Label">
+      <Container83 />
+    </div>
+  );
+}
+
+function Container86() {
+  return (
+    <div className="relative rounded-[8px] shrink-0 size-[48px]" data-name="container">
+      <img alt="" className="absolute inset-0 max-w-none object-bottom pointer-events-none rounded-[8px] size-full" src={imgContainer} />
+      <div className="content-stretch flex flex-col items-center justify-center overflow-clip px-[16px] py-[12px] relative rounded-[inherit] size-full">
+        <p className="[word-break:break-word] font-['Publico:Bold',sans-serif] leading-[24px] not-italic relative shrink-0 text-[#cc0009] text-[20px] whitespace-nowrap">Aa</p>
+      </div>
+      <div aria-hidden className="absolute border border-[rgba(0,0,0,0.1)] border-solid inset-0 pointer-events-none rounded-[8px]" />
+    </div>
+  );
+}
+
+function Container85() {
+  return (
+    <div className="content-stretch flex flex-col items-center justify-center overflow-clip relative rounded-[8px] shrink-0" data-name="container">
+      <Container86 />
+    </div>
+  );
+}
+
+function ColumnLabel65() {
+  return (
+    <div className="content-stretch flex items-center justify-center relative shrink-0" data-name="Column Label">
+      <Container85 />
+    </div>
+  );
+}
+
+function DocsTableCell87() {
+  return (
+    <div className="content-stretch flex gap-[4px] items-center justify-end overflow-clip relative shrink-0" data-name=".Docs/Table/Cell">
+      <ColumnLabel64 />
+      <ColumnLabel65 />
+    </div>
+  );
+}
+
+function StyleProperty21() {
+  return (
+    <div className="content-stretch flex items-center min-h-[88px] py-[12px] relative shrink-0 w-full" data-name="Style Property">
+      <div aria-hidden className="absolute border-[rgba(0,0,0,0.1)] border-b border-solid inset-[0_0_-0.5px_0] pointer-events-none" />
+      <DocsTableCell84 />
+      <DocsTableCell85 />
+      <DocsTableCell86 />
+      <DocsTableCell87 />
+    </div>
+  );
+}
+
+function Token22() {
+  return (
+    <div className="bg-[#efeff1] content-stretch flex items-center justify-center px-[8px] py-[4px] relative rounded-[4px] shrink-0" data-name="token">
+      <p className="[word-break:break-word] font-['Source_Sans_3:SemiBold',sans-serif] font-semibold leading-[20px] max-w-[230px] relative shrink-0 text-[#434956] text-[14px] whitespace-nowrap">color-text-interaction-strong-active</p>
+    </div>
+  );
+}
+
+function DocsTableCell88() {
+  return (
+    <div className="flex-[1_0_0] max-w-[264px] min-w-px relative" data-name=".Docs/Table/Cell">
+      <div className="flex flex-col justify-center max-w-[inherit] overflow-clip rounded-[inherit] size-full">
+        <div className="content-stretch flex flex-col items-start justify-center max-w-[inherit] pr-[16px] relative size-full">
+          <Token22 />
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function DocsTableCell89() {
+  return (
+    <div className="content-stretch flex flex-col h-[92px] items-start justify-center overflow-clip p-[16px] relative shrink-0 w-[340px]" data-name=".Docs/Table/Cell">
+      <p className="[word-break:break-word] flex-[1_0_0] font-['Source_Sans_3:Regular',sans-serif] font-normal leading-[20px] min-h-px relative text-[#1a1d21] text-[14px] w-full">{`Use for important interactive text when active or pressed, signaling user engagement, on light background. `}</p>
+    </div>
+  );
+}
+
+function ColumnLabel66() {
+  return (
+    <div className="relative shrink-0 w-full" data-name="Column Label">
+      <div className="content-stretch flex flex-col items-start px-[8px] relative size-full">
+        <p className="[word-break:break-word] font-['Source_Sans_3:SemiBold',sans-serif] font-semibold leading-[20px] overflow-hidden relative shrink-0 text-[#1a1d21] text-[14px] text-center text-ellipsis whitespace-nowrap">#B20008</p>
+      </div>
+    </div>
+  );
+}
+
+function DocsTableCell90() {
+  return (
+    <div className="content-stretch flex flex-col items-center justify-center overflow-clip relative shrink-0 w-[146px]" data-name=".Docs/Table/Cell">
+      <ColumnLabel66 />
+    </div>
+  );
+}
+
+function Container88() {
+  return (
+    <div className="bg-white relative rounded-[8px] shrink-0 size-[48px]" data-name="container">
+      <div className="content-stretch flex flex-col items-center justify-center overflow-clip px-[16px] py-[12px] relative rounded-[inherit] size-full">
+        <p className="[word-break:break-word] font-['Publico:Bold',sans-serif] leading-[24px] not-italic relative shrink-0 text-[#b20008] text-[20px] w-[25px]">Aa</p>
+      </div>
+      <div aria-hidden className="absolute border border-[rgba(0,0,0,0.1)] border-solid inset-0 pointer-events-none rounded-[8px]" />
+    </div>
+  );
+}
+
+function Container87() {
+  return (
+    <div className="content-stretch flex flex-col items-center justify-center overflow-clip relative rounded-[8px] shrink-0" data-name="container">
+      <Container88 />
+    </div>
+  );
+}
+
+function ColumnLabel67() {
+  return (
+    <div className="content-stretch flex items-center justify-center relative shrink-0" data-name="Column Label">
+      <Container87 />
+    </div>
+  );
+}
+
+function Container90() {
+  return (
+    <div className="relative rounded-[8px] shrink-0 size-[48px]" data-name="container">
+      <img alt="" className="absolute inset-0 max-w-none object-bottom pointer-events-none rounded-[8px] size-full" src={imgContainer} />
+      <div className="content-stretch flex flex-col items-center justify-center overflow-clip px-[16px] py-[12px] relative rounded-[inherit] size-full">
+        <p className="[word-break:break-word] font-['Publico:Bold',sans-serif] leading-[24px] not-italic relative shrink-0 text-[#b20008] text-[20px] whitespace-nowrap">Aa</p>
+      </div>
+      <div aria-hidden className="absolute border border-[rgba(0,0,0,0.1)] border-solid inset-0 pointer-events-none rounded-[8px]" />
+    </div>
+  );
+}
+
+function Container89() {
+  return (
+    <div className="content-stretch flex flex-col items-center justify-center overflow-clip relative rounded-[8px] shrink-0" data-name="container">
+      <Container90 />
+    </div>
+  );
+}
+
+function ColumnLabel68() {
+  return (
+    <div className="content-stretch flex items-center justify-center relative shrink-0" data-name="Column Label">
+      <Container89 />
+    </div>
+  );
+}
+
+function DocsTableCell91() {
+  return (
+    <div className="content-stretch flex gap-[4px] items-center justify-end overflow-clip relative shrink-0" data-name=".Docs/Table/Cell">
+      <ColumnLabel67 />
+      <ColumnLabel68 />
+    </div>
+  );
+}
+
+function StyleProperty22() {
+  return (
+    <div className="content-stretch flex items-center min-h-[88px] py-[12px] relative shrink-0 w-full" data-name="Style Property">
+      <div aria-hidden className="absolute border-[rgba(0,0,0,0.1)] border-b border-solid inset-[0_0_-0.5px_0] pointer-events-none" />
+      <DocsTableCell88 />
+      <DocsTableCell89 />
+      <DocsTableCell90 />
+      <DocsTableCell91 />
+    </div>
+  );
+}
+
+function Token23() {
+  return (
+    <div className="bg-[#efeff1] content-stretch flex items-center justify-center px-[8px] py-[4px] relative rounded-[4px] shrink-0" data-name="token">
+      <p className="[word-break:break-word] font-['Source_Sans_3:SemiBold',sans-serif] font-semibold leading-[20px] max-w-[230px] relative shrink-0 text-[#434956] text-[14px] whitespace-nowrap">color-text-interaction-strong-default-inverse</p>
+    </div>
+  );
+}
+
+function DocsTableCell92() {
+  return (
+    <div className="flex-[1_0_0] max-w-[264px] min-w-px relative" data-name=".Docs/Table/Cell">
+      <div className="flex flex-col justify-center max-w-[inherit] overflow-clip rounded-[inherit] size-full">
+        <div className="content-stretch flex flex-col items-start justify-center max-w-[inherit] pr-[16px] relative size-full">
+          <Token23 />
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function DocsTableCell93() {
+  return (
+    <div className="content-stretch flex flex-col h-[72px] items-start justify-center overflow-clip p-[16px] relative shrink-0 w-[340px]" data-name=".Docs/Table/Cell">
+      <p className="[word-break:break-word] flex-[1_0_0] font-['Source_Sans_3:Regular',sans-serif] font-normal leading-[20px] min-h-px relative text-[#1a1d21] text-[14px] w-full">Use for important interactive text in its default state on dark or colored background.</p>
+    </div>
+  );
+}
+
+function ColumnLabel69() {
+  return (
+    <div className="relative shrink-0 w-full" data-name="Column Label">
+      <div className="content-stretch flex flex-col items-start px-[8px] relative size-full">
+        <p className="[word-break:break-word] font-['Source_Sans_3:SemiBold',sans-serif] font-semibold leading-[20px] overflow-hidden relative shrink-0 text-[#1a1d21] text-[14px] text-center text-ellipsis whitespace-nowrap">#FFFFFF</p>
+      </div>
+    </div>
+  );
+}
+
+function DocsTableCell94() {
+  return (
+    <div className="content-stretch flex flex-col items-center justify-center overflow-clip relative shrink-0 w-[146px]" data-name=".Docs/Table/Cell">
+      <ColumnLabel69 />
+    </div>
+  );
+}
+
+function Container92() {
+  return (
+    <div className="bg-[#070e40] relative rounded-[8px] shrink-0 size-[48px]" data-name="container">
+      <div className="content-stretch flex flex-col items-center justify-center overflow-clip px-[16px] py-[12px] relative rounded-[inherit] size-full">
+        <p className="[word-break:break-word] font-['Publico:Bold',sans-serif] leading-[24px] not-italic relative shrink-0 text-[20px] text-white whitespace-nowrap">Aa</p>
+      </div>
+      <div aria-hidden className="absolute border border-[rgba(0,0,0,0.1)] border-solid inset-0 pointer-events-none rounded-[8px]" />
+    </div>
+  );
+}
+
+function Container91() {
+  return (
+    <div className="content-stretch flex flex-col items-center justify-center overflow-clip relative rounded-[8px] shrink-0" data-name="container">
+      <Container92 />
+    </div>
+  );
+}
+
+function ColumnLabel70() {
+  return (
+    <div className="content-stretch flex items-center justify-center relative shrink-0" data-name="Column Label">
+      <Container91 />
+    </div>
+  );
+}
+
+function Container94() {
+  return (
+    <div className="relative rounded-[8px] shrink-0 size-[48px]" data-name="container">
+      <div className="absolute inset-0 overflow-hidden pointer-events-none rounded-[8px]">
+        <img alt="" className="absolute h-[723.48%] left-[-472.81%] max-w-none top-[-196.15%] w-[1285.52%]" src={imgContainer1} />
+      </div>
+      <div className="content-stretch flex flex-col items-center justify-center overflow-clip px-[16px] py-[12px] relative rounded-[inherit] size-full">
+        <p className="[word-break:break-word] font-['Publico:Bold',sans-serif] leading-[24px] not-italic relative shrink-0 text-[20px] text-white whitespace-nowrap">Aa</p>
+      </div>
+      <div aria-hidden className="absolute border border-[rgba(0,0,0,0.1)] border-solid inset-0 pointer-events-none rounded-[8px]" />
+    </div>
+  );
+}
+
+function Container93() {
+  return (
+    <div className="content-stretch flex flex-col items-center justify-center overflow-clip relative rounded-[8px] shrink-0" data-name="container">
+      <Container94 />
+    </div>
+  );
+}
+
+function ColumnLabel71() {
+  return (
+    <div className="content-stretch flex items-center justify-center relative shrink-0" data-name="Column Label">
+      <Container93 />
+    </div>
+  );
+}
+
+function DocsTableCell95() {
+  return (
+    <div className="content-stretch flex gap-[4px] items-center justify-end overflow-clip relative shrink-0" data-name=".Docs/Table/Cell">
+      <ColumnLabel70 />
+      <ColumnLabel71 />
+    </div>
+  );
+}
+
+function StyleProperty23() {
+  return (
+    <div className="content-stretch flex items-center min-h-[88px] py-[12px] relative shrink-0 w-full" data-name="Style Property">
+      <div aria-hidden className="absolute border-[rgba(0,0,0,0.1)] border-b border-solid inset-[0_0_-0.5px_0] pointer-events-none" />
+      <DocsTableCell92 />
+      <DocsTableCell93 />
+      <DocsTableCell94 />
+      <DocsTableCell95 />
+    </div>
+  );
+}
+
+function Token24() {
+  return (
+    <div className="bg-[#efeff1] content-stretch flex items-center justify-center px-[8px] py-[4px] relative rounded-[4px] shrink-0" data-name="token">
+      <p className="[word-break:break-word] font-['Source_Sans_3:SemiBold',sans-serif] font-semibold leading-[20px] max-w-[230px] relative shrink-0 text-[#434956] text-[14px] whitespace-nowrap">color-text-interaction-strong-hover-inverse</p>
+    </div>
+  );
+}
+
+function DocsTableCell96() {
+  return (
+    <div className="flex-[1_0_0] max-w-[264px] min-w-px relative" data-name=".Docs/Table/Cell">
+      <div className="flex flex-col justify-center max-w-[inherit] overflow-clip rounded-[inherit] size-full">
+        <div className="content-stretch flex flex-col items-start justify-center max-w-[inherit] pr-[16px] relative size-full">
+          <Token24 />
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function DocsTableCell97() {
+  return (
+    <div className="content-stretch flex flex-col h-[72px] items-start justify-center overflow-clip p-[16px] relative shrink-0 w-[340px]" data-name=".Docs/Table/Cell">
+      <p className="[word-break:break-word] flex-[1_0_0] font-['Source_Sans_3:Regular',sans-serif] font-normal leading-[20px] min-h-px relative text-[#1a1d21] text-[14px] w-full">Use for important interactive text when hovered on dark or colored background.</p>
+    </div>
+  );
+}
+
+function ColumnLabel72() {
+  return (
+    <div className="relative shrink-0 w-full" data-name="Column Label">
+      <div className="content-stretch flex flex-col items-start px-[8px] relative size-full">
+        <p className="[word-break:break-word] font-['Source_Sans_3:SemiBold',sans-serif] font-semibold leading-[20px] overflow-hidden relative shrink-0 text-[#1a1d21] text-[14px] text-center text-ellipsis whitespace-nowrap">#FFFFFF</p>
+      </div>
+    </div>
+  );
+}
+
+function DocsTableCell98() {
+  return (
+    <div className="content-stretch flex flex-col items-center justify-center overflow-clip relative shrink-0 w-[146px]" data-name=".Docs/Table/Cell">
+      <ColumnLabel72 />
+    </div>
+  );
+}
+
+function Container96() {
+  return (
+    <div className="bg-[#070e40] relative rounded-[8px] shrink-0 size-[48px]" data-name="container">
+      <div className="content-stretch flex flex-col items-center justify-center overflow-clip px-[16px] py-[12px] relative rounded-[inherit] size-full">
+        <p className="[word-break:break-word] font-['Publico:Bold',sans-serif] leading-[24px] not-italic relative shrink-0 text-[20px] text-white whitespace-nowrap">Aa</p>
+      </div>
+      <div aria-hidden className="absolute border border-[rgba(0,0,0,0.1)] border-solid inset-0 pointer-events-none rounded-[8px]" />
+    </div>
+  );
+}
+
+function Container95() {
+  return (
+    <div className="content-stretch flex flex-col items-center justify-center overflow-clip relative rounded-[8px] shrink-0" data-name="container">
+      <Container96 />
+    </div>
+  );
+}
+
+function ColumnLabel73() {
+  return (
+    <div className="content-stretch flex items-center justify-center relative shrink-0" data-name="Column Label">
+      <Container95 />
+    </div>
+  );
+}
+
+function Container98() {
+  return (
+    <div className="relative rounded-[8px] shrink-0 size-[48px]" data-name="container">
+      <div className="absolute inset-0 overflow-hidden pointer-events-none rounded-[8px]">
+        <img alt="" className="absolute h-[723.48%] left-[-472.81%] max-w-none top-[-196.15%] w-[1285.52%]" src={imgContainer1} />
+      </div>
+      <div className="content-stretch flex flex-col items-center justify-center overflow-clip px-[16px] py-[12px] relative rounded-[inherit] size-full">
+        <p className="[word-break:break-word] font-['Publico:Bold',sans-serif] leading-[24px] not-italic relative shrink-0 text-[20px] text-white whitespace-nowrap">Aa</p>
+      </div>
+      <div aria-hidden className="absolute border border-[rgba(0,0,0,0.1)] border-solid inset-0 pointer-events-none rounded-[8px]" />
+    </div>
+  );
+}
+
+function Container97() {
+  return (
+    <div className="content-stretch flex flex-col items-center justify-center overflow-clip relative rounded-[8px] shrink-0" data-name="container">
+      <Container98 />
+    </div>
+  );
+}
+
+function ColumnLabel74() {
+  return (
+    <div className="content-stretch flex items-center justify-center relative shrink-0" data-name="Column Label">
+      <Container97 />
+    </div>
+  );
+}
+
+function DocsTableCell99() {
+  return (
+    <div className="content-stretch flex gap-[4px] items-center justify-end overflow-clip relative shrink-0" data-name=".Docs/Table/Cell">
+      <ColumnLabel73 />
+      <ColumnLabel74 />
+    </div>
+  );
+}
+
+function StyleProperty24() {
+  return (
+    <div className="content-stretch flex items-center min-h-[88px] py-[12px] relative shrink-0 w-full" data-name="Style Property">
+      <div aria-hidden className="absolute border-[rgba(0,0,0,0.1)] border-b border-solid inset-[0_0_-0.5px_0] pointer-events-none" />
+      <DocsTableCell96 />
+      <DocsTableCell97 />
+      <DocsTableCell98 />
+      <DocsTableCell99 />
+    </div>
+  );
+}
+
+function Token25() {
+  return (
+    <div className="bg-[#efeff1] content-stretch flex items-center justify-center px-[8px] py-[4px] relative rounded-[4px] shrink-0" data-name="token">
+      <p className="[word-break:break-word] font-['Source_Sans_3:SemiBold',sans-serif] font-semibold leading-[20px] max-w-[230px] relative shrink-0 text-[#434956] text-[14px] whitespace-nowrap">color-text-interaction-strong-active-inverse</p>
+    </div>
+  );
+}
+
+function DocsTableCell100() {
+  return (
+    <div className="flex-[1_0_0] max-w-[264px] min-w-px relative" data-name=".Docs/Table/Cell">
+      <div className="flex flex-col justify-center max-w-[inherit] overflow-clip rounded-[inherit] size-full">
+        <div className="content-stretch flex flex-col items-start justify-center max-w-[inherit] pr-[16px] relative size-full">
+          <Token25 />
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function DocsTableCell101() {
+  return (
+    <div className="content-stretch flex flex-col h-[72px] items-start justify-center overflow-clip p-[16px] relative shrink-0 w-[340px]" data-name=".Docs/Table/Cell">
+      <p className="[word-break:break-word] flex-[1_0_0] font-['Source_Sans_3:Regular',sans-serif] font-normal leading-[20px] min-h-px relative text-[#1a1d21] text-[14px] w-full">Use for important interactive text when active or pressed on dark or colored background.</p>
+    </div>
+  );
+}
+
+function ColumnLabel75() {
+  return (
+    <div className="relative shrink-0 w-full" data-name="Column Label">
+      <div className="content-stretch flex flex-col items-start px-[8px] relative size-full">
+        <p className="[word-break:break-word] font-['Source_Sans_3:SemiBold',sans-serif] font-semibold leading-[20px] overflow-hidden relative shrink-0 text-[#1a1d21] text-[14px] text-center text-ellipsis whitespace-nowrap">#FFFFFF</p>
+      </div>
+    </div>
+  );
+}
+
+function DocsTableCell102() {
+  return (
+    <div className="content-stretch flex flex-col items-center justify-center overflow-clip relative shrink-0 w-[146px]" data-name=".Docs/Table/Cell">
+      <ColumnLabel75 />
+    </div>
+  );
+}
+
+function Container100() {
+  return (
+    <div className="bg-[#070e40] relative rounded-[8px] shrink-0 size-[48px]" data-name="container">
+      <div className="content-stretch flex flex-col items-center justify-center overflow-clip px-[16px] py-[12px] relative rounded-[inherit] size-full">
+        <p className="[word-break:break-word] font-['Publico:Bold',sans-serif] leading-[24px] not-italic relative shrink-0 text-[20px] text-white whitespace-nowrap">Aa</p>
+      </div>
+      <div aria-hidden className="absolute border border-[rgba(0,0,0,0.1)] border-solid inset-0 pointer-events-none rounded-[8px]" />
+    </div>
+  );
+}
+
+function Container99() {
+  return (
+    <div className="content-stretch flex flex-col items-center justify-center overflow-clip relative rounded-[8px] shrink-0" data-name="container">
+      <Container100 />
+    </div>
+  );
+}
+
+function ColumnLabel76() {
+  return (
+    <div className="content-stretch flex items-center justify-center relative shrink-0" data-name="Column Label">
+      <Container99 />
+    </div>
+  );
+}
+
+function Container102() {
+  return (
+    <div className="relative rounded-[8px] shrink-0 size-[48px]" data-name="container">
+      <div className="absolute inset-0 overflow-hidden pointer-events-none rounded-[8px]">
+        <img alt="" className="absolute h-[723.48%] left-[-472.81%] max-w-none top-[-196.15%] w-[1285.52%]" src={imgContainer1} />
+      </div>
+      <div className="content-stretch flex flex-col items-center justify-center overflow-clip px-[16px] py-[12px] relative rounded-[inherit] size-full">
+        <p className="[word-break:break-word] font-['Publico:Bold',sans-serif] leading-[24px] not-italic relative shrink-0 text-[20px] text-white whitespace-nowrap">Aa</p>
+      </div>
+      <div aria-hidden className="absolute border border-[rgba(0,0,0,0.1)] border-solid inset-0 pointer-events-none rounded-[8px]" />
+    </div>
+  );
+}
+
+function Container101() {
+  return (
+    <div className="content-stretch flex flex-col items-center justify-center overflow-clip relative rounded-[8px] shrink-0" data-name="container">
+      <Container102 />
+    </div>
+  );
+}
+
+function ColumnLabel77() {
+  return (
+    <div className="content-stretch flex items-center justify-center relative shrink-0" data-name="Column Label">
+      <Container101 />
+    </div>
+  );
+}
+
+function DocsTableCell103() {
+  return (
+    <div className="content-stretch flex gap-[4px] items-center justify-end overflow-clip relative shrink-0" data-name=".Docs/Table/Cell">
+      <ColumnLabel76 />
+      <ColumnLabel77 />
+    </div>
+  );
+}
+
+function StyleProperty25() {
+  return (
+    <div className="content-stretch flex items-center min-h-[88px] py-[12px] relative shrink-0 w-full" data-name="Style Property">
+      <div aria-hidden className="absolute border-[rgba(0,0,0,0.1)] border-b border-solid inset-[0_0_-0.5px_0] pointer-events-none" />
+      <DocsTableCell100 />
+      <DocsTableCell101 />
+      <DocsTableCell102 />
+      <DocsTableCell103 />
+    </div>
+  );
+}
+
+function Table1() {
+  return (
+    <div className="content-stretch flex flex-col items-start relative shrink-0 w-full" data-name="table">
+      <TableHeader1 />
+      <StyleProperty8 />
+      <StyleProperty9 />
+      <StyleProperty10 />
+      <StyleProperty11 />
+      <StyleProperty12 />
+      <StyleProperty13 />
+      <StyleProperty14 />
+      <StyleProperty15 />
+      <StyleProperty16 />
+      <StyleProperty17 />
+      <StyleProperty18 />
+      <StyleProperty19 />
+      <StyleProperty20 />
+      <StyleProperty21 />
+      <StyleProperty22 />
+      <StyleProperty23 />
+      <StyleProperty24 />
+      <StyleProperty25 />
+    </div>
+  );
+}
+
+function Tabs2() {
+  return (
+    <div className="content-stretch flex flex-col items-start relative shrink-0 w-[848px]" data-name="Tabs">
+      <Table1 />
+    </div>
+  );
+}
+
+function Tabs1() {
+  return (
+    <div className="content-stretch flex flex-col items-start relative shrink-0 w-[848px]" data-name="Tabs">
+      <Tabs2 />
+    </div>
+  );
+}
+
+function ColorBrand1() {
+  return (
+    <div className="bg-white relative rounded-[12px] shadow-[0px_2px_4px_-2px_rgba(17,24,39,0.1),0px_0px_2px_0px_rgba(17,24,39,0.06)] shrink-0 w-full" data-name="color-brand">
+      <div className="overflow-clip rounded-[inherit] size-full">
+        <div className="content-stretch flex flex-col gap-[48px] items-start p-[40px] relative size-full">
+          <Description1 />
+          <Tabs1 />
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function ColorInfo2() {
+  return (
+    <div className="content-stretch flex flex-col items-start relative shrink-0 w-full" data-name="Color Info">
+      <p className="[word-break:break-word] font-['Publico:Bold',sans-serif] leading-[46px] not-italic relative shrink-0 text-[#1a1d21] text-[40px] w-full">Feedbacks</p>
+    </div>
+  );
+}
+
+function Description2() {
+  return (
+    <div className="content-stretch flex flex-col items-start relative shrink-0 w-full" data-name="Description">
+      <ColorInfo2 />
+    </div>
+  );
+}
+
+function DocsTableHeader8() {
+  return (
+    <div className="content-stretch flex flex-col h-[48px] items-start justify-center overflow-clip relative shrink-0 w-[264px]" data-name=".Docs/Table/Header">
+      <p className="[word-break:break-word] font-['Source_Sans_Pro:SemiBold',sans-serif] leading-[16px] not-italic relative shrink-0 text-[#606776] text-[12px] tracking-[1px] uppercase whitespace-pre">{`TOKEN  `}</p>
+    </div>
+  );
+}
+
+function DocsTableHeader9() {
+  return (
+    <div className="content-stretch flex flex-col h-[48px] items-start justify-center overflow-clip px-[16px] relative shrink-0 w-[340px]" data-name=".Docs/Table/Header">
+      <p className="[word-break:break-word] font-['Source_Sans_Pro:SemiBold',sans-serif] leading-[16px] not-italic relative shrink-0 text-[#606776] text-[12px] tracking-[1px] uppercase whitespace-nowrap">DESCRIPTION</p>
+    </div>
+  );
+}
+
+function DocsTableHeader10() {
+  return (
+    <div className="content-stretch flex flex-col h-[48px] items-start justify-center overflow-clip relative shrink-0 w-[146px]" data-name=".Docs/Table/Header">
+      <p className="[word-break:break-word] font-['Source_Sans_Pro:SemiBold',sans-serif] leading-[16px] not-italic relative shrink-0 text-[#606776] text-[12px] tracking-[1px] uppercase w-full">VALUE (RGBA/HEX)</p>
+    </div>
+  );
+}
+
+function DocsTableHeader11() {
+  return (
+    <div className="content-stretch flex flex-col h-[48px] items-start justify-center max-w-[96px] overflow-clip relative shrink-0 w-[96px]" data-name=".Docs/Table/Header">
+      <p className="[word-break:break-word] font-['Source_Sans_Pro:SemiBold',sans-serif] leading-[16px] not-italic relative shrink-0 text-[#606776] text-[12px] tracking-[1px] uppercase whitespace-nowrap">LIGHT MODE</p>
+    </div>
+  );
+}
+
+function TableHeader2() {
+  return (
+    <div className="content-stretch flex items-center relative shrink-0 w-full" data-name="Table Header">
+      <div aria-hidden className="absolute border-[rgba(0,0,0,0.2)] border-b border-solid inset-[0_0_-0.5px_0] pointer-events-none" />
+      <DocsTableHeader8 />
+      <DocsTableHeader9 />
+      <DocsTableHeader10 />
+      <DocsTableHeader11 />
+    </div>
+  );
+}
+
+function Token26() {
+  return (
+    <div className="bg-[#efeff1] content-stretch flex items-center justify-center px-[8px] py-[4px] relative rounded-[4px] shrink-0" data-name="token">
+      <p className="[word-break:break-word] font-['Source_Sans_3:SemiBold',sans-serif] font-semibold leading-[20px] max-w-[230px] relative shrink-0 text-[#434956] text-[14px] whitespace-nowrap">color-text-feedback-neutral-default</p>
+    </div>
+  );
+}
+
+function DocsTableCell104() {
+  return (
+    <div className="flex-[1_0_0] max-w-[264px] min-w-px relative" data-name=".Docs/Table/Cell">
+      <div className="flex flex-col justify-center max-w-[inherit] overflow-clip rounded-[inherit] size-full">
+        <div className="content-stretch flex flex-col items-start justify-center max-w-[inherit] pr-[16px] relative size-full">
+          <Token26 />
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function DocsTableCell105() {
+  return (
+    <div className="content-stretch flex flex-col h-[72px] items-start justify-center overflow-clip p-[16px] relative shrink-0 w-[340px]" data-name=".Docs/Table/Cell">
+      <p className="[word-break:break-word] flex-[1_0_0] font-['Source_Sans_3:Regular',sans-serif] font-normal leading-[20px] min-h-px relative text-[#1a1d21] text-[14px] w-full">{`Use for neutral feedback messages that provide context without positive or negative meaning. `}</p>
+    </div>
+  );
+}
+
+function ColumnLabel78() {
+  return (
+    <div className="relative shrink-0 w-full" data-name="Column Label">
+      <div className="content-stretch flex flex-col items-start px-[8px] relative size-full">
+        <p className="[word-break:break-word] font-['Source_Sans_3:SemiBold',sans-serif] font-semibold leading-[20px] overflow-hidden relative shrink-0 text-[#1a1d21] text-[14px] text-center text-ellipsis whitespace-nowrap">#2B303B</p>
+      </div>
+    </div>
+  );
+}
+
+function DocsTableCell106() {
+  return (
+    <div className="content-stretch flex flex-col items-center justify-center overflow-clip relative shrink-0 w-[146px]" data-name=".Docs/Table/Cell">
+      <ColumnLabel78 />
+    </div>
+  );
+}
+
+function Container103() {
+  return (
+    <div className="bg-white relative rounded-[8px] shrink-0 size-[48px]" data-name="container">
+      <div className="content-stretch flex flex-col items-center justify-center overflow-clip px-[16px] py-[12px] relative rounded-[inherit] size-full">
+        <p className="[word-break:break-word] font-['Publico:Bold',sans-serif] leading-[24px] not-italic relative shrink-0 text-[#2b303b] text-[20px] w-[25px]">Aa</p>
+      </div>
+      <div aria-hidden className="absolute border border-[rgba(0,0,0,0.1)] border-solid inset-0 pointer-events-none rounded-[8px]" />
+    </div>
+  );
+}
+
+function DocsTableCell107() {
+  return (
+    <div className="content-stretch flex items-center justify-center overflow-clip relative shrink-0 w-[96px]" data-name=".Docs/Table/Cell">
+      <Container103 />
+    </div>
+  );
+}
+
+function StyleProperty26() {
+  return (
+    <div className="content-stretch flex items-center min-h-[88px] py-[12px] relative shrink-0 w-full" data-name="Style Property">
+      <div aria-hidden className="absolute border-[rgba(0,0,0,0.1)] border-b border-solid inset-[0_0_-0.5px_0] pointer-events-none" />
+      <DocsTableCell104 />
+      <DocsTableCell105 />
+      <DocsTableCell106 />
+      <DocsTableCell107 />
+    </div>
+  );
+}
+
+function Token27() {
+  return (
+    <div className="bg-[#efeff1] content-stretch flex items-center justify-center px-[8px] py-[4px] relative rounded-[4px] shrink-0" data-name="token">
+      <p className="[word-break:break-word] font-['Source_Sans_3:SemiBold',sans-serif] font-semibold leading-[20px] max-w-[230px] relative shrink-0 text-[#434956] text-[14px] whitespace-nowrap">color-text-feedback-neutral-inverse</p>
+    </div>
+  );
+}
+
+function DocsTableCell108() {
+  return (
+    <div className="flex-[1_0_0] max-w-[264px] min-w-px relative" data-name=".Docs/Table/Cell">
+      <div className="flex flex-col justify-center max-w-[inherit] overflow-clip rounded-[inherit] size-full">
+        <div className="content-stretch flex flex-col items-start justify-center max-w-[inherit] pr-[16px] relative size-full">
+          <Token27 />
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function DocsTableCell109() {
+  return (
+    <div className="content-stretch flex flex-col h-[72px] items-start justify-center overflow-clip p-[16px] relative shrink-0 w-[340px]" data-name=".Docs/Table/Cell">
+      <p className="[word-break:break-word] flex-[1_0_0] font-['Source_Sans_3:Regular',sans-serif] font-normal leading-[0] min-h-px relative text-[#1a1d21] text-[0px] w-full">
+        <span className="leading-[20px] text-[14px]">{`Use for neutral feedback messages on `}</span>
+        <span className="font-['Source_Sans_3:Bold',sans-serif] font-bold leading-[20px] text-[14px]">{`bg-feedback-neutral-default `}</span>
+        <span className="leading-[20px] text-[14px]">or dark backgrounds.</span>
+      </p>
+    </div>
+  );
+}
+
+function ColumnLabel79() {
+  return (
+    <div className="relative shrink-0 w-full" data-name="Column Label">
+      <div className="content-stretch flex flex-col items-start px-[8px] relative size-full">
+        <p className="[word-break:break-word] font-['Source_Sans_3:SemiBold',sans-serif] font-semibold leading-[20px] overflow-hidden relative shrink-0 text-[#1a1d21] text-[14px] text-center text-ellipsis whitespace-nowrap">#E8EAED</p>
+      </div>
+    </div>
+  );
+}
+
+function DocsTableCell110() {
+  return (
+    <div className="content-stretch flex flex-col items-center justify-center overflow-clip relative shrink-0 w-[146px]" data-name=".Docs/Table/Cell">
+      <ColumnLabel79 />
+    </div>
+  );
+}
+
+function Container104() {
+  return (
+    <div className="bg-[#434956] relative rounded-[8px] shrink-0 size-[48px]" data-name="container">
+      <div className="content-stretch flex flex-col items-center justify-center overflow-clip px-[16px] py-[12px] relative rounded-[inherit] size-full">
+        <p className="[word-break:break-word] font-['Publico:Bold',sans-serif] leading-[24px] not-italic relative shrink-0 text-[#e8eaed] text-[20px] whitespace-nowrap">Aa</p>
+      </div>
+      <div aria-hidden className="absolute border border-[rgba(0,0,0,0.1)] border-solid inset-0 pointer-events-none rounded-[8px]" />
+    </div>
+  );
+}
+
+function DocsTableCell111() {
+  return (
+    <div className="content-stretch flex items-center justify-center overflow-clip relative shrink-0 w-[96px]" data-name=".Docs/Table/Cell">
+      <Container104 />
+    </div>
+  );
+}
+
+function StyleProperty27() {
+  return (
+    <div className="content-stretch flex items-center min-h-[88px] py-[12px] relative shrink-0 w-full" data-name="Style Property">
+      <div aria-hidden className="absolute border-[rgba(0,0,0,0.1)] border-b border-solid inset-[0_0_-0.5px_0] pointer-events-none" />
+      <DocsTableCell108 />
+      <DocsTableCell109 />
+      <DocsTableCell110 />
+      <DocsTableCell111 />
+    </div>
+  );
+}
+
+function Token28() {
+  return (
+    <div className="bg-[#efeff1] content-stretch flex items-center justify-center px-[8px] py-[4px] relative rounded-[4px] shrink-0" data-name="token">
+      <p className="[word-break:break-word] font-['Source_Sans_3:SemiBold',sans-serif] font-semibold leading-[20px] max-w-[230px] relative shrink-0 text-[#434956] text-[14px] whitespace-nowrap">color-text-feedback-info-default</p>
+    </div>
+  );
+}
+
+function DocsTableCell112() {
+  return (
+    <div className="flex-[1_0_0] max-w-[264px] min-w-px relative" data-name=".Docs/Table/Cell">
+      <div className="flex flex-col justify-center max-w-[inherit] overflow-clip rounded-[inherit] size-full">
+        <div className="content-stretch flex flex-col items-start justify-center max-w-[inherit] pr-[16px] relative size-full">
+          <Token28 />
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function DocsTableCell113() {
+  return (
+    <div className="content-stretch flex flex-col h-[72px] items-start justify-center overflow-clip p-[16px] relative shrink-0 w-[340px]" data-name=".Docs/Table/Cell">
+      <p className="[word-break:break-word] flex-[1_0_0] font-['Source_Sans_3:Regular',sans-serif] font-normal leading-[20px] min-h-px relative text-[#1a1d21] text-[14px] w-full">{`Use for informational feedback messages, that highlight details, such as tooltips. `}</p>
+    </div>
+  );
+}
+
+function ColumnLabel80() {
+  return (
+    <div className="relative shrink-0 w-full" data-name="Column Label">
+      <div className="content-stretch flex flex-col items-start px-[8px] relative size-full">
+        <p className="[word-break:break-word] font-['Source_Sans_3:SemiBold',sans-serif] font-semibold leading-[20px] overflow-hidden relative shrink-0 text-[#1a1d21] text-[14px] text-center text-ellipsis whitespace-nowrap">#152E54</p>
+      </div>
+    </div>
+  );
+}
+
+function DocsTableCell114() {
+  return (
+    <div className="content-stretch flex flex-col items-center justify-center overflow-clip relative shrink-0 w-[146px]" data-name=".Docs/Table/Cell">
+      <ColumnLabel80 />
+    </div>
+  );
+}
+
+function Container105() {
+  return (
+    <div className="bg-white relative rounded-[8px] shrink-0 size-[48px]" data-name="container">
+      <div className="content-stretch flex flex-col items-center justify-center overflow-clip px-[16px] py-[12px] relative rounded-[inherit] size-full">
+        <p className="[word-break:break-word] font-['Publico:Bold',sans-serif] leading-[24px] not-italic relative shrink-0 text-[#152e54] text-[20px] w-[25px]">Aa</p>
+      </div>
+      <div aria-hidden className="absolute border border-[rgba(0,0,0,0.1)] border-solid inset-0 pointer-events-none rounded-[8px]" />
+    </div>
+  );
+}
+
+function DocsTableCell115() {
+  return (
+    <div className="content-stretch flex items-center justify-center overflow-clip relative shrink-0 w-[96px]" data-name=".Docs/Table/Cell">
+      <Container105 />
+    </div>
+  );
+}
+
+function StyleProperty28() {
+  return (
+    <div className="content-stretch flex items-center min-h-[88px] py-[12px] relative shrink-0 w-full" data-name="Style Property">
+      <div aria-hidden className="absolute border-[rgba(0,0,0,0.1)] border-b border-solid inset-[0_0_-0.5px_0] pointer-events-none" />
+      <DocsTableCell112 />
+      <DocsTableCell113 />
+      <DocsTableCell114 />
+      <DocsTableCell115 />
+    </div>
+  );
+}
+
+function Token29() {
+  return (
+    <div className="bg-[#efeff1] content-stretch flex items-center justify-center px-[8px] py-[4px] relative rounded-[4px] shrink-0" data-name="token">
+      <p className="[word-break:break-word] font-['Source_Sans_3:SemiBold',sans-serif] font-semibold leading-[20px] max-w-[230px] relative shrink-0 text-[#434956] text-[14px] whitespace-nowrap">color-text-feedback-info-inverse</p>
+    </div>
+  );
+}
+
+function DocsTableCell116() {
+  return (
+    <div className="flex-[1_0_0] max-w-[264px] min-w-px relative" data-name=".Docs/Table/Cell">
+      <div className="flex flex-col justify-center max-w-[inherit] overflow-clip rounded-[inherit] size-full">
+        <div className="content-stretch flex flex-col items-start justify-center max-w-[inherit] pr-[16px] relative size-full">
+          <Token29 />
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function DocsTableCell117() {
+  return (
+    <div className="content-stretch flex flex-col h-[92px] items-start justify-center overflow-clip p-[16px] relative shrink-0 w-[340px]" data-name=".Docs/Table/Cell">
+      <p className="[word-break:break-word] flex-[1_0_0] font-['Source_Sans_3:Regular',sans-serif] font-normal leading-[0] min-h-px relative text-[#1a1d21] text-[0px] w-full">
+        <span className="leading-[20px] text-[14px]">Use for informational feedback messages on</span>
+        <span className="font-['Source_Sans_3:Bold',sans-serif] font-bold leading-[20px] text-[14px]">{` bg-feedback-info-default`}</span>
+        <span className="leading-[20px] text-[14px]">{` or `}</span>
+        <span className="font-['Source_Sans_3:Bold',sans-serif] font-bold leading-[20px] text-[14px]">{`bg-feedback-info-subtle-inverse `}</span>
+        <span className="leading-[20px] text-[14px]">or dark backgrounds.</span>
+      </p>
+    </div>
+  );
+}
+
+function ColumnLabel81() {
+  return (
+    <div className="relative shrink-0 w-full" data-name="Column Label">
+      <div className="content-stretch flex flex-col items-start px-[8px] relative size-full">
+        <p className="[word-break:break-word] font-['Source_Sans_3:SemiBold',sans-serif] font-semibold leading-[20px] overflow-hidden relative shrink-0 text-[#1a1d21] text-[14px] text-center text-ellipsis whitespace-nowrap">#99C2FF</p>
+      </div>
+    </div>
+  );
+}
+
+function DocsTableCell118() {
+  return (
+    <div className="content-stretch flex flex-col items-center justify-center overflow-clip relative shrink-0 w-[146px]" data-name=".Docs/Table/Cell">
+      <ColumnLabel81 />
+    </div>
+  );
+}
+
+function Container106() {
+  return (
+    <div className="bg-[#234476] relative rounded-[8px] shrink-0 size-[48px]" data-name="container">
+      <div className="content-stretch flex flex-col items-center justify-center overflow-clip px-[16px] py-[12px] relative rounded-[inherit] size-full">
+        <p className="[word-break:break-word] font-['Publico:Bold',sans-serif] leading-[24px] not-italic relative shrink-0 text-[#99c2ff] text-[20px] w-[25px]">Aa</p>
+      </div>
+      <div aria-hidden className="absolute border border-[rgba(0,0,0,0.1)] border-solid inset-0 pointer-events-none rounded-[8px]" />
+    </div>
+  );
+}
+
+function DocsTableCell119() {
+  return (
+    <div className="content-stretch flex items-center justify-center overflow-clip relative shrink-0 w-[96px]" data-name=".Docs/Table/Cell">
+      <Container106 />
+    </div>
+  );
+}
+
+function StyleProperty29() {
+  return (
+    <div className="content-stretch flex items-center min-h-[88px] py-[12px] relative shrink-0 w-full" data-name="Style Property">
+      <div aria-hidden className="absolute border-[rgba(0,0,0,0.1)] border-b border-solid inset-[0_0_-0.5px_0] pointer-events-none" />
+      <DocsTableCell116 />
+      <DocsTableCell117 />
+      <DocsTableCell118 />
+      <DocsTableCell119 />
+    </div>
+  );
+}
+
+function Token30() {
+  return (
+    <div className="bg-[#efeff1] content-stretch flex items-center justify-center px-[8px] py-[4px] relative rounded-[4px] shrink-0" data-name="token">
+      <p className="[word-break:break-word] font-['Source_Sans_3:SemiBold',sans-serif] font-semibold leading-[20px] max-w-[230px] relative shrink-0 text-[#434956] text-[14px] whitespace-nowrap">color-text-feedback-warning-default</p>
+    </div>
+  );
+}
+
+function DocsTableCell120() {
+  return (
+    <div className="flex-[1_0_0] max-w-[264px] min-w-px relative" data-name=".Docs/Table/Cell">
+      <div className="flex flex-col justify-center max-w-[inherit] overflow-clip rounded-[inherit] size-full">
+        <div className="content-stretch flex flex-col items-start justify-center max-w-[inherit] pr-[16px] relative size-full">
+          <Token30 />
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function DocsTableCell121() {
+  return (
+    <div className="content-stretch flex flex-col h-[72px] items-start justify-center overflow-clip p-[16px] relative shrink-0 w-[340px]" data-name=".Docs/Table/Cell">
+      <p className="[word-break:break-word] flex-[1_0_0] font-['Source_Sans_3:Regular',sans-serif] font-normal leading-[20px] min-h-px relative text-[#1a1d21] text-[14px] w-full">Use for warning feedback messages that draw attention to potential issues.</p>
+    </div>
+  );
+}
+
+function ColumnLabel82() {
+  return (
+    <div className="relative shrink-0 w-full" data-name="Column Label">
+      <div className="content-stretch flex flex-col items-start px-[8px] relative size-full">
+        <p className="[word-break:break-word] font-['Source_Sans_3:SemiBold',sans-serif] font-semibold leading-[20px] overflow-hidden relative shrink-0 text-[#1a1d21] text-[14px] text-center text-ellipsis whitespace-nowrap">#5C4200</p>
+      </div>
+    </div>
+  );
+}
+
+function DocsTableCell122() {
+  return (
+    <div className="content-stretch flex flex-col items-center justify-center overflow-clip relative shrink-0 w-[146px]" data-name=".Docs/Table/Cell">
+      <ColumnLabel82 />
+    </div>
+  );
+}
+
+function Container107() {
+  return (
+    <div className="bg-white relative rounded-[8px] shrink-0 size-[48px]" data-name="container">
+      <div className="content-stretch flex flex-col items-center justify-center overflow-clip px-[16px] py-[12px] relative rounded-[inherit] size-full">
+        <p className="[word-break:break-word] font-['Publico:Bold',sans-serif] leading-[24px] not-italic relative shrink-0 text-[#5c4200] text-[20px] w-[25px]">Aa</p>
+      </div>
+      <div aria-hidden className="absolute border border-[rgba(0,0,0,0.1)] border-solid inset-0 pointer-events-none rounded-[8px]" />
+    </div>
+  );
+}
+
+function DocsTableCell123() {
+  return (
+    <div className="content-stretch flex items-center justify-center overflow-clip relative shrink-0 w-[96px]" data-name=".Docs/Table/Cell">
+      <Container107 />
+    </div>
+  );
+}
+
+function StyleProperty30() {
+  return (
+    <div className="content-stretch flex items-center min-h-[88px] py-[12px] relative shrink-0 w-full" data-name="Style Property">
+      <div aria-hidden className="absolute border-[rgba(0,0,0,0.1)] border-b border-solid inset-[0_0_-0.5px_0] pointer-events-none" />
+      <DocsTableCell120 />
+      <DocsTableCell121 />
+      <DocsTableCell122 />
+      <DocsTableCell123 />
+    </div>
+  );
+}
+
+function Token31() {
+  return (
+    <div className="bg-[#efeff1] content-stretch flex items-center justify-center px-[8px] py-[4px] relative rounded-[4px] shrink-0" data-name="token">
+      <p className="[word-break:break-word] font-['Source_Sans_3:SemiBold',sans-serif] font-semibold leading-[20px] max-w-[230px] relative shrink-0 text-[#434956] text-[14px] whitespace-nowrap">color-text-feedback-warning-inverse</p>
+    </div>
+  );
+}
+
+function DocsTableCell124() {
+  return (
+    <div className="flex-[1_0_0] max-w-[264px] min-w-px relative" data-name=".Docs/Table/Cell">
+      <div className="flex flex-col justify-center max-w-[inherit] overflow-clip rounded-[inherit] size-full">
+        <div className="content-stretch flex flex-col items-start justify-center max-w-[inherit] pr-[16px] relative size-full">
+          <Token31 />
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function DocsTableCell125() {
+  return (
+    <div className="content-stretch flex flex-col h-[72px] items-start justify-center overflow-clip p-[16px] relative shrink-0 w-[340px]" data-name=".Docs/Table/Cell">
+      <p className="[word-break:break-word] flex-[1_0_0] font-['Source_Sans_3:Regular',sans-serif] font-normal leading-[20px] min-h-px relative text-[#1a1d21] text-[14px] w-full">Use for warning feedback messages on dark backgrounds.</p>
+    </div>
+  );
+}
+
+function ColumnLabel83() {
+  return (
+    <div className="relative shrink-0 w-full" data-name="Column Label">
+      <div className="content-stretch flex flex-col items-start px-[8px] relative size-full">
+        <p className="[word-break:break-word] font-['Source_Sans_3:SemiBold',sans-serif] font-semibold leading-[20px] overflow-hidden relative shrink-0 text-[#1a1d21] text-[14px] text-center text-ellipsis whitespace-nowrap">#FFD467</p>
+      </div>
+    </div>
+  );
+}
+
+function DocsTableCell126() {
+  return (
+    <div className="content-stretch flex flex-col items-center justify-center overflow-clip relative shrink-0 w-[146px]" data-name=".Docs/Table/Cell">
+      <ColumnLabel83 />
+    </div>
+  );
+}
+
+function Container108() {
+  return (
+    <div className="bg-[#04060c] relative rounded-[8px] shrink-0 size-[48px]" data-name="container">
+      <div className="content-stretch flex flex-col items-center justify-center overflow-clip px-[16px] py-[12px] relative rounded-[inherit] size-full">
+        <p className="[word-break:break-word] font-['Publico:Bold',sans-serif] leading-[24px] not-italic relative shrink-0 text-[#ffd467] text-[20px] w-[25px]">Aa</p>
+      </div>
+      <div aria-hidden className="absolute border border-[rgba(0,0,0,0.1)] border-solid inset-0 pointer-events-none rounded-[8px]" />
+    </div>
+  );
+}
+
+function DocsTableCell127() {
+  return (
+    <div className="content-stretch flex items-center justify-center overflow-clip relative shrink-0 w-[96px]" data-name=".Docs/Table/Cell">
+      <Container108 />
+    </div>
+  );
+}
+
+function StyleProperty31() {
+  return (
+    <div className="content-stretch flex items-center min-h-[88px] py-[12px] relative shrink-0 w-full" data-name="Style Property">
+      <div aria-hidden className="absolute border-[rgba(0,0,0,0.1)] border-b border-solid inset-[0_0_-0.5px_0] pointer-events-none" />
+      <DocsTableCell124 />
+      <DocsTableCell125 />
+      <DocsTableCell126 />
+      <DocsTableCell127 />
+    </div>
+  );
+}
+
+function Token32() {
+  return (
+    <div className="bg-[#efeff1] content-stretch flex items-center justify-center px-[8px] py-[4px] relative rounded-[4px] shrink-0" data-name="token">
+      <p className="[word-break:break-word] font-['Source_Sans_3:SemiBold',sans-serif] font-semibold leading-[20px] max-w-[230px] relative shrink-0 text-[#434956] text-[14px] whitespace-nowrap">color-text-feedback-success-default</p>
+    </div>
+  );
+}
+
+function DocsTableCell128() {
+  return (
+    <div className="flex-[1_0_0] max-w-[264px] min-w-px relative" data-name=".Docs/Table/Cell">
+      <div className="flex flex-col justify-center max-w-[inherit] overflow-clip rounded-[inherit] size-full">
+        <div className="content-stretch flex flex-col items-start justify-center max-w-[inherit] pr-[16px] relative size-full">
+          <Token32 />
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function DocsTableCell129() {
+  return (
+    <div className="content-stretch flex flex-col h-[92px] items-start justify-center overflow-clip p-[16px] relative shrink-0 w-[340px]" data-name=".Docs/Table/Cell">
+      <p className="[word-break:break-word] flex-[1_0_0] font-['Source_Sans_3:Regular',sans-serif] font-normal leading-[20px] min-h-px relative text-[#1a1d21] text-[14px] w-full">{`Use for success feedback messages that confirm an action was completed correctly, such as success banners. `}</p>
+    </div>
+  );
+}
+
+function ColumnLabel84() {
+  return (
+    <div className="relative shrink-0 w-full" data-name="Column Label">
+      <div className="content-stretch flex flex-col items-start px-[8px] relative size-full">
+        <p className="[word-break:break-word] font-['Source_Sans_3:SemiBold',sans-serif] font-semibold leading-[20px] overflow-hidden relative shrink-0 text-[#1a1d21] text-[14px] text-center text-ellipsis whitespace-nowrap">#0F4527</p>
+      </div>
+    </div>
+  );
+}
+
+function DocsTableCell130() {
+  return (
+    <div className="content-stretch flex flex-col items-center justify-center overflow-clip relative shrink-0 w-[146px]" data-name=".Docs/Table/Cell">
+      <ColumnLabel84 />
+    </div>
+  );
+}
+
+function Container109() {
+  return (
+    <div className="bg-white relative rounded-[8px] shrink-0 size-[48px]" data-name="container">
+      <div className="content-stretch flex flex-col items-center justify-center overflow-clip px-[16px] py-[12px] relative rounded-[inherit] size-full">
+        <p className="[word-break:break-word] font-['Publico:Bold',sans-serif] leading-[24px] not-italic relative shrink-0 text-[#0f4527] text-[20px] w-[25px]">Aa</p>
+      </div>
+      <div aria-hidden className="absolute border border-[rgba(0,0,0,0.1)] border-solid inset-0 pointer-events-none rounded-[8px]" />
+    </div>
+  );
+}
+
+function DocsTableCell131() {
+  return (
+    <div className="content-stretch flex items-center justify-center overflow-clip relative shrink-0 w-[96px]" data-name=".Docs/Table/Cell">
+      <Container109 />
+    </div>
+  );
+}
+
+function StyleProperty32() {
+  return (
+    <div className="content-stretch flex items-center min-h-[88px] py-[12px] relative shrink-0 w-full" data-name="Style Property">
+      <div aria-hidden className="absolute border-[rgba(0,0,0,0.1)] border-b border-solid inset-[0_0_-0.5px_0] pointer-events-none" />
+      <DocsTableCell128 />
+      <DocsTableCell129 />
+      <DocsTableCell130 />
+      <DocsTableCell131 />
+    </div>
+  );
+}
+
+function Token33() {
+  return (
+    <div className="bg-[#efeff1] content-stretch flex items-center justify-center px-[8px] py-[4px] relative rounded-[4px] shrink-0" data-name="token">
+      <p className="[word-break:break-word] font-['Source_Sans_3:SemiBold',sans-serif] font-semibold leading-[20px] max-w-[230px] relative shrink-0 text-[#434956] text-[14px] whitespace-nowrap">color-text-feedback-success-inverse</p>
+    </div>
+  );
+}
+
+function DocsTableCell132() {
+  return (
+    <div className="flex-[1_0_0] max-w-[264px] min-w-px relative" data-name=".Docs/Table/Cell">
+      <div className="flex flex-col justify-center max-w-[inherit] overflow-clip rounded-[inherit] size-full">
+        <div className="content-stretch flex flex-col items-start justify-center max-w-[inherit] pr-[16px] relative size-full">
+          <Token33 />
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function DocsTableCell133() {
+  return (
+    <div className="content-stretch flex flex-col h-[92px] items-start justify-center overflow-clip p-[16px] relative shrink-0 w-[340px]" data-name=".Docs/Table/Cell">
+      <p className="[word-break:break-word] flex-[1_0_0] font-['Source_Sans_3:Regular',sans-serif] font-normal leading-[0] min-h-px relative text-[#1a1d21] text-[0px] w-full whitespace-pre-wrap">
+        <span className="leading-[20px] text-[14px]">{`Use for success feedback messages on `}</span>
+        <span className="font-['Source_Sans_3:Bold',sans-serif] font-bold leading-[20px] text-[14px]">{`bg-feedback-success-default, `}</span>
+        <span className="leading-[20px] text-[14px]">{` `}</span>
+        <span className="font-['Source_Sans_3:Bold',sans-serif] font-bold leading-[20px] text-[14px]">{`bg-feedback-success-subtle-inverse `}</span>
+        <span className="leading-[20px] text-[14px]">or dark backgrounds.</span>
+      </p>
+    </div>
+  );
+}
+
+function ColumnLabel85() {
+  return (
+    <div className="relative shrink-0 w-full" data-name="Column Label">
+      <div className="content-stretch flex flex-col items-start px-[8px] relative size-full">
+        <p className="[word-break:break-word] font-['Source_Sans_3:SemiBold',sans-serif] font-semibold leading-[20px] overflow-hidden relative shrink-0 text-[#1a1d21] text-[14px] text-center text-ellipsis whitespace-nowrap">#84E4AE</p>
+      </div>
+    </div>
+  );
+}
+
+function DocsTableCell134() {
+  return (
+    <div className="content-stretch flex flex-col items-center justify-center overflow-clip relative shrink-0 w-[146px]" data-name=".Docs/Table/Cell">
+      <ColumnLabel85 />
+    </div>
+  );
+}
+
+function Container110() {
+  return (
+    <div className="bg-[#17663a] relative rounded-[8px] shrink-0 size-[48px]" data-name="container">
+      <div className="content-stretch flex flex-col items-center justify-center overflow-clip px-[16px] py-[12px] relative rounded-[inherit] size-full">
+        <p className="[word-break:break-word] font-['Publico:Bold',sans-serif] leading-[24px] not-italic relative shrink-0 text-[#84e4ae] text-[20px] w-[25px]">Aa</p>
+      </div>
+      <div aria-hidden className="absolute border border-[rgba(0,0,0,0.1)] border-solid inset-0 pointer-events-none rounded-[8px]" />
+    </div>
+  );
+}
+
+function DocsTableCell135() {
+  return (
+    <div className="content-stretch flex items-center justify-center overflow-clip relative shrink-0 w-[96px]" data-name=".Docs/Table/Cell">
+      <Container110 />
+    </div>
+  );
+}
+
+function StyleProperty33() {
+  return (
+    <div className="content-stretch flex items-center min-h-[88px] py-[12px] relative shrink-0 w-full" data-name="Style Property">
+      <div aria-hidden className="absolute border-[rgba(0,0,0,0.1)] border-b border-solid inset-[0_0_-0.5px_0] pointer-events-none" />
+      <DocsTableCell132 />
+      <DocsTableCell133 />
+      <DocsTableCell134 />
+      <DocsTableCell135 />
+    </div>
+  );
+}
+
+function Token34() {
+  return (
+    <div className="bg-[#efeff1] content-stretch flex items-center justify-center px-[8px] py-[4px] relative rounded-[4px] shrink-0" data-name="token">
+      <p className="[word-break:break-word] font-['Source_Sans_3:SemiBold',sans-serif] font-semibold leading-[20px] max-w-[230px] relative shrink-0 text-[#434956] text-[14px] whitespace-nowrap">color-text-feedback-error-default</p>
+    </div>
+  );
+}
+
+function DocsTableCell136() {
+  return (
+    <div className="flex-[1_0_0] max-w-[264px] min-w-px relative" data-name=".Docs/Table/Cell">
+      <div className="flex flex-col justify-center max-w-[inherit] overflow-clip rounded-[inherit] size-full">
+        <div className="content-stretch flex flex-col items-start justify-center max-w-[inherit] pr-[16px] relative size-full">
+          <Token34 />
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function DocsTableCell137() {
+  return (
+    <div className="content-stretch flex flex-col h-[72px] items-start justify-center overflow-clip p-[16px] relative shrink-0 w-[340px]" data-name=".Docs/Table/Cell">
+      <p className="[word-break:break-word] flex-[1_0_0] font-['Source_Sans_3:Regular',sans-serif] font-normal leading-[20px] min-h-px relative text-[#1a1d21] text-[14px] w-full">Use for error feedback messages that indicate problems or required corrections.</p>
+    </div>
+  );
+}
+
+function ColumnLabel86() {
+  return (
+    <div className="relative shrink-0 w-full" data-name="Column Label">
+      <div className="content-stretch flex flex-col items-start px-[8px] relative size-full">
+        <p className="[word-break:break-word] font-['Source_Sans_3:SemiBold',sans-serif] font-semibold leading-[20px] overflow-hidden relative shrink-0 text-[#1a1d21] text-[14px] text-center text-ellipsis whitespace-nowrap">#880727</p>
+      </div>
+    </div>
+  );
+}
+
+function DocsTableCell138() {
+  return (
+    <div className="content-stretch flex flex-col items-center justify-center overflow-clip relative shrink-0 w-[146px]" data-name=".Docs/Table/Cell">
+      <ColumnLabel86 />
+    </div>
+  );
+}
+
+function Container111() {
+  return (
+    <div className="bg-white relative rounded-[8px] shrink-0 size-[48px]" data-name="container">
+      <div className="content-stretch flex flex-col items-center justify-center overflow-clip px-[16px] py-[12px] relative rounded-[inherit] size-full">
+        <p className="[word-break:break-word] font-['Publico:Bold',sans-serif] leading-[24px] not-italic relative shrink-0 text-[#880727] text-[20px] w-[25px]">Aa</p>
+      </div>
+      <div aria-hidden className="absolute border border-[rgba(0,0,0,0.1)] border-solid inset-0 pointer-events-none rounded-[8px]" />
+    </div>
+  );
+}
+
+function DocsTableCell139() {
+  return (
+    <div className="content-stretch flex items-center justify-center overflow-clip relative shrink-0 w-[96px]" data-name=".Docs/Table/Cell">
+      <Container111 />
+    </div>
+  );
+}
+
+function StyleProperty34() {
+  return (
+    <div className="content-stretch flex items-center min-h-[88px] py-[12px] relative shrink-0 w-full" data-name="Style Property">
+      <div aria-hidden className="absolute border-[rgba(0,0,0,0.1)] border-b border-solid inset-[0_0_-0.5px_0] pointer-events-none" />
+      <DocsTableCell136 />
+      <DocsTableCell137 />
+      <DocsTableCell138 />
+      <DocsTableCell139 />
+    </div>
+  );
+}
+
+function Token35() {
+  return (
+    <div className="bg-[#efeff1] content-stretch flex items-center justify-center px-[8px] py-[4px] relative rounded-[4px] shrink-0" data-name="token">
+      <p className="[word-break:break-word] font-['Source_Sans_3:SemiBold',sans-serif] font-semibold leading-[20px] max-w-[230px] relative shrink-0 text-[#434956] text-[14px] whitespace-nowrap">color-text-feedback-error-inverse</p>
+    </div>
+  );
+}
+
+function DocsTableCell140() {
+  return (
+    <div className="flex-[1_0_0] max-w-[264px] min-w-px relative" data-name=".Docs/Table/Cell">
+      <div className="flex flex-col justify-center max-w-[inherit] overflow-clip rounded-[inherit] size-full">
+        <div className="content-stretch flex flex-col items-start justify-center max-w-[inherit] pr-[16px] relative size-full">
+          <Token35 />
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function DocsTableCell141() {
+  return (
+    <div className="content-stretch flex flex-col h-[92px] items-start justify-center overflow-clip p-[16px] relative shrink-0 w-[340px]" data-name=".Docs/Table/Cell">
+      <p className="[word-break:break-word] flex-[1_0_0] font-['Source_Sans_3:Regular',sans-serif] font-normal leading-[0] min-h-px relative text-[#1a1d21] text-[0px] w-full">
+        <span className="leading-[20px] text-[14px]">{`Use for error feedback messages on `}</span>
+        <span className="font-['Source_Sans_3:Bold',sans-serif] font-bold leading-[20px] text-[14px]">bg-feedback-error-default, bg-feedback-error-subtle-inverse</span>
+        <span className="leading-[20px] text-[14px]">{` or dark backgrounds.`}</span>
+      </p>
+    </div>
+  );
+}
+
+function ColumnLabel87() {
+  return (
+    <div className="relative shrink-0 w-full" data-name="Column Label">
+      <div className="content-stretch flex flex-col items-start px-[8px] relative size-full">
+        <p className="[word-break:break-word] font-['Source_Sans_3:SemiBold',sans-serif] font-semibold leading-[20px] overflow-hidden relative shrink-0 text-[#1a1d21] text-[14px] text-center text-ellipsis whitespace-nowrap">#FCC0CE</p>
+      </div>
+    </div>
+  );
+}
+
+function DocsTableCell142() {
+  return (
+    <div className="content-stretch flex flex-col items-center justify-center overflow-clip relative shrink-0 w-[146px]" data-name=".Docs/Table/Cell">
+      <ColumnLabel87 />
+    </div>
+  );
+}
+
+function Container112() {
+  return (
+    <div className="bg-[#880727] relative rounded-[8px] shrink-0 size-[48px]" data-name="container">
+      <div className="content-stretch flex flex-col items-center justify-center overflow-clip px-[16px] py-[12px] relative rounded-[inherit] size-full">
+        <p className="[word-break:break-word] font-['Publico:Bold',sans-serif] leading-[24px] not-italic relative shrink-0 text-[#f98ba6] text-[20px] w-[25px]">Aa</p>
+      </div>
+      <div aria-hidden className="absolute border border-[rgba(0,0,0,0.1)] border-solid inset-0 pointer-events-none rounded-[8px]" />
+    </div>
+  );
+}
+
+function DocsTableCell143() {
+  return (
+    <div className="content-stretch flex items-center justify-center overflow-clip relative shrink-0 w-[96px]" data-name=".Docs/Table/Cell">
+      <Container112 />
+    </div>
+  );
+}
+
+function StyleProperty35() {
+  return (
+    <div className="content-stretch flex items-center min-h-[88px] py-[12px] relative shrink-0 w-full" data-name="Style Property">
+      <div aria-hidden className="absolute border-[rgba(0,0,0,0.1)] border-b border-solid inset-[0_0_-0.5px_0] pointer-events-none" />
+      <DocsTableCell140 />
+      <DocsTableCell141 />
+      <DocsTableCell142 />
+      <DocsTableCell143 />
+    </div>
+  );
+}
+
+function Table2() {
+  return (
+    <div className="content-stretch flex flex-col items-start relative shrink-0 w-full" data-name="table">
+      <TableHeader2 />
+      <StyleProperty26 />
+      <StyleProperty27 />
+      <StyleProperty28 />
+      <StyleProperty29 />
+      <StyleProperty30 />
+      <StyleProperty31 />
+      <StyleProperty32 />
+      <StyleProperty33 />
+      <StyleProperty34 />
+      <StyleProperty35 />
+    </div>
+  );
+}
+
+function Tabs3() {
+  return (
+    <div className="content-stretch flex flex-col items-start relative shrink-0 w-[848px]" data-name="Tabs">
+      <Table2 />
+    </div>
+  );
+}
+
+function ColorBrand2() {
+  return (
+    <div className="bg-white relative rounded-[12px] shadow-[0px_2px_4px_-2px_rgba(17,24,39,0.1),0px_0px_2px_0px_rgba(17,24,39,0.06)] shrink-0 w-full" data-name="color-brand">
+      <div className="overflow-clip rounded-[inherit] size-full">
+        <div className="content-stretch flex flex-col gap-[48px] items-start p-[40px] relative size-full">
+          <Description2 />
+          <Tabs3 />
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function ColorInfo3() {
+  return (
+    <div className="content-stretch flex flex-col items-start relative shrink-0 w-full" data-name="Color Info">
+      <p className="[word-break:break-word] font-['Publico:Bold',sans-serif] leading-[46px] not-italic relative shrink-0 text-[#1a1d21] text-[40px] w-full">Badge</p>
+    </div>
+  );
+}
+
+function Description3() {
+  return (
+    <div className="content-stretch flex flex-col items-start relative shrink-0 w-full" data-name="Description">
+      <ColorInfo3 />
+    </div>
+  );
+}
+
+function DocsTableHeader12() {
+  return (
+    <div className="content-stretch flex flex-col h-[48px] items-start justify-center overflow-clip relative shrink-0 w-[264px]" data-name=".Docs/Table/Header">
+      <p className="[word-break:break-word] font-['Source_Sans_Pro:SemiBold',sans-serif] leading-[16px] not-italic relative shrink-0 text-[#606776] text-[12px] tracking-[1px] uppercase whitespace-pre">{`TOKEN  `}</p>
+    </div>
+  );
+}
+
+function DocsTableHeader13() {
+  return (
+    <div className="content-stretch flex flex-col h-[48px] items-start justify-center overflow-clip px-[16px] relative shrink-0 w-[340px]" data-name=".Docs/Table/Header">
+      <p className="[word-break:break-word] font-['Source_Sans_Pro:SemiBold',sans-serif] leading-[16px] not-italic relative shrink-0 text-[#606776] text-[12px] tracking-[1px] uppercase whitespace-nowrap">DESCRIPTION</p>
+    </div>
+  );
+}
+
+function DocsTableHeader14() {
+  return (
+    <div className="content-stretch flex flex-col h-[48px] items-start justify-center overflow-clip relative shrink-0 w-[146px]" data-name=".Docs/Table/Header">
+      <p className="[word-break:break-word] font-['Source_Sans_Pro:SemiBold',sans-serif] leading-[16px] not-italic relative shrink-0 text-[#606776] text-[12px] tracking-[1px] uppercase w-full">VALUE (RGBA/HEX)</p>
+    </div>
+  );
+}
+
+function DocsTableHeader15() {
+  return (
+    <div className="content-stretch flex flex-col h-[48px] items-start justify-center max-w-[96px] overflow-clip relative shrink-0 w-[96px]" data-name=".Docs/Table/Header">
+      <p className="[word-break:break-word] font-['Source_Sans_Pro:SemiBold',sans-serif] leading-[16px] not-italic relative shrink-0 text-[#606776] text-[12px] tracking-[1px] uppercase whitespace-nowrap">LIGHT MODE</p>
+    </div>
+  );
+}
+
+function TableHeader3() {
+  return (
+    <div className="content-stretch flex items-center relative shrink-0 w-full" data-name="Table Header">
+      <div aria-hidden className="absolute border-[rgba(0,0,0,0.2)] border-b border-solid inset-[0_0_-0.5px_0] pointer-events-none" />
+      <DocsTableHeader12 />
+      <DocsTableHeader13 />
+      <DocsTableHeader14 />
+      <DocsTableHeader15 />
+    </div>
+  );
+}
+
+function Token36() {
+  return (
+    <div className="bg-[#efeff1] content-stretch flex items-center justify-center px-[8px] py-[4px] relative rounded-[4px] shrink-0" data-name="token">
+      <p className="[word-break:break-word] font-['Source_Sans_3:SemiBold',sans-serif] font-semibold leading-[20px] max-w-[230px] relative shrink-0 text-[#434956] text-[14px] w-[212px]">color-text-badge-coral</p>
+    </div>
+  );
+}
+
+function DocsTableCell144() {
+  return (
+    <div className="flex-[1_0_0] max-w-[264px] min-w-px relative" data-name=".Docs/Table/Cell">
+      <div className="flex flex-col justify-center max-w-[inherit] overflow-clip rounded-[inherit] size-full">
+        <div className="content-stretch flex flex-col items-start justify-center max-w-[inherit] pr-[16px] relative size-full">
+          <Token36 />
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function DocsTableCell145() {
+  return (
+    <div className="content-stretch flex flex-col h-[52px] items-start justify-center overflow-clip p-[16px] relative shrink-0 w-[340px]" data-name=".Docs/Table/Cell">
+      <p className="[word-break:break-word] flex-[1_0_0] font-['Source_Sans_3:Regular',sans-serif] font-normal leading-[0] min-h-px relative text-[#1a1d21] text-[14px] w-full">
+        <span className="leading-[20px]">{`Use for text on coral color badges `}</span>
+        <span className="font-['Source_Sans_3:Bold',sans-serif] font-bold leading-[20px]">{`bg-badge-coral. `}</span>
+      </p>
+    </div>
+  );
+}
+
+function ColumnLabel88() {
+  return (
+    <div className="relative shrink-0 w-full" data-name="Column Label">
+      <div className="content-stretch flex flex-col items-start px-[8px] relative size-full">
+        <p className="[word-break:break-word] font-['Source_Sans_3:SemiBold',sans-serif] font-semibold leading-[20px] overflow-hidden relative shrink-0 text-[#1a1d21] text-[14px] text-center text-ellipsis whitespace-nowrap">#3D1600</p>
+      </div>
+    </div>
+  );
+}
+
+function DocsTableCell146() {
+  return (
+    <div className="content-stretch flex flex-col items-center justify-center overflow-clip relative shrink-0 w-[146px]" data-name=".Docs/Table/Cell">
+      <ColumnLabel88 />
+    </div>
+  );
+}
+
+function Container113() {
+  return (
+    <div className="bg-[#ff9c62] relative rounded-[8px] shrink-0 size-[48px]" data-name="container">
+      <div className="content-stretch flex flex-col items-center justify-center overflow-clip px-[16px] py-[12px] relative rounded-[inherit] size-full">
+        <p className="[word-break:break-word] font-['Publico:Bold',sans-serif] leading-[24px] not-italic relative shrink-0 text-[#3d1600] text-[20px] w-[25px]">Aa</p>
+      </div>
+      <div aria-hidden className="absolute border border-[rgba(0,0,0,0.1)] border-solid inset-0 pointer-events-none rounded-[8px]" />
+    </div>
+  );
+}
+
+function DocsTableCell147() {
+  return (
+    <div className="content-stretch flex items-center justify-center overflow-clip relative shrink-0 w-[96px]" data-name=".Docs/Table/Cell">
+      <Container113 />
+    </div>
+  );
+}
+
+function StyleProperty36() {
+  return (
+    <div className="content-stretch flex items-center min-h-[88px] py-[12px] relative shrink-0 w-full" data-name="Style Property">
+      <div aria-hidden className="absolute border-[rgba(0,0,0,0.1)] border-b border-solid inset-[0_0_-0.5px_0] pointer-events-none" />
+      <DocsTableCell144 />
+      <DocsTableCell145 />
+      <DocsTableCell146 />
+      <DocsTableCell147 />
+    </div>
+  );
+}
+
+function Token37() {
+  return (
+    <div className="bg-[#efeff1] content-stretch flex items-center justify-center px-[8px] py-[4px] relative rounded-[4px] shrink-0" data-name="token">
+      <p className="[word-break:break-word] font-['Source_Sans_3:SemiBold',sans-serif] font-semibold leading-[20px] max-w-[230px] relative shrink-0 text-[#434956] text-[14px] whitespace-nowrap">color-text-badge-teal</p>
+    </div>
+  );
+}
+
+function DocsTableCell148() {
+  return (
+    <div className="flex-[1_0_0] max-w-[264px] min-w-px relative" data-name=".Docs/Table/Cell">
+      <div className="flex flex-col justify-center max-w-[inherit] overflow-clip rounded-[inherit] size-full">
+        <div className="content-stretch flex flex-col items-start justify-center max-w-[inherit] pr-[16px] relative size-full">
+          <Token37 />
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function DocsTableCell149() {
+  return (
+    <div className="content-stretch flex flex-col h-[52px] items-start justify-center overflow-clip p-[16px] relative shrink-0 w-[340px]" data-name=".Docs/Table/Cell">
+      <p className="[word-break:break-word] flex-[1_0_0] font-['Source_Sans_3:Regular',sans-serif] font-normal leading-[0] min-h-px relative text-[#1a1d21] text-[14px] w-full">
+        <span className="leading-[20px]">{`Use for text on teal color badges `}</span>
+        <span className="font-['Source_Sans_3:Bold',sans-serif] font-bold leading-[20px]">bg-badge-teal.</span>
+      </p>
+    </div>
+  );
+}
+
+function ColumnLabel89() {
+  return (
+    <div className="relative shrink-0 w-full" data-name="Column Label">
+      <div className="content-stretch flex flex-col items-start px-[8px] relative size-full">
+        <p className="[word-break:break-word] font-['Source_Sans_3:SemiBold',sans-serif] font-semibold leading-[20px] overflow-hidden relative shrink-0 text-[#1a1d21] text-[14px] text-center text-ellipsis whitespace-nowrap">#DBF7FB</p>
+      </div>
+    </div>
+  );
+}
+
+function DocsTableCell150() {
+  return (
+    <div className="content-stretch flex flex-col items-center justify-center overflow-clip relative shrink-0 w-[146px]" data-name=".Docs/Table/Cell">
+      <ColumnLabel89 />
+    </div>
+  );
+}
+
+function Container114() {
+  return (
+    <div className="bg-[#0f717f] relative rounded-[8px] shrink-0 size-[48px]" data-name="container">
+      <div className="content-stretch flex flex-col items-center justify-center overflow-clip px-[16px] py-[12px] relative rounded-[inherit] size-full">
+        <p className="[word-break:break-word] font-['Publico:Bold',sans-serif] leading-[24px] not-italic relative shrink-0 text-[#dbf7fb] text-[20px] w-[25px]">Aa</p>
+      </div>
+      <div aria-hidden className="absolute border border-[rgba(0,0,0,0.1)] border-solid inset-0 pointer-events-none rounded-[8px]" />
+    </div>
+  );
+}
+
+function DocsTableCell151() {
+  return (
+    <div className="content-stretch flex items-center justify-center overflow-clip relative shrink-0 w-[96px]" data-name=".Docs/Table/Cell">
+      <Container114 />
+    </div>
+  );
+}
+
+function StyleProperty37() {
+  return (
+    <div className="content-stretch flex items-center min-h-[88px] py-[12px] relative shrink-0 w-full" data-name="Style Property">
+      <div aria-hidden className="absolute border-[rgba(0,0,0,0.1)] border-b border-solid inset-[0_0_-0.5px_0] pointer-events-none" />
+      <DocsTableCell148 />
+      <DocsTableCell149 />
+      <DocsTableCell150 />
+      <DocsTableCell151 />
+    </div>
+  );
+}
+
+function Token38() {
+  return (
+    <div className="bg-[#efeff1] content-stretch flex items-center justify-center px-[8px] py-[4px] relative rounded-[4px] shrink-0" data-name="token">
+      <p className="[word-break:break-word] font-['Source_Sans_3:SemiBold',sans-serif] font-semibold leading-[20px] max-w-[230px] relative shrink-0 text-[#434956] text-[14px] whitespace-nowrap">color-text-badge-leaf-green</p>
+    </div>
+  );
+}
+
+function DocsTableCell152() {
+  return (
+    <div className="flex-[1_0_0] max-w-[264px] min-w-px relative" data-name=".Docs/Table/Cell">
+      <div className="flex flex-col justify-center max-w-[inherit] overflow-clip rounded-[inherit] size-full">
+        <div className="content-stretch flex flex-col items-start justify-center max-w-[inherit] pr-[16px] relative size-full">
+          <Token38 />
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function DocsTableCell153() {
+  return (
+    <div className="content-stretch flex flex-col h-[72px] items-start justify-center overflow-clip p-[16px] relative shrink-0 w-[340px]" data-name=".Docs/Table/Cell">
+      <p className="[word-break:break-word] flex-[1_0_0] font-['Source_Sans_3:Regular',sans-serif] font-normal leading-[0] min-h-px relative text-[#1a1d21] text-[14px] w-full">
+        <span className="leading-[20px]">{`Use for text on leaf green color badges `}</span>
+        <span className="font-['Source_Sans_3:Bold',sans-serif] font-bold leading-[20px]">{`bg-badge-leaf-green. `}</span>
+      </p>
+    </div>
+  );
+}
+
+function ColumnLabel90() {
+  return (
+    <div className="relative shrink-0 w-full" data-name="Column Label">
+      <div className="content-stretch flex flex-col items-start px-[8px] relative size-full">
+        <p className="[word-break:break-word] font-['Source_Sans_3:SemiBold',sans-serif] font-semibold leading-[20px] overflow-hidden relative shrink-0 text-[#1a1d21] text-[14px] text-center text-ellipsis whitespace-nowrap">#062900</p>
+      </div>
+    </div>
+  );
+}
+
+function DocsTableCell154() {
+  return (
+    <div className="content-stretch flex flex-col items-center justify-center overflow-clip relative shrink-0 w-[146px]" data-name=".Docs/Table/Cell">
+      <ColumnLabel90 />
+    </div>
+  );
+}
+
+function Container115() {
+  return (
+    <div className="bg-[#58c645] relative rounded-[8px] shrink-0 size-[48px]" data-name="container">
+      <div className="content-stretch flex flex-col items-center justify-center overflow-clip px-[16px] py-[12px] relative rounded-[inherit] size-full">
+        <p className="[word-break:break-word] font-['Publico:Bold',sans-serif] leading-[24px] not-italic relative shrink-0 text-[#062900] text-[20px] w-[25px]">Aa</p>
+      </div>
+      <div aria-hidden className="absolute border border-[rgba(0,0,0,0.1)] border-solid inset-0 pointer-events-none rounded-[8px]" />
+    </div>
+  );
+}
+
+function DocsTableCell155() {
+  return (
+    <div className="content-stretch flex items-center justify-center overflow-clip relative shrink-0 w-[96px]" data-name=".Docs/Table/Cell">
+      <Container115 />
+    </div>
+  );
+}
+
+function StyleProperty38() {
+  return (
+    <div className="content-stretch flex items-center min-h-[88px] py-[12px] relative shrink-0 w-full" data-name="Style Property">
+      <div aria-hidden className="absolute border-[rgba(0,0,0,0.1)] border-b border-solid inset-[0_0_-0.5px_0] pointer-events-none" />
+      <DocsTableCell152 />
+      <DocsTableCell153 />
+      <DocsTableCell154 />
+      <DocsTableCell155 />
+    </div>
+  );
+}
+
+function Token39() {
+  return (
+    <div className="bg-[#efeff1] content-stretch flex items-center justify-center px-[8px] py-[4px] relative rounded-[4px] shrink-0" data-name="token">
+      <p className="[word-break:break-word] font-['Source_Sans_3:SemiBold',sans-serif] font-semibold leading-[20px] max-w-[230px] relative shrink-0 text-[#434956] text-[14px] whitespace-nowrap">color-text-badge-cotton-candy</p>
+    </div>
+  );
+}
+
+function DocsTableCell156() {
+  return (
+    <div className="flex-[1_0_0] max-w-[264px] min-w-px relative" data-name=".Docs/Table/Cell">
+      <div className="flex flex-col justify-center max-w-[inherit] overflow-clip rounded-[inherit] size-full">
+        <div className="content-stretch flex flex-col items-start justify-center max-w-[inherit] pr-[16px] relative size-full">
+          <Token39 />
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function DocsTableCell157() {
+  return (
+    <div className="content-stretch flex flex-col h-[72px] items-start justify-center overflow-clip p-[16px] relative shrink-0 w-[340px]" data-name=".Docs/Table/Cell">
+      <p className="[word-break:break-word] flex-[1_0_0] font-['Source_Sans_3:Regular',sans-serif] font-normal leading-[0] min-h-px relative text-[#1a1d21] text-[14px] w-full whitespace-pre-wrap">
+        <span className="leading-[20px]">{`Use for text on cotton candy color badges `}</span>
+        <span className="font-['Source_Sans_3:Bold',sans-serif] font-bold leading-[20px]">{`bg-badge-cotton-candy. `}</span>
+        <span className="leading-[20px]">{` `}</span>
+      </p>
+    </div>
+  );
+}
+
+function ColumnLabel91() {
+  return (
+    <div className="relative shrink-0 w-full" data-name="Column Label">
+      <div className="content-stretch flex flex-col items-start px-[8px] relative size-full">
+        <p className="[word-break:break-word] font-['Source_Sans_3:SemiBold',sans-serif] font-semibold leading-[20px] overflow-hidden relative shrink-0 text-[#1a1d21] text-[14px] text-center text-ellipsis whitespace-nowrap">#4C001B</p>
+      </div>
+    </div>
+  );
+}
+
+function DocsTableCell158() {
+  return (
+    <div className="content-stretch flex flex-col items-center justify-center overflow-clip relative shrink-0 w-[146px]" data-name=".Docs/Table/Cell">
+      <ColumnLabel91 />
+    </div>
+  );
+}
+
+function Container116() {
+  return (
+    <div className="bg-[#ffb4ce] relative rounded-[8px] shrink-0 size-[48px]" data-name="container">
+      <div className="content-stretch flex flex-col items-center justify-center overflow-clip px-[16px] py-[12px] relative rounded-[inherit] size-full">
+        <p className="[word-break:break-word] font-['Publico:Bold',sans-serif] leading-[24px] not-italic relative shrink-0 text-[#4c001b] text-[20px] w-[25px]">Aa</p>
+      </div>
+      <div aria-hidden className="absolute border border-[rgba(0,0,0,0.1)] border-solid inset-0 pointer-events-none rounded-[8px]" />
+    </div>
+  );
+}
+
+function DocsTableCell159() {
+  return (
+    <div className="content-stretch flex items-center justify-center overflow-clip relative shrink-0 w-[96px]" data-name=".Docs/Table/Cell">
+      <Container116 />
+    </div>
+  );
+}
+
+function StyleProperty39() {
+  return (
+    <div className="content-stretch flex items-center min-h-[88px] py-[12px] relative shrink-0 w-full" data-name="Style Property">
+      <div aria-hidden className="absolute border-[rgba(0,0,0,0.1)] border-b border-solid inset-[0_0_-0.5px_0] pointer-events-none" />
+      <DocsTableCell156 />
+      <DocsTableCell157 />
+      <DocsTableCell158 />
+      <DocsTableCell159 />
+    </div>
+  );
+}
+
+function Token40() {
+  return (
+    <div className="bg-[#efeff1] content-stretch flex items-center justify-center px-[8px] py-[4px] relative rounded-[4px] shrink-0" data-name="token">
+      <p className="[word-break:break-word] font-['Source_Sans_3:SemiBold',sans-serif] font-semibold leading-[20px] max-w-[230px] relative shrink-0 text-[#434956] text-[14px] whitespace-nowrap">color-text-badge-sky-blue</p>
+    </div>
+  );
+}
+
+function DocsTableCell160() {
+  return (
+    <div className="flex-[1_0_0] max-w-[264px] min-w-px relative" data-name=".Docs/Table/Cell">
+      <div className="flex flex-col justify-center max-w-[inherit] overflow-clip rounded-[inherit] size-full">
+        <div className="content-stretch flex flex-col items-start justify-center max-w-[inherit] pr-[16px] relative size-full">
+          <Token40 />
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function DocsTableCell161() {
+  return (
+    <div className="content-stretch flex flex-col h-[72px] items-start justify-center overflow-clip p-[16px] relative shrink-0 w-[340px]" data-name=".Docs/Table/Cell">
+      <p className="[word-break:break-word] flex-[1_0_0] font-['Source_Sans_3:Regular',sans-serif] font-normal leading-[0] min-h-px relative text-[#1a1d21] text-[14px] w-full">
+        <span className="leading-[20px]">{`Use for text on sky blue color badges `}</span>
+        <span className="font-['Source_Sans_3:Bold',sans-serif] font-bold leading-[20px]">{`bg-badge-sky-blue. `}</span>
+      </p>
+    </div>
+  );
+}
+
+function ColumnLabel92() {
+  return (
+    <div className="relative shrink-0 w-full" data-name="Column Label">
+      <div className="content-stretch flex flex-col items-start px-[8px] relative size-full">
+        <p className="[word-break:break-word] font-['Source_Sans_3:SemiBold',sans-serif] font-semibold leading-[20px] overflow-hidden relative shrink-0 text-[#1a1d21] text-[14px] text-center text-ellipsis whitespace-nowrap">#00273D</p>
+      </div>
+    </div>
+  );
+}
+
+function DocsTableCell162() {
+  return (
+    <div className="content-stretch flex flex-col items-center justify-center overflow-clip relative shrink-0 w-[146px]" data-name=".Docs/Table/Cell">
+      <ColumnLabel92 />
+    </div>
+  );
+}
+
+function Container117() {
+  return (
+    <div className="bg-[#74bde8] relative rounded-[8px] shrink-0 size-[48px]" data-name="container">
+      <div className="content-stretch flex flex-col items-center justify-center overflow-clip px-[16px] py-[12px] relative rounded-[inherit] size-full">
+        <p className="[word-break:break-word] font-['Publico:Bold',sans-serif] leading-[24px] not-italic relative shrink-0 text-[#00273d] text-[20px] w-[25px]">Aa</p>
+      </div>
+      <div aria-hidden className="absolute border border-[rgba(0,0,0,0.1)] border-solid inset-0 pointer-events-none rounded-[8px]" />
+    </div>
+  );
+}
+
+function DocsTableCell163() {
+  return (
+    <div className="content-stretch flex items-center justify-center overflow-clip relative shrink-0 w-[96px]" data-name=".Docs/Table/Cell">
+      <Container117 />
+    </div>
+  );
+}
+
+function StyleProperty40() {
+  return (
+    <div className="content-stretch flex items-center min-h-[88px] py-[12px] relative shrink-0 w-full" data-name="Style Property">
+      <div aria-hidden className="absolute border-[rgba(0,0,0,0.1)] border-b border-solid inset-[0_0_-0.5px_0] pointer-events-none" />
+      <DocsTableCell160 />
+      <DocsTableCell161 />
+      <DocsTableCell162 />
+      <DocsTableCell163 />
+    </div>
+  );
+}
+
+function Token41() {
+  return (
+    <div className="bg-[#efeff1] content-stretch flex items-center justify-center px-[8px] py-[4px] relative rounded-[4px] shrink-0" data-name="token">
+      <p className="[word-break:break-word] font-['Source_Sans_3:SemiBold',sans-serif] font-semibold leading-[20px] max-w-[230px] relative shrink-0 text-[#434956] text-[14px] whitespace-nowrap">color-text-badge-grape</p>
+    </div>
+  );
+}
+
+function DocsTableCell164() {
+  return (
+    <div className="flex-[1_0_0] max-w-[264px] min-w-px relative" data-name=".Docs/Table/Cell">
+      <div className="flex flex-col justify-center max-w-[inherit] overflow-clip rounded-[inherit] size-full">
+        <div className="content-stretch flex flex-col items-start justify-center max-w-[inherit] pr-[16px] relative size-full">
+          <Token41 />
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function DocsTableCell165() {
+  return (
+    <div className="content-stretch flex flex-col h-[52px] items-start justify-center overflow-clip p-[16px] relative shrink-0 w-[340px]" data-name=".Docs/Table/Cell">
+      <p className="[word-break:break-word] flex-[1_0_0] font-['Source_Sans_3:Regular',sans-serif] font-normal leading-[0] min-h-px relative text-[#1a1d21] text-[14px] w-full">
+        <span className="leading-[20px]">{`Use for text on grape color badges `}</span>
+        <span className="font-['Source_Sans_3:Bold',sans-serif] font-bold leading-[20px]">{`bg-badge-grape. `}</span>
+      </p>
+    </div>
+  );
+}
+
+function ColumnLabel93() {
+  return (
+    <div className="relative shrink-0 w-full" data-name="Column Label">
+      <div className="content-stretch flex flex-col items-start px-[8px] relative size-full">
+        <p className="[word-break:break-word] font-['Source_Sans_3:SemiBold',sans-serif] font-semibold leading-[20px] overflow-hidden relative shrink-0 text-[#1a1d21] text-[14px] text-center text-ellipsis whitespace-nowrap">#DFDBFA</p>
+      </div>
+    </div>
+  );
+}
+
+function DocsTableCell166() {
+  return (
+    <div className="content-stretch flex flex-col items-center justify-center overflow-clip relative shrink-0 w-[146px]" data-name=".Docs/Table/Cell">
+      <ColumnLabel93 />
+    </div>
+  );
+}
+
+function Container118() {
+  return (
+    <div className="bg-[#614fe8] relative rounded-[8px] shrink-0 size-[48px]" data-name="container">
+      <div className="content-stretch flex flex-col items-center justify-center overflow-clip px-[16px] py-[12px] relative rounded-[inherit] size-full">
+        <p className="[word-break:break-word] font-['Publico:Bold',sans-serif] leading-[24px] not-italic relative shrink-0 text-[#dfdbfa] text-[20px] w-[25px]">Aa</p>
+      </div>
+      <div aria-hidden className="absolute border border-[rgba(0,0,0,0.1)] border-solid inset-0 pointer-events-none rounded-[8px]" />
+    </div>
+  );
+}
+
+function DocsTableCell167() {
+  return (
+    <div className="content-stretch flex items-center justify-center overflow-clip relative shrink-0 w-[96px]" data-name=".Docs/Table/Cell">
+      <Container118 />
+    </div>
+  );
+}
+
+function StyleProperty41() {
+  return (
+    <div className="content-stretch flex items-center min-h-[88px] py-[12px] relative shrink-0 w-full" data-name="Style Property">
+      <div aria-hidden className="absolute border-[rgba(0,0,0,0.1)] border-b border-solid inset-[0_0_-0.5px_0] pointer-events-none" />
+      <DocsTableCell164 />
+      <DocsTableCell165 />
+      <DocsTableCell166 />
+      <DocsTableCell167 />
+    </div>
+  );
+}
+
+function Token42() {
+  return (
+    <div className="bg-[#efeff1] content-stretch flex items-center justify-center px-[8px] py-[4px] relative rounded-[4px] shrink-0" data-name="token">
+      <p className="[word-break:break-word] font-['Source_Sans_3:SemiBold',sans-serif] font-semibold leading-[20px] max-w-[230px] relative shrink-0 text-[#434956] text-[14px] whitespace-nowrap">color-text-badge-mint-green</p>
+    </div>
+  );
+}
+
+function DocsTableCell168() {
+  return (
+    <div className="flex-[1_0_0] max-w-[264px] min-w-px relative" data-name=".Docs/Table/Cell">
+      <div className="flex flex-col justify-center max-w-[inherit] overflow-clip rounded-[inherit] size-full">
+        <div className="content-stretch flex flex-col items-start justify-center max-w-[inherit] pr-[16px] relative size-full">
+          <Token42 />
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function DocsTableCell169() {
+  return (
+    <div className="content-stretch flex flex-col h-[72px] items-start justify-center overflow-clip p-[16px] relative shrink-0 w-[340px]" data-name=".Docs/Table/Cell">
+      <p className="[word-break:break-word] flex-[1_0_0] font-['Source_Sans_3:Regular',sans-serif] font-normal leading-[0] min-h-px relative text-[#1a1d21] text-[14px] w-full">
+        <span className="leading-[20px]">{`Use for text on mint green color badges `}</span>
+        <span className="font-['Source_Sans_3:Bold',sans-serif] font-bold leading-[20px]">{`bg-badge-mint-green. `}</span>
+      </p>
+    </div>
+  );
+}
+
+function ColumnLabel94() {
+  return (
+    <div className="relative shrink-0 w-full" data-name="Column Label">
+      <div className="content-stretch flex flex-col items-start px-[8px] relative size-full">
+        <p className="[word-break:break-word] font-['Source_Sans_3:SemiBold',sans-serif] font-semibold leading-[20px] overflow-hidden relative shrink-0 text-[#1a1d21] text-[14px] text-center text-ellipsis whitespace-nowrap">#004C3E</p>
+      </div>
+    </div>
+  );
+}
+
+function DocsTableCell170() {
+  return (
+    <div className="content-stretch flex flex-col items-center justify-center overflow-clip relative shrink-0 w-[146px]" data-name=".Docs/Table/Cell">
+      <ColumnLabel94 />
+    </div>
+  );
+}
+
+function Container119() {
+  return (
+    <div className="bg-[#81eebb] relative rounded-[8px] shrink-0 size-[48px]" data-name="container">
+      <div className="content-stretch flex flex-col items-center justify-center overflow-clip px-[16px] py-[12px] relative rounded-[inherit] size-full">
+        <p className="[word-break:break-word] font-['Publico:Bold',sans-serif] leading-[24px] not-italic relative shrink-0 text-[#004c3e] text-[20px] w-[25px]">Aa</p>
+      </div>
+      <div aria-hidden className="absolute border border-[rgba(0,0,0,0.1)] border-solid inset-0 pointer-events-none rounded-[8px]" />
+    </div>
+  );
+}
+
+function DocsTableCell171() {
+  return (
+    <div className="content-stretch flex items-center justify-center overflow-clip relative shrink-0 w-[96px]" data-name=".Docs/Table/Cell">
+      <Container119 />
+    </div>
+  );
+}
+
+function StyleProperty42() {
+  return (
+    <div className="content-stretch flex items-center min-h-[88px] py-[12px] relative shrink-0 w-full" data-name="Style Property">
+      <div aria-hidden className="absolute border-[rgba(0,0,0,0.1)] border-b border-solid inset-[0_0_-0.5px_0] pointer-events-none" />
+      <DocsTableCell168 />
+      <DocsTableCell169 />
+      <DocsTableCell170 />
+      <DocsTableCell171 />
+    </div>
+  );
+}
+
+function Token43() {
+  return (
+    <div className="bg-[#efeff1] content-stretch flex items-center justify-center px-[8px] py-[4px] relative rounded-[4px] shrink-0" data-name="token">
+      <p className="[word-break:break-word] font-['Source_Sans_3:SemiBold',sans-serif] font-semibold leading-[20px] max-w-[230px] relative shrink-0 text-[#434956] text-[14px] whitespace-nowrap">color-text-badge-sunshine</p>
+    </div>
+  );
+}
+
+function DocsTableCell172() {
+  return (
+    <div className="flex-[1_0_0] max-w-[264px] min-w-px relative" data-name=".Docs/Table/Cell">
+      <div className="flex flex-col justify-center max-w-[inherit] overflow-clip rounded-[inherit] size-full">
+        <div className="content-stretch flex flex-col items-start justify-center max-w-[inherit] pr-[16px] relative size-full">
+          <Token43 />
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function DocsTableCell173() {
+  return (
+    <div className="content-stretch flex flex-col h-[72px] items-start justify-center overflow-clip p-[16px] relative shrink-0 w-[340px]" data-name=".Docs/Table/Cell">
+      <p className="[word-break:break-word] flex-[1_0_0] font-['Source_Sans_3:Regular',sans-serif] font-normal leading-[0] min-h-px relative text-[#1a1d21] text-[14px] w-full">
+        <span className="leading-[20px]">{`Use for text on sunshine color badges `}</span>
+        <span className="font-['Source_Sans_3:Bold',sans-serif] font-bold leading-[20px]">{`bg-badge-sunshine. `}</span>
+      </p>
+    </div>
+  );
+}
+
+function ColumnLabel95() {
+  return (
+    <div className="relative shrink-0 w-full" data-name="Column Label">
+      <div className="content-stretch flex flex-col items-start px-[8px] relative size-full">
+        <p className="[word-break:break-word] font-['Source_Sans_3:SemiBold',sans-serif] font-semibold leading-[20px] overflow-hidden relative shrink-0 text-[#1a1d21] text-[14px] text-center text-ellipsis whitespace-nowrap">#4C4500</p>
+      </div>
+    </div>
+  );
+}
+
+function DocsTableCell174() {
+  return (
+    <div className="content-stretch flex flex-col items-center justify-center overflow-clip relative shrink-0 w-[146px]" data-name=".Docs/Table/Cell">
+      <ColumnLabel95 />
+    </div>
+  );
+}
+
+function Container120() {
+  return (
+    <div className="bg-[#fff06c] relative rounded-[8px] shrink-0 size-[48px]" data-name="container">
+      <div className="content-stretch flex flex-col items-center justify-center overflow-clip px-[16px] py-[12px] relative rounded-[inherit] size-full">
+        <p className="[word-break:break-word] font-['Publico:Bold',sans-serif] leading-[24px] not-italic relative shrink-0 text-[#4c4500] text-[20px] w-[25px]">Aa</p>
+      </div>
+      <div aria-hidden className="absolute border border-[rgba(0,0,0,0.1)] border-solid inset-0 pointer-events-none rounded-[8px]" />
+    </div>
+  );
+}
+
+function DocsTableCell175() {
+  return (
+    <div className="content-stretch flex items-center justify-center overflow-clip relative shrink-0 w-[96px]" data-name=".Docs/Table/Cell">
+      <Container120 />
+    </div>
+  );
+}
+
+function StyleProperty43() {
+  return (
+    <div className="content-stretch flex items-center min-h-[88px] py-[12px] relative shrink-0 w-full" data-name="Style Property">
+      <div aria-hidden className="absolute border-[rgba(0,0,0,0.1)] border-b border-solid inset-[0_0_-0.5px_0] pointer-events-none" />
+      <DocsTableCell172 />
+      <DocsTableCell173 />
+      <DocsTableCell174 />
+      <DocsTableCell175 />
+    </div>
+  );
+}
+
+function Table3() {
+  return (
+    <div className="content-stretch flex flex-col items-start relative shrink-0 w-full" data-name="table">
+      <TableHeader3 />
+      <StyleProperty36 />
+      <StyleProperty37 />
+      <StyleProperty38 />
+      <StyleProperty39 />
+      <StyleProperty40 />
+      <StyleProperty41 />
+      <StyleProperty42 />
+      <StyleProperty43 />
+    </div>
+  );
+}
+
+function Tabs4() {
+  return (
+    <div className="content-stretch flex flex-col items-start relative shrink-0 w-[848px]" data-name="Tabs">
+      <Table3 />
+    </div>
+  );
+}
+
+function ColorBrand3() {
+  return (
+    <div className="bg-white relative rounded-[12px] shadow-[0px_2px_4px_-2px_rgba(17,24,39,0.1),0px_0px_2px_0px_rgba(17,24,39,0.06)] shrink-0 w-full" data-name="color-brand">
+      <div className="overflow-clip rounded-[inherit] size-full">
+        <div className="content-stretch flex flex-col gap-[48px] items-start p-[40px] relative size-full">
+          <Description3 />
+          <Tabs4 />
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function GlobalColorWrapper() {
+  return (
+    <div className="content-stretch flex flex-col gap-[56px] items-start relative rounded-[8px] shrink-0 w-[928px]" data-name="global-color-wrapper">
+      <ColorBrand />
+      <ColorBrand1 />
+      <ColorBrand2 />
+      <ColorBrand3 />
+    </div>
+  );
+}
+
+export default function Text() {
+  return (
+    <div className="bg-[#fafafa] content-stretch flex flex-col gap-[40px] items-start p-[40px] relative rounded-[16px] size-full" data-name="Text">
+      <DesignSystemHeader />
+      <GlobalColorWrapper />
+    </div>
+  );
+}

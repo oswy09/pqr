@@ -1,0 +1,28 @@
+/* Source Sans 3 — Regular (400) */
+@font-face {
+  font-family: 'Source Sans 3';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src:
+    url('https://res.cloudinary.com/ddqbnr9vo/raw/upload/v1775794313/source-sans-3-latin-400-normal_lafrfl.woff2') format('woff2'),
+    url('https://res.cloudinary.com/ddqbnr9vo/raw/upload/v1775794313/source-sans-3-latin-400-normal_ggeqe1.woff') format('woff');
+}
+
+/* Publico — Bold (700) */
+@font-face {
+  font-family: 'Publico';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url('https://res.cloudinary.com/ddqbnr9vo/raw/upload/v1750205338/PublicoHeadline-Bold-Web_nphjdn.woff2') format('woff2');
+}
+
+/* Publico — Light (300) */
+@font-face {
+  font-family: 'Publico';
+  font-style: normal;
+  font-weight: 300;
+  font-display: swap;
+  src: url('https://res.cloudinary.com/ddqbnr9vo/raw/upload/v1776114950/PublicoHeadline-Light-Web_viavlr.woff2') format('woff2');
+}
