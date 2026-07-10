@@ -1,5 +1,6 @@
 import { useState, useRef, useEffect } from "react";
 import { createPortal } from "react-dom";
+import ReCAPTCHA from "react-google-recaptcha";
 import {
   ChevronDown, AlertCircle, CheckCircle2, Check,
   ChevronLeft, Mail, Home, User, Users,
@@ -219,7 +220,7 @@ const PASOS = [
 const PASOS_COLOR = [
   { num: 1, label: "Detalle de tu solicitud" },
   { num: 2, label: "Datos personales" },
-  { num: 3, label: "Detalle de solicitud" },
+  { num: 3, label: "Soportes y validación" },
   { num: 4, label: "Confirmación" },
 ];
 
@@ -1200,32 +1201,98 @@ function CamposEspecificos({ form, setForm }: { form: FormState; setForm: (f: Fo
 
 const FORMATOS_PERMITIDOS = ["application/pdf", "image/png", "image/jpeg", "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"];
 const MAX_TOTAL_MB = 25;
+const MAX_TOTAL_BYTES = MAX_TOTAL_MB * 1024 * 1024;
+const DEFAULT_RECAPTCHA_TEST_SITE_KEY = "6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI";
+const RECAPTCHA_SITE_KEY = import.meta.env.VITE_RECAPTCHA_SITE_KEY || DEFAULT_RECAPTCHA_TEST_SITE_KEY;
+
+const formatFileSize = (bytes: number) => {
+  if (bytes < 1024 * 1024) return `${Math.round(bytes / 1024)} KB`;
+  return `${(bytes / (1024 * 1024)).toFixed(2)} MB`;
+};
+
+const getFileExt = (fileName: string) => {
+  const ext = fileName.split(".").pop();
+  return ext ? ext.toUpperCase() : "FILE";
+};
 
 function Paso3({ form, setForm, onBack, onContinue, wireframeMode }: {
   form: FormState; setForm: (f: FormState) => void; onBack: () => void; onContinue: () => void; wireframeMode?: boolean;
 }) {
   const fileInputRef = useRef<HTMLInputElement>(null);
+  const [fileFeedback, setFileFeedback] = useState("");
 
   const totalMB = form.archivos.reduce((acc, f) => acc + f.size, 0) / (1024 * 1024);
   const overLimit = totalMB > MAX_TOTAL_MB;
 
   const handleFiles = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const picked = Array.from(e.target.files ?? []).filter(
-      (f) => FORMATOS_PERMITIDOS.includes(f.type)
-    );
-    setForm({ ...form, archivos: [...form.archivos, ...picked] });
+    const selected = Array.from(e.target.files ?? []);
+    if (!selected.length) return;
+
+    let skippedInvalid = 0;
+    let skippedDuplicate = 0;
+    let skippedBySize = 0;
+    let currentBytes = form.archivos.reduce((acc, f) => acc + f.size, 0);
+    const nextFiles = [...form.archivos];
+
+    for (const file of selected) {
+      if (!FORMATOS_PERMITIDOS.includes(file.type)) {
+        skippedInvalid += 1;
+        continue;
+      }
+
+      const duplicated = nextFiles.some(
+        (existing) =>
+          existing.name === file.name &&
+          existing.size === file.size &&
+          existing.lastModified === file.lastModified,
+      );
+
+      if (duplicated) {
+        skippedDuplicate += 1;
+        continue;
+      }
+
+      if (currentBytes + file.size > MAX_TOTAL_BYTES) {
+        skippedBySize += 1;
+        continue;
+      }
+
+      nextFiles.push(file);
+      currentBytes += file.size;
+    }
+
+    setForm({ ...form, archivos: nextFiles });
+
+    const notices: string[] = [];
+    if (skippedInvalid) notices.push(`${skippedInvalid} archivo(s) no permitido(s)`);
+    if (skippedDuplicate) notices.push(`${skippedDuplicate} duplicado(s)`);
+    if (skippedBySize) notices.push(`${skippedBySize} supera(n) el límite de 25 MB`);
+    setFileFeedback(notices.join(" · "));
+
     e.target.value = "";
   };
 
-  const removeFile = (i: number) =>
+  const removeFile = (i: number) => {
     setForm({ ...form, archivos: form.archivos.filter((_, idx) => idx !== i) });
+    setFileFeedback("");
+  };
+
+  const clearFiles = () => {
+    setForm({ ...form, archivos: [] });
+    setFileFeedback("");
+  };
 
   const tipologiaOpts = getTipologiaOpts(form.producto);
   const subtipologiaOpts = getSubtipologiaOpts(form.tipologia);
   const handleTipologia = (v: string) =>
     setForm({ ...form, tipologia: v, subtipologia: "" });
 
-  const canContinue = false;
+  const canContinue =
+    (wireframeMode || (form.tipologia !== "" && form.subtipologia !== "")) &&
+    form.descripcion.trim().length >= 20 &&
+    !overLimit &&
+    form.captchaOk &&
+    form.aceptaTratamiento;
 
   return (
     <>
@@ -1308,19 +1375,38 @@ function Paso3({ form, setForm, onBack, onContinue, wireframeMode }: {
 
             {/* File list */}
             {form.archivos.length > 0 && (
-              <ul className="flex flex-col gap-1.5 mt-1">
-                {form.archivos.map((f, i) => (
-                  <li key={i} className="flex items-center justify-between px-3 py-2 rounded-lg bg-muted/40 border border-border text-sm">
-                    <span className="text-foreground truncate max-w-[480px]">{f.name}</span>
-                    <div className="flex items-center gap-3 shrink-0 ml-3">
-                      <span className="text-xs text-muted-foreground">{(f.size / 1024).toFixed(0)} KB</span>
-                      <button type="button" onClick={() => removeFile(i)} className="text-muted-foreground hover:text-red-500 transition-colors cursor-pointer">
-                        <X size={14} />
-                      </button>
-                    </div>
-                  </li>
-                ))}
-              </ul>
+              <div className="mt-2 rounded-xl border border-border bg-muted/20 p-3">
+                <div className="flex items-center justify-between gap-3 mb-2">
+                  <p className="text-xs font-semibold text-foreground">
+                    {form.archivos.length} archivo(s) cargado(s)
+                  </p>
+                  <button
+                    type="button"
+                    onClick={clearFiles}
+                    className="text-xs text-muted-foreground underline hover:text-foreground cursor-pointer"
+                  >
+                    Quitar todos
+                  </button>
+                </div>
+                <ul className="flex flex-col gap-2">
+                  {form.archivos.map((f, i) => (
+                    <li key={i} className="flex items-center justify-between px-3 py-2 rounded-lg bg-white border border-border text-sm">
+                      <div className="min-w-0 flex items-center gap-2.5">
+                        <span className="px-2 py-0.5 rounded-md text-[10px] font-bold tracking-wide bg-primary/10 text-primary shrink-0">
+                          {getFileExt(f.name)}
+                        </span>
+                        <span className="text-foreground truncate max-w-[430px]">{f.name}</span>
+                      </div>
+                      <div className="flex items-center gap-3 shrink-0 ml-3">
+                        <span className="text-xs text-muted-foreground">{formatFileSize(f.size)}</span>
+                        <button type="button" onClick={() => removeFile(i)} className="text-muted-foreground hover:text-red-500 transition-colors cursor-pointer">
+                          <X size={14} />
+                        </button>
+                      </div>
+                    </li>
+                  ))}
+                </ul>
+              </div>
             )}
 
             {overLimit && (
@@ -1331,58 +1417,81 @@ function Paso3({ form, setForm, onBack, onContinue, wireframeMode }: {
             {form.archivos.length > 0 && !overLimit && (
               <p className="text-xs text-muted-foreground">{totalMB.toFixed(2)} MB de 25 MB utilizados</p>
             )}
+            {fileFeedback && (
+              <p className="text-xs text-amber-700 flex items-center gap-1.5">
+                <AlertCircle size={13} /> {fileFeedback}
+              </p>
+            )}
           </div>
         </Annotate>
 
-        {/* reCAPTCHA v2 — réplica visual fiel */}
+        {/* reCAPTCHA v2 */}
         <Annotate id="recaptcha" active={!!wireframeMode}>
-          <div>
-            <div
-              className="flex items-center justify-between rounded"
-              style={{
-                width: 304, height: 78, padding: "0 14px",
-                backgroundColor: wireframeMode ? "#F0F0F0" : "#f9f9f9",
-                border: `1px solid ${wireframeMode ? "#BFBFBF" : "#d3d3d3"}`,
-                boxShadow: wireframeMode ? "none" : "0 1px 3px rgba(0,0,0,.1)",
-              }}
-            >
-              {/* Left: checkbox + label */}
-              <label className="flex items-center gap-3 cursor-pointer select-none">
-                <div
-                  onClick={() => setForm({ ...form, captchaOk: !form.captchaOk })}
-                  className="w-7 h-7 rounded border-2 flex items-center justify-center transition-all cursor-pointer"
-                  style={{
-                    backgroundColor: form.captchaOk ? (wireframeMode ? "#6B6B6B" : "#4a90d9") : "#fff",
-                    borderColor: form.captchaOk ? (wireframeMode ? "#6B6B6B" : "#4a90d9") : (wireframeMode ? "#BFBFBF" : "#c1c1c1"),
-                  }}
-                >
-                  {form.captchaOk && (
-                    <svg width="15" height="12" viewBox="0 0 14 11" fill="none">
-                      <path d="M1.5 5.5L5.5 9.5L12.5 1.5" stroke="white" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"/>
-                    </svg>
-                  )}
-                </div>
-                <span style={{ fontSize: 14, color: wireframeMode ? "#1A1A1A" : "#000", fontFamily: "Roboto, Arial, sans-serif", fontWeight: 400 }}>
-                  No soy un robot
-                </span>
-              </label>
+          {wireframeMode ? (
+            <div>
+              <div
+                className="flex items-center justify-between rounded"
+                style={{
+                  width: 304, height: 78, padding: "0 14px",
+                  backgroundColor: "#F0F0F0",
+                  border: "1px solid #BFBFBF",
+                  boxShadow: "none",
+                }}
+              >
+                <label className="flex items-center gap-3 cursor-pointer select-none">
+                  <div
+                    onClick={() => setForm({ ...form, captchaOk: !form.captchaOk })}
+                    className="w-7 h-7 rounded border-2 flex items-center justify-center transition-all cursor-pointer"
+                    style={{
+                      backgroundColor: form.captchaOk ? "#6B6B6B" : "#fff",
+                      borderColor: form.captchaOk ? "#6B6B6B" : "#BFBFBF",
+                    }}
+                  >
+                    {form.captchaOk && (
+                      <svg width="15" height="12" viewBox="0 0 14 11" fill="none">
+                        <path d="M1.5 5.5L5.5 9.5L12.5 1.5" stroke="white" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"/>
+                      </svg>
+                    )}
+                  </div>
+                  <span style={{ fontSize: 14, color: "#1A1A1A", fontFamily: "Roboto, Arial, sans-serif", fontWeight: 400 }}>
+                    No soy un robot
+                  </span>
+                </label>
 
-              {/* Right: branding */}
-              <div className="flex flex-col items-center gap-0.5 shrink-0">
-                {/* reCAPTCHA logo */}
-                <svg width="34" height="34" viewBox="0 0 64 64" fill="none">
-                  <path d="M32 4C16.536 4 4 16.536 4 32s12.536 28 28 28 28-12.536 28-28S47.464 4 32 4z" fill={wireframeMode ? "#8A8A8A" : "#4A90D9"}/>
-                  <path d="M44 22H32v-6l-12 10 12 10v-6h8v8H20V20h24v2z" fill="white"/>
-                </svg>
-                <span style={{ fontSize: 8, color: wireframeMode ? "#4A4A4A" : "#555", fontFamily: "Roboto, Arial, sans-serif", letterSpacing: "0.05em" }}>
-                  reCAPTCHA
-                </span>
-                <span style={{ fontSize: 7, color: wireframeMode ? "#7A7A7A" : "#999", fontFamily: "Roboto, Arial, sans-serif" }}>
-                  Privacidad · Condiciones
-                </span>
+                <div className="flex flex-col items-center gap-0.5 shrink-0">
+                  <svg width="34" height="34" viewBox="0 0 64 64" fill="none">
+                    <path d="M32 4C16.536 4 4 16.536 4 32s12.536 28 28 28 28-12.536 28-28S47.464 4 32 4z" fill="#8A8A8A"/>
+                    <path d="M44 22H32v-6l-12 10 12 10v-6h8v8H20V20h24v2z" fill="white"/>
+                  </svg>
+                  <span style={{ fontSize: 8, color: "#4A4A4A", fontFamily: "Roboto, Arial, sans-serif", letterSpacing: "0.05em" }}>
+                    reCAPTCHA
+                  </span>
+                  <span style={{ fontSize: 7, color: "#7A7A7A", fontFamily: "Roboto, Arial, sans-serif" }}>
+                    Privacidad · Condiciones
+                  </span>
+                </div>
               </div>
             </div>
-          </div>
+          ) : (
+            <div className="flex flex-col gap-2">
+              <p className="text-sm font-semibold text-foreground">
+                Verificación de seguridad <span className="text-red-500">*</span>
+              </p>
+              <div className="w-fit overflow-hidden rounded-xl border border-border bg-white p-2">
+                <ReCAPTCHA
+                  sitekey={RECAPTCHA_SITE_KEY}
+                  onChange={(token) => setForm({ ...form, captchaOk: !!token })}
+                  onExpired={() => setForm({ ...form, captchaOk: false })}
+                  onErrored={() => setForm({ ...form, captchaOk: false })}
+                />
+              </div>
+              {RECAPTCHA_SITE_KEY === DEFAULT_RECAPTCHA_TEST_SITE_KEY && (
+                <p className="text-xs text-amber-700">
+                  Se está usando una clave de prueba de Google reCAPTCHA. Configura VITE_RECAPTCHA_SITE_KEY para producción.
+                </p>
+              )}
+            </div>
+          )}
         </Annotate>
 
         {/* Aceptación tratamiento de datos */}
