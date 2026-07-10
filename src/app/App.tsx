@@ -1,7 +1,7 @@
 import { useState, useRef, useEffect } from "react";
 import { createPortal } from "react-dom";
 import {
-  ChevronDown, AlertCircle, CheckCircle2,
+  ChevronDown, AlertCircle, CheckCircle2, Check,
   ChevronLeft, Mail, Home, User, Users,
   Paperclip, X, Send,
   ClipboardList, MessageCircleWarning, Scale, Star, Lightbulb,
@@ -26,6 +26,22 @@ function AxaLogo({ size = 28 }: { size?: number }) {
 // ── Constants ────────────────────────────────────────────────────────────────
 
 const PRODUCTOS = ["ARL", "Salud", "Autos", "SOAT", "Vida", "Otros Seguros"];
+
+// Lista de productos del prototipo a color (nombres actualizados, orden alfabético) —
+// el modo wireframe sigue usando PRODUCTOS sin tocar.
+const PRODUCTOS_COLOR = ["ARL", "Salud", "Automóviles", "SOAT", "Vida", "Generales", "Otros seguros", "Títulos de Capitalización"]
+  .sort((a, b) => a.localeCompare(b, "es"));
+
+// Líneas de negocio por producto, para mostrar como subtexto en el desplegable
+// de producto del prototipo a color.
+const PRODUCTO_LINEAS_MAP: Record<string, string> = {
+  "ARL": "Riesgos laborales",
+  "Salud": "Póliza de salud · MPP",
+  "Automóviles": "Automóviles · Responsabilidad Civil",
+  "SOAT": "SOAT",
+  "Vida": "Vida individual · Vida deudor · Grupo deudor",
+  "Generales": "Hogar · Incendio · Sustracción · AP · Otros",
+};
 const TIPOS_SOLICITUD = ["Petición", "Queja", "Reclamo", "Felicitaciones", "Sugerencias"];
 const TIPOS_ID = [
   "Cédula de ciudadanía",
@@ -98,6 +114,9 @@ const TIPOLOGIAS_POR_PRODUCTO: Record<string, string[]> = {
     "Otro motivo",
   ],
 };
+// Alias para los nombres de producto del prototipo a color (mismos motivos que su equivalente).
+TIPOLOGIAS_POR_PRODUCTO["Automóviles"] = TIPOLOGIAS_POR_PRODUCTO.Autos;
+TIPOLOGIAS_POR_PRODUCTO["Generales"] = TIPOLOGIAS_POR_PRODUCTO["Otros Seguros"];
 
 // Subtipologías por tipología (demo data, compartidas)
 // Tipología / Subtipología — datos demo
@@ -195,6 +214,15 @@ const PASOS = [
   { num: 4, label: "Confirmación" },
 ];
 
+// Etiquetas del stepper del prototipo a color — el paso 1 tiene otro nombre ahí,
+// el modo wireframe sigue usando PASOS sin tocar.
+const PASOS_COLOR = [
+  { num: 1, label: "Detalle de tu solicitud" },
+  { num: 2, label: "Datos personales" },
+  { num: 3, label: "Detalle de solicitud" },
+  { num: 4, label: "Confirmación" },
+];
+
 // ── Types ────────────────────────────────────────────────────────────────────
 
 export interface DatosPersona {
@@ -232,11 +260,11 @@ const inputBase =
   "w-full px-4 py-3 rounded-xl border border-border bg-white text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all";
 
 function SelectField({
-  id, label, placeholder, options, value, onChange, optional, hint, disabled,
+  id, label, placeholder, options, value, onChange, optional, hint, disabled, optionHints,
 }: {
   id: string; label: string; placeholder: string; options: string[];
   value: string; onChange: (v: string) => void;
-  optional?: boolean; hint?: string; disabled?: boolean;
+  optional?: boolean; hint?: string; disabled?: boolean; optionHints?: Record<string, string>;
 }) {
   const [open, setOpen] = useState(false);
   const btnRef = useRef<HTMLButtonElement>(null);
@@ -292,10 +320,17 @@ function SelectField({
         <li
           key={opt} role="option" aria-selected={value === opt}
           onClick={() => { onChange(opt); setOpen(false); }}
-          className={`px-4 py-2.5 text-sm cursor-pointer flex items-center justify-between transition-colors
+          className={`px-4 py-2 text-sm cursor-pointer flex items-center justify-between gap-2 transition-colors
             ${value === opt ? "bg-accent font-semibold" : "text-foreground hover:bg-muted"}`}
         >
-          {opt}
+          <span className="flex flex-col min-w-0 py-0.5">
+            <span className="truncate">{opt}</span>
+            {optionHints?.[opt] && (
+              <span className={`text-[11px] font-normal truncate ${value === opt ? "text-primary/70" : "text-muted-foreground"}`}>
+                {optionHints[opt]}
+              </span>
+            )}
+          </span>
           {value === opt && <CheckCircle2 size={13} className="text-primary shrink-0" />}
         </li>
       ))}
@@ -384,17 +419,63 @@ function TextAreaField({
 // ── Step indicator ───────────────────────────────────────────────────────────
 
 function StepIndicator({ current, total, label, wireframeMode }: { current: number; total: number; label: string; wireframeMode?: boolean }) {
+  if (!wireframeMode) {
+    // Stepper horizontal con círculos numerados y conector, estilo "Book an appointment"
+    // pero con los colores de marca (navy).
+    return (
+      <div className="mb-8">
+        <div className="flex items-start">
+          {PASOS_COLOR.map((p, i) => {
+            const isCompleted = p.num < current;
+            const isActive = p.num === current;
+            return (
+              <div key={p.num} className={`flex items-center ${i < PASOS_COLOR.length - 1 ? "flex-1" : ""}`}>
+                <div className="flex flex-col items-center gap-2 shrink-0">
+                  <div
+                    className="w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold shrink-0"
+                    style={{
+                      backgroundColor: isCompleted ? "#16A34A" : isActive ? "#00008F" : "#FFFFFF",
+                      border: `2px solid ${isCompleted ? "#16A34A" : isActive ? "#00008F" : "#D8DCE3"}`,
+                      color: isCompleted || isActive ? "#FFFFFF" : "#9AA1AC",
+                    }}
+                  >
+                    {isCompleted ? <Check size={15} strokeWidth={3} /> : p.num}
+                  </div>
+                  <p
+                    className={`text-[11px] text-center leading-tight ${isActive ? "font-bold text-foreground" : "text-muted-foreground"}`}
+                    style={{ width: 76 }}
+                  >
+                    {p.label}
+                  </p>
+                </div>
+                {i < PASOS_COLOR.length - 1 && (
+                  <div
+                    className="flex-1 mx-1.5"
+                    style={{
+                      height: 0, marginTop: 16,
+                      borderTop: isCompleted ? "2px solid #16A34A" : "2px dashed #D8DCE3",
+                    }}
+                  />
+                )}
+              </div>
+            );
+          })}
+        </div>
+      </div>
+    );
+  }
+
   return (
     <Annotate id="step-indicator" active={!!wireframeMode}>
       <div className="mb-7">
         <div className="flex items-center gap-2 mb-2">
-          <div className="w-6 h-6 rounded-full flex items-center justify-center text-[11px] font-bold text-white shrink-0" style={{ backgroundColor: wireframeMode ? "#8A8A8A" : "#2B7A78" }}>
+          <div className="w-6 h-6 rounded-full flex items-center justify-center text-[11px] font-bold text-white shrink-0" style={{ backgroundColor: "#8A8A8A" }}>
             {current}
           </div>
           <p className="text-sm font-bold text-foreground" style={{ fontFamily: "'Publico', Georgia, serif" }}>{label}</p>
         </div>
         <div className="h-1 w-full bg-muted rounded-full overflow-hidden">
-          <div className="h-full rounded-full transition-all duration-500" style={{ width: `${(current / total) * 100}%`, backgroundColor: wireframeMode ? "#8A8A8A" : "#E05C3A" }} />
+          <div className="h-full rounded-full transition-all duration-500" style={{ width: `${(current / total) * 100}%`, backgroundColor: "#8A8A8A" }} />
         </div>
         <p className="text-[11px] text-muted-foreground mt-1.5">Paso {current} de {total}</p>
       </div>
@@ -492,6 +573,64 @@ function MedioRespuesta({ value, onChange, wireframeMode }: { value: string; onC
   );
 }
 
+// ── Medio de respuesta (prototipo a color) — resumen con opción de cambiar ────
+// Como casi todos eligen correo electrónico, se asume por defecto y solo se
+// muestra el elegido; el detalle con las 2 opciones se abre bajo demanda.
+
+function MedioRespuestaSmart({ value, onChange, correo }: {
+  value: string; onChange: (v: string) => void; correo: string;
+}) {
+  const [expanded, setExpanded] = useState(false);
+  const options = [
+    { key: "Correo electrónico", icon: <Mail size={16} /> },
+    { key: "Correo físico", icon: <Home size={16} /> },
+  ];
+
+  if (!expanded) {
+    return (
+      <div className="flex flex-col gap-1.5">
+        <p className="text-sm text-foreground">
+          Te enviaremos la respuesta a: <span className="font-semibold">{correo || "tu correo registrado"}</span>
+        </p>
+        <button
+          type="button"
+          onClick={() => setExpanded(true)}
+          className="text-xs text-primary underline text-left w-fit cursor-pointer"
+        >
+          ¿Prefieres recibirla en tu dirección física? Cambiar método
+        </button>
+      </div>
+    );
+  }
+
+  return (
+    <div className="flex flex-col gap-1.5">
+      <p className="text-sm font-semibold text-foreground flex items-center gap-1">
+        ¿Por cuál medio deseas recibir la respuesta a tu solicitud?
+        <span className="text-red-500 ml-0.5">*</span>
+      </p>
+      <div className="flex gap-2 mt-1">
+        {options.map((opt) => {
+          const sel = value === opt.key;
+          return (
+            <button
+              key={opt.key} type="button" onClick={() => onChange(opt.key)}
+              className={`flex items-center gap-2 px-4 py-2 rounded-full border-2 text-sm font-medium transition-all cursor-pointer
+                ${sel
+                  ? "border-primary bg-accent text-primary"
+                  : "border-border bg-white text-muted-foreground hover:border-primary/40 hover:text-foreground"}`}
+            >
+              {opt.icon}
+              {opt.key}
+              {sel && <CheckCircle2 size={13} className="text-primary ml-0.5" />}
+            </button>
+          );
+        })}
+      </div>
+    </div>
+  );
+}
+
 // ── Persona fields ───────────────────────────────────────────────────────────
 
 function PersonaFields({
@@ -572,104 +711,227 @@ function NavButtons({ canContinue, onBack, onContinue, readyLabel = "Todos los c
   );
 }
 
+// ── Tipo de solicitud — selector en tarjetas (prototipo a color) ──────────────
+
+const TIPO_SOLICITUD_INFO: Record<string, { icon: React.ReactNode; label: string; desc: string }> = {
+  "Petición": { icon: <ClipboardList size={22} />, label: "Petición", desc: "Solicitud de información o trámite" },
+  "Queja": { icon: <MessageCircleWarning size={22} />, label: "Queja", desc: "Inconformidad con el servicio" },
+  "Reclamo": { icon: <Scale size={22} />, label: "Reclamo", desc: "Corregir un inconveniente" },
+  "Felicitaciones": { icon: <Star size={22} />, label: "Felicitación", desc: "Reconocer un buen servicio" },
+  "Sugerencias": { icon: <Lightbulb size={22} />, label: "Sugerencia", desc: "Propuesta de mejora" },
+};
+
+function TipoSolicitudCards({ options, value, onChange, disabled }: {
+  options: string[]; value: string; onChange: (v: string) => void; disabled?: boolean;
+}) {
+  return (
+    <div className="flex flex-col gap-1.5">
+      <label className="text-sm font-semibold text-foreground flex items-center gap-1">
+        ¿Qué tipo de solicitud deseas radicar?
+        <span className="text-red-500 ml-0.5">*</span>
+      </label>
+      <p className="text-xs text-muted-foreground -mt-0.5">
+        {disabled ? "Primero selecciona un producto." : "Selecciona una opción para continuar."}
+      </p>
+      <div className={`grid grid-cols-3 gap-3 mt-1 ${disabled ? "opacity-50 pointer-events-none" : ""}`}>
+        {options.map((opt) => {
+          const info = TIPO_SOLICITUD_INFO[opt];
+          const sel = value === opt;
+          return (
+            <button
+              key={opt} type="button" onClick={() => onChange(opt)}
+              className={`flex flex-col items-start gap-2 p-4 rounded-xl border-2 text-left transition-all cursor-pointer
+                ${sel ? "border-primary bg-accent" : "border-border bg-white hover:border-primary/40"}`}
+            >
+              <div className="flex items-center justify-between w-full">
+                <span style={{ color: "#00008F" }}>{info?.icon}</span>
+                {sel && <CheckCircle2 size={16} className="text-primary" />}
+              </div>
+              <p className="text-sm font-semibold text-foreground">{info?.label ?? opt}</p>
+              <p className="text-xs text-muted-foreground leading-snug">{info?.desc}</p>
+            </button>
+          );
+        })}
+      </div>
+    </div>
+  );
+}
+
+// ── Motivo / subtipología — helpers compartidos entre Paso1 (wireframe) y Paso2 (color) ──
+
+const SUBTIPOLOGIAS_DEMO_FALLBACK = [
+  "Tiempo de respuesta excedido",
+  "Información desactualizada",
+  "Error en el proceso",
+  "Trámite incompleto",
+  "Documentación requerida",
+  "Otro",
+];
+
+function getTipologiaOpts(producto: string) {
+  return producto ? (TIPOLOGIAS_POR_PRODUCTO[producto] ?? TIPOLOGIAS.default) : [];
+}
+
+function getSubtipologiaOpts(tipologia: string) {
+  return tipologia ? (SUBTIPOLOGIAS[tipologia] ?? SUBTIPOLOGIAS_DEMO_FALLBACK) : [];
+}
+
 // ── Step 1 ───────────────────────────────────────────────────────────────────
 
 function Paso1({ form, setForm, onContinue, wireframeMode }: { form: FormState; setForm: (f: FormState) => void; onContinue: () => void; wireframeMode?: boolean }) {
   const showAutosAlert = form.producto === "Autos";
-  const tipologiaOpts = form.producto
-    ? (TIPOLOGIAS_POR_PRODUCTO[form.producto] ?? TIPOLOGIAS.default)
-    : [];
-    const SUBTIPOLOGIAS_DEMO_FALLBACK = [
-    "Tiempo de respuesta excedido",
-    "Información desactualizada",
-    "Error en el proceso",
-    "Trámite incompleto",
-    "Documentación requerida",
-    "Otro",
-  ];
-  const subtipologiaOpts = form.tipologia
-    ? (SUBTIPOLOGIAS[form.tipologia] ?? SUBTIPOLOGIAS_DEMO_FALLBACK)
-    : [];
+  const showAutomovilesAlert = form.producto === "Automóviles";
+  const showTitulosAlert = form.producto === "Títulos de Capitalización";
+  const tipologiaOpts = getTipologiaOpts(form.producto);
+  const subtipologiaOpts = getSubtipologiaOpts(form.tipologia);
 
   // Tipos disponibles según producto: ARL no aplica Felicitaciones ni Sugerencias
+  // (solo aplica en modo wireframe, donde producto ya se conoce en este mismo paso)
   const tiposSolicitudFiltrados = (form.producto === "ARL")
     ? TIPOS_SOLICITUD.filter((t) => !["Felicitaciones", "Sugerencias"].includes(t))
     : TIPOS_SOLICITUD;
 
-  const canContinue =
-    form.producto !== "" && form.tipoSolicitud !== "" &&
-    form.tipologia !== "" && form.subtipologia !== "";
+  const canContinue = wireframeMode
+    ? (form.producto !== "" && form.tipoSolicitud !== "" && form.tipologia !== "" && form.subtipologia !== "")
+    : (form.tipoSolicitud !== "" && form.producto !== "");
 
   const handleTipologia = (v: string) =>
     setForm({ ...form, tipologia: v, subtipologia: "" });
+
+  const resetProducto = (v: string) => ({
+    ...form, producto: v, tipoSolicitud: wireframeMode ? "" : form.tipoSolicitud, tipologia: "", subtipologia: "",
+    placa: "", terceroAfectado: "", placaTercero: "",
+    departamento: "", ciudad: "", lugarServicio: "", lugarServicioOtro: "",
+    vidaAsociadaCredito: null, numCredito: "",
+  });
 
   return (
     <>
       <StepIndicator current={1} total={PASOS.length} label={PASOS[0].label} wireframeMode={wireframeMode} />
 
       <div className="flex flex-col gap-6">
-        <SelectField
-          id="producto"
-          label="¿Sobre cuál producto deseas presentar tu PQRS?"
-          placeholder="Selecciona un producto"
-          options={PRODUCTOS}
-          value={form.producto}
-          onChange={(v) =>
-            setForm({
-              ...form, producto: v, tipoSolicitud: "", tipologia: "", subtipologia: "",
-              placa: "", terceroAfectado: "", placaTercero: "",
-              departamento: "", ciudad: "", lugarServicio: "", lugarServicioOtro: "",
-              vidaAsociadaCredito: null, numCredito: "",
-            })
-          }
-        />
+        {wireframeMode && (
+          <>
+            <SelectField
+              id="producto"
+              label="¿Sobre cuál producto deseas presentar tu PQRS?"
+              placeholder="Selecciona un producto"
+              options={PRODUCTOS}
+              value={form.producto}
+              onChange={(v) => setForm(resetProducto(v))}
+            />
 
-        {showAutosAlert && (
-          <div className="flex gap-3 p-4 rounded-xl bg-amber-50 border border-amber-200">
-            <AlertCircle size={17} className="shrink-0 mt-0.5 text-amber-600" />
-            <div className="text-sm leading-relaxed text-amber-800">
-              <p className="font-semibold mb-1">¿Tu solicitud está relacionada con un siniestro?</p>
-              <p className="text-amber-700">
-                Si aún no has realizado el reporte, te invitamos a hacerlo antes de continuar.
-                Para Pérdida Total, Hurto o Responsabilidad Civil ingresa a{" "}
-                <span className="font-medium underline cursor-pointer">aplicaciones.axacolpatria.co/RadicadorSiniestros/</span>.
-                Para Pérdida Parcial, comunícate al <span className="font-medium">#247</span>.
-              </p>
-            </div>
-          </div>
+            {showAutosAlert && (
+              <div className="flex gap-3 p-4 rounded-xl bg-amber-50 border border-amber-200">
+                <AlertCircle size={17} className="shrink-0 mt-0.5 text-amber-600" />
+                <div className="text-sm leading-relaxed text-amber-800">
+                  <p className="font-semibold mb-1">¿Tu solicitud está relacionada con un siniestro?</p>
+                  <p className="text-amber-700">
+                    Si aún no has realizado el reporte, te invitamos a hacerlo antes de continuar.
+                    Para Pérdida Total, Hurto o Responsabilidad Civil ingresa a{" "}
+                    <span className="font-medium underline cursor-pointer">aplicaciones.axacolpatria.co/RadicadorSiniestros/</span>.
+                    Para Pérdida Parcial, comunícate al <span className="font-medium">#247</span>.
+                  </p>
+                </div>
+              </div>
+            )}
+          </>
         )}
 
-        <SelectField
-          id="tipo-solicitud"
-          label="¿Qué tipo de solicitud deseas radicar?"
-          placeholder={(wireframeMode || form.producto) ? "Selecciona el tipo de solicitud" : "Primero selecciona un producto"}
-          options={tiposSolicitudFiltrados}
-          value={form.tipoSolicitud}
-          onChange={(v) => setForm({ ...form, tipoSolicitud: v, tipologia: "", subtipologia: "" })}
-          disabled={wireframeMode ? false : !form.producto}
-        />
+        {wireframeMode ? (
+          <SelectField
+            id="tipo-solicitud"
+            label="¿Qué tipo de solicitud deseas radicar?"
+            placeholder="Selecciona el tipo de solicitud"
+            options={tiposSolicitudFiltrados}
+            value={form.tipoSolicitud}
+            onChange={(v) => setForm({ ...form, tipoSolicitud: v, tipologia: "", subtipologia: "" })}
+            disabled={false}
+          />
+        ) : (
+          <TipoSolicitudCards
+            options={TIPOS_SOLICITUD}
+            value={form.tipoSolicitud}
+            onChange={(v) => setForm({ ...form, tipoSolicitud: v })}
+            disabled={false}
+          />
+        )}
 
-        <div className="border-t border-dashed border-border" />
+        {wireframeMode && (
+          <>
+            <div className="border-t border-dashed border-border" />
 
-        <SelectField
-          id="tipologia"
-          label="¿Cuál es el motivo de tu solicitud?"
-          placeholder={form.producto ? "Selecciona" : "Primero selecciona un producto"}
-          options={tipologiaOpts}
-          value={form.tipologia}
-          onChange={handleTipologia}
-          disabled={!form.producto}
-        />
+            <SelectField
+              id="tipologia"
+              label="¿Cuál es el motivo de tu solicitud?"
+              placeholder={form.producto ? "Selecciona" : "Primero selecciona un producto"}
+              options={tipologiaOpts}
+              value={form.tipologia}
+              onChange={handleTipologia}
+              disabled={!form.producto}
+            />
 
-        <SelectField
-          id="subtipologia"
-          label="¿Cuál de las siguientes opciones describe mejor tu solicitud?"
-          placeholder={form.tipologia ? "Selecciona" : "Primero selecciona el motivo"}
-          options={subtipologiaOpts}
-          value={form.subtipologia}
-          onChange={(v) => setForm({ ...form, subtipologia: v })}
-          disabled={!form.tipologia}
-        />
+            <SelectField
+              id="subtipologia"
+              label="¿Cuál de las siguientes opciones describe mejor tu solicitud?"
+              placeholder={form.tipologia ? "Selecciona" : "Primero selecciona el motivo"}
+              options={subtipologiaOpts}
+              value={form.subtipologia}
+              onChange={(v) => setForm({ ...form, subtipologia: v })}
+              disabled={!form.tipologia}
+            />
+          </>
+        )}
+
+        {!wireframeMode && (
+          <>
+            <div className="border-t border-dashed border-border" />
+
+            <SelectField
+              id="producto"
+              label="¿Sobre cuál producto deseas presentar tu PQRS?"
+              placeholder="Selecciona un producto"
+              options={PRODUCTOS_COLOR}
+              optionHints={PRODUCTO_LINEAS_MAP}
+              value={form.producto}
+              onChange={(v) => setForm(resetProducto(v))}
+            />
+
+            {showAutomovilesAlert && (
+              <div className="flex gap-3 p-4 rounded-xl bg-amber-50 border border-amber-200">
+                <AlertCircle size={17} className="shrink-0 mt-0.5 text-amber-600" />
+                <div className="text-sm leading-relaxed text-amber-800">
+                  <p className="font-semibold mb-1">¿Tu solicitud está relacionada con un siniestro?</p>
+                  <p className="text-amber-700">
+                    Si aún no has realizado el reporte, te invitamos a hacerlo antes de continuar.
+                    Para Pérdida Total, Hurto o Responsabilidad Civil ingresa a{" "}
+                    <span className="font-medium underline cursor-pointer">aplicaciones.axacolpatria.co/RadicadorSiniestros/</span>.
+                    Para Pérdida Parcial, comunícate al <span className="font-medium">#247</span>.
+                  </p>
+                </div>
+              </div>
+            )}
+
+            {showTitulosAlert && (
+              <div className="flex gap-3 p-4 rounded-xl bg-amber-50 border border-amber-200">
+                <AlertCircle size={17} className="shrink-0 mt-0.5 text-amber-600" />
+                <div className="text-sm leading-relaxed text-amber-800">
+                  <p className="mb-2">
+                    Si deseas radicar una solicitud relacionada con Títulos de Capitalización, por favor comunícate
+                    con Credicorp Capital Fiduciaria S.A. a través de los siguientes canales de atención:
+                  </p>
+                  <p>Teléfono: <span className="font-medium">(601) 2415420</span> en Bogotá o al <span className="font-medium">018005190969</span> para el resto del país</p>
+                  <p>Correo electrónico: <span className="font-medium">suscriptoresaxacapi@credicorpcapital.com</span></p>
+                  <p className="mt-2 text-amber-700">
+                    Lo anterior, teniendo en cuenta que el programa de desmonte progresivo de la operación finalizó
+                    e inició su proceso de disolución y liquidación, de conformidad con la Resolución 2039 de 2023
+                    emitida por la Superintendencia Financiera de Colombia.
+                  </p>
+                </div>
+              </div>
+            )}
+          </>
+        )}
       </div>
 
       <Annotate id="campos-obligatorios" active={!!wireframeMode}>
@@ -718,10 +980,24 @@ function Paso2({ form, setForm, onBack, onContinue, wireframeMode }: { form: For
       </p>
 
       <div className="flex flex-col gap-6">
-        <MedioRespuesta value={form.medio} onChange={(v) => setForm({ ...form, medio: v })} wireframeMode={wireframeMode} />
-        <div className="border-t border-dashed border-border" />
-        <p className="text-xs font-bold tracking-widest text-muted-foreground uppercase">Datos de quien presenta</p>
-        <PersonaFields prefix="presenter" datos={form.presenter} onChange={setPresenter} showTelefono />
+        {wireframeMode && (
+          <>
+            <MedioRespuesta value={form.medio} onChange={(v) => setForm({ ...form, medio: v })} wireframeMode={wireframeMode} />
+            <div className="border-t border-dashed border-border" />
+          </>
+        )}
+        <p className="text-xs font-bold tracking-widest text-muted-foreground uppercase">
+          {wireframeMode ? "Datos de quien presenta" : "Datos de quien presenta la solicitud"}
+        </p>
+        <PersonaFields prefix="presenter" datos={form.presenter} onChange={setPresenter} celularCorreoEnFila />
+
+        {!wireframeMode && (
+          <MedioRespuestaSmart
+            value={form.medio}
+            onChange={(v) => setForm({ ...form, medio: v })}
+            correo={form.presenter.correo}
+          />
+        )}
 
         {correoFisico && (
           <div className="flex flex-col gap-1.5 p-4 rounded-xl bg-blue-50 border border-blue-100">
@@ -764,13 +1040,24 @@ function Paso2({ form, setForm, onBack, onContinue, wireframeMode }: { form: For
             </Annotate>
 
             {form.mismaPersonaAfectada === false && (
-              <div className="flex flex-col gap-5 p-5 rounded-xl border border-border bg-secondary/30">
-                <p className="text-xs font-bold tracking-widest text-muted-foreground uppercase">Datos del afectado</p>
-                <PersonaFields prefix="afectado" datos={form.afectado} onChange={setAfectado} celularCorreoEnFila />
-              </div>
+              <>
+                {!wireframeMode && (
+                  <div className="flex gap-2.5 p-3.5 rounded-xl bg-blue-50 border border-blue-100">
+                    <AlertCircle size={15} className="shrink-0 mt-0.5 text-blue-600" />
+                    <p className="text-xs text-blue-800 leading-relaxed">
+                      Si actúas en representación del asegurado, debes contar con la autorización correspondiente
+                      y adjuntarla en el siguiente paso.
+                    </p>
+                  </div>
+                )}
+                <div className="flex flex-col gap-5 p-5 rounded-xl border border-border bg-secondary/30">
+                  <p className="text-xs font-bold tracking-widest text-muted-foreground uppercase">Datos del afectado</p>
+                  <PersonaFields prefix="afectado" datos={form.afectado} onChange={setAfectado} celularCorreoEnFila />
+                </div>
+              </>
             )}
 
-            {form.mismaPersonaAfectada === true && (
+            {form.mismaPersonaAfectada === true && wireframeMode && (
               <div className="flex gap-2.5 p-3.5 rounded-xl bg-green-50 border border-green-200">
                 <CheckCircle2 size={15} className="shrink-0 mt-0.5 text-green-600" />
                 <p className="text-xs text-green-800 leading-relaxed">
@@ -799,7 +1086,7 @@ function CamposEspecificos({ form, setForm }: { form: FormState; setForm: (f: Fo
   const requiere = TIPOS_CON_AFECTADO_SET.has(tipoSolicitud);
   if (!requiere) return null;
 
-  const esAutos = producto === "Autos";
+  const esAutos = producto === "Autos" || producto === "Automóviles";
   const esSoat = producto === "SOAT";
   const esSalud = producto === "Salud";
   const esArl = producto === "ARL";
@@ -933,20 +1220,47 @@ function Paso3({ form, setForm, onBack, onContinue, wireframeMode }: {
   const removeFile = (i: number) =>
     setForm({ ...form, archivos: form.archivos.filter((_, idx) => idx !== i) });
 
-  const canContinue =
-    form.descripcion.trim().length >= 20 &&
-    !overLimit &&
-    form.captchaOk &&
-    form.aceptaTratamiento;
+  const tipologiaOpts = getTipologiaOpts(form.producto);
+  const subtipologiaOpts = getSubtipologiaOpts(form.tipologia);
+  const handleTipologia = (v: string) =>
+    setForm({ ...form, tipologia: v, subtipologia: "" });
+
+  const canContinue = false;
 
   return (
     <>
-      <StepIndicator current={3} total={PASOS.length} label={PASOS[2].label} wireframeMode={wireframeMode} />
+      <StepIndicator current={3} total={wireframeMode ? PASOS.length : PASOS_COLOR.length} label={wireframeMode ? PASOS[2].label : PASOS_COLOR[2].label} wireframeMode={wireframeMode} />
       <p className="text-sm text-muted-foreground leading-relaxed mb-7">
         Cuéntanos con detalle tu solicitud y adjunta los documentos que la soporten.
       </p>
 
       <div className="flex flex-col gap-6">
+        {!wireframeMode && (
+          <>
+            <SelectField
+              id="tipologia"
+              label="¿Cuál es el motivo de tu solicitud?"
+              placeholder={form.producto ? "Selecciona" : "Primero selecciona un producto"}
+              options={tipologiaOpts}
+              value={form.tipologia}
+              onChange={handleTipologia}
+              disabled={!form.producto}
+            />
+
+            <SelectField
+              id="subtipologia"
+              label="¿Cuál de las siguientes opciones describe mejor tu solicitud?"
+              placeholder={form.tipologia ? "Selecciona" : "Primero selecciona el motivo"}
+              options={subtipologiaOpts}
+              value={form.subtipologia}
+              onChange={(v) => setForm({ ...form, subtipologia: v })}
+              disabled={!form.tipologia}
+            />
+
+            <div className="border-t border-dashed border-border" />
+          </>
+        )}
+
         {/* Descripción */}
         <TextAreaField
           id="descripcion"
@@ -1142,7 +1456,7 @@ export default function App() {
   const [paso, setPaso] = useState(1);
   const [form, setForm] = useState<FormState>({
     producto: "", tipoSolicitud: "", tipologia: "", subtipologia: "",
-    medio: "", presenter: emptyPersona(), direccion: "", sexo: "", grupoEspecial: "",
+    medio: "Correo electrónico", presenter: emptyPersona(), direccion: "", sexo: "", grupoEspecial: "",
     placa: "", terceroAfectado: "", placaTercero: "",
     departamento: "", ciudad: "", lugarServicio: "", lugarServicioOtro: "",
     vidaAsociadaCredito: null, numCredito: "",
@@ -1151,11 +1465,11 @@ export default function App() {
   });
 
   // ── Modo wireframe de presentación ──────────────────────────────────────────
-  // Por defecto arranca en modo wireframe (para compartir el link tal cual con negocio).
-  // ?mode=color permite abrir directo en el prototipo a color/interactivo (uso interno,
-  // sin botón visible por ahora).
+  // /wireframe muestra el wireframe en blanco y negro (para compartir "el antes").
+  // La URL normal ("/") muestra el prototipo a color/interactivo completo,
+  // incluyendo los cambios nuevos que se vayan agregando (para mostrar "el después").
   const [wireframeMode] = useState<boolean>(
-    () => new URLSearchParams(window.location.search).get("mode") !== "color"
+    () => window.location.pathname.replace(/\/$/, "") === "/wireframe"
   );
   const [snapshotIndex, setSnapshotIndex] = useState(0);
 
@@ -1164,31 +1478,52 @@ export default function App() {
   const activePaso = wireframeMode ? activeSnapshot.paso : paso;
   const noop = () => {};
 
+  const confirmacionJsx = (
+    <Annotate id="confirmacion-final" active={wireframeMode}>
+      <div className="text-center py-10">
+        <div className="w-16 h-16 rounded-full bg-green-100 flex items-center justify-center mx-auto mb-5">
+          <CheckCircle2 size={36} className="text-green-600" />
+        </div>
+        <p className="text-lg font-bold text-foreground mb-1">¡Tu solicitud fue radicada!</p>
+        <p className="text-sm text-muted-foreground mb-5">
+          Hemos recibido tu PQRS. Te notificaremos por{" "}
+          {activeForm.medio || "correo electrónico"} cuando tengamos una respuesta.
+        </p>
+        <div className="inline-flex flex-col items-center gap-1 bg-muted/50 border border-border rounded-xl px-8 py-4 mb-6">
+          <p className="text-xs text-muted-foreground uppercase tracking-widest font-semibold">Número de radicado</p>
+          <p className="text-2xl font-bold text-primary tracking-widest">
+            {String(Math.floor(Math.random() * 900000) + 100000)}
+          </p>
+          <p className="text-xs text-muted-foreground">Guarda este número para hacer seguimiento</p>
+        </div>
+        <p className="text-xs text-muted-foreground leading-relaxed max-w-sm mx-auto">
+          Se ha enviado una confirmación a{" "}
+          <span className="font-medium text-foreground">{activeForm.presenter.correo || "tu correo registrado"}</span>.
+          El tiempo de respuesta es de máximo 15 días hábiles.
+        </p>
+      </div>
+    </Annotate>
+  );
+
   return (
     <div className={`min-h-screen bg-background flex flex-col ${wireframeMode ? "wireframe pb-16" : ""}`} style={{ fontFamily: "'Source Sans 3', system-ui, sans-serif", fontSize: 16 }}>
 
-      {/* Banner header con imagen */}
-      <div className="relative w-full overflow-hidden" style={{ height: 140 }}>
-        {wireframeMode ? (
+      {/* Banner header con imagen — solo en modo wireframe, se quitó del prototipo a color */}
+      {wireframeMode && (
+        <div className="relative w-full overflow-hidden" style={{ height: 140 }}>
           <div className="absolute inset-0" style={{ background: "#D9D9D9" }} />
-        ) : (
-          <img
-            src="https://images.unsplash.com/photo-1569821177600-77115bd0f5c6?w=1200&h=280&fit=crop&auto=format"
-            alt=""
-            className="absolute inset-0 w-full h-full object-cover object-center"
-          />
-        )}
-        {/* Overlay gris oscuro sutil */}
-        <div className="absolute inset-0" style={{ background: "rgba(0,0,0,0.38)" }} />
-        <div className="relative h-full flex items-center px-4">
-          <div className="max-w-[660px] mx-auto w-full">
-            <p className="text-xs font-semibold text-white/60 tracking-widest uppercase mb-1">AXA Colpatria</p>
-            <h1 className="text-4xl text-white" style={{ fontFamily: "'Publico', Georgia, serif", fontWeight: 700 }}>
-              Radica tu PQRS
-            </h1>
+          {/* Overlay gris oscuro sutil */}
+          <div className="absolute inset-0" style={{ background: "rgba(0,0,0,0.38)" }} />
+          <div className="relative h-full flex items-center px-4">
+            <div className="max-w-[660px] mx-auto w-full">
+              <p className="text-xs font-semibold text-white/60 tracking-widest uppercase mb-1">AXA Colpatria</p>
+              <h1 className="text-4xl text-white" style={{ fontFamily: "'Publico', Georgia, serif", fontWeight: 700 }}>
+                Radica tu PQRS
+              </h1>
+            </div>
           </div>
         </div>
-      </div>
+      )}
 
       {/* Intro text — between banner and form */}
       {activePaso === 1 && (
@@ -1208,10 +1543,10 @@ export default function App() {
       <main className="flex-1 flex justify-center px-4 py-6">
         <div className="w-full max-w-[980px] flex flex-col lg:flex-row gap-6 items-start">
 
-          <div className="w-full max-w-[660px] mx-auto lg:mx-0">
+          <div className={wireframeMode ? "w-full max-w-[660px] mx-auto lg:mx-0" : "w-full max-w-[760px] mx-auto"}>
 
-            {/* ¿Qué puedes radicar? — sin contenedor ni borde, solo en paso 1 */}
-            {activePaso === 1 && (
+            {/* ¿Qué puedes radicar? — sin contenedor ni borde, solo en modo wireframe, paso 1 */}
+            {wireframeMode && activePaso === 1 && (
               <Annotate id="category-cards" active={wireframeMode}>
                 <div className="px-1 mb-6">
                   <p className="text-xs font-bold tracking-widest text-muted-foreground uppercase mb-3">¿Qué puedes radicar?</p>
@@ -1234,11 +1569,13 @@ export default function App() {
               </Annotate>
             )}
 
-            {/* Líneas de negocio y Títulos de Capitalización — solo mobile/tablet, persistentes en todos los pasos; en desktop viven en el panel lateral */}
-            <div className="lg:hidden flex flex-col gap-3 mb-6">
-              <LineasNegocioPanel wireframeMode={wireframeMode} />
-              <TitulosCapitalizacionAlert wireframeMode={wireframeMode} />
-            </div>
+            {/* Líneas de negocio y Títulos de Capitalización — solo modo wireframe (mobile/tablet); en desktop viven en el panel lateral. En el prototipo a color se reubican dentro del form más adelante. */}
+            {wireframeMode && (
+              <div className="lg:hidden flex flex-col gap-3 mb-6">
+                <LineasNegocioPanel wireframeMode={wireframeMode} />
+                <TitulosCapitalizacionAlert wireframeMode={wireframeMode} />
+              </div>
+            )}
 
             <div className={wireframeMode ? "pointer-events-none select-none" : ""}>
               <div className="w-full bg-white rounded-2xl border border-border shadow-sm">
@@ -1254,32 +1591,7 @@ export default function App() {
                   {activePaso === 1 && <Paso1 form={activeForm} setForm={wireframeMode ? noop : setForm} onContinue={wireframeMode ? noop : () => setPaso(2)} wireframeMode={wireframeMode} />}
                   {activePaso === 2 && <Paso2 form={activeForm} setForm={wireframeMode ? noop : setForm} onBack={wireframeMode ? noop : () => setPaso(1)} onContinue={wireframeMode ? noop : () => setPaso(3)} wireframeMode={wireframeMode} />}
                   {activePaso === 3 && <Paso3 form={activeForm} setForm={wireframeMode ? noop : setForm} onBack={wireframeMode ? noop : () => setPaso(2)} onContinue={wireframeMode ? noop : () => setPaso(4)} wireframeMode={wireframeMode} />}
-                  {activePaso === 4 && (
-                    <Annotate id="confirmacion-final" active={wireframeMode}>
-                      <div className="text-center py-10">
-                        <div className="w-16 h-16 rounded-full bg-green-100 flex items-center justify-center mx-auto mb-5">
-                          <CheckCircle2 size={36} className="text-green-600" />
-                        </div>
-                        <p className="text-lg font-bold text-foreground mb-1">¡Tu solicitud fue radicada!</p>
-                        <p className="text-sm text-muted-foreground mb-5">
-                          Hemos recibido tu PQRS. Te notificaremos por{" "}
-                          {activeForm.medio || "correo electrónico"} cuando tengamos una respuesta.
-                        </p>
-                        <div className="inline-flex flex-col items-center gap-1 bg-muted/50 border border-border rounded-xl px-8 py-4 mb-6">
-                          <p className="text-xs text-muted-foreground uppercase tracking-widest font-semibold">Número de radicado</p>
-                          <p className="text-2xl font-bold text-primary tracking-widest">
-                            {String(Math.floor(Math.random() * 900000) + 100000)}
-                          </p>
-                          <p className="text-xs text-muted-foreground">Guarda este número para hacer seguimiento</p>
-                        </div>
-                        <p className="text-xs text-muted-foreground leading-relaxed max-w-sm mx-auto">
-                          Se ha enviado una confirmación a{" "}
-                          <span className="font-medium text-foreground">{activeForm.presenter.correo || "tu correo registrado"}</span>.
-                          El tiempo de respuesta es de máximo 15 días hábiles.
-                        </p>
-                      </div>
-                    </Annotate>
-                  )}
+                  {activePaso === 4 && confirmacionJsx}
                 </div>
               </div>
             </div>
@@ -1289,11 +1601,13 @@ export default function App() {
             </p>
           </div>
 
-          {/* Panel lateral — Productos, líneas de negocio y Títulos de Capitalización (solo desktop, persistente en todos los pasos) */}
-          <aside className="hidden lg:flex flex-col gap-3 w-[280px] shrink-0 sticky top-6">
-            <LineasNegocioPanel wireframeMode={wireframeMode} />
-            <TitulosCapitalizacionAlert wireframeMode={wireframeMode} />
-          </aside>
+          {/* Panel lateral — Productos, líneas de negocio y Títulos de Capitalización (solo modo wireframe, desktop). En el prototipo a color se reubican dentro del form más adelante. */}
+          {wireframeMode && (
+            <aside className="hidden lg:flex flex-col gap-3 w-[280px] shrink-0 sticky top-6">
+              <LineasNegocioPanel wireframeMode={wireframeMode} />
+              <TitulosCapitalizacionAlert wireframeMode={wireframeMode} />
+            </aside>
+          )}
         </div>
       </main>
 
