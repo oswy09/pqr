@@ -15,7 +15,7 @@ const EMPTY_FORM: FormState = {
   producto: "", tipoSolicitud: "", tipologia: "", subtipologia: "",
   medio: "", presenter: EMPTY_PERSONA, direccion: "", sexo: "", grupoEspecial: "",
   placa: "", terceroAfectado: "", placaTercero: "",
-  departamento: "", ciudad: "", lugarServicio: "", lugarServicioOtro: "",
+  pais: "", departamento: "", ciudad: "", lugarServicio: "", lugarServicioOtro: "",
   vidaAsociadaCredito: null, numCredito: "",
   archivos: [], captchaOk: false, aceptaTratamiento: false,
   mismaPersonaAfectada: null, afectado: EMPTY_PERSONA, descripcion: "",

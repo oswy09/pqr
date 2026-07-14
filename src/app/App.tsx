@@ -5,6 +5,7 @@ import {
   ChevronDown, AlertCircle, CheckCircle2, Check,
   ChevronLeft, Mail, Home, User, Users,
   Paperclip, X, Send,
+  LoaderCircle,
   ClipboardList, MessageCircleWarning, Scale, Star, Lightbulb,
   HardHat, Heart, Car, UserCheck, Package,
 } from "lucide-react";
@@ -30,8 +31,9 @@ const PRODUCTOS = ["ARL", "Salud", "Autos", "SOAT", "Vida", "Otros Seguros"];
 
 // Lista de productos del prototipo a color (nombres actualizados, orden alfabético) —
 // el modo wireframe sigue usando PRODUCTOS sin tocar.
-const PRODUCTOS_COLOR = ["ARL", "Salud", "Automóviles", "SOAT", "Vida", "Generales", "Otros seguros", "Títulos de Capitalización"]
-  .sort((a, b) => a.localeCompare(b, "es"));
+const PRODUCTOS_COLOR = ["ARL", "Salud", "Automóviles", "SOAT", "Vida", "Generales", "Títulos de Capitalización"]
+  .sort((a, b) => a.localeCompare(b, "es"))
+  .concat("Otros seguros");
 
 // Líneas de negocio por producto, para mostrar como subtexto en el desplegable
 // de producto del prototipo a color.
@@ -41,7 +43,7 @@ const PRODUCTO_LINEAS_MAP: Record<string, string> = {
   "Automóviles": "Automóviles · Responsabilidad Civil",
   "SOAT": "SOAT",
   "Vida": "Vida individual · Vida deudor · Grupo deudor",
-  "Generales": "Hogar · Incendio · Sustracción · AP · Otros",
+  "Generales": "Hogar · Incendio · Sustracción · AP",
 };
 const TIPOS_SOLICITUD = ["Petición", "Queja", "Reclamo", "Felicitaciones", "Sugerencias"];
 const TIPOS_ID = [
@@ -49,7 +51,6 @@ const TIPOS_ID = [
   "Cédula de extranjería",
   "NIT",
   "Pasaporte",
-  "Tarjeta de identidad",
   "Registro civil",
 ];
 const SEXOS = ["Femenino", "Masculino", "No Binario", "Trans"];
@@ -112,7 +113,6 @@ const TIPOLOGIAS_POR_PRODUCTO: Record<string, string[]> = {
     "Cobro indebido",
     "Información incorrecta o incompleta",
     "Atención al cliente deficiente",
-    "Otro motivo",
   ],
 };
 // Alias para los nombres de producto del prototipo a color (mismos motivos que su equivalente).
@@ -178,7 +178,7 @@ const TIPOS_CON_AFECTADO = [...TIPOS_CON_AFECTADO_SET];
 
 // ── Geo data (demo) ──────────────────────────────────────────────────────────
 
-const DEPARTAMENTOS: Record<string, string[]> = {
+const DEPARTAMENTOS_CO: Record<string, string[]> = {
   "Bogotá D.C.": ["Bogotá"],
   "Antioquia": ["Medellín", "Bello", "Envigado", "Itagüí", "Sabaneta"],
   "Valle del Cauca": ["Cali", "Buenaventura", "Palmira", "Tuluá"],
@@ -195,6 +195,12 @@ const DEPARTAMENTOS: Record<string, string[]> = {
   "Tolima": ["Ibagué", "Espinal"],
   "Meta": ["Villavicencio", "Acacías"],
 };
+
+const UBICACIONES_POR_PAIS: Record<string, Record<string, string[]>> = {
+  "Colombia": DEPARTAMENTOS_CO,
+};
+
+const PAISES = Object.keys(UBICACIONES_POR_PAIS);
 
 const LUGARES_SERVICIO_SALUD = [
   "Hospital",
@@ -241,6 +247,7 @@ export interface FormState {
   placa: string;
   terceroAfectado: string;
   placaTercero: string;
+  pais: string;
   departamento: string;
   ciudad: string;
   lugarServicio: string;
@@ -259,6 +266,22 @@ const emptyPersona = (): DatosPersona => ({
 
 const inputBase =
   "w-full px-4 py-3 rounded-xl border border-border bg-white text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all";
+
+const PRIMARY_BUTTON_INTERACTION = "hover:bg-[#0000F7] active:bg-[#0000D2]";
+const SECONDARY_BUTTON_INTERACTION = "border-[#0000F7] text-[#0000F7] bg-white hover:bg-[#0000F7] hover:text-white active:bg-[#0000D2] active:border-[#0000D2] active:text-white";
+const FIELD_ERROR_COLOR = "#880727";
+
+type ValidationRule = "name" | "email" | "colombiaMobile" | "positiveInteger";
+
+function isFieldValueValid(rule: ValidationRule, rawValue: string) {
+  const value = rawValue.trim();
+  if (!value) return false;
+
+  if (rule === "name") return /^[A-Za-zÁÉÍÓÚÜÑáéíóúüñ\s]+$/.test(value) && value.length >= 2;
+  if (rule === "email") return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
+  if (rule === "colombiaMobile") return /^3\d{9}$/.test(value);
+  return /^[1-9]\d*$/.test(value);
+}
 
 function SelectField({
   id, label, placeholder, options, value, onChange, optional, hint, disabled, optionHints,
@@ -370,11 +393,16 @@ function SelectField({
 }
 
 function TextField({
-  id, label, placeholder, value, onChange, type = "text", optional, hint,
+  id, label, placeholder, value, onChange, type = "text", optional, hint, validationRule,
 }: {
   id: string; label: string; placeholder: string; value: string;
-  onChange: (v: string) => void; type?: string; optional?: boolean; hint?: string;
+  onChange: (v: string) => void; type?: string; optional?: boolean; hint?: string; validationRule?: ValidationRule;
 }) {
+  const [isTouched, setIsTouched] = useState(false);
+  const fieldValue = value;
+  const isValid = validationRule ? isFieldValueValid(validationRule, fieldValue) : true;
+  const hasError = Boolean(validationRule && isTouched && !isValid);
+
   return (
     <div className="flex flex-col gap-1.5">
       <label htmlFor={id} className="text-sm font-semibold text-foreground flex items-center gap-1">
@@ -384,11 +412,18 @@ function TextField({
       </label>
       <input
         id={id} type={type} value={value}
-        onChange={(e) => onChange(e.target.value)}
+        onChange={(e) => {
+          onChange(e.target.value);
+        }}
+        onBlur={() => {
+          if (validationRule) setIsTouched(true);
+        }}
         placeholder={placeholder}
-        className={inputBase}
+        className={`${inputBase} ${hasError ? "border-2 border-[#880727] focus:border-[#880727] focus:ring-0" : ""}`}
       />
-      {hint && <p className="text-xs text-muted-foreground -mt-0.5">{hint}</p>}
+      {hasError
+        ? <p className="text-xs -mt-0.5" style={{ color: FIELD_ERROR_COLOR }}>Campo no cumple con el formato requerido</p>
+        : hint && <p className="text-xs text-muted-foreground -mt-0.5">{hint}</p>}
     </div>
   );
 }
@@ -421,46 +456,42 @@ function TextAreaField({
 
 function StepIndicator({ current, total, label, wireframeMode }: { current: number; total: number; label: string; wireframeMode?: boolean }) {
   if (!wireframeMode) {
-    // Stepper horizontal con círculos numerados y conector, estilo "Book an appointment"
-    // pero con los colores de marca (navy).
+    const steps = PASOS_COLOR.slice(0, total);
+    const progress = Math.max(0, Math.min(100, (current / Math.max(1, steps.length)) * 100));
+
     return (
-      <div className="mb-8">
-        <div className="flex items-start">
-          {PASOS_COLOR.map((p, i) => {
-            const isCompleted = p.num < current;
-            const isActive = p.num === current;
-            return (
-              <div key={p.num} className={`flex items-center ${i < PASOS_COLOR.length - 1 ? "flex-1" : ""}`}>
-                <div className="flex flex-col items-center gap-2 shrink-0">
+      <div className="mb-8 overflow-hidden">
+        <div className="px-5 pt-4 pb-3">
+          <div className="grid gap-3" style={{ gridTemplateColumns: `repeat(${steps.length}, minmax(0, 1fr))` }}>
+            {steps.map((p) => {
+              const isCurrent = p.num === current;
+              const isCompleted = p.num < current;
+              return (
+                <div key={p.num} className="flex flex-col items-center gap-2 text-center">
                   <div
-                    className="w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold shrink-0"
+                    className="w-8 h-8 rounded-full border-2 flex items-center justify-center text-sm font-semibold transition-all"
                     style={{
-                      backgroundColor: isCompleted ? "#16A34A" : isActive ? "#00008F" : "#FFFFFF",
-                      border: `2px solid ${isCompleted ? "#16A34A" : isActive ? "#00008F" : "#D8DCE3"}`,
-                      color: isCompleted || isActive ? "#FFFFFF" : "#9AA1AC",
+                      borderColor: isCompleted ? "#56B07C" : isCurrent ? "#3F45B5" : "#B4B8C0",
+                      backgroundColor: isCompleted ? "#56B07C" : isCurrent ? "#3F45B5" : "#F2F4F8",
+                      color: isCompleted || isCurrent ? "#FFFFFF" : "#7D838F",
                     }}
                   >
-                    {isCompleted ? <Check size={15} strokeWidth={3} /> : p.num}
+                    {isCompleted ? <Check size={16} strokeWidth={3} /> : p.num}
                   </div>
-                  <p
-                    className={`text-[11px] text-center leading-tight ${isActive ? "font-bold text-foreground" : "text-muted-foreground"}`}
-                    style={{ width: 76 }}
-                  >
+                  <p className={`text-[13px] leading-tight ${isCompleted ? "font-semibold text-[#56B07C]" : isCurrent ? "font-semibold text-[#3F45B5]" : "font-medium text-[#7D838F]"}`}>
                     {p.label}
                   </p>
                 </div>
-                {i < PASOS_COLOR.length - 1 && (
-                  <div
-                    className="flex-1 mx-1.5"
-                    style={{
-                      height: 0, marginTop: 16,
-                      borderTop: isCompleted ? "2px solid #16A34A" : "2px dashed #D8DCE3",
-                    }}
-                  />
-                )}
-              </div>
-            );
-          })}
+              );
+            })}
+          </div>
+        </div>
+
+        <div className="h-2 w-full bg-[#DCE6F7]">
+          <div
+            className="h-full transition-all duration-500 ease-out"
+            style={{ width: `${progress}%`, backgroundColor: "#3F45B5" }}
+          />
         </div>
       </div>
     );
@@ -492,7 +523,7 @@ const LINEAS_NEGOCIO = [
   { prod: "Autos", lineas: "Autos · Responsabilidad Civil" },
   { prod: "SOAT", lineas: "SOAT" },
   { prod: "Vida", lineas: "Vida individual · Vida deudor · Grupo deudor" },
-  { prod: "Otros Seguros", lineas: "Hogar · Incendio · Sustracción · AP · Otros" },
+  { prod: "Otros Seguros", lineas: "Hogar · Incendio · Sustracción · AP" },
 ];
 
 function LineasNegocioPanel({ wireframeMode }: { wireframeMode?: boolean } = {}) {
@@ -647,26 +678,26 @@ function PersonaFields({
     <div className="flex flex-col gap-5">
       <div className="grid grid-cols-2 gap-4">
         <SelectField id={`${prefix}-tipo-id`} label="Tipo de identificación" placeholder="Selecciona" options={TIPOS_ID} value={datos.tipoId} onChange={set("tipoId")} />
-        <TextField id={`${prefix}-num-id`} label="Número de identificación" placeholder="Ej. 1234567890" value={datos.numId} onChange={set("numId")} />
+        <TextField id={`${prefix}-num-id`} label="Número de identificación" placeholder="Ej. 1234567890" value={datos.numId} onChange={set("numId")} validationRule="positiveInteger" />
       </div>
-      <TextField id={`${prefix}-nombre`} label="Nombre completo o Razón Social" placeholder="Como aparece en tu documento" value={datos.nombre} onChange={set("nombre")} />
+      <TextField id={`${prefix}-nombre`} label="Nombre completo o Razón Social" placeholder="Como aparece en tu documento" value={datos.nombre} onChange={set("nombre")} validationRule="name" />
 
       {celularCorreoEnFila ? (
         /* Afectado: celular + correo en la misma fila */
         <div className="grid grid-cols-2 gap-4">
-          <TextField id={`${prefix}-celular`} label="Número de celular" placeholder="3001234567" value={datos.celular} onChange={set("celular")} type="tel" hint="Debe iniciar por 3, 10 dígitos" />
-          <TextField id={`${prefix}-correo`} label="Correo electrónico" placeholder="ejemplo@correo.com" value={datos.correo} onChange={set("correo")} type="email" />
+          <TextField id={`${prefix}-celular`} label="Número de celular" placeholder="3001234567" value={datos.celular} onChange={set("celular")} type="tel" hint="Debe iniciar por 3, 10 dígitos" validationRule="colombiaMobile" />
+          <TextField id={`${prefix}-correo`} label="Correo electrónico" placeholder="ejemplo@correo.com" value={datos.correo} onChange={set("correo")} type="email" validationRule="email" />
         </div>
       ) : (
         /* Presenter: celular + teléfono, luego correo aparte */
         <>
           <div className="grid grid-cols-2 gap-4">
-            <TextField id={`${prefix}-celular`} label="Número de celular" placeholder="3001234567" value={datos.celular} onChange={set("celular")} type="tel" hint="Debe iniciar por 3, 10 dígitos" />
+            <TextField id={`${prefix}-celular`} label="Número de celular" placeholder="3001234567" value={datos.celular} onChange={set("celular")} type="tel" hint="Debe iniciar por 3, 10 dígitos" validationRule="colombiaMobile" />
             {showTelefono && (
               <TextField id={`${prefix}-telefono`} label="Teléfono" placeholder="6012345678" value={datos.telefono} onChange={set("telefono")} type="tel" optional hint="Inicia con 60, 10 dígitos" />
             )}
           </div>
-          <TextField id={`${prefix}-correo`} label="Correo electrónico" placeholder="ejemplo@correo.com" value={datos.correo} onChange={set("correo")} type="email" />
+          <TextField id={`${prefix}-correo`} label="Correo electrónico" placeholder="ejemplo@correo.com" value={datos.correo} onChange={set("correo")} type="email" validationRule="email" />
         </>
       )}
     </div>
@@ -692,14 +723,14 @@ function NavButtons({ canContinue, onBack, onContinue, readyLabel = "Todos los c
         <div className="flex items-center gap-3 ml-auto">
           {onBack && (
             <button type="button" onClick={onBack}
-              className="flex items-center gap-1.5 px-5 py-2.5 rounded-full text-sm font-semibold border border-border text-muted-foreground hover:border-primary/40 hover:text-foreground transition-all cursor-pointer">
+              className={`flex items-center gap-1.5 px-5 py-2.5 rounded-full text-sm font-semibold border transition-all cursor-pointer ${SECONDARY_BUTTON_INTERACTION}`}>
               <ChevronLeft size={14} /> Atrás
             </button>
           )}
           <Annotate id="continuar-btn" active={!!wireframeMode} display="inline-block">
             <button type="button" disabled={!canContinue} onClick={onContinue}
               className={`px-7 py-2.5 rounded-full text-sm font-semibold transition-all flex items-center gap-2
-                ${canContinue ? "bg-primary text-primary-foreground hover:bg-primary/90 shadow-sm cursor-pointer" : "bg-muted text-muted-foreground cursor-not-allowed border border-border"}`}>
+                ${canContinue ? `bg-primary text-primary-foreground shadow-sm cursor-pointer ${PRIMARY_BUTTON_INTERACTION}` : "bg-muted text-muted-foreground cursor-not-allowed border border-border"}`}>
               Continuar
               <svg width="13" height="13" viewBox="0 0 14 14" fill="none">
                 <path d="M2.625 7h8.75M7.875 4.375 10.5 7l-2.625 2.625" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
@@ -794,7 +825,7 @@ function Paso1({ form, setForm, onContinue, wireframeMode }: { form: FormState; 
 
   const canContinue = wireframeMode
     ? (form.producto !== "" && form.tipoSolicitud !== "" && form.tipologia !== "" && form.subtipologia !== "")
-    : (form.tipoSolicitud !== "" && form.producto !== "");
+    : (form.tipoSolicitud !== "" && form.producto !== "" && !showTitulosAlert);
 
   const handleTipologia = (v: string) =>
     setForm({ ...form, tipologia: v, subtipologia: "" });
@@ -802,7 +833,7 @@ function Paso1({ form, setForm, onContinue, wireframeMode }: { form: FormState; 
   const resetProducto = (v: string) => ({
     ...form, producto: v, tipoSolicitud: wireframeMode ? "" : form.tipoSolicitud, tipologia: "", subtipologia: "",
     placa: "", terceroAfectado: "", placaTercero: "",
-    departamento: "", ciudad: "", lugarServicio: "", lugarServicioOtro: "",
+    pais: "", departamento: "", ciudad: "", lugarServicio: "", lugarServicioOtro: "",
     vidaAsociadaCredito: null, numCredito: "",
   });
 
@@ -1003,7 +1034,7 @@ function Paso2({ form, setForm, onBack, onContinue, wireframeMode }: { form: For
         {correoFisico && (
           <div className="flex flex-col gap-1.5 p-4 rounded-xl bg-blue-50 border border-blue-100">
             <p className="text-xs text-blue-700 font-semibold mb-1">Requerido para respuesta por correo físico</p>
-            <TextField id="direccion" label="Dirección" placeholder="Calle, carrera, barrio, ciudad" value={form.direccion} onChange={(v) => setForm({ ...form, direccion: v })} />
+            <TextField id="direccion" label="Dirección" placeholder="Escribe la dirección de correspondencia." value={form.direccion} onChange={(v) => setForm({ ...form, direccion: v })} />
           </div>
         )}
 
@@ -1097,7 +1128,10 @@ function CamposEspecificos({ form, setForm }: { form: FormState; setForm: (f: Fo
 
   if (!tienePlaca && !tieneUbicacion && !esVida) return null;
 
-  const ciudades = form.departamento ? (DEPARTAMENTOS[form.departamento] ?? []) : [];
+  const departamentos = form.pais ? Object.keys(UBICACIONES_POR_PAIS[form.pais] ?? {}) : [];
+  const ciudades = form.pais && form.departamento
+    ? (UBICACIONES_POR_PAIS[form.pais]?.[form.departamento] ?? [])
+    : [];
 
   const set = (k: keyof FormState) => (v: string) => setForm({ ...form, [k]: v });
 
@@ -1120,14 +1154,23 @@ function CamposEspecificos({ form, setForm }: { form: FormState; setForm: (f: Fo
       {tieneUbicacion && (
         <>
           <p className="text-xs font-semibold text-muted-foreground -mb-2">Ubicación relacionada con la solicitud</p>
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-3 gap-4">
+            <SelectField
+              id="pais"
+              label="País"
+              placeholder="Selecciona"
+              options={PAISES}
+              value={form.pais}
+              onChange={(v) => setForm({ ...form, pais: v, departamento: "", ciudad: "" })}
+            />
             <SelectField
               id="departamento"
               label="Departamento"
-              placeholder="Selecciona"
-              options={Object.keys(DEPARTAMENTOS)}
+              placeholder={form.pais ? "Selecciona" : "Primero selecciona país"}
+              options={departamentos}
               value={form.departamento}
               onChange={(v) => setForm({ ...form, departamento: v, ciudad: "" })}
+              disabled={!form.pais}
             />
             <SelectField
               id="ciudad"
@@ -1219,7 +1262,26 @@ function Paso3({ form, setForm, onBack, onContinue, wireframeMode }: {
   form: FormState; setForm: (f: FormState) => void; onBack: () => void; onContinue: () => void; wireframeMode?: boolean;
 }) {
   const fileInputRef = useRef<HTMLInputElement>(null);
+  const formRef = useRef(form);
   const [fileFeedback, setFileFeedback] = useState("");
+  const [localCaptchaState, setLocalCaptchaState] = useState<"idle" | "loading" | "verified">("idle");
+  const isLocalHost = typeof window !== "undefined" && ["localhost", "127.0.0.1"].includes(window.location.hostname);
+  const useLocalAnimatedCaptcha = !wireframeMode && (isLocalHost || RECAPTCHA_SITE_KEY === DEFAULT_RECAPTCHA_TEST_SITE_KEY);
+
+  useEffect(() => {
+    formRef.current = form;
+  }, [form]);
+
+  useEffect(() => {
+    if (!useLocalAnimatedCaptcha || localCaptchaState !== "loading") return;
+
+    const timeout = window.setTimeout(() => {
+      setLocalCaptchaState("verified");
+      setForm({ ...formRef.current, captchaOk: true });
+    }, 900);
+
+    return () => window.clearTimeout(timeout);
+  }, [localCaptchaState, useLocalAnimatedCaptcha, setForm]);
 
   const totalMB = form.archivos.reduce((acc, f) => acc + f.size, 0) / (1024 * 1024);
   const overLimit = totalMB > MAX_TOTAL_MB;
@@ -1287,9 +1349,14 @@ function Paso3({ form, setForm, onBack, onContinue, wireframeMode }: {
   const handleTipologia = (v: string) =>
     setForm({ ...form, tipologia: v, subtipologia: "" });
 
+  const esMensajeAgradecimiento = ["Felicitaciones", "Sugerencias"].includes(form.tipoSolicitud);
+  const requiereTipologiaSubtipologia = !esMensajeAgradecimiento;
+  const minDescripcionCaracteres = esMensajeAgradecimiento ? 5 : 20;
+  const descripcionOk = form.descripcion.trim().length >= minDescripcionCaracteres;
+
   const canContinue =
-    (wireframeMode || (form.tipologia !== "" && form.subtipologia !== "")) &&
-    form.descripcion.trim().length >= 20 &&
+    (wireframeMode || !requiereTipologiaSubtipologia || (form.tipologia !== "" && form.subtipologia !== "")) &&
+    descripcionOk &&
     !overLimit &&
     form.captchaOk &&
     form.aceptaTratamiento;
@@ -1302,7 +1369,7 @@ function Paso3({ form, setForm, onBack, onContinue, wireframeMode }: {
       </p>
 
       <div className="flex flex-col gap-6">
-        {!wireframeMode && (
+        {!wireframeMode && requiereTipologiaSubtipologia && (
           <>
             <SelectField
               id="tipologia"
@@ -1473,22 +1540,66 @@ function Paso3({ form, setForm, onBack, onContinue, wireframeMode }: {
               </div>
             </div>
           ) : (
-            <div className="flex flex-col gap-2">
+            <div className="flex flex-col gap-2 rounded-xl border border-border bg-gradient-to-b from-white to-muted/20 p-4">
               <p className="text-sm font-semibold text-foreground">
                 Verificación de seguridad <span className="text-red-500">*</span>
               </p>
-              <div className="w-fit overflow-hidden rounded-xl border border-border bg-white p-2">
-                <ReCAPTCHA
-                  sitekey={RECAPTCHA_SITE_KEY}
-                  onChange={(token) => setForm({ ...form, captchaOk: !!token })}
-                  onExpired={() => setForm({ ...form, captchaOk: false })}
-                  onErrored={() => setForm({ ...form, captchaOk: false })}
-                />
-              </div>
-              {RECAPTCHA_SITE_KEY === DEFAULT_RECAPTCHA_TEST_SITE_KEY && (
-                <p className="text-xs text-amber-700">
-                  Se está usando una clave de prueba de Google reCAPTCHA. Configura VITE_RECAPTCHA_SITE_KEY para producción.
-                </p>
+              <p className="text-xs text-muted-foreground -mt-1">
+                Completa la validación para habilitar el botón Enviar.
+              </p>
+              {useLocalAnimatedCaptcha ? (
+                <button
+                  type="button"
+                  onClick={() => {
+                    if (localCaptchaState === "loading") return;
+                    if (localCaptchaState === "verified") {
+                      return;
+                    }
+                    setLocalCaptchaState("loading");
+                    setForm({ ...form, captchaOk: false });
+                  }}
+                  className="w-[304px] h-[78px] rounded-[3px] border border-[#d3d3d3] bg-[#f9f9f9] px-3 py-2 transition-all hover:border-[#c9c9c9] cursor-pointer"
+                >
+                  <div className="h-full flex items-center justify-between gap-3">
+                    <div className="flex items-center gap-3 min-w-0">
+                      <div className={`w-7 h-7 rounded-[2px] border-2 flex items-center justify-center transition-all ${
+                        localCaptchaState === "verified"
+                          ? "border-emerald-600 bg-white"
+                          : "border-[#b5b5b5] bg-white"
+                      }`}>
+                        {localCaptchaState === "loading" && <LoaderCircle size={16} className="animate-spin text-[#4a90e2]" />}
+                        {localCaptchaState === "verified" && <Check size={16} className="text-emerald-600 animate-in zoom-in-75 duration-200" />}
+                      </div>
+                      <div className="text-left">
+                        <p className="text-[24px] leading-none scale-[0.58] origin-left text-black font-normal" style={{ fontFamily: "Roboto, Arial, sans-serif" }}>
+                          No soy un robot
+                        </p>
+                        <p className="text-[10px] text-[#666] leading-tight mt-0.5" style={{ fontFamily: "Roboto, Arial, sans-serif" }}>
+                          {localCaptchaState === "loading" && "Verificando..."}
+                          {localCaptchaState === "verified" && "Verificación completada"}
+                          {localCaptchaState === "idle" && "Haz clic para validar"}
+                        </p>
+                      </div>
+                    </div>
+                    <div className="text-right shrink-0 flex flex-col items-center">
+                      <svg width="30" height="30" viewBox="0 0 64 64" fill="none" aria-hidden="true">
+                        <path d="M32 4C16.536 4 4 16.536 4 32s12.536 28 28 28 28-12.536 28-28S47.464 4 32 4z" fill="#4A90D9"/>
+                        <path d="M44 22H32v-6l-12 10 12 10v-6h8v8H20V20h24v2z" fill="white"/>
+                      </svg>
+                      <p className="text-[10px] text-[#555] leading-none mt-0.5" style={{ fontFamily: "Roboto, Arial, sans-serif" }}>reCAPTCHA</p>
+                      <p className="text-[8px] text-[#888] leading-none mt-0.5" style={{ fontFamily: "Roboto, Arial, sans-serif" }}>Privacidad · Terms</p>
+                    </div>
+                  </div>
+                </button>
+              ) : (
+                <div className="w-fit overflow-hidden rounded-xl border border-border bg-white p-2 shadow-sm">
+                  <ReCAPTCHA
+                    sitekey={RECAPTCHA_SITE_KEY}
+                    onChange={(token) => setForm({ ...form, captchaOk: !!token })}
+                    onExpired={() => setForm({ ...form, captchaOk: false })}
+                    onErrored={() => setForm({ ...form, captchaOk: false })}
+                  />
+                </div>
               )}
             </div>
           )}
@@ -1521,7 +1632,7 @@ function Paso3({ form, setForm, onBack, onContinue, wireframeMode }: {
 
       <Annotate id="campos-obligatorios" active={!!wireframeMode}>
         <p className="text-xs text-muted-foreground mt-6">
-          <span className="text-red-500 font-bold">*</span> Campos obligatorios · Mínimo 20 caracteres en la descripción
+          <span className="text-red-500 font-bold">*</span> Campos obligatorios · Mínimo {minDescripcionCaracteres} caracteres en la descripción
         </p>
       </Annotate>
 
@@ -1538,7 +1649,7 @@ function Paso3({ form, setForm, onBack, onContinue, wireframeMode }: {
           </Annotate>
           <div className="flex items-center gap-3 ml-auto">
             <button type="button" onClick={onBack}
-              className="flex items-center gap-1.5 px-5 py-2.5 rounded-full text-sm font-semibold border border-border text-muted-foreground hover:border-primary/40 hover:text-foreground transition-all cursor-pointer">
+              className={`flex items-center gap-1.5 px-5 py-2.5 rounded-full text-sm font-semibold border transition-all cursor-pointer ${SECONDARY_BUTTON_INTERACTION}`}>
               <ChevronLeft size={14} /> Atrás
             </button>
             <Annotate id="continuar-btn" active={!!wireframeMode} display="inline-block">
@@ -1546,7 +1657,7 @@ function Paso3({ form, setForm, onBack, onContinue, wireframeMode }: {
                 type="button" disabled={!canContinue} onClick={onContinue}
                 className={`px-7 py-2.5 rounded-full text-sm font-semibold transition-all flex items-center gap-2
                   ${canContinue
-                    ? "bg-primary text-primary-foreground hover:bg-primary/90 shadow-sm cursor-pointer"
+                    ? `bg-primary text-primary-foreground shadow-sm cursor-pointer ${PRIMARY_BUTTON_INTERACTION}`
                     : "bg-muted text-muted-foreground cursor-not-allowed border border-border"}`}
               >
                 <Send size={14} /> Enviar
@@ -1567,7 +1678,7 @@ export default function App() {
     producto: "", tipoSolicitud: "", tipologia: "", subtipologia: "",
     medio: "Correo electrónico", presenter: emptyPersona(), direccion: "", sexo: "", grupoEspecial: "",
     placa: "", terceroAfectado: "", placaTercero: "",
-    departamento: "", ciudad: "", lugarServicio: "", lugarServicioOtro: "",
+    pais: "", departamento: "", ciudad: "", lugarServicio: "", lugarServicioOtro: "",
     vidaAsociadaCredito: null, numCredito: "",
     archivos: [], captchaOk: false, aceptaTratamiento: false,
     mismaPersonaAfectada: null, afectado: emptyPersona(), descripcion: "",
@@ -1586,6 +1697,16 @@ export default function App() {
   const activeForm = wireframeMode ? activeSnapshot.form : form;
   const activePaso = wireframeMode ? activeSnapshot.paso : paso;
   const noop = () => {};
+  const esMensajeAgradecimiento = ["Felicitaciones", "Sugerencias"].includes(activeForm.tipoSolicitud);
+  const tituloConfirmacion =
+    activeForm.tipoSolicitud === "Felicitaciones"
+      ? "¡Gracias por tu felicitación!"
+      : activeForm.tipoSolicitud === "Sugerencias"
+        ? "¡Gracias por tu sugerencia!"
+        : "¡Tu solicitud fue radicada!";
+  const textoConfirmacion = esMensajeAgradecimiento
+    ? "Hemos recibido tu mensaje y será compartido con las áreas correspondientes. Agradecemos el tiempo que dedicaste a reconocer nuestro servicio."
+    : `Hemos recibido tu PQRS. Te notificaremos por ${activeForm.medio || "correo electrónico"} cuando tengamos una respuesta.`;
 
   const confirmacionJsx = (
     <Annotate id="confirmacion-final" active={wireframeMode}>
@@ -1593,23 +1714,26 @@ export default function App() {
         <div className="w-16 h-16 rounded-full bg-green-100 flex items-center justify-center mx-auto mb-5">
           <CheckCircle2 size={36} className="text-green-600" />
         </div>
-        <p className="text-lg font-bold text-foreground mb-1">¡Tu solicitud fue radicada!</p>
+        <p className="text-lg font-bold text-foreground mb-1">{tituloConfirmacion}</p>
         <p className="text-sm text-muted-foreground mb-5">
-          Hemos recibido tu PQRS. Te notificaremos por{" "}
-          {activeForm.medio || "correo electrónico"} cuando tengamos una respuesta.
+          {textoConfirmacion}
         </p>
-        <div className="inline-flex flex-col items-center gap-1 bg-muted/50 border border-border rounded-xl px-8 py-4 mb-6">
-          <p className="text-xs text-muted-foreground uppercase tracking-widest font-semibold">Número de radicado</p>
-          <p className="text-2xl font-bold text-primary tracking-widest">
-            {String(Math.floor(Math.random() * 900000) + 100000)}
-          </p>
-          <p className="text-xs text-muted-foreground">Guarda este número para hacer seguimiento</p>
-        </div>
-        <p className="text-xs text-muted-foreground leading-relaxed max-w-sm mx-auto">
-          Se ha enviado una confirmación a{" "}
-          <span className="font-medium text-foreground">{activeForm.presenter.correo || "tu correo registrado"}</span>.
-          El tiempo de respuesta es de máximo 15 días hábiles.
-        </p>
+        {!esMensajeAgradecimiento && (
+          <>
+            <div className="inline-flex flex-col items-center gap-1 bg-muted/50 border border-border rounded-xl px-8 py-4 mb-6">
+              <p className="text-xs text-muted-foreground uppercase tracking-widest font-semibold">Número de radicado</p>
+              <p className="text-2xl font-bold text-primary tracking-widest">
+                {String(Math.floor(Math.random() * 900000) + 100000)}
+              </p>
+              <p className="text-xs text-muted-foreground">Guarda este número para hacer seguimiento</p>
+            </div>
+            <p className="text-xs text-muted-foreground leading-relaxed max-w-sm mx-auto">
+              Se ha enviado una confirmación a{" "}
+              <span className="font-medium text-foreground">{activeForm.presenter.correo || "tu correo registrado"}</span>.
+              El tiempo de respuesta es de máximo 15 días hábiles.
+            </p>
+          </>
+        )}
       </div>
     </Annotate>
   );
