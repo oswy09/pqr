@@ -1,11 +1,11 @@
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect, Fragment } from "react";
 import { createPortal } from "react-dom";
 import ReCAPTCHA from "react-google-recaptcha";
 import {
   ChevronDown, AlertCircle, CheckCircle2, Check,
   ChevronLeft, Mail, Home, User, Users,
   Paperclip, X, Send,
-  LoaderCircle,
+  LoaderCircle, Phone, MessageCircle,
   ClipboardList, MessageCircleWarning, Scale, Star, Lightbulb,
   HardHat, Heart, Car, UserCheck, Package,
 } from "lucide-react";
@@ -39,12 +39,13 @@ const PRODUCTOS_COLOR = ["ARL", "Salud", "Automóviles", "SOAT", "Vida", "Genera
 // de producto del prototipo a color.
 const PRODUCTO_LINEAS_MAP: Record<string, string> = {
   "ARL": "Riesgos laborales",
-  "Salud": "Póliza de salud · MPP",
-  "Automóviles": "Automóviles · Responsabilidad Civil",
+  "Salud": "Póliza de salud · MPP · Red propia · Centros de salud",
+  "Automóviles": "Autos · Motos · Servicio público · Responsabilidad civil",
   "SOAT": "SOAT",
   "Vida": "Vida individual · Vida deudor · Grupo deudor",
   "Generales": "Hogar · Incendio · Sustracción · AP",
 };
+
 const TIPOS_SOLICITUD = ["Petición", "Queja", "Reclamo", "Felicitaciones", "Sugerencias"];
 const TIPOS_ID = [
   "Cédula de ciudadanía",
@@ -237,7 +238,7 @@ export interface DatosPersona {
   celular: string; telefono: string; correo: string;
 }
 export interface FormState {
-  producto: string; tipoSolicitud: string;
+  producto: string; subproducto: string; tipoSolicitud: string;
   tipologia: string; subtipologia: string;
   medio: string; presenter: DatosPersona;
   direccion: string; sexo: string; grupoEspecial: string;
@@ -283,10 +284,14 @@ function isFieldValueValid(rule: ValidationRule, rawValue: string) {
   return /^[1-9]\d*$/.test(value);
 }
 
+type SelectEntry = string | { header: string; items: string[] };
+
 function SelectField({
-  id, label, placeholder, options, value, onChange, optional, hint, disabled, optionHints,
+  id, label, placeholder, options = [], entries, value, onChange, optional, hint, disabled, optionHints,
 }: {
-  id: string; label: string; placeholder: string; options: string[];
+  id: string; label: string; placeholder: string;
+  options?: string[];
+  entries?: SelectEntry[];
   value: string; onChange: (v: string) => void;
   optional?: boolean; hint?: string; disabled?: boolean; optionHints?: Record<string, string>;
 }) {
@@ -338,26 +343,52 @@ function SelectField({
       className={`bg-white border border-border shadow-2xl overflow-y-auto py-1
         ${openUp ? "rounded-t-xl rounded-b-md mb-1" : "rounded-xl mt-1"}`}
     >
-      {options.length === 0 ? (
-        <li className="px-4 py-3 text-sm text-muted-foreground italic">Sin opciones disponibles</li>
-      ) : options.map((opt) => (
-        <li
-          key={opt} role="option" aria-selected={value === opt}
-          onClick={() => { onChange(opt); setOpen(false); }}
-          className={`px-4 py-2 text-sm cursor-pointer flex items-center justify-between gap-2 transition-colors
-            ${value === opt ? "bg-accent font-semibold" : "text-foreground hover:bg-muted"}`}
-        >
-          <span className="flex flex-col min-w-0 py-0.5">
-            <span className="truncate">{opt}</span>
-            {optionHints?.[opt] && (
-              <span className={`text-[11px] font-normal truncate ${value === opt ? "text-primary/70" : "text-muted-foreground"}`}>
-                {optionHints[opt]}
-              </span>
-            )}
-          </span>
-          {value === opt && <CheckCircle2 size={13} className="text-primary shrink-0" />}
-        </li>
-      ))}
+      {(() => {
+        const allEntries: SelectEntry[] = entries ?? options;
+        if (allEntries.length === 0) {
+          return <li className="px-4 py-3 text-sm text-muted-foreground italic">Sin opciones disponibles</li>;
+        }
+        return allEntries.map((entry) => {
+          if (typeof entry === "string") {
+            return (
+              <li
+                key={entry} role="option" aria-selected={value === entry}
+                onClick={() => { onChange(entry); setOpen(false); }}
+                className={`px-4 py-2 text-sm cursor-pointer flex items-center justify-between gap-2 transition-colors
+                  ${value === entry ? "bg-accent font-semibold" : "text-foreground hover:bg-muted"}`}
+              >
+                <span className="flex flex-col min-w-0 py-0.5">
+                  <span className="truncate">{entry}</span>
+                  {optionHints?.[entry] && (
+                    <span className={`text-[11px] font-normal truncate ${value === entry ? "text-primary/70" : "text-muted-foreground"}`}>
+                      {optionHints[entry]}
+                    </span>
+                  )}
+                </span>
+                {value === entry && <CheckCircle2 size={13} className="text-primary shrink-0" />}
+              </li>
+            );
+          }
+          return (
+            <Fragment key={entry.header}>
+              <li className="px-4 pt-2.5 pb-1 text-[10px] font-bold text-muted-foreground uppercase tracking-widest border-t border-border/30 cursor-default select-none first:border-t-0">
+                {entry.header}
+              </li>
+              {entry.items.map((item) => (
+                <li
+                  key={item} role="option" aria-selected={value === item}
+                  onClick={() => { onChange(item); setOpen(false); }}
+                  className={`pl-7 pr-4 py-2 text-sm cursor-pointer flex items-center justify-between gap-2 transition-colors
+                    ${value === item ? "bg-accent font-semibold" : "text-foreground hover:bg-muted"}`}
+                >
+                  <span className="truncate">{item}</span>
+                  {value === item && <CheckCircle2 size={13} className="text-primary shrink-0" />}
+                </li>
+              ))}
+            </Fragment>
+          );
+        });
+      })()}
     </ul>,
     document.body
   ) : null;
@@ -419,7 +450,8 @@ function TextField({
           if (validationRule) setIsTouched(true);
         }}
         placeholder={placeholder}
-        className={`${inputBase} ${hasError ? "border-2 border-[#880727] focus:border-[#880727] focus:ring-0" : ""}`}
+        data-error={hasError ? "true" : undefined}
+        className={`${inputBase} ${hasError ? "focus:ring-0" : ""}`}
       />
       {hasError
         ? <p className="text-xs -mt-0.5" style={{ color: FIELD_ERROR_COLOR }}>Campo no cumple con el formato requerido</p>
@@ -447,7 +479,77 @@ function TextAreaField({
         rows={5}
         className="w-full px-4 py-3 rounded-xl border border-border bg-input-background text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all resize-none"
       />
-      <p className="text-xs text-muted-foreground text-right">{value.length} caracteres</p>
+    </div>
+  );
+}
+
+// ── Dirección estructurada ───────────────────────────────────────────────────
+
+const TIPOS_VIA = ["Carrera", "Calle", "Avenida", "Avenida Carrera", "Avenida Calle", "Diagonal", "Transversal"];
+
+function DireccionField({ onChange }: { onChange: (v: string) => void }) {
+  const [tipoVia, setTipoVia] = useState("");
+  const [numVia, setNumVia] = useState("");
+  const [nomenclatura, setNomenclatura] = useState("");
+  const [complemento, setComplemento] = useState("");
+
+  const build = (tv: string, nv: string, nom: string, comp: string) =>
+    [tv, nv, nom ? `# ${nom}` : "", comp].filter(Boolean).join(" ");
+
+  const emit = (tv: string, nv: string, nom: string, comp: string) =>
+    onChange(build(tv, nv, nom, comp));
+
+  const preview = build(tipoVia, numVia, nomenclatura, complemento);
+
+  return (
+    <div className="flex flex-col gap-3">
+      <div className="grid grid-cols-[1fr_80px_12px_90px] gap-2 items-end">
+        <div className="flex flex-col gap-1.5">
+          <label htmlFor="tipo-via" className="text-xs font-medium text-muted-foreground">Tipo de vía</label>
+          <select
+            id="tipo-via" value={tipoVia}
+            onChange={(e) => { setTipoVia(e.target.value); emit(e.target.value, numVia, nomenclatura, complemento); }}
+            className={`${inputBase} cursor-pointer`}
+          >
+            <option value="" disabled>Selecciona</option>
+            {TIPOS_VIA.map((t) => <option key={t} value={t}>{t}</option>)}
+          </select>
+        </div>
+        <div className="flex flex-col gap-1.5">
+          <label htmlFor="num-via" className="text-xs font-medium text-muted-foreground">Número</label>
+          <input
+            id="num-via" type="text" value={numVia}
+            onChange={(e) => { setNumVia(e.target.value); emit(tipoVia, e.target.value, nomenclatura, complemento); }}
+            placeholder="12"
+            className={inputBase}
+          />
+        </div>
+        <div className="flex items-end justify-center pb-3.5 font-bold text-muted-foreground select-none">#</div>
+        <div className="flex flex-col gap-1.5">
+          <label htmlFor="num-nomen" className="text-xs font-medium text-muted-foreground">Nomenclatura</label>
+          <input
+            id="num-nomen" type="text" value={nomenclatura}
+            onChange={(e) => { setNomenclatura(e.target.value); emit(tipoVia, numVia, e.target.value, complemento); }}
+            placeholder="34-56"
+            className={inputBase}
+          />
+        </div>
+      </div>
+      <div className="flex flex-col gap-1.5">
+        <label htmlFor="complemento-dir" className="text-xs font-medium text-muted-foreground">
+          Complemento <span className="font-normal">(opcional)</span>
+        </label>
+        <input
+          id="complemento-dir" type="text" value={complemento}
+          onChange={(e) => { setComplemento(e.target.value); emit(tipoVia, numVia, nomenclatura, e.target.value); }}
+          placeholder="Ej: Apto 301, Torre B, Barrio Centro"
+          className={inputBase}
+        />
+      </div>
+      <div className="rounded-xl bg-secondary/50 border border-border p-3 flex flex-col gap-1">
+        <p className="text-[10px] font-bold tracking-widest text-muted-foreground uppercase">Vista previa de la dirección</p>
+        <p className="text-sm font-semibold text-foreground">{preview || "—"}</p>
+      </div>
     </div>
   );
 }
@@ -568,6 +670,79 @@ function TitulosCapitalizacionAlert({ wireframeMode }: { wireframeMode?: boolean
   );
 }
 
+// ── Líneas de atención ────────────────────────────────────────────────────────
+
+function LineasAtencionPanel() {
+  return (
+    <div className="rounded-xl border border-border bg-white p-4 flex flex-col gap-3">
+      <p className="text-xs font-bold tracking-widest text-muted-foreground uppercase">Líneas de atención</p>
+
+      {/* Línea integral */}
+      <div className="flex flex-col gap-1.5">
+        <div className="flex items-center gap-1.5" style={{ color: "#00008F" }}>
+          <Phone size={22} />
+          <p className="text-sm font-semibold text-foreground">Línea integral</p>
+        </div>
+        <div className="flex flex-col gap-1 text-sm">
+          <div className="flex gap-1.5">
+            <span className="text-muted-foreground shrink-0">Bogotá:</span>
+            <span className="font-semibold text-foreground">+57 (601) 423 5757</span>
+          </div>
+          <div className="flex gap-1.5">
+            <span className="text-muted-foreground shrink-0">Resto del país:</span>
+            <span className="font-semibold text-foreground">+57 01-8000-512620</span>
+          </div>
+        </div>
+      </div>
+
+      {/* #247 — opción de asistencia */}
+      <div className="flex flex-col gap-1.5 border-t border-border/40 pt-2.5">
+        <div className="flex items-center gap-1.5" style={{ color: "#00008F" }}>
+          <HardHat size={22} />
+          <p className="text-sm font-semibold text-foreground">#247 — Asistencias y urgencias</p>
+        </div>
+        <p className="text-sm text-muted-foreground leading-snug">
+          Marca <span className="font-semibold text-foreground">#247</span> desde tu celular, opción 1-1. Disponible las 24 horas.
+        </p>
+      </div>
+
+      {/* Línea exclusiva de salud */}
+      <div className="flex flex-col gap-1.5 border-t border-border/40 pt-2.5">
+        <div className="flex items-center gap-1.5" style={{ color: "#00008F" }}>
+          <Heart size={22} />
+          <p className="text-sm font-semibold text-foreground">Línea exclusiva de salud</p>
+        </div>
+        <div className="flex flex-col gap-1 text-sm">
+          <div className="flex gap-1.5">
+            <span className="text-muted-foreground shrink-0">Bogotá:</span>
+            <span className="font-semibold text-foreground">+57 601 4235750</span>
+          </div>
+          <div className="flex gap-1.5">
+            <span className="text-muted-foreground shrink-0">Resto del país:</span>
+            <span className="font-semibold text-foreground">+57 01-8000-515750</span>
+          </div>
+        </div>
+      </div>
+
+      {/* Chat en línea */}
+      <div className="flex flex-col gap-1.5 border-t border-border/40 pt-2.5">
+        <div className="flex items-center gap-1.5" style={{ color: "#00008F" }}>
+          <MessageCircle size={22} />
+          <p className="text-sm font-semibold text-foreground">Chat en línea</p>
+        </div>
+        <a
+          href="https://webchat.millenium.com.co/webchatcolpatria/online.jsp?workgroup=chatbotcolpatriaarl@workgroup.multi-chat.millenium.com.co"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-sm text-primary underline underline-offset-2 hover:opacity-75 transition-opacity"
+        >
+          Iniciar chat →
+        </a>
+      </div>
+    </div>
+  );
+}
+
 // ── Medio de respuesta ───────────────────────────────────────────────────────
 
 function MedioRespuesta({ value, onChange, wireframeMode }: { value: string; onChange: (v: string) => void; wireframeMode?: boolean }) {
@@ -685,14 +860,14 @@ function PersonaFields({
       {celularCorreoEnFila ? (
         /* Afectado: celular + correo en la misma fila */
         <div className="grid grid-cols-2 gap-4">
-          <TextField id={`${prefix}-celular`} label="Número de celular" placeholder="3001234567" value={datos.celular} onChange={set("celular")} type="tel" hint="Debe iniciar por 3, 10 dígitos" validationRule="colombiaMobile" />
+          <TextField id={`${prefix}-celular`} label="Número de celular" placeholder="3001234567" value={datos.celular} onChange={set("celular")} type="tel" hint="Debe iniciar por 3, y tener 10 dígitos" validationRule="colombiaMobile" />
           <TextField id={`${prefix}-correo`} label="Correo electrónico" placeholder="ejemplo@correo.com" value={datos.correo} onChange={set("correo")} type="email" validationRule="email" />
         </div>
       ) : (
         /* Presenter: celular + teléfono, luego correo aparte */
         <>
           <div className="grid grid-cols-2 gap-4">
-            <TextField id={`${prefix}-celular`} label="Número de celular" placeholder="3001234567" value={datos.celular} onChange={set("celular")} type="tel" hint="Debe iniciar por 3, 10 dígitos" validationRule="colombiaMobile" />
+            <TextField id={`${prefix}-celular`} label="Número de celular" placeholder="3001234567" value={datos.celular} onChange={set("celular")} type="tel" hint="Debe iniciar por 3, y tener 10 dígitos" validationRule="colombiaMobile" />
             {showTelefono && (
               <TextField id={`${prefix}-telefono`} label="Teléfono" placeholder="6012345678" value={datos.telefono} onChange={set("telefono")} type="tel" optional hint="Inicia con 60, 10 dígitos" />
             )}
@@ -831,7 +1006,7 @@ function Paso1({ form, setForm, onContinue, wireframeMode }: { form: FormState; 
     setForm({ ...form, tipologia: v, subtipologia: "" });
 
   const resetProducto = (v: string) => ({
-    ...form, producto: v, tipoSolicitud: wireframeMode ? "" : form.tipoSolicitud, tipologia: "", subtipologia: "",
+    ...form, producto: v, subproducto: "", tipoSolicitud: wireframeMode ? "" : form.tipoSolicitud, tipologia: "", subtipologia: "",
     placa: "", terceroAfectado: "", placaTercero: "",
     pais: "", departamento: "", ciudad: "", lugarServicio: "", lugarServicioOtro: "",
     vidaAsociadaCredito: null, numCredito: "",
@@ -929,6 +1104,7 @@ function Paso1({ form, setForm, onContinue, wireframeMode }: { form: FormState; 
               onChange={(v) => setForm(resetProducto(v))}
             />
 
+
             {showAutomovilesAlert && (
               <div className="flex gap-3 p-4 rounded-xl bg-amber-50 border border-amber-200">
                 <AlertCircle size={17} className="shrink-0 mt-0.5 text-amber-600" />
@@ -962,6 +1138,7 @@ function Paso1({ form, setForm, onContinue, wireframeMode }: { form: FormState; 
                 </div>
               </div>
             )}
+
           </>
         )}
       </div>
@@ -992,10 +1169,11 @@ function Paso2({ form, setForm, onBack, onContinue, wireframeMode }: { form: For
     else setForm({ ...form, mismaPersonaAfectada: false, afectado: emptyPersona() });
   };
 
+  const isNIT = form.presenter.tipoId === "NIT";
   const presenterOk =
     form.medio !== "" && form.presenter.tipoId !== "" && form.presenter.numId !== "" &&
     form.presenter.nombre !== "" && form.presenter.celular !== "" && form.presenter.correo !== "" &&
-    form.sexo !== "" && form.grupoEspecial !== "" && (!correoFisico || form.direccion !== "");
+    (isNIT || form.sexo !== "") && form.grupoEspecial !== "" && (!correoFisico || form.direccion !== "");
 
   const afectadoOk = !requiereAfectado || form.mismaPersonaAfectada === true ||
     (form.mismaPersonaAfectada === false &&
@@ -1034,12 +1212,14 @@ function Paso2({ form, setForm, onBack, onContinue, wireframeMode }: { form: For
         {correoFisico && (
           <div className="flex flex-col gap-1.5 p-4 rounded-xl bg-blue-50 border border-blue-100">
             <p className="text-xs text-blue-700 font-semibold mb-1">Requerido para respuesta por correo físico</p>
-            <TextField id="direccion" label="Dirección" placeholder="Escribe la dirección de correspondencia." value={form.direccion} onChange={(v) => setForm({ ...form, direccion: v })} />
+            <DireccionField onChange={(v) => setForm({ ...form, direccion: v })} />
           </div>
         )}
 
-        <div className="grid grid-cols-2 gap-4">
-          <SelectField id="sexo" label="Sexo" placeholder="Selecciona" options={SEXOS} value={form.sexo} onChange={(v) => setForm({ ...form, sexo: v })} />
+        <div className={`grid gap-4 ${isNIT ? "grid-cols-1" : "grid-cols-2"}`}>
+          {!isNIT && (
+            <SelectField id="sexo" label="Sexo" placeholder="Selecciona" options={SEXOS} value={form.sexo} onChange={(v) => setForm({ ...form, sexo: v })} />
+          )}
           <SelectField id="grupo" label="Grupo o condición especial" placeholder="Selecciona" options={GRUPOS_ESPECIALES} value={form.grupoEspecial} onChange={(v) => setForm({ ...form, grupoEspecial: v })} />
         </div>
 
@@ -1675,7 +1855,7 @@ function Paso3({ form, setForm, onBack, onContinue, wireframeMode }: {
 export default function App() {
   const [paso, setPaso] = useState(1);
   const [form, setForm] = useState<FormState>({
-    producto: "", tipoSolicitud: "", tipologia: "", subtipologia: "",
+    producto: "", subproducto: "", tipoSolicitud: "", tipologia: "", subtipologia: "",
     medio: "Correo electrónico", presenter: emptyPersona(), direccion: "", sexo: "", grupoEspecial: "",
     placa: "", terceroAfectado: "", placaTercero: "",
     pais: "", departamento: "", ciudad: "", lugarServicio: "", lugarServicioOtro: "",
@@ -1741,6 +1921,19 @@ export default function App() {
   return (
     <div className={`min-h-screen bg-background flex flex-col ${wireframeMode ? "wireframe pb-16" : ""}`} style={{ fontFamily: "'Source Sans 3', system-ui, sans-serif", fontSize: 16 }}>
 
+      {/* Navbar con logo — solo en modo color */}
+      {!wireframeMode && (
+        <header className="w-full bg-white border-b border-border">
+          <div className="max-w-[980px] mx-auto px-4 py-3 flex items-center">
+            <img
+              src="https://www.axacolpatria.co/PortalARL/images/logo.png"
+              alt="AXA Colpatria"
+              className="h-9 w-auto object-contain"
+            />
+          </div>
+        </header>
+      )}
+
       {/* Banner header con imagen — solo en modo wireframe, se quitó del prototipo a color */}
       {wireframeMode && (
         <div className="relative w-full overflow-hidden" style={{ height: 140 }}>
@@ -1776,7 +1969,7 @@ export default function App() {
       <main className="flex-1 flex justify-center px-4 py-6">
         <div className="w-full max-w-[980px] flex flex-col lg:flex-row gap-6 items-start">
 
-          <div className={wireframeMode ? "w-full max-w-[660px] mx-auto lg:mx-0" : "w-full max-w-[760px] mx-auto"}>
+          <div className={wireframeMode ? "w-full max-w-[660px] mx-auto lg:mx-0" : "flex-1 min-w-0"}>
 
             {/* ¿Qué puedes radicar? — sin contenedor ni borde, solo en modo wireframe, paso 1 */}
             {wireframeMode && activePaso === 1 && (
@@ -1834,15 +2027,24 @@ export default function App() {
             </p>
           </div>
 
-          {/* Panel lateral — Productos, líneas de negocio y Títulos de Capitalización (solo modo wireframe, desktop). En el prototipo a color se reubican dentro del form más adelante. */}
-          {wireframeMode && (
+          {/* Panel lateral — wireframe: Productos + Títulos. Color: Líneas de atención. */}
+          {wireframeMode ? (
             <aside className="hidden lg:flex flex-col gap-3 w-[280px] shrink-0 sticky top-6">
               <LineasNegocioPanel wireframeMode={wireframeMode} />
               <TitulosCapitalizacionAlert wireframeMode={wireframeMode} />
             </aside>
+          ) : (
+            <aside className="hidden lg:flex flex-col gap-3 w-[260px] shrink-0 sticky top-6">
+              <LineasAtencionPanel />
+            </aside>
           )}
         </div>
       </main>
+
+      {/* Footer — solo en modo color */}
+      {!wireframeMode && (
+        <footer className="w-full h-10" style={{ backgroundColor: "#4976BA" }} />
+      )}
 
       {/* Controles del presentador — solo en modo wireframe, hermano del wrapper inerte */}
       {wireframeMode && (

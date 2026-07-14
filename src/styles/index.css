@@ -3,3 +3,11 @@
 @import './tailwind.css';
 @import './theme.css';
 @import './wireframe.css';
+
+/* Error state — fuera de @layer para ganarle al reset * { border-color: var(--border) } de Tailwind v4 */
+input[data-error="true"],
+input[data-error="true"]:focus {
+  border-color: #880727;
+  border-width: 2px;
+  box-shadow: none;
+}
