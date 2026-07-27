@@ -31,9 +31,16 @@ const PRODUCTOS = ["ARL", "Salud", "Autos", "SOAT", "Vida", "Otros Seguros"];
 
 // Lista de productos del prototipo a color (nombres actualizados, orden alfabético) —
 // el modo wireframe sigue usando PRODUCTOS sin tocar.
-const PRODUCTOS_COLOR = ["ARL", "Salud", "Automóviles", "SOAT", "Vida", "Generales", "Títulos de Capitalización"]
-  .sort((a, b) => a.localeCompare(b, "es"))
-  .concat("Otros seguros");
+const PRODUCTOS_COLOR = [
+  "ARL",
+  "Automóviles",
+  "Generales",
+  "Salud",
+  "SOAT",
+  "Títulos de Capitalización",
+  "Vida",
+  "Otros seguros",
+];
 
 // Líneas de negocio por producto, para mostrar como subtexto en el desplegable
 // de producto del prototipo a color.
@@ -200,8 +207,9 @@ const DEPARTAMENTOS_CO: Record<string, string[]> = {
 const UBICACIONES_POR_PAIS: Record<string, Record<string, string[]>> = {
   "Colombia": DEPARTAMENTOS_CO,
 };
-
-const PAISES = Object.keys(UBICACIONES_POR_PAIS);
+const CIUDADES_DISPONIBLES = Array.from(
+  new Set(Object.values(UBICACIONES_POR_PAIS.Colombia).flat())
+).sort((a, b) => a.localeCompare(b, "es"));
 
 const LUGARES_SERVICIO_SALUD = [
   "Hospital",
@@ -232,7 +240,6 @@ const PASOS_COLOR = [
 ];
 
 // ── Types ────────────────────────────────────────────────────────────────────
-
 export interface DatosPersona {
   tipoId: string; numId: string; nombre: string;
   celular: string; telefono: string; correo: string;
@@ -264,7 +271,6 @@ const emptyPersona = (): DatosPersona => ({
 });
 
 // ── Shared UI ────────────────────────────────────────────────────────────────
-
 const inputBase =
   "w-full px-4 py-3 rounded-xl border border-border bg-white text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all";
 
@@ -503,52 +509,52 @@ function DireccionField({ onChange }: { onChange: (v: string) => void }) {
 
   return (
     <div className="flex flex-col gap-3">
-      <div className="grid grid-cols-[1fr_80px_12px_90px] gap-2 items-end">
+      <div className="grid grid-cols-1 md:grid-cols-4 gap-3 items-end">
         <div className="flex flex-col gap-1.5">
-          <label htmlFor="tipo-via" className="text-xs font-medium text-muted-foreground">Tipo de vía</label>
+          <label htmlFor="tipo-via" className="text-xs font-medium text-muted-foreground">Tipo de vía <span className="text-red-500">*</span></label>
           <select
             id="tipo-via" value={tipoVia}
             onChange={(e) => { setTipoVia(e.target.value); emit(e.target.value, numVia, nomenclatura, complemento); }}
             className={`${inputBase} cursor-pointer`}
           >
-            <option value="" disabled>Selecciona</option>
+            <option value="" disabled>Ej: Transversal</option>
             {TIPOS_VIA.map((t) => <option key={t} value={t}>{t}</option>)}
           </select>
         </div>
         <div className="flex flex-col gap-1.5">
-          <label htmlFor="num-via" className="text-xs font-medium text-muted-foreground">Número</label>
+          <label htmlFor="num-via" className="text-xs font-medium text-muted-foreground">Número de la vía <span className="text-red-500">*</span></label>
           <input
             id="num-via" type="text" value={numVia}
             onChange={(e) => { setNumVia(e.target.value); emit(tipoVia, e.target.value, nomenclatura, complemento); }}
-            placeholder="12"
+            placeholder="Ej: 73G Bis"
             className={inputBase}
           />
         </div>
-        <div className="flex items-end justify-center pb-3.5 font-bold text-muted-foreground select-none">#</div>
         <div className="flex flex-col gap-1.5">
-          <label htmlFor="num-nomen" className="text-xs font-medium text-muted-foreground">Nomenclatura</label>
+          <label htmlFor="num-nomen" className="text-xs font-medium text-muted-foreground">Nomenclatura <span className="text-red-500">*</span></label>
+          <div className="relative">
+            <span className="absolute left-3 top-1/2 -translate-y-1/2 font-semibold text-muted-foreground select-none">#</span>
+            <input
+              id="num-nomen" type="text" value={nomenclatura}
+              onChange={(e) => { setNomenclatura(e.target.value); emit(tipoVia, numVia, e.target.value, complemento); }}
+              placeholder="Ej: 73C sur - 14"
+              className={`${inputBase} pl-8`}
+            />
+          </div>
+        </div>
+        <div className="flex flex-col gap-1.5">
+          <label htmlFor="complemento-dir" className="text-xs font-medium text-muted-foreground">Complemento</label>
           <input
-            id="num-nomen" type="text" value={nomenclatura}
-            onChange={(e) => { setNomenclatura(e.target.value); emit(tipoVia, numVia, e.target.value, complemento); }}
-            placeholder="34-56"
+            id="complemento-dir" type="text" value={complemento}
+            onChange={(e) => { setComplemento(e.target.value); emit(tipoVia, numVia, nomenclatura, e.target.value); }}
+            placeholder="Ej: Torre 10 Mz 4"
             className={inputBase}
           />
         </div>
       </div>
-      <div className="flex flex-col gap-1.5">
-        <label htmlFor="complemento-dir" className="text-xs font-medium text-muted-foreground">
-          Complemento <span className="font-normal">(opcional)</span>
-        </label>
-        <input
-          id="complemento-dir" type="text" value={complemento}
-          onChange={(e) => { setComplemento(e.target.value); emit(tipoVia, numVia, nomenclatura, e.target.value); }}
-          placeholder="Ej: Apto 301, Torre B, Barrio Centro"
-          className={inputBase}
-        />
-      </div>
-      <div className="rounded-xl bg-secondary/50 border border-border p-3 flex flex-col gap-1">
-        <p className="text-[10px] font-bold tracking-widest text-muted-foreground uppercase">Vista previa de la dirección</p>
-        <p className="text-sm font-semibold text-foreground">{preview || "—"}</p>
+      <div className="rounded-xl bg-[#EEF4FF] border border-[#BFD1F8] p-4 flex flex-col gap-1.5">
+        <p className="text-[11px] font-bold tracking-wide text-[#1F3FAE] uppercase">Vista previa de la dirección</p>
+        <p className="text-sm font-medium text-[#1F2A44]">{preview || "—"}</p>
       </div>
     </div>
   );
@@ -674,69 +680,79 @@ function TitulosCapitalizacionAlert({ wireframeMode }: { wireframeMode?: boolean
 
 function LineasAtencionPanel() {
   return (
-    <div className="rounded-xl border border-border bg-white p-4 flex flex-col gap-3">
-      <p className="text-xs font-bold tracking-widest text-muted-foreground uppercase">Líneas de atención</p>
-
-      {/* Línea integral */}
-      <div className="flex flex-col gap-1.5">
-        <div className="flex items-center gap-1.5" style={{ color: "#00008F" }}>
-          <Phone size={22} />
-          <p className="text-sm font-semibold text-foreground">Línea integral</p>
-        </div>
-        <div className="flex flex-col gap-1 text-sm">
-          <div className="flex gap-1.5">
-            <span className="text-muted-foreground shrink-0">Bogotá:</span>
-            <span className="font-semibold text-foreground">+57 (601) 423 5757</span>
-          </div>
-          <div className="flex gap-1.5">
-            <span className="text-muted-foreground shrink-0">Resto del país:</span>
-            <span className="font-semibold text-foreground">+57 01-8000-512620</span>
-          </div>
-        </div>
+    <div className="rounded-[24px] border border-[#D9DEE7] bg-white overflow-hidden shadow-sm">
+      <div className="bg-[#2E4EA8] text-white px-5 py-4 flex items-start justify-between">
+        <p className="text-[17px] leading-[1.2] font-semibold tracking-wide max-w-[132px]">Líneas de atención</p>
       </div>
 
-      {/* #247 — opción de asistencia */}
-      <div className="flex flex-col gap-1.5 border-t border-border/40 pt-2.5">
-        <div className="flex items-center gap-1.5" style={{ color: "#00008F" }}>
-          <HardHat size={22} />
-          <p className="text-sm font-semibold text-foreground">#247 — Asistencias y urgencias</p>
-        </div>
-        <p className="text-sm text-muted-foreground leading-snug">
-          Marca <span className="font-semibold text-foreground">#247</span> desde tu celular, opción 1-1. Disponible las 24 horas.
-        </p>
-      </div>
-
-      {/* Línea exclusiva de salud */}
-      <div className="flex flex-col gap-1.5 border-t border-border/40 pt-2.5">
-        <div className="flex items-center gap-1.5" style={{ color: "#00008F" }}>
-          <Heart size={22} />
-          <p className="text-sm font-semibold text-foreground">Línea exclusiva de salud</p>
-        </div>
-        <div className="flex flex-col gap-1 text-sm">
-          <div className="flex gap-1.5">
-            <span className="text-muted-foreground shrink-0">Bogotá:</span>
-            <span className="font-semibold text-foreground">+57 601 4235750</span>
+      <div className="px-5 py-4 flex flex-col gap-4">
+        <div className="flex gap-4">
+          <div className="w-11 h-11 rounded-2xl bg-[#EAF0FF] text-[#2E4EA8] flex items-center justify-center shrink-0">
+            <Phone size={18} />
           </div>
-          <div className="flex gap-1.5">
-            <span className="text-muted-foreground shrink-0">Resto del país:</span>
-            <span className="font-semibold text-foreground">+57 01-8000-515750</span>
+          <div className="flex-1 min-w-0">
+            <p className="text-[16px] font-semibold text-[#111827] leading-tight">Línea integral</p>
+            <div className="mt-2.5 space-y-2 text-[13px] leading-snug">
+              <div>
+                <p className="text-[#4B5563]">Bogotá</p>
+                <p className="font-semibold text-[#111827] mt-0.5">+57 (601) 423 5757</p>
+              </div>
+              <div>
+                <p className="text-[#4B5563]">Resto del país</p>
+                <p className="font-semibold text-[#111827] mt-0.5">01-8000-512620</p>
+              </div>
+            </div>
           </div>
         </div>
-      </div>
 
-      {/* Chat en línea */}
-      <div className="flex flex-col gap-1.5 border-t border-border/40 pt-2.5">
-        <div className="flex items-center gap-1.5" style={{ color: "#00008F" }}>
-          <MessageCircle size={22} />
-          <p className="text-sm font-semibold text-foreground">Chat en línea</p>
+        <div className="border-t border-[#E5E7EB]" />
+
+        <div className="flex gap-4">
+          <div className="w-11 h-11 rounded-2xl bg-[#EAF0FF] text-[#2E4EA8] flex items-center justify-center shrink-0">
+            <HardHat size={18} />
+          </div>
+          <div className="flex-1 min-w-0">
+            <p className="text-[16px] font-semibold text-[#111827] leading-tight">
+              <span className="block">#247 -</span>
+              <span className="block">Asistencias y urgencias</span>
+            </p>
+            <p className="mt-2 text-[13px] text-[#4B5563] leading-relaxed">
+              Marca <span className="font-semibold text-[#111827]">#247</span> desde tu celular, opción 1-1.
+            </p>
+          </div>
         </div>
+
+        <div className="border-t border-[#E5E7EB]" />
+
+        <div className="flex gap-4">
+          <div className="w-11 h-11 rounded-2xl bg-[#EAF0FF] text-[#2E4EA8] flex items-center justify-center shrink-0">
+            <Heart size={18} />
+          </div>
+          <div className="flex-1 min-w-0">
+            <p className="text-[16px] font-semibold text-[#111827] leading-tight">Línea exclusiva de salud</p>
+            <div className="mt-2.5 space-y-2 text-[13px] leading-snug">
+              <div>
+                <p className="text-[#4B5563]">Bogotá</p>
+                <p className="font-semibold text-[#111827] mt-0.5">+57 601 4235750</p>
+              </div>
+              <div>
+                <p className="text-[#4B5563]">Resto del país</p>
+                <p className="font-semibold text-[#111827] mt-0.5">01-8000-515750</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div className="border-t border-[#E5E7EB]" />
+
         <a
           href="https://webchat.millenium.com.co/webchatcolpatria/online.jsp?workgroup=chatbotcolpatriaarl@workgroup.multi-chat.millenium.com.co"
           target="_blank"
           rel="noopener noreferrer"
-          className="text-sm text-primary underline underline-offset-2 hover:opacity-75 transition-opacity"
+          className={`rounded-full bg-primary text-primary-foreground shadow-sm cursor-pointer ${PRIMARY_BUTTON_INTERACTION} px-5 py-3 inline-flex items-center justify-center gap-2 text-[14px] font-semibold`}
         >
-          Iniciar chat →
+          <MessageCircle size={15} />
+          <span>Chat en línea</span>
         </a>
       </div>
     </div>
@@ -860,14 +876,14 @@ function PersonaFields({
       {celularCorreoEnFila ? (
         /* Afectado: celular + correo en la misma fila */
         <div className="grid grid-cols-2 gap-4">
-          <TextField id={`${prefix}-celular`} label="Número de celular" placeholder="3001234567" value={datos.celular} onChange={set("celular")} type="tel" hint="Debe iniciar por 3, y tener 10 dígitos" validationRule="colombiaMobile" />
+          <TextField id={`${prefix}-celular`} label="Número de celular" placeholder="Ej: 3001234567" value={datos.celular} onChange={set("celular")} type="tel" hint="Debe iniciar por 3, y tener 10 dígitos" validationRule="colombiaMobile" />
           <TextField id={`${prefix}-correo`} label="Correo electrónico" placeholder="ejemplo@correo.com" value={datos.correo} onChange={set("correo")} type="email" validationRule="email" />
         </div>
       ) : (
         /* Presenter: celular + teléfono, luego correo aparte */
         <>
           <div className="grid grid-cols-2 gap-4">
-            <TextField id={`${prefix}-celular`} label="Número de celular" placeholder="3001234567" value={datos.celular} onChange={set("celular")} type="tel" hint="Debe iniciar por 3, y tener 10 dígitos" validationRule="colombiaMobile" />
+            <TextField id={`${prefix}-celular`} label="Número de celular" placeholder="Ej: 3001234567" value={datos.celular} onChange={set("celular")} type="tel" hint="Debe iniciar por 3, y tener 10 dígitos" validationRule="colombiaMobile" />
             {showTelefono && (
               <TextField id={`${prefix}-telefono`} label="Teléfono" placeholder="6012345678" value={datos.telefono} onChange={set("telefono")} type="tel" optional hint="Inicia con 60, 10 dígitos" />
             )}
@@ -1001,6 +1017,16 @@ function Paso1({ form, setForm, onContinue, wireframeMode }: { form: FormState; 
   const canContinue = wireframeMode
     ? (form.producto !== "" && form.tipoSolicitud !== "" && form.tipologia !== "" && form.subtipologia !== "")
     : (form.tipoSolicitud !== "" && form.producto !== "" && !showTitulosAlert);
+
+  const isArlPeticion = !wireframeMode && form.tipoSolicitud === "Petición" && form.producto === "ARL";
+
+  const handleContinue = () => {
+    if (isArlPeticion) {
+      window.open("https://www.axacolpatria.my.site.com/serviciosarl/s/", "_blank");
+    } else {
+      onContinue();
+    }
+  };
 
   const handleTipologia = (v: string) =>
     setForm({ ...form, tipologia: v, subtipologia: "" });
@@ -1148,7 +1174,17 @@ function Paso1({ form, setForm, onContinue, wireframeMode }: { form: FormState; 
           <span className="text-red-500 font-bold">*</span> Campos obligatorios
         </p>
       </Annotate>
-      <NavButtons canContinue={canContinue} onContinue={onContinue} wireframeMode={wireframeMode} />
+
+      {isArlPeticion && (
+        <div className="flex gap-3 p-4 rounded-xl bg-blue-50 border border-blue-100">
+          <AlertCircle size={17} className="shrink-0 mt-0.5 text-blue-500" />
+          <p className="text-sm text-blue-800 leading-relaxed">
+            Una vez selecciones <span className="font-semibold">"continuar"</span>, serás remitido al radicador de ARL, donde podrás continuar con el proceso de radicación y seguimiento correspondiente.
+          </p>
+        </div>
+      )}
+
+      <NavButtons canContinue={canContinue} onContinue={handleContinue} wireframeMode={wireframeMode} />
     </>
   );
 }
@@ -1210,7 +1246,7 @@ function Paso2({ form, setForm, onBack, onContinue, wireframeMode }: { form: For
         )}
 
         {correoFisico && (
-          <div className="flex flex-col gap-1.5 p-4 rounded-xl bg-blue-50 border border-blue-100">
+          <div className="flex flex-col gap-1.5 p-4 rounded-xl bg-white border border-blue-200">
             <p className="text-xs text-blue-700 font-semibold mb-1">Requerido para respuesta por correo físico</p>
             <DireccionField onChange={(v) => setForm({ ...form, direccion: v })} />
           </div>
@@ -1295,23 +1331,21 @@ function Paso2({ form, setForm, onBack, onContinue, wireframeMode }: { form: For
 
 function CamposEspecificos({ form, setForm }: { form: FormState; setForm: (f: FormState) => void }) {
   const { producto, tipoSolicitud } = form;
-  const requiere = TIPOS_CON_AFECTADO_SET.has(tipoSolicitud);
-  if (!requiere) return null;
+  if (!producto) return null;
 
   const esAutos = producto === "Autos" || producto === "Automóviles";
   const esSoat = producto === "SOAT";
   const esSalud = producto === "Salud";
   const esArl = producto === "ARL";
   const esVida = producto === "Vida";
+  const requiere = TIPOS_CON_AFECTADO_SET.has(tipoSolicitud);
   const tieneUbicacion = esSoat || esSalud || esArl;
   const tienePlaca = esAutos || esSoat;
 
-  if (!tienePlaca && !tieneUbicacion && !esVida) return null;
-
-  const departamentos = form.pais ? Object.keys(UBICACIONES_POR_PAIS[form.pais] ?? {}) : [];
-  const ciudades = form.pais && form.departamento
-    ? (UBICACIONES_POR_PAIS[form.pais]?.[form.departamento] ?? [])
-    : [];
+  if (requiere && !tienePlaca && !tieneUbicacion && !esVida) {
+    // Incluso si no hay más campos específicos para el producto,
+    // se mantiene siempre la captura de ciudad.
+  }
 
   const set = (k: keyof FormState) => (v: string) => setForm({ ...form, [k]: v });
 
@@ -1322,7 +1356,7 @@ function CamposEspecificos({ form, setForm }: { form: FormState; setForm: (f: Fo
       </p>
 
       {/* AUTOS / SOAT: placa */}
-      {tienePlaca && (
+      {requiere && tienePlaca && (
         <>
           <TextField id="placa" label="Placa" placeholder="Ej. ABC123" value={form.placa} onChange={set("placa")} />
           <TextField id="tercero" label="Tercero afectado" placeholder="Nombre del tercero" value={form.terceroAfectado} onChange={set("terceroAfectado")} optional />
@@ -1330,43 +1364,26 @@ function CamposEspecificos({ form, setForm }: { form: FormState; setForm: (f: Fo
         </>
       )}
 
-      {/* Ubicación: SOAT, SALUD, ARL */}
-      {tieneUbicacion && (
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <SelectField
+          id="ciudad"
+          label="Ciudad"
+          placeholder="Selecciona"
+          options={CIUDADES_DISPONIBLES}
+          value={form.ciudad}
+          onChange={set("ciudad")}
+        />
+      </div>
+
+      {/* Campos complementarios de ubicación: SOAT, SALUD, ARL */}
+      {requiere && tieneUbicacion && (
         <>
-          <p className="text-xs font-semibold text-muted-foreground -mb-2">Ubicación relacionada con la solicitud</p>
-          <div className="grid grid-cols-3 gap-4">
-            <SelectField
-              id="pais"
-              label="País"
-              placeholder="Selecciona"
-              options={PAISES}
-              value={form.pais}
-              onChange={(v) => setForm({ ...form, pais: v, departamento: "", ciudad: "" })}
-            />
-            <SelectField
-              id="departamento"
-              label="Departamento"
-              placeholder={form.pais ? "Selecciona" : "Primero selecciona país"}
-              options={departamentos}
-              value={form.departamento}
-              onChange={(v) => setForm({ ...form, departamento: v, ciudad: "" })}
-              disabled={!form.pais}
-            />
-            <SelectField
-              id="ciudad"
-              label="Ciudad"
-              placeholder={form.departamento ? "Selecciona" : "Primero selecciona departamento"}
-              options={ciudades}
-              value={form.ciudad}
-              onChange={set("ciudad")}
-              disabled={!form.departamento}
-            />
-          </div>
+          <p className="text-xs font-semibold text-muted-foreground -mb-2">Información adicional de la solicitud</p>
         </>
       )}
 
       {/* SALUD: lugar donde recibiste el servicio */}
-      {esSalud && (
+      {requiere && esSalud && (
         <>
           <SelectField
             id="lugar-servicio"
@@ -1383,7 +1400,7 @@ function CamposEspecificos({ form, setForm }: { form: FormState; setForm: (f: Fo
       )}
 
       {/* VIDA: asociado a crédito */}
-      {esVida && (
+      {requiere && esVida && (
         <>
           <div className="flex flex-col gap-2">
             <p className="text-sm font-semibold text-foreground flex items-center gap-1">
@@ -1536,6 +1553,7 @@ function Paso3({ form, setForm, onBack, onContinue, wireframeMode }: {
 
   const canContinue =
     (wireframeMode || !requiereTipologiaSubtipologia || (form.tipologia !== "" && form.subtipologia !== "")) &&
+    (wireframeMode || form.ciudad.trim() !== "") &&
     descripcionOk &&
     !overLimit &&
     form.captchaOk &&
