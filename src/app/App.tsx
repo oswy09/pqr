@@ -1176,11 +1176,13 @@ function Paso1({ form, setForm, onContinue, wireframeMode }: { form: FormState; 
       </Annotate>
 
       {isArlPeticion && (
-        <div className="flex gap-3 p-4 rounded-xl bg-blue-50 border border-blue-100">
-          <AlertCircle size={17} className="shrink-0 mt-0.5 text-blue-500" />
-          <p className="text-sm text-blue-800 leading-relaxed">
-            Una vez selecciones <span className="font-semibold">"continuar"</span>, serás remitido al radicador de ARL, donde podrás continuar con el proceso de radicación y seguimiento correspondiente.
-          </p>
+        <div className="flex gap-3 p-4 rounded-xl bg-amber-50 border border-amber-200">
+          <AlertCircle size={17} className="shrink-0 mt-0.5 text-amber-600" />
+          <div className="text-sm leading-relaxed text-amber-800">
+            <p className="text-amber-700">
+              Una vez selecciones <span className="font-semibold">"continuar"</span>, serás remitido al radicador de ARL, donde podrás continuar con el proceso de radicación y seguimiento correspondiente.
+            </p>
+          </div>
         </div>
       )}
 
@@ -1355,13 +1357,9 @@ function CamposEspecificos({ form, setForm }: { form: FormState; setForm: (f: Fo
         Datos específicos — {producto}
       </p>
 
-      {/* AUTOS / SOAT: placa */}
+      {/* AUTOS / SOAT: solo placa */}
       {requiere && tienePlaca && (
-        <>
-          <TextField id="placa" label="Placa" placeholder="Ej. ABC123" value={form.placa} onChange={set("placa")} />
-          <TextField id="tercero" label="Tercero afectado" placeholder="Nombre del tercero" value={form.terceroAfectado} onChange={set("terceroAfectado")} optional />
-          <TextField id="placa-tercero" label="Placa del tercero" placeholder="Ej. XYZ789" value={form.placaTercero} onChange={set("placaTercero")} optional />
-        </>
+        <TextField id="placa" label="Placa" placeholder="Ej. ABC123" value={form.placa} onChange={set("placa")} />
       )}
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -1612,10 +1610,19 @@ function Paso3({ form, setForm, onBack, onContinue, wireframeMode }: {
             <p className="text-sm font-semibold text-foreground">
               Anexos de soporte <span className="text-xs font-normal text-muted-foreground">(opcional)</span>
             </p>
-            <p className="text-xs text-muted-foreground -mt-1">
-              Adjunta los documentos que ayuden a soportar o complementar tu solicitud.
-              Formatos permitidos: PDF, PNG, JPG y XLSX. Tamaño máximo total: 25 MB.
-            </p>
+            <div className="text-xs text-muted-foreground -mt-1 flex flex-col gap-2">
+              <p>
+                Adjunta los documentos que ayuden a soportar o complementar tu solicitud.
+                Formatos permitidos: PDF, PNG, JPG, XLSX y videos.
+                Tamaño máximo por archivo: <span className="font-medium text-foreground">5 MB</span>.
+                Tamaño máximo total: <span className="font-medium text-foreground">25 MB</span>.
+              </p>
+              <div className="rounded-lg bg-muted/60 border border-border/60 px-3 py-2.5 flex flex-col gap-1.5">
+                <p className="font-semibold text-foreground">Si actúas en representación del asegurado, adjunta los documentos correspondientes:</p>
+                <p><span className="font-medium text-foreground">Menor de edad:</span> Cédula y registro civil o documento que acredite el parentesco.</p>
+                <p><span className="font-medium text-foreground">Tercero autorizado:</span> Poder y documentos que acrediten la autorización para solicitar información y tratar sus datos personales.</p>
+              </div>
+            </div>
 
             {/* Drop zone */}
             <button
@@ -1626,14 +1633,14 @@ function Paso3({ form, setForm, onBack, onContinue, wireframeMode }: {
               <Paperclip size={18} className="text-muted-foreground shrink-0" />
               <div>
                 <p className="text-sm font-medium text-foreground">Adjuntar archivos</p>
-                <p className="text-xs text-muted-foreground">PDF, PNG, JPG, XLSX · máx. 25 MB en total</p>
+                <p className="text-xs text-muted-foreground">PDF, PNG, JPG, XLSX, videos · máx. 5 MB/archivo · 25 MB total</p>
               </div>
             </button>
             <input
               ref={fileInputRef}
               type="file"
               multiple
-              accept=".pdf,.png,.jpg,.jpeg,.xlsx"
+              accept=".pdf,.png,.jpg,.jpeg,.xlsx,.mp4,.mov,.avi,.mkv,.webm"
               className="hidden"
               onChange={handleFiles}
             />
