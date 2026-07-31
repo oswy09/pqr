@@ -224,18 +224,18 @@ const LUGARES_SERVICIO_SALUD = [
 ];
 
 const PASOS = [
-  { num: 1, label: "Tipo de solicitud" },
+  { num: 1, label: "Solicitud" },
   { num: 2, label: "Datos personales" },
-  { num: 3, label: "Detalle de solicitud" },
+  { num: 3, label: "Detalle" },
   { num: 4, label: "Confirmación" },
 ];
 
 // Etiquetas del stepper del prototipo a color — el paso 1 tiene otro nombre ahí,
 // el modo wireframe sigue usando PASOS sin tocar.
 const PASOS_COLOR = [
-  { num: 1, label: "Detalle de tu solicitud" },
+  { num: 1, label: "Solicitud" },
   { num: 2, label: "Datos personales" },
-  { num: 3, label: "Soportes y validación" },
+  { num: 3, label: "Detalle" },
   { num: 4, label: "Confirmación" },
 ];
 
@@ -509,7 +509,7 @@ function DireccionField({ onChange }: { onChange: (v: string) => void }) {
 
   return (
     <div className="flex flex-col gap-3">
-      <div className="grid grid-cols-1 md:grid-cols-4 gap-3 items-end">
+      <div className="grid grid-cols-1 md:grid-cols-[1fr_1fr_auto_1fr_1fr] gap-3 items-end">
         <div className="flex flex-col gap-1.5">
           <label htmlFor="tipo-via" className="text-xs font-medium text-muted-foreground">Tipo de vía <span className="text-red-500">*</span></label>
           <select
@@ -530,17 +530,17 @@ function DireccionField({ onChange }: { onChange: (v: string) => void }) {
             className={inputBase}
           />
         </div>
+        <div className="hidden md:flex items-center justify-center h-[46px] text-base font-semibold text-muted-foreground select-none px-1">
+          #
+        </div>
         <div className="flex flex-col gap-1.5">
           <label htmlFor="num-nomen" className="text-xs font-medium text-muted-foreground">Nomenclatura <span className="text-red-500">*</span></label>
-          <div className="relative">
-            <span className="absolute left-3 top-1/2 -translate-y-1/2 font-semibold text-muted-foreground select-none">#</span>
-            <input
-              id="num-nomen" type="text" value={nomenclatura}
-              onChange={(e) => { setNomenclatura(e.target.value); emit(tipoVia, numVia, e.target.value, complemento); }}
-              placeholder="Ej: 73C sur - 14"
-              className={`${inputBase} pl-8`}
-            />
-          </div>
+          <input
+            id="num-nomen" type="text" value={nomenclatura}
+            onChange={(e) => { setNomenclatura(e.target.value); emit(tipoVia, numVia, e.target.value, complemento); }}
+            placeholder="Ej: 73C sur - 14"
+            className={inputBase}
+          />
         </div>
         <div className="flex flex-col gap-1.5">
           <label htmlFor="complemento-dir" className="text-xs font-medium text-muted-foreground">Complemento</label>
@@ -713,8 +713,7 @@ function LineasAtencionPanel() {
           </div>
           <div className="flex-1 min-w-0">
             <p className="text-[16px] font-semibold text-[#111827] leading-tight">
-              <span className="block">#247 -</span>
-              <span className="block">Asistencias y urgencias</span>
+              Asistencias y urgencias
             </p>
             <p className="mt-2 text-[13px] text-[#4B5563] leading-relaxed">
               Marca <span className="font-semibold text-[#111827]">#247</span> desde tu celular, opción 1-1.
@@ -1374,11 +1373,6 @@ function CamposEspecificos({ form, setForm }: { form: FormState; setForm: (f: Fo
       </div>
 
       {/* Campos complementarios de ubicación: SOAT, SALUD, ARL */}
-      {requiere && tieneUbicacion && (
-        <>
-          <p className="text-xs font-semibold text-muted-foreground -mb-2">Información adicional de la solicitud</p>
-        </>
-      )}
 
       {/* SALUD: lugar donde recibiste el servicio */}
       {requiere && esSalud && (
@@ -1613,9 +1607,6 @@ function Paso3({ form, setForm, onBack, onContinue, wireframeMode }: {
             <div className="text-xs text-muted-foreground -mt-1 flex flex-col gap-2">
               <p>
                 Adjunta los documentos que ayuden a soportar o complementar tu solicitud.
-                Formatos permitidos: PDF, PNG, JPG, XLSX y videos.
-                Tamaño máximo por archivo: <span className="font-medium text-foreground">5 MB</span>.
-                Tamaño máximo total: <span className="font-medium text-foreground">25 MB</span>.
               </p>
               <div className="rounded-lg bg-muted/60 border border-border/60 px-3 py-2.5 flex flex-col gap-1.5">
                 <p className="font-semibold text-foreground">Si actúas en representación del asegurado, adjunta los documentos correspondientes:</p>
@@ -1633,7 +1624,7 @@ function Paso3({ form, setForm, onBack, onContinue, wireframeMode }: {
               <Paperclip size={18} className="text-muted-foreground shrink-0" />
               <div>
                 <p className="text-sm font-medium text-foreground">Adjuntar archivos</p>
-                <p className="text-xs text-muted-foreground">PDF, PNG, JPG, XLSX, videos · máx. 5 MB/archivo · 25 MB total</p>
+                <p className="text-xs text-muted-foreground">Formatos permitidos: PDF, PNG, JPG, XLSX y videos. Tamaño máximo por archivo: 5 MB. Tamaño máximo total: 25 MB.</p>
               </div>
             </button>
             <input
@@ -1837,7 +1828,7 @@ function Paso3({ form, setForm, onBack, onContinue, wireframeMode }: {
 
       <Annotate id="campos-obligatorios" active={!!wireframeMode}>
         <p className="text-xs text-muted-foreground mt-6">
-          <span className="text-red-500 font-bold">*</span> Campos obligatorios · Mínimo {minDescripcionCaracteres} caracteres en la descripción
+          <span className="text-red-500 font-bold">*</span> Campos obligatorios
         </p>
       </Annotate>
 
