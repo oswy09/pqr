@@ -1333,6 +1333,7 @@ function Paso2({ form, setForm, onBack, onContinue, wireframeMode }: { form: For
 function CamposEspecificos({ form, setForm }: { form: FormState; setForm: (f: FormState) => void }) {
   const { producto, tipoSolicitud } = form;
   if (!producto) return null;
+  if (["Felicitaciones", "Sugerencias"].includes(tipoSolicitud)) return null;
 
   const esAutos = producto === "Autos" || producto === "Automóviles";
   const esSoat = producto === "SOAT";
