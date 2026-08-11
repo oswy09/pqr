@@ -681,13 +681,13 @@ function TitulosCapitalizacionAlert({ wireframeMode }: { wireframeMode?: boolean
 function LineasAtencionPanel() {
   return (
     <div className="rounded-[24px] border border-[#D9DEE7] bg-white overflow-hidden shadow-sm">
-      <div className="bg-[#2E4EA8] text-white px-5 py-4 flex items-start justify-between">
+      <div className="bg-primary text-white px-5 py-4 flex items-start justify-between">
         <p className="text-[17px] leading-[1.2] font-semibold tracking-wide max-w-[132px]">Líneas de atención</p>
       </div>
 
       <div className="px-5 py-4 flex flex-col gap-4">
         <div className="flex gap-4">
-          <div className="w-11 h-11 rounded-2xl bg-[#EAF0FF] text-[#2E4EA8] flex items-center justify-center shrink-0">
+          <div className="w-11 h-11 rounded-full bg-[#EAF0FF] text-[#2E4EA8] flex items-center justify-center shrink-0">
             <Phone size={18} />
           </div>
           <div className="flex-1 min-w-0">
@@ -708,7 +708,7 @@ function LineasAtencionPanel() {
         <div className="border-t border-[#E5E7EB]" />
 
         <div className="flex gap-4">
-          <div className="w-11 h-11 rounded-2xl bg-[#EAF0FF] text-[#2E4EA8] flex items-center justify-center shrink-0">
+          <div className="w-11 h-11 rounded-full bg-[#EAF0FF] text-[#2E4EA8] flex items-center justify-center shrink-0">
             <HardHat size={18} />
           </div>
           <div className="flex-1 min-w-0">
@@ -724,7 +724,7 @@ function LineasAtencionPanel() {
         <div className="border-t border-[#E5E7EB]" />
 
         <div className="flex gap-4">
-          <div className="w-11 h-11 rounded-2xl bg-[#EAF0FF] text-[#2E4EA8] flex items-center justify-center shrink-0">
+          <div className="w-11 h-11 rounded-full bg-[#EAF0FF] text-[#2E4EA8] flex items-center justify-center shrink-0">
             <Heart size={18} />
           </div>
           <div className="flex-1 min-w-0">
@@ -1290,15 +1290,6 @@ function Paso2({ form, setForm, onBack, onContinue, wireframeMode }: { form: For
 
             {form.mismaPersonaAfectada === false && (
               <>
-                {!wireframeMode && (
-                  <div className="flex gap-2.5 p-3.5 rounded-xl bg-blue-50 border border-blue-100">
-                    <AlertCircle size={15} className="shrink-0 mt-0.5 text-blue-600" />
-                    <p className="text-xs text-blue-800 leading-relaxed">
-                      Si actúas en representación del asegurado, debes contar con la autorización correspondiente
-                      y adjuntarla en el siguiente paso.
-                    </p>
-                  </div>
-                )}
                 <div className="flex flex-col gap-5 p-5 rounded-xl border border-border bg-secondary/30">
                   <p className="text-xs font-bold tracking-widest text-muted-foreground uppercase">Datos del afectado</p>
                   <PersonaFields prefix="afectado" datos={form.afectado} onChange={setAfectado} celularCorreoEnFila />
@@ -1609,10 +1600,10 @@ function Paso3({ form, setForm, onBack, onContinue, wireframeMode }: {
               <p>
                 Adjunta los documentos que ayuden a soportar o complementar tu solicitud.
               </p>
-              <div className="rounded-lg bg-muted/60 border border-border/60 px-3 py-2.5 flex flex-col gap-1.5">
-                <p className="font-semibold text-foreground">Si actúas en representación del asegurado, adjunta los documentos correspondientes:</p>
-                <p><span className="font-medium text-foreground">Menor de edad:</span> Cédula y registro civil o documento que acredite el parentesco.</p>
-                <p><span className="font-medium text-foreground">Tercero autorizado:</span> Poder y documentos que acrediten la autorización para solicitar información y tratar sus datos personales.</p>
+              <div className="rounded-lg bg-blue-50 border border-blue-200 px-3 py-2.5 flex flex-col gap-1.5">
+                <p className="font-semibold text-blue-800">Si actúas en representación del asegurado, adjunta los documentos correspondientes:</p>
+                <p><span className="font-medium text-blue-700">Menor de edad:</span> <span className="text-blue-700">Cédula y registro civil o documento que acredite el parentesco.</span></p>
+                <p><span className="font-medium text-blue-700">Tercero autorizado:</span> <span className="text-blue-700">Poder y documentos que acrediten la autorización para solicitar información y tratar sus datos personales.</span></p>
               </div>
             </div>
 
