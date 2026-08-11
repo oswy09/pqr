@@ -7,7 +7,7 @@ import {
   Paperclip, X, Send,
   LoaderCircle, Phone, MessageCircle,
   ClipboardList, MessageCircleWarning, Scale, Star, Lightbulb,
-  HardHat, Heart, Car, UserCheck, Package,
+  HardHat, Heart, Car, UserCheck, Package, Search,
 } from "lucide-react";
 import { Annotate } from "./wireframe/Annotate";
 import { PresenterControls } from "./wireframe/PresenterControls";
@@ -88,11 +88,9 @@ const TIPOLOGIAS_POR_PRODUCTO: Record<string, string[]> = {
     "Otro motivo ARL",
   ],
   Salud: [
-    "Negación de servicio médico",
-    "Demora en autorización",
-    "Cobro de copago incorrecto",
-    "Red de prestadores insuficiente",
-    "Otro motivo Salud",
+    "Afiliación",
+    "Datos personales",
+    "Prestación de servicios y atención médica",
   ],
   Autos: [
     "Demora en proceso de siniestro",
@@ -142,6 +140,15 @@ const TIPOLOGIAS: Record<string, string[]> = {
   ],
 };
 const SUBTIPOLOGIAS: Record<string, string[]> = {
+  "Afiliación": [
+    "Inconformidad con la información y/o tiempos de afiliación",
+  ],
+  "Datos personales": [
+    "Inconformidad con el uso de mis datos o canal de contacto",
+  ],
+  "Prestación de servicios y atención médica": [
+    "Inconformidad con mi diagnóstico, tratamiento o concepto médico",
+  ],
   "Demoras en el proceso": [
     "Tiempo de respuesta excedido",
     "Trámite sin actualización",
@@ -210,6 +217,12 @@ const UBICACIONES_POR_PAIS: Record<string, Record<string, string[]>> = {
 const CIUDADES_DISPONIBLES = Array.from(
   new Set(Object.values(UBICACIONES_POR_PAIS.Colombia).flat())
 ).sort((a, b) => a.localeCompare(b, "es"));
+
+// Mapa inverso ciudad → departamento
+const CIUDAD_A_DEPTO: Record<string, string> = {};
+for (const [depto, ciudades] of Object.entries(DEPARTAMENTOS_CO)) {
+  for (const ciudad of ciudades) CIUDAD_A_DEPTO[ciudad] = depto;
+}
 
 const LUGARES_SERVICIO_SALUD = [
   "Hospital",
@@ -673,6 +686,92 @@ function TitulosCapitalizacionAlert({ wireframeMode }: { wireframeMode?: boolean
         </p>
       </div>
     </Annotate>
+  );
+}
+
+// ── Ciudad con autocompletado ─────────────────────────────────────────────────
+
+function CiudadHechosField({ value, onChange }: { value: string; onChange: (ciudad: string, depto: string) => void }) {
+  const [query, setQuery] = useState(value);
+  const [open, setOpen] = useState(false);
+  const [focused, setFocused] = useState(false);
+  const wrapRef = useRef<HTMLDivElement>(null);
+  const depto = CIUDAD_A_DEPTO[value] ?? "";
+
+  const matches = query.trim().length === 0
+    ? []
+    : CIUDADES_DISPONIBLES.filter((c) =>
+        c.toLowerCase().includes(query.toLowerCase())
+      ).slice(0, 8);
+
+  const handleSelect = (ciudad: string) => {
+    setQuery(ciudad);
+    setOpen(false);
+    onChange(ciudad, CIUDAD_A_DEPTO[ciudad] ?? "");
+  };
+
+  useEffect(() => {
+    const handler = (e: MouseEvent) => {
+      if (wrapRef.current && !wrapRef.current.contains(e.target as Node)) {
+        setOpen(false);
+        if (!CIUDAD_A_DEPTO[query]) { setQuery(""); onChange("", ""); }
+      }
+    };
+    document.addEventListener("mousedown", handler);
+    return () => document.removeEventListener("mousedown", handler);
+  }, [query]);
+
+  return (
+    <div ref={wrapRef} className="flex flex-col gap-1.5 relative">
+      <label htmlFor="ciudad-hechos" className="text-sm font-medium text-foreground">
+        ¿Dónde ocurrieron los hechos? <span className="text-destructive">*</span>
+      </label>
+      <div className={`flex items-center gap-2 border rounded-xl px-3 h-11 bg-background transition-colors ${focused ? "border-primary ring-2 ring-primary/20" : "border-border"}`}>
+        <Search size={15} className="text-muted-foreground shrink-0" />
+        <input
+          id="ciudad-hechos"
+          type="text"
+          autoComplete="off"
+          placeholder="Busca tu ciudad..."
+          value={query}
+          className="flex-1 bg-transparent text-sm outline-none placeholder:text-muted-foreground"
+          onFocus={() => { setFocused(true); setOpen(query.trim().length > 0); }}
+          onBlur={() => setFocused(false)}
+          onChange={(e) => {
+            const v = e.target.value;
+            setQuery(v);
+            setOpen(v.trim().length > 0);
+            if (!v) onChange("", "");
+          }}
+        />
+        {query && (
+          <button type="button" onClick={() => { setQuery(""); setOpen(false); onChange("", ""); }}
+            className="text-muted-foreground hover:text-foreground transition-colors">
+            <X size={14} />
+          </button>
+        )}
+      </div>
+      {open && matches.length > 0 && (
+        <div className="absolute top-[calc(100%+4px)] left-0 right-0 z-50 bg-popover border border-border rounded-xl shadow-lg overflow-hidden">
+          {matches.map((ciudad) => (
+            <button
+              key={ciudad}
+              type="button"
+              onMouseDown={(e) => { e.preventDefault(); handleSelect(ciudad); }}
+              className="w-full text-left px-4 py-2.5 text-sm hover:bg-accent hover:text-accent-foreground transition-colors flex justify-between items-center"
+            >
+              <span>{ciudad}</span>
+              <span className="text-xs text-muted-foreground">{CIUDAD_A_DEPTO[ciudad]}</span>
+            </button>
+          ))}
+        </div>
+      )}
+      {depto && (
+        <p className="text-xs text-muted-foreground mt-0.5">
+          Departamento: <span className="font-medium text-foreground">{depto}</span>
+        </p>
+      )}
+    </div>
   );
 }
 
@@ -1353,17 +1452,6 @@ function CamposEspecificos({ form, setForm }: { form: FormState; setForm: (f: Fo
         <TextField id="placa" label="Placa" placeholder="Ej. ABC123" value={form.placa} onChange={set("placa")} />
       )}
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <SelectField
-          id="ciudad"
-          label="Ciudad"
-          placeholder="Selecciona"
-          options={CIUDADES_DISPONIBLES}
-          value={form.ciudad}
-          onChange={set("ciudad")}
-        />
-      </div>
-
       {/* Campos complementarios de ubicación: SOAT, SALUD, ARL */}
 
       {/* SALUD: lugar donde recibiste el servicio */}
@@ -1575,6 +1663,14 @@ function Paso3({ form, setForm, onBack, onContinue, wireframeMode }: {
 
             <div className="border-t border-dashed border-border" />
           </>
+        )}
+
+        {/* Ciudad de los hechos */}
+        {!wireframeMode && (
+          <CiudadHechosField
+            value={form.ciudad}
+            onChange={(ciudad, departamento) => setForm({ ...form, ciudad, departamento })}
+          />
         )}
 
         {/* Descripción */}
