@@ -139,16 +139,16 @@ const TIPOLOGIAS: Record<string, string[]> = {
     "Otro motivo",
   ],
 };
+const SUBTIPOLOGIAS_SALUD = [
+  "Inconformidad con la información y/o tiempos de afiliación",
+  "Inconformidad con el uso de mis datos o canal de contacto",
+  "Inconformidad con mi diagnóstico, tratamiento o concepto médico",
+];
+
 const SUBTIPOLOGIAS: Record<string, string[]> = {
-  "Afiliación": [
-    "Inconformidad con la información y/o tiempos de afiliación",
-  ],
-  "Datos personales": [
-    "Inconformidad con el uso de mis datos o canal de contacto",
-  ],
-  "Prestación de servicios y atención médica": [
-    "Inconformidad con mi diagnóstico, tratamiento o concepto médico",
-  ],
+  "Afiliación": SUBTIPOLOGIAS_SALUD,
+  "Datos personales": SUBTIPOLOGIAS_SALUD,
+  "Prestación de servicios y atención médica": SUBTIPOLOGIAS_SALUD,
   "Demoras en el proceso": [
     "Tiempo de respuesta excedido",
     "Trámite sin actualización",
