@@ -125,69 +125,18 @@ const TIPOLOGIAS_POR_PRODUCTO: Record<string, string[]> = {
 TIPOLOGIAS_POR_PRODUCTO["Automóviles"] = TIPOLOGIAS_POR_PRODUCTO.Autos;
 TIPOLOGIAS_POR_PRODUCTO["Generales"] = TIPOLOGIAS_POR_PRODUCTO["Otros Seguros"];
 
-// Subtipologías por tipología (demo data, compartidas)
-// Tipología / Subtipología — datos demo
-const TIPOLOGIAS: Record<string, string[]> = {
-  default: [
-    "Demoras en el proceso",
-    "Inconformidad con la respuesta",
-    "Cobro indebido",
-    "Información incorrecta o incompleta",
-    "Atención al cliente deficiente",
-    "Proceso de reclamación",
-    "Cancelación de póliza",
-    "Otro motivo",
-  ],
-};
-const SUBTIPOLOGIAS_SALUD = [
+const TIPOLOGIAS_FIJAS = [
+  "Afiliación",
+  "Datos personales",
+  "Prestación de servicios y atención médica",
+];
+
+const SUBTIPOLOGIAS_FIJAS = [
   "Inconformidad con la información y/o tiempos de afiliación",
   "Inconformidad con el uso de mis datos o canal de contacto",
   "Inconformidad con mi diagnóstico, tratamiento o concepto médico",
 ];
 
-const SUBTIPOLOGIAS: Record<string, string[]> = {
-  "Afiliación": SUBTIPOLOGIAS_SALUD,
-  "Datos personales": SUBTIPOLOGIAS_SALUD,
-  "Prestación de servicios y atención médica": SUBTIPOLOGIAS_SALUD,
-  "Demoras en el proceso": [
-    "Tiempo de respuesta excedido",
-    "Trámite sin actualización",
-    "Demora en desembolso",
-    "Espera en línea de atención",
-  ],
-  "Cobro indebido": [
-    "Error en facturación",
-    "Débito no autorizado",
-    "Prima incorrecta",
-    "Cobro duplicado",
-  ],
-  "Inconformidad con la respuesta": [
-    "Respuesta fuera de término",
-    "Respuesta incompleta",
-    "Respuesta no corresponde a la solicitud",
-  ],
-  "Información incorrecta o incompleta": [
-    "Datos del asegurado incorrectos",
-    "Información de póliza desactualizada",
-    "Documentación requerida no informada",
-  ],
-  "Atención al cliente deficiente": [
-    "Trato inadecuado",
-    "Asesoría incorrecta",
-    "Agente sin capacitación",
-  ],
-  "Proceso de reclamación": [
-    "Reclamación negada injustamente",
-    "Documentos extraviados",
-    "Proceso incompleto",
-  ],
-  "Cancelación de póliza": [
-    "Cancelación no solicitada",
-    "Error en fecha de cancelación",
-    "Sin previo aviso",
-  ],
-  "Otro motivo": ["Otro"],
-};
 
 const TIPOS_CON_AFECTADO = [...TIPOS_CON_AFECTADO_SET];
 
@@ -696,25 +645,31 @@ function CiudadHechosField({ value, onChange }: { value: string; onChange: (ciud
   const [open, setOpen] = useState(false);
   const [focused, setFocused] = useState(false);
   const wrapRef = useRef<HTMLDivElement>(null);
+  const onChangeRef = useRef(onChange);
+  onChangeRef.current = onChange;
   const depto = CIUDAD_A_DEPTO[value] ?? "";
 
   const matches = query.trim().length === 0
-    ? []
+    ? CIUDADES_DISPONIBLES.slice(0, 50)
     : CIUDADES_DISPONIBLES.filter((c) =>
         c.toLowerCase().includes(query.toLowerCase())
-      ).slice(0, 8);
+      ).slice(0, 10);
 
   const handleSelect = (ciudad: string) => {
     setQuery(ciudad);
     setOpen(false);
-    onChange(ciudad, CIUDAD_A_DEPTO[ciudad] ?? "");
+    onChangeRef.current(ciudad, CIUDAD_A_DEPTO[ciudad] ?? "");
+  };
+
+  const toggleOpen = () => {
+    setOpen((prev) => !prev);
   };
 
   useEffect(() => {
     const handler = (e: MouseEvent) => {
       if (wrapRef.current && !wrapRef.current.contains(e.target as Node)) {
         setOpen(false);
-        if (!CIUDAD_A_DEPTO[query]) { setQuery(""); onChange("", ""); }
+        if (!CIUDAD_A_DEPTO[query]) { setQuery(""); onChangeRef.current("", ""); }
       }
     };
     document.addEventListener("mousedown", handler);
@@ -723,7 +678,7 @@ function CiudadHechosField({ value, onChange }: { value: string; onChange: (ciud
 
   return (
     <div ref={wrapRef} className="flex flex-col gap-1.5 relative">
-      <label htmlFor="ciudad-hechos" className="text-sm font-medium text-foreground">
+      <label htmlFor="ciudad-hechos" className="text-sm font-semibold text-foreground">
         ¿Dónde ocurrieron los hechos? <span className="text-destructive">*</span>
       </label>
       <div className={`flex items-center gap-2 border rounded-xl px-3 h-11 bg-background transition-colors ${focused ? "border-primary ring-2 ring-primary/20" : "border-border"}`}>
@@ -735,30 +690,35 @@ function CiudadHechosField({ value, onChange }: { value: string; onChange: (ciud
           placeholder="Busca tu ciudad..."
           value={query}
           className="flex-1 bg-transparent text-sm outline-none placeholder:text-muted-foreground"
-          onFocus={() => { setFocused(true); setOpen(query.trim().length > 0); }}
+          onFocus={() => { setFocused(true); setOpen(true); }}
           onBlur={() => setFocused(false)}
           onChange={(e) => {
             const v = e.target.value;
             setQuery(v);
-            setOpen(v.trim().length > 0);
+            setOpen(true);
             if (!v) onChange("", "");
           }}
         />
-        {query && (
-          <button type="button" onClick={() => { setQuery(""); setOpen(false); onChange("", ""); }}
+        {query ? (
+          <button type="button" onMouseDown={(e) => { e.preventDefault(); setQuery(""); setOpen(false); onChange("", ""); }}
             className="text-muted-foreground hover:text-foreground transition-colors">
             <X size={14} />
+          </button>
+        ) : (
+          <button type="button" onMouseDown={(e) => { e.preventDefault(); toggleOpen(); }}
+            className="text-muted-foreground hover:text-foreground transition-colors">
+            <ChevronDown size={16} className={`transition-transform ${open ? "rotate-180" : ""}`} />
           </button>
         )}
       </div>
       {open && matches.length > 0 && (
-        <div className="absolute top-[calc(100%+4px)] left-0 right-0 z-50 bg-popover border border-border rounded-xl shadow-lg overflow-hidden">
+        <div className="absolute top-[calc(100%+4px)] left-0 right-0 z-50 bg-popover border border-border rounded-xl shadow-lg overflow-y-auto max-h-52">
           {matches.map((ciudad) => (
             <button
               key={ciudad}
               type="button"
               onMouseDown={(e) => { e.preventDefault(); handleSelect(ciudad); }}
-              className="w-full text-left px-4 py-2.5 text-sm hover:bg-accent hover:text-accent-foreground transition-colors flex justify-between items-center"
+              className="w-full text-left px-4 py-2.5 text-sm hover:bg-accent hover:text-accent-foreground transition-colors flex flex-col items-start gap-0.5"
             >
               <span>{ciudad}</span>
               <span className="text-xs text-muted-foreground">{CIUDAD_A_DEPTO[ciudad]}</span>
@@ -1089,12 +1049,12 @@ const SUBTIPOLOGIAS_DEMO_FALLBACK = [
   "Otro",
 ];
 
-function getTipologiaOpts(producto: string) {
-  return producto ? (TIPOLOGIAS_POR_PRODUCTO[producto] ?? TIPOLOGIAS.default) : [];
+function getTipologiaOpts(_producto: string) {
+  return TIPOLOGIAS_FIJAS;
 }
 
-function getSubtipologiaOpts(tipologia: string) {
-  return tipologia ? (SUBTIPOLOGIAS[tipologia] ?? SUBTIPOLOGIAS_DEMO_FALLBACK) : [];
+function getSubtipologiaOpts(_tipologia: string) {
+  return SUBTIPOLOGIAS_FIJAS;
 }
 
 // ── Step 1 ───────────────────────────────────────────────────────────────────
@@ -1195,8 +1155,8 @@ function Paso1({ form, setForm, onContinue, wireframeMode }: { form: FormState; 
             <SelectField
               id="tipologia"
               label="¿Cuál es el motivo de tu solicitud?"
-              placeholder={form.producto ? "Selecciona" : "Primero selecciona un producto"}
-              options={tipologiaOpts}
+              placeholder="Selecciona"
+              options={TIPOLOGIAS_FIJAS}
               value={form.tipologia}
               onChange={handleTipologia}
               disabled={!form.producto}
@@ -1205,11 +1165,10 @@ function Paso1({ form, setForm, onContinue, wireframeMode }: { form: FormState; 
             <SelectField
               id="subtipologia"
               label="¿Cuál de las siguientes opciones describe mejor tu solicitud?"
-              placeholder={form.tipologia ? "Selecciona" : "Primero selecciona el motivo"}
-              options={subtipologiaOpts}
+              placeholder="Selecciona"
+              options={SUBTIPOLOGIAS_FIJAS}
               value={form.subtipologia}
               onChange={(v) => setForm({ ...form, subtipologia: v })}
-              disabled={!form.tipologia}
             />
           </>
         )}
@@ -1434,10 +1393,8 @@ function CamposEspecificos({ form, setForm }: { form: FormState; setForm: (f: Fo
   const tieneUbicacion = esSoat || esSalud || esArl;
   const tienePlaca = esAutos || esSoat;
 
-  if (requiere && !tienePlaca && !tieneUbicacion && !esVida) {
-    // Incluso si no hay más campos específicos para el producto,
-    // se mantiene siempre la captura de ciudad.
-  }
+  const hasContent = (requiere && tienePlaca) || (requiere && esSalud) || (requiere && esVida);
+  if (!hasContent) return null;
 
   const set = (k: keyof FormState) => (v: string) => setForm({ ...form, [k]: v });
 
@@ -1644,8 +1601,8 @@ function Paso3({ form, setForm, onBack, onContinue, wireframeMode }: {
             <SelectField
               id="tipologia"
               label="¿Cuál es el motivo de tu solicitud?"
-              placeholder={form.producto ? "Selecciona" : "Primero selecciona un producto"}
-              options={tipologiaOpts}
+              placeholder="Selecciona"
+              options={TIPOLOGIAS_FIJAS}
               value={form.tipologia}
               onChange={handleTipologia}
               disabled={!form.producto}
@@ -1654,11 +1611,10 @@ function Paso3({ form, setForm, onBack, onContinue, wireframeMode }: {
             <SelectField
               id="subtipologia"
               label="¿Cuál de las siguientes opciones describe mejor tu solicitud?"
-              placeholder={form.tipologia ? "Selecciona" : "Primero selecciona el motivo"}
-              options={subtipologiaOpts}
+              placeholder="Selecciona"
+              options={SUBTIPOLOGIAS_FIJAS}
               value={form.subtipologia}
               onChange={(v) => setForm({ ...form, subtipologia: v })}
-              disabled={!form.tipologia}
             />
 
             <div className="border-t border-dashed border-border" />
