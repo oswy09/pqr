@@ -12,6 +12,7 @@ import {
 import { Annotate } from "./wireframe/Annotate";
 import { PresenterControls } from "./wireframe/PresenterControls";
 import { SNAPSHOTS } from "./wireframe/snapshots";
+import { InspectorPanel } from "./InspectorPanel";
 
 // AXA logo mark — from DS import (svg path matches axa-mini-switch)
 function AxaLogo({ size = 28 }: { size?: number }) {
@@ -2117,6 +2118,7 @@ export default function App() {
           onJump={(i) => setSnapshotIndex(i)}
         />
       )}
+      {!wireframeMode && <InspectorPanel />}
     </div>
   );
 }
