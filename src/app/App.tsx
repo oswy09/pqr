@@ -997,11 +997,11 @@ function NavButtons({ canContinue, onBack, onContinue, readyLabel = "Todos los c
 // ── Tipo de solicitud — selector en tarjetas (prototipo a color) ──────────────
 
 const TIPO_SOLICITUD_INFO: Record<string, { icon: React.ReactNode; label: string; desc: string }> = {
-  "Petición": { icon: <ClipboardList size={20} strokeWidth={2} />, label: "Petición", desc: "Solicitud de información o trámite" },
-  "Queja": { icon: <MessageCircleWarning size={20} strokeWidth={2} />, label: "Queja", desc: "Inconformidad con el servicio" },
-  "Reclamo": { icon: <Scale size={20} strokeWidth={2} />, label: "Reclamo", desc: "Corregir un inconveniente" },
-  "Felicitaciones": { icon: <Star size={20} strokeWidth={2} />, label: "Felicitación", desc: "Reconocer un buen servicio" },
-  "Sugerencias": { icon: <Lightbulb size={20} strokeWidth={2} />, label: "Sugerencia", desc: "Propuesta de mejora" },
+  "Petición": { icon: <ClipboardList size={18} strokeWidth={2} />, label: "Petición", desc: "Solicitud de información o trámite" },
+  "Queja": { icon: <MessageCircleWarning size={18} strokeWidth={2} />, label: "Queja", desc: "Inconformidad con el servicio" },
+  "Reclamo": { icon: <Scale size={18} strokeWidth={2} />, label: "Reclamo", desc: "Corregir un inconveniente" },
+  "Felicitaciones": { icon: <Star size={18} strokeWidth={2} />, label: "Felicitación", desc: "Reconocer un buen servicio" },
+  "Sugerencias": { icon: <Lightbulb size={18} strokeWidth={2} />, label: "Sugerencia", desc: "Propuesta de mejora" },
 };
 
 function TipoSolicitudCards({ options, value, onChange, disabled }: {
@@ -1029,7 +1029,7 @@ function TipoSolicitudCards({ options, value, onChange, disabled }: {
               {sel && <CheckCircle2 size={14} className="text-primary absolute top-2.5 right-2.5" />}
               <div
                 className="w-11 h-11 rounded-full flex items-center justify-center"
-                style={{ background: sel ? "rgba(0,0,143,.12)" : "#EFEFF1", color: "#00008F" }}
+                style={{ background: sel ? "rgba(0,0,143,.15)" : "#EAF0FF", color: sel ? "#00008F" : "#2E4EA8" }}
               >
                 {info?.icon}
               </div>
@@ -1053,7 +1053,7 @@ function TipoSolicitudCards({ options, value, onChange, disabled }: {
               {sel && <CheckCircle2 size={14} className="text-primary absolute top-2.5 right-2.5" />}
               <div
                 className="w-11 h-11 rounded-full flex items-center justify-center"
-                style={{ background: sel ? "rgba(0,0,143,.12)" : "#EFEFF1", color: "#00008F" }}
+                style={{ background: sel ? "rgba(0,0,143,.15)" : "#EAF0FF", color: sel ? "#00008F" : "#2E4EA8" }}
               >
                 {info?.icon}
               </div>
