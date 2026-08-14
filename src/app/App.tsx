@@ -997,11 +997,11 @@ function NavButtons({ canContinue, onBack, onContinue, readyLabel = "Todos los c
 // ── Tipo de solicitud — selector en tarjetas (prototipo a color) ──────────────
 
 const TIPO_SOLICITUD_INFO: Record<string, { icon: React.ReactNode; label: string; desc: string }> = {
-  "Petición": { icon: <ClipboardList size={22} />, label: "Petición", desc: "Solicitud de información o trámite" },
-  "Queja": { icon: <MessageCircleWarning size={22} />, label: "Queja", desc: "Inconformidad con el servicio" },
-  "Reclamo": { icon: <Scale size={22} />, label: "Reclamo", desc: "Corregir un inconveniente" },
-  "Felicitaciones": { icon: <Star size={22} />, label: "Felicitación", desc: "Reconocer un buen servicio" },
-  "Sugerencias": { icon: <Lightbulb size={22} />, label: "Sugerencia", desc: "Propuesta de mejora" },
+  "Petición": { icon: <ClipboardList size={20} strokeWidth={2} />, label: "Petición", desc: "Solicitud de información o trámite" },
+  "Queja": { icon: <MessageCircleWarning size={20} strokeWidth={2} />, label: "Queja", desc: "Inconformidad con el servicio" },
+  "Reclamo": { icon: <Scale size={20} strokeWidth={2} />, label: "Reclamo", desc: "Corregir un inconveniente" },
+  "Felicitaciones": { icon: <Star size={20} strokeWidth={2} />, label: "Felicitación", desc: "Reconocer un buen servicio" },
+  "Sugerencias": { icon: <Lightbulb size={20} strokeWidth={2} />, label: "Sugerencia", desc: "Propuesta de mejora" },
 };
 
 function TipoSolicitudCards({ options, value, onChange, disabled }: {
@@ -1016,22 +1016,27 @@ function TipoSolicitudCards({ options, value, onChange, disabled }: {
       <p className="text-xs text-muted-foreground -mt-0.5">
         {disabled ? "Primero selecciona un producto." : "Selecciona una opción para continuar."}
       </p>
-      <div className={`grid grid-cols-3 gap-3 mt-1 ${disabled ? "opacity-50 pointer-events-none" : ""}`}>
+      <div className={`grid grid-cols-5 gap-3 mt-1 ${disabled ? "opacity-50 pointer-events-none" : ""}`}>
         {options.map((opt) => {
           const info = TIPO_SOLICITUD_INFO[opt];
           const sel = value === opt;
           return (
             <button
               key={opt} type="button" onClick={() => onChange(opt)}
-              className={`flex flex-col items-start gap-2 p-4 rounded-xl border-2 text-left transition-all cursor-pointer
+              className={`relative flex flex-col items-center text-center gap-2.5 p-4 rounded-2xl border-2 transition-all cursor-pointer
                 ${sel ? "border-primary bg-accent" : "border-border bg-white hover:border-primary/40"}`}
             >
-              <div className="flex items-center justify-between w-full">
-                <span style={{ color: "#00008F" }}>{info?.icon}</span>
-                {sel && <CheckCircle2 size={16} className="text-primary" />}
+              {sel && <CheckCircle2 size={14} className="text-primary absolute top-2.5 right-2.5" />}
+              <div
+                className="w-11 h-11 rounded-full flex items-center justify-center"
+                style={{ background: sel ? "rgba(0,0,143,.12)" : "#EFEFF1", color: sel ? "#00008F" : "#606776" }}
+              >
+                {info?.icon}
               </div>
-              <p className="text-sm font-semibold text-foreground">{info?.label ?? opt}</p>
-              <p className="text-xs text-muted-foreground leading-snug">{info?.desc}</p>
+              <div>
+                <p className={`text-sm font-bold leading-tight ${sel ? "text-primary" : "text-foreground"}`}>{info?.label ?? opt}</p>
+                <p className="text-[11px] text-muted-foreground leading-snug mt-0.5">{info?.desc}</p>
+              </div>
             </button>
           );
         })}

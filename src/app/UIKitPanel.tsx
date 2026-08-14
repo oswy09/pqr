@@ -67,23 +67,27 @@ function ColorChip({ name, hex, dark, bg }: { name: string; hex: string; dark: b
 }
 
 function StepPip({ num, state, connector }: { num: number; state: "done" | "active" | "pending"; connector: boolean }) {
-  const on = state !== "pending";
+  const bg = state === "done" ? "#56B07C" : state === "active" ? "#3F45B5" : "#F2F4F8";
+  const fg = state === "pending" ? "#7D838F" : "#fff";
   return (
     <div style={{ display: "flex", alignItems: "center", flex: 1, minWidth: 0 }}>
-      <div style={{ display: "flex", flexDirection: "column", alignItems: "center", flexShrink: 0 }}>
+      <div style={{ flexShrink: 0 }}>
         <div style={{
-          width: 30, height: 30, borderRadius: "50%",
-          background: on ? "#00008F" : "#EFEFF1",
-          color: on ? "#fff" : "#8089A0",
+          width: 32, height: 32, borderRadius: "50%",
+          background: bg, color: fg,
           display: "flex", alignItems: "center", justifyContent: "center",
-          fontSize: 12, fontWeight: 700,
-          outline: state === "active" ? "3px solid rgba(0,0,143,.2)" : "none",
+          fontSize: 13, fontWeight: 700,
+          border: `2px solid ${bg}`,
+          outline: state === "active" ? "4px solid rgba(63,69,181,.15)" : "none",
           outlineOffset: 2,
+          boxSizing: "border-box",
         }}>
           {state === "done" ? "✓" : num}
         </div>
       </div>
-      {connector && <div style={{ flex: 1, height: 2, background: state === "done" ? "#00008F" : "#EFEFF1", margin: "0 2px" }} />}
+      {connector && (
+        <div style={{ flex: 1, height: 2, background: state === "done" ? "#3F45B5" : "#DCE6F7", margin: "0 3px" }} />
+      )}
     </div>
   );
 }
@@ -91,17 +95,25 @@ function StepPip({ num, state, connector }: { num: number; state: "done" | "acti
 const STEPS = ["Solicitud", "Datos personales", "Detalle", "Confirmación"];
 
 function Stepper({ active }: { active: number }) {
+  const progress = Math.round((active / (STEPS.length - 1)) * 100);
   return (
     <div>
-      <div style={{ display: "flex", alignItems: "center" }}>
+      <div style={{ display: "flex", alignItems: "center", padding: "0 4px" }}>
         {STEPS.map((_, i) => (
           <StepPip key={i} num={i + 1} state={i < active ? "done" : i === active ? "active" : "pending"} connector={i < STEPS.length - 1} />
         ))}
       </div>
-      <div style={{ display: "flex", marginTop: 8 }}>
+      <div style={{ display: "flex", marginTop: 10, padding: "0 4px" }}>
         {STEPS.map((label, i) => (
-          <div key={i} style={{ flex: 1, textAlign: "center", fontSize: 11, color: i <= active ? "#00008F" : "#8089A0", fontWeight: i === active ? 700 : 500, minWidth: 0, padding: "0 2px" }}>{label}</div>
+          <div key={i} style={{
+            flex: 1, textAlign: "center", fontSize: 12, minWidth: 0, padding: "0 2px",
+            color: i < active ? "#56B07C" : i === active ? "#3F45B5" : "#7D838F",
+            fontWeight: i === active ? 700 : 500,
+          }}>{label}</div>
         ))}
+      </div>
+      <div style={{ height: 6, background: "#DCE6F7", borderRadius: 99, marginTop: 10 }}>
+        <div style={{ height: "100%", width: `${progress}%`, background: "#3F45B5", borderRadius: 99, transition: "width .3s" }} />
       </div>
     </div>
   );
@@ -297,9 +309,9 @@ export function UIKitPanel() {
                     </FieldState>
                     <FieldState label="Error — border #880727">
                       <div>
-                        <input value="invalido@correo" className="w-full px-4 py-3 rounded-xl border border-[#880727] bg-[#FFF5F5] text-sm text-foreground outline-none ring-2 ring-[#880727]/20" readOnly />
+                        <input value="invalido@correo" className="w-full px-4 py-3 rounded-xl border border-[#880727] bg-[#F8F9FB] text-sm text-foreground outline-none ring-2 ring-[#880727]/20" readOnly />
                         <span style={{ fontSize: 11, color: "#880727", display: "flex", alignItems: "center", gap: 4, marginTop: 5 }}>
-                          <AlertCircle size={11} /> Formato de correo inválido
+                          <AlertCircle size={11} /> Campo no cumple con el formato requerido
                         </span>
                       </div>
                     </FieldState>
