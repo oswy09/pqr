@@ -1023,13 +1023,13 @@ function TipoSolicitudCards({ options, value, onChange, disabled }: {
           return (
             <button
               key={opt} type="button" onClick={() => onChange(opt)}
-              className={`col-span-2 relative flex flex-col items-center text-center gap-2.5 p-4 rounded-2xl border-2 transition-all cursor-pointer
+              className={`col-span-2 relative flex flex-col items-start text-left gap-2.5 p-4 rounded-2xl border-2 transition-all cursor-pointer
                 ${sel ? "border-primary bg-accent" : "border-border bg-white hover:border-primary/40"}`}
             >
               {sel && <CheckCircle2 size={14} className="text-primary absolute top-2.5 right-2.5" />}
               <div
                 className="w-11 h-11 rounded-full flex items-center justify-center"
-                style={{ background: sel ? "rgba(0,0,143,.12)" : "#EFEFF1", color: sel ? "#00008F" : "#606776" }}
+                style={{ background: sel ? "rgba(0,0,143,.12)" : "#EFEFF1", color: "#00008F" }}
               >
                 {info?.icon}
               </div>
@@ -1047,13 +1047,13 @@ function TipoSolicitudCards({ options, value, onChange, disabled }: {
           return (
             <button
               key={opt} type="button" onClick={() => onChange(opt)}
-              className={`col-span-2 relative flex flex-col items-center text-center gap-2.5 p-4 rounded-2xl border-2 transition-all cursor-pointer
+              className={`col-span-2 relative flex flex-col items-start text-left gap-2.5 p-4 rounded-2xl border-2 transition-all cursor-pointer
                 ${sel ? "border-primary bg-accent" : "border-border bg-white hover:border-primary/40"}`}
             >
               {sel && <CheckCircle2 size={14} className="text-primary absolute top-2.5 right-2.5" />}
               <div
                 className="w-11 h-11 rounded-full flex items-center justify-center"
-                style={{ background: sel ? "rgba(0,0,143,.12)" : "#EFEFF1", color: sel ? "#00008F" : "#606776" }}
+                style={{ background: sel ? "rgba(0,0,143,.12)" : "#EFEFF1", color: "#00008F" }}
               >
                 {info?.icon}
               </div>
