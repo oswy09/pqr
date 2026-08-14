@@ -1016,14 +1016,38 @@ function TipoSolicitudCards({ options, value, onChange, disabled }: {
       <p className="text-xs text-muted-foreground -mt-0.5">
         {disabled ? "Primero selecciona un producto." : "Selecciona una opción para continuar."}
       </p>
-      <div className={`grid grid-cols-5 gap-3 mt-1 ${disabled ? "opacity-50 pointer-events-none" : ""}`}>
-        {options.map((opt) => {
+      <div className={`grid grid-cols-6 gap-3 mt-1 ${disabled ? "opacity-50 pointer-events-none" : ""}`}>
+        {options.slice(0, 3).map((opt) => {
           const info = TIPO_SOLICITUD_INFO[opt];
           const sel = value === opt;
           return (
             <button
               key={opt} type="button" onClick={() => onChange(opt)}
-              className={`relative flex flex-col items-center text-center gap-2.5 p-4 rounded-2xl border-2 transition-all cursor-pointer
+              className={`col-span-2 relative flex flex-col items-center text-center gap-2.5 p-4 rounded-2xl border-2 transition-all cursor-pointer
+                ${sel ? "border-primary bg-accent" : "border-border bg-white hover:border-primary/40"}`}
+            >
+              {sel && <CheckCircle2 size={14} className="text-primary absolute top-2.5 right-2.5" />}
+              <div
+                className="w-11 h-11 rounded-full flex items-center justify-center"
+                style={{ background: sel ? "rgba(0,0,143,.12)" : "#EFEFF1", color: sel ? "#00008F" : "#606776" }}
+              >
+                {info?.icon}
+              </div>
+              <div>
+                <p className={`text-sm font-bold leading-tight ${sel ? "text-primary" : "text-foreground"}`}>{info?.label ?? opt}</p>
+                <p className="text-[11px] text-muted-foreground leading-snug mt-0.5">{info?.desc}</p>
+              </div>
+            </button>
+          );
+        })}
+        <div className="col-span-1" />
+        {options.slice(3).map((opt) => {
+          const info = TIPO_SOLICITUD_INFO[opt];
+          const sel = value === opt;
+          return (
+            <button
+              key={opt} type="button" onClick={() => onChange(opt)}
+              className={`col-span-2 relative flex flex-col items-center text-center gap-2.5 p-4 rounded-2xl border-2 transition-all cursor-pointer
                 ${sel ? "border-primary bg-accent" : "border-border bg-white hover:border-primary/40"}`}
             >
               {sel && <CheckCircle2 size={14} className="text-primary absolute top-2.5 right-2.5" />}
