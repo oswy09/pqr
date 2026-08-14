@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { createPortal } from "react-dom";
-import { Palette, X, ChevronDown, AlertCircle, CheckCircle2 } from "lucide-react";
+import { Palette, X, ChevronDown, AlertCircle, CheckCircle2, ArrowRight, ClipboardList, MessageCircleWarning, Scale, Star, Lightbulb } from "lucide-react";
 
 const iBase =
   "w-full px-4 py-3 rounded-xl border border-border bg-[#F8F9FB] text-sm text-foreground placeholder:text-muted-foreground outline-none transition-all";
@@ -176,18 +176,18 @@ export function UIKitPanel() {
             <Sec label="02 · Tipografía">
               <Card>
                 {[
-                  { role: "Display", spec: "26px · 700", text: "Radica tu PQRS", size: "26px", weight: 700, color: "#1A1D21" },
-                  { role: "Sección", spec: "20px · 600", text: "Formulario de radicación", size: "20px", weight: 600, color: "#1A1D21" },
-                  { role: "Label / Button", spec: "15px · 500", text: "Correo electrónico *", size: "15px", weight: 500, color: "#1A1D21" },
-                  { role: "Body / Input", spec: "15px · 400", text: "Describe con detalle tu solicitud...", size: "15px", weight: 400, color: "#434956" },
-                  { role: "Caption / Hint", spec: "12px · 400", text: "Máx. 25 MB · PDF, PNG, JPG, XLSX", size: "12px", weight: 400, color: "#8089A0" },
+                  { role: "Display", spec: "Publico Banner · 26px · 700", text: "Radica tu PQRS", size: "26px", weight: 700, color: "#1A1D21", ff: "Georgia, serif" },
+                  { role: "Sección / H2", spec: "Source Sans 3 · 20px · 600", text: "Formulario de radicación", size: "20px", weight: 600, color: "#1A1D21", ff: undefined },
+                  { role: "Label / Button", spec: "Source Sans 3 · 15px · 500", text: "Correo electrónico *", size: "15px", weight: 500, color: "#1A1D21", ff: undefined },
+                  { role: "Body / Input", spec: "Source Sans 3 · 15px · 400", text: "Describe con detalle tu solicitud...", size: "15px", weight: 400, color: "#434956", ff: undefined },
+                  { role: "Caption / Hint", spec: "Source Sans 3 · 12px · 400", text: "Máx. 25 MB · PDF, PNG, JPG, XLSX", size: "12px", weight: 400, color: "#8089A0", ff: undefined },
                 ].map((r, i, arr) => (
                   <div key={r.role} style={{ display: "flex", alignItems: "baseline", gap: 24, padding: "13px 0", borderBottom: i < arr.length - 1 ? "1px solid rgba(0,0,143,.07)" : "none" }}>
-                    <div style={{ width: 140, flexShrink: 0 }}>
+                    <div style={{ width: 160, flexShrink: 0 }}>
                       <p style={{ fontSize: 11, fontWeight: 700, color: "#8089A0", textTransform: "uppercase", letterSpacing: ".08em", margin: 0 }}>{r.role}</p>
                       <p style={{ fontSize: 10, fontFamily: "monospace", color: "#B0B8C8", margin: "2px 0 0" }}>{r.spec}</p>
                     </div>
-                    <p style={{ fontSize: r.size, fontWeight: r.weight, color: r.color, margin: 0 }}>{r.text}</p>
+                    <p style={{ fontSize: r.size, fontWeight: r.weight, color: r.color, margin: 0, fontFamily: r.ff }}>{r.text}</p>
                   </div>
                 ))}
               </Card>
@@ -212,7 +212,9 @@ export function UIKitPanel() {
                       <button style={{ background: "#0000D2", color: "#fff", borderRadius: 99, padding: "10px 24px", border: "none", fontSize: 14, fontWeight: 600, cursor: "default" }}>Continuar</button>
                     </BtnState>
                     <BtnState label="Disabled">
-                      <button disabled style={{ background: "#00008F", color: "#fff", borderRadius: 99, padding: "10px 24px", border: "none", fontSize: 14, fontWeight: 600, opacity: .38, cursor: "not-allowed" }}>Continuar</button>
+                      <button disabled style={{ background: "#EFEFF1", color: "#8089A0", borderRadius: 99, padding: "10px 22px", border: "none", fontSize: 14, fontWeight: 600, cursor: "not-allowed", display: "flex", alignItems: "center", gap: 8 }}>
+                        Continuar <ArrowRight size={14} />
+                      </button>
                     </BtnState>
                   </div>
                 </Card>
@@ -232,7 +234,7 @@ export function UIKitPanel() {
                       <button style={{ background: "#0000D2", color: "#fff", borderRadius: 99, padding: "9px 22px", border: "2px solid #0000D2", fontSize: 14, fontWeight: 600, cursor: "default" }}>Volver</button>
                     </BtnState>
                     <BtnState label="Disabled">
-                      <button disabled style={{ background: "#fff", color: "#00008F", borderRadius: 99, padding: "9px 22px", border: "2px solid #00008F", fontSize: 14, fontWeight: 600, opacity: .35, cursor: "not-allowed" }}>Volver</button>
+                      <button disabled style={{ background: "#EFEFF1", color: "#8089A0", borderRadius: 99, padding: "9px 22px", border: "2px solid #EFEFF1", fontSize: 14, fontWeight: 600, cursor: "not-allowed" }}>Volver</button>
                     </BtnState>
                   </div>
                 </Card>
@@ -268,7 +270,7 @@ export function UIKitPanel() {
                       <button style={{ background: "#fff", color: "#FF1721", borderRadius: 99, padding: "9px 22px", border: "2px solid #FF1721", fontSize: 14, fontWeight: 600, cursor: "pointer" }}>Cancelar</button>
                     </BtnState>
                     <BtnState label="Disabled">
-                      <button disabled style={{ background: "#FF1721", color: "#fff", borderRadius: 99, padding: "10px 24px", border: "none", fontSize: 14, fontWeight: 600, opacity: .35, cursor: "not-allowed" }}>Eliminar</button>
+                      <button disabled style={{ background: "#EFEFF1", color: "#8089A0", borderRadius: 99, padding: "10px 24px", border: "none", fontSize: 14, fontWeight: 600, cursor: "not-allowed" }}>Eliminar</button>
                     </BtnState>
                   </div>
                 </Card>
@@ -394,8 +396,56 @@ export function UIKitPanel() {
               </div>
             </Sec>
 
-            {/* ── 05 STEP INDICATOR ─────────────────────────────────────── */}
-            <Sec label="05 · Indicador de pasos">
+            {/* ── 05 CARDS DE TIPO ──────────────────────────────────────── */}
+            <Sec label="05 · Tarjetas de tipo de solicitud">
+              <Card>
+                <CardTitle>Selección de motivo — Paso 1</CardTitle>
+                <CardNote>Iconos strokeWidth=2 · size=20 · mismo grosor que Líneas de atención</CardNote>
+                <div style={{ display: "grid", gridTemplateColumns: "repeat(5, 1fr)", gap: 10, marginTop: 16 }}>
+                  {[
+                    { label: "Petición", sub: "Solicitud de información", Icon: ClipboardList, state: "selected" },
+                    { label: "Queja", sub: "Inconformidad con el servicio", Icon: MessageCircleWarning, state: "default" },
+                    { label: "Reclamo", sub: "Corregir un inconveniente", Icon: Scale, state: "hover" },
+                    { label: "Felicitaciones", sub: "Reconocer un buen servicio", Icon: Star, state: "default" },
+                    { label: "Sugerencias", sub: "Propuesta de mejora", Icon: Lightbulb, state: "default" },
+                  ].map(({ label, sub, Icon, state }) => {
+                    const sel = state === "selected";
+                    const hov = state === "hover";
+                    return (
+                      <div key={label} style={{
+                        border: sel ? "2px solid #00008F" : hov ? "2px solid rgba(0,0,143,.35)" : "2px solid rgba(0,0,0,.1)",
+                        borderRadius: 14, padding: "16px 12px", display: "flex", flexDirection: "column", alignItems: "center", gap: 10,
+                        background: sel ? "rgba(0,0,143,.05)" : hov ? "rgba(0,0,143,.02)" : "#fff",
+                        cursor: "pointer", position: "relative",
+                      }}>
+                        {sel && (
+                          <div style={{ position: "absolute", top: 8, right: 8 }}>
+                            <CheckCircle2 size={14} color="#00008F" strokeWidth={2} />
+                          </div>
+                        )}
+                        <div style={{
+                          width: 44, height: 44, borderRadius: "50%",
+                          background: sel ? "rgba(0,0,143,.12)" : hov ? "rgba(0,0,143,.07)" : "#EFEFF1",
+                          display: "flex", alignItems: "center", justifyContent: "center",
+                        }}>
+                          <Icon size={20} color={sel || hov ? "#00008F" : "#606776"} strokeWidth={2} />
+                        </div>
+                        <div style={{ textAlign: "center" }}>
+                          <p style={{ fontSize: 13, fontWeight: 700, color: sel ? "#00008F" : "#1A1D21", margin: 0 }}>{label}</p>
+                          <p style={{ fontSize: 11, color: "#8089A0", margin: "3px 0 0", lineHeight: 1.3 }}>{sub}</p>
+                        </div>
+                        <div style={{ fontSize: 9, fontWeight: 700, color: sel ? "#00008F" : hov ? "#434956" : "#8089A0", textTransform: "uppercase", letterSpacing: ".08em" }}>
+                          {sel ? "Seleccionado" : hov ? "Hover" : "Default"}
+                        </div>
+                      </div>
+                    );
+                  })}
+                </div>
+              </Card>
+            </Sec>
+
+            {/* ── 06 STEP INDICATOR ─────────────────────────────────────── */}
+            <Sec label="06 · Indicador de pasos">
               <Card>
                 <CardTitle>Stepper — 4 pasos</CardTitle>
                 <CardNote>Paso activo, completado y pendiente</CardNote>
