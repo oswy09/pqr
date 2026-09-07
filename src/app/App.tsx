@@ -1130,6 +1130,9 @@ function Paso1({ form, setForm, onContinue, wireframeMode }: { form: FormState; 
   return (
     <>
       <StepIndicator current={1} total={PASOS.length} label={PASOS[0].label} wireframeMode={wireframeMode} />
+      <p className="text-sm text-muted-foreground leading-relaxed mb-7">
+        Selecciona el tipo de solicitud que deseas radicar y el producto correspondiente.
+      </p>
 
       <div className="flex flex-col gap-6">
         {wireframeMode && (
@@ -2042,10 +2045,15 @@ export default function App() {
 
       {/* Intro text — between banner and form */}
       {activePaso === 1 && (
-        <div className="w-full px-4 pt-5 pb-1">
-          <div className="max-w-[660px] mx-auto">
+        <div className="w-full px-4 pt-6 pb-2">
+          <div className="max-w-[660px] mx-auto text-center">
+            {!wireframeMode && (
+              <h1 className="text-3xl md:text-4xl font-bold text-foreground mb-3" style={{ fontFamily: "'Publico', Georgia, serif" }}>
+                Radica tu PQRS
+              </h1>
+            )}
             <Annotate id="intro-text" active={wireframeMode}>
-              <p className="text-base text-muted-foreground leading-relaxed text-center">
+              <p className="text-base text-muted-foreground leading-relaxed">
                 Si tienes solicitudes, quejas o reclamos, acerca de nuestros productos y servicios,
                 te invitamos a diligenciar el siguiente formulario.
               </p>
