@@ -2046,16 +2046,15 @@ export default function App() {
       {/* Intro text — between banner and form */}
       {activePaso === 1 && (
         <div className="w-full px-4 pt-6 pb-2">
-          <div className="max-w-[660px] mx-auto text-center">
+          <div className="max-w-[760px] mx-auto text-center">
             {!wireframeMode && (
               <h1 className="text-3xl md:text-4xl font-bold text-foreground mb-3" style={{ fontFamily: "'Publico', Georgia, serif" }}>
-                Radica tu PQRS
+                Te escuchamos: Tu experiencia nos ayuda a mejorar.
               </h1>
             )}
             <Annotate id="intro-text" active={wireframeMode}>
               <p className="text-base text-muted-foreground leading-relaxed">
-                Si tienes solicitudes, quejas o reclamos, acerca de nuestros productos y servicios,
-                te invitamos a diligenciar el siguiente formulario.
+                En AXA COLPATRIA tu tranquilidad es nuestra prioridad. Queremos ofrecerte el mejor servicio posible; por eso, creamos este espacio para gestionar tus <strong className="font-semibold text-foreground">solicitudes</strong>, <strong className="font-semibold text-foreground">quejas</strong> o <strong className="font-semibold text-foreground">reclamos</strong>, resolver tus dudas y escuchar tus comentarios. Cuéntanos qué necesitas y te daremos una respuesta rápida y oportuna.
               </p>
             </Annotate>
           </div>
