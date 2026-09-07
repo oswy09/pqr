@@ -40,19 +40,19 @@ const PASO1_FORM: FormState = {
 
 const PASO2_FORM: FormState = {
   ...PASO1_FORM,
+  descripcion:
+    "El día 12 de junio reporté un siniestro de mi vehículo placa ABC123 por un choque leve. Han pasado más de 15 días hábiles y no he recibido respuesta sobre el estado de mi reclamación.",
+  placa: "ABC123",
+};
+
+const PASO3_FORM: FormState = {
+  ...PASO2_FORM,
   medio: "Correo electrónico",
   presenter: SAMPLE_PERSONA,
   sexo: "Femenino",
   grupoEspecial: "Ninguno",
   mismaPersonaAfectada: true,
   afectado: SAMPLE_PERSONA,
-};
-
-const PASO3_FORM: FormState = {
-  ...PASO2_FORM,
-  descripcion:
-    "El día 12 de junio reporté un siniestro de mi vehículo placa ABC123 por un choque leve. Han pasado más de 15 días hábiles y no he recibido respuesta sobre el estado de mi reclamación.",
-  placa: "ABC123",
   captchaOk: true,
   aceptaTratamiento: true,
 };
@@ -62,7 +62,7 @@ const PASO4_FORM: FormState = { ...PASO3_FORM };
 export const SNAPSHOTS: Snapshot[] = [
   { id: "landing", paso: 1, label: "Pantalla inicial", form: EMPTY_FORM },
   { id: "paso1", paso: 1, label: "Paso 1 — Tipo de solicitud", form: PASO1_FORM },
-  { id: "paso2", paso: 2, label: "Paso 2 — Datos personales", form: PASO2_FORM },
-  { id: "paso3", paso: 3, label: "Paso 3 — Detalle de la solicitud", form: PASO3_FORM },
+  { id: "paso2", paso: 2, label: "Paso 2 — Detalle de la solicitud", form: PASO2_FORM },
+  { id: "paso3", paso: 3, label: "Paso 3 — Datos personales", form: PASO3_FORM },
   { id: "paso4", paso: 4, label: "Paso 4 — Confirmación", form: PASO4_FORM },
 ];

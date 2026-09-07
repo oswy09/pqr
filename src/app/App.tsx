@@ -189,8 +189,8 @@ const LUGARES_SERVICIO_SALUD = [
 
 const PASOS = [
   { num: 1, label: "Solicitud" },
-  { num: 2, label: "Datos personales" },
-  { num: 3, label: "Detalle" },
+  { num: 2, label: "Detalle" },
+  { num: 3, label: "Datos personales" },
   { num: 4, label: "Confirmación" },
 ];
 
@@ -198,8 +198,8 @@ const PASOS = [
 // el modo wireframe sigue usando PASOS sin tocar.
 const PASOS_COLOR = [
   { num: 1, label: "Solicitud" },
-  { num: 2, label: "Datos personales" },
-  { num: 3, label: "Detalle" },
+  { num: 2, label: "Detalle" },
+  { num: 3, label: "Datos personales" },
   { num: 4, label: "Confirmación" },
 ];
 
@@ -1279,135 +1279,6 @@ function Paso1({ form, setForm, onContinue, wireframeMode }: { form: FormState; 
   );
 }
 
-// ── Step 2 ───────────────────────────────────────────────────────────────────
-
-function Paso2({ form, setForm, onBack, onContinue, wireframeMode }: { form: FormState; setForm: (f: FormState) => void; onBack: () => void; onContinue: () => void; wireframeMode?: boolean }) {
-  const requiereAfectado = TIPOS_CON_AFECTADO.includes(form.tipoSolicitud);
-  const correoFisico = form.medio === "Correo físico";
-
-  const setPresenter = (k: keyof DatosPersona, v: string) =>
-    setForm({ ...form, presenter: { ...form.presenter, [k]: v } });
-  const setAfectado = (k: keyof DatosPersona, v: string) =>
-    setForm({ ...form, afectado: { ...form.afectado, [k]: v } });
-
-  const handleMismaPersona = (val: boolean) => {
-    if (val) setForm({ ...form, mismaPersonaAfectada: true, afectado: { ...form.presenter, telefono: "" } });
-    else setForm({ ...form, mismaPersonaAfectada: false, afectado: emptyPersona() });
-  };
-
-  const isNIT = form.presenter.tipoId === "NIT";
-  const presenterOk =
-    form.medio !== "" && form.presenter.tipoId !== "" && form.presenter.numId !== "" &&
-    form.presenter.nombre !== "" && form.presenter.celular !== "" && form.presenter.correo !== "" &&
-    (isNIT || form.sexo !== "") && form.grupoEspecial !== "" && (!correoFisico || form.direccion !== "");
-
-  const afectadoOk = !requiereAfectado || form.mismaPersonaAfectada === true ||
-    (form.mismaPersonaAfectada === false &&
-      form.afectado.tipoId !== "" && form.afectado.numId !== "" &&
-      form.afectado.nombre !== "" && form.afectado.celular !== "" && form.afectado.correo !== "");
-
-  const canContinue = presenterOk && (!requiereAfectado || form.mismaPersonaAfectada !== null) && afectadoOk;
-
-  return (
-    <>
-      <StepIndicator current={2} total={PASOS.length} label={PASOS[1].label} wireframeMode={wireframeMode} />
-      <p className="text-sm text-muted-foreground leading-relaxed mb-7">
-        Ingresa tus datos para que podamos gestionar y darte respuesta a tu solicitud.
-      </p>
-
-      <div className="flex flex-col gap-6">
-        {wireframeMode && (
-          <>
-            <MedioRespuesta value={form.medio} onChange={(v) => setForm({ ...form, medio: v })} wireframeMode={wireframeMode} />
-            <div className="border-t border-dashed border-border" />
-          </>
-        )}
-        <p className="text-xs font-bold tracking-widest text-muted-foreground uppercase">
-          {wireframeMode ? "Datos de quien presenta" : "Datos de quien presenta la solicitud"}
-        </p>
-        <PersonaFields prefix="presenter" datos={form.presenter} onChange={setPresenter} celularCorreoEnFila />
-
-        {!wireframeMode && (
-          <MedioRespuestaSmart
-            value={form.medio}
-            onChange={(v) => setForm({ ...form, medio: v })}
-            correo={form.presenter.correo}
-          />
-        )}
-
-        {correoFisico && (
-          <div className="flex flex-col gap-1.5 p-4 rounded-xl bg-white border border-blue-200">
-            <p className="text-xs text-blue-700 font-semibold mb-1">Requerido para respuesta por correo físico</p>
-            <DireccionField onChange={(v) => setForm({ ...form, direccion: v })} />
-          </div>
-        )}
-
-        <div className={`grid gap-4 ${isNIT ? "grid-cols-1" : "grid-cols-2"}`}>
-          {!isNIT && (
-            <SelectField id="sexo" label="Sexo" placeholder="Selecciona" options={SEXOS} value={form.sexo} onChange={(v) => setForm({ ...form, sexo: v })} />
-          )}
-          <SelectField id="grupo" label="Grupo o condición especial" placeholder="Selecciona" options={GRUPOS_ESPECIALES} value={form.grupoEspecial} onChange={(v) => setForm({ ...form, grupoEspecial: v })} />
-        </div>
-
-        {requiereAfectado && (
-          <>
-            <div className="border-t border-dashed border-border" />
-            <Annotate id="afectado-toggle" active={!!wireframeMode}>
-              <div className="flex flex-col gap-3">
-                <p className="text-sm font-semibold text-foreground flex items-center gap-1">
-                  ¿La persona que presenta la solicitud es la misma persona afectada?
-                  <span className="text-red-500 ml-0.5">*</span>
-                </p>
-                <div className="flex gap-3 flex-wrap">
-                  {[
-                    { val: true, label: "Sí", icon: <User size={15} /> },
-                    { val: false, label: "No, es otra persona", icon: <Users size={15} /> },
-                  ].map(({ val, label, icon }) => {
-                    const sel = form.mismaPersonaAfectada === val;
-                    return (
-                      <button key={String(val)} type="button" onClick={() => handleMismaPersona(val)}
-                        className={`flex items-center gap-2 px-5 py-2.5 rounded-full border-2 text-sm font-semibold transition-all cursor-pointer
-                          ${sel ? "border-primary bg-accent text-primary" : "border-border text-muted-foreground hover:border-primary/40 hover:text-foreground"}`}>
-                        {icon} {label}
-                        {sel && <CheckCircle2 size={13} className="text-primary ml-1" />}
-                      </button>
-                    );
-                  })}
-                </div>
-              </div>
-            </Annotate>
-
-            {form.mismaPersonaAfectada === false && (
-              <>
-                <div className="flex flex-col gap-5 p-5 rounded-xl border border-border bg-secondary/30">
-                  <p className="text-xs font-bold tracking-widest text-muted-foreground uppercase">Datos del afectado</p>
-                  <PersonaFields prefix="afectado" datos={form.afectado} onChange={setAfectado} celularCorreoEnFila />
-                </div>
-              </>
-            )}
-
-            {form.mismaPersonaAfectada === true && wireframeMode && (
-              <div className="flex gap-2.5 p-3.5 rounded-xl bg-green-50 border border-green-200">
-                <CheckCircle2 size={15} className="shrink-0 mt-0.5 text-green-600" />
-                <p className="text-xs text-green-800 leading-relaxed">
-                  Los datos del afectado se han diligenciado automáticamente con tu información.
-                </p>
-              </div>
-            )}
-          </>
-        )}
-      </div>
-
-      <Annotate id="campos-obligatorios" active={!!wireframeMode}>
-        <p className="text-xs text-muted-foreground mt-6">
-          <span className="text-red-500 font-bold">*</span> Campos obligatorios
-        </p>
-      </Annotate>
-      <NavButtons canContinue={canContinue} onBack={onBack} onContinue={onContinue} wireframeMode={wireframeMode} />
-    </>
-  );
-}
-
 // ── Product-specific fields ───────────────────────────────────────────────────
 
 function CamposEspecificos({ form, setForm }: { form: FormState; setForm: (f: FormState) => void }) {
@@ -1497,7 +1368,7 @@ function CamposEspecificos({ form, setForm }: { form: FormState; setForm: (f: Fo
   );
 }
 
-// ── Step 3 ───────────────────────────────────────────────────────────────────
+// ── Attachment helpers ────────────────────────────────────────────────────────
 
 const FORMATOS_PERMITIDOS = ["application/pdf", "image/png", "image/jpeg", "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"];
 const MAX_TOTAL_MB = 25;
@@ -1515,30 +1386,13 @@ const getFileExt = (fileName: string) => {
   return ext ? ext.toUpperCase() : "FILE";
 };
 
-function Paso3({ form, setForm, onBack, onContinue, wireframeMode }: {
+// ── Step 2 (Detalle de la solicitud) ──────────────────────────────────────────
+
+function Paso2({ form, setForm, onBack, onContinue, wireframeMode }: {
   form: FormState; setForm: (f: FormState) => void; onBack: () => void; onContinue: () => void; wireframeMode?: boolean;
 }) {
   const fileInputRef = useRef<HTMLInputElement>(null);
-  const formRef = useRef(form);
   const [fileFeedback, setFileFeedback] = useState("");
-  const [localCaptchaState, setLocalCaptchaState] = useState<"idle" | "loading" | "verified">("idle");
-  const isLocalHost = typeof window !== "undefined" && ["localhost", "127.0.0.1"].includes(window.location.hostname);
-  const useLocalAnimatedCaptcha = !wireframeMode && (isLocalHost || RECAPTCHA_SITE_KEY === DEFAULT_RECAPTCHA_TEST_SITE_KEY);
-
-  useEffect(() => {
-    formRef.current = form;
-  }, [form]);
-
-  useEffect(() => {
-    if (!useLocalAnimatedCaptcha || localCaptchaState !== "loading") return;
-
-    const timeout = window.setTimeout(() => {
-      setLocalCaptchaState("verified");
-      setForm({ ...formRef.current, captchaOk: true });
-    }, 900);
-
-    return () => window.clearTimeout(timeout);
-  }, [localCaptchaState, useLocalAnimatedCaptcha, setForm]);
 
   const totalMB = form.archivos.reduce((acc, f) => acc + f.size, 0) / (1024 * 1024);
   const overLimit = totalMB > MAX_TOTAL_MB;
@@ -1601,8 +1455,6 @@ function Paso3({ form, setForm, onBack, onContinue, wireframeMode }: {
     setFileFeedback("");
   };
 
-  const tipologiaOpts = getTipologiaOpts(form.producto);
-  const subtipologiaOpts = getSubtipologiaOpts(form.tipologia);
   const handleTipologia = (v: string) =>
     setForm({ ...form, tipologia: v, subtipologia: "" });
 
@@ -1615,13 +1467,11 @@ function Paso3({ form, setForm, onBack, onContinue, wireframeMode }: {
     (wireframeMode || !requiereTipologiaSubtipologia || (form.tipologia !== "" && form.subtipologia !== "")) &&
     (wireframeMode || form.ciudad.trim() !== "") &&
     descripcionOk &&
-    !overLimit &&
-    form.captchaOk &&
-    form.aceptaTratamiento;
+    !overLimit;
 
   return (
     <>
-      <StepIndicator current={3} total={wireframeMode ? PASOS.length : PASOS_COLOR.length} label={wireframeMode ? PASOS[2].label : PASOS_COLOR[2].label} wireframeMode={wireframeMode} />
+      <StepIndicator current={2} total={wireframeMode ? PASOS.length : PASOS_COLOR.length} label={wireframeMode ? PASOS[1].label : PASOS_COLOR[1].label} wireframeMode={wireframeMode} />
       <p className="text-sm text-muted-foreground leading-relaxed mb-7">
         Cuéntanos con detalle tu solicitud y adjunta los documentos que la soporten.
       </p>
@@ -1652,7 +1502,6 @@ function Paso3({ form, setForm, onBack, onContinue, wireframeMode }: {
           </>
         )}
 
-        {/* Ciudad de los hechos */}
         {!wireframeMode && (
           <CiudadHechosField
             value={form.ciudad}
@@ -1660,7 +1509,6 @@ function Paso3({ form, setForm, onBack, onContinue, wireframeMode }: {
           />
         )}
 
-        {/* Descripción */}
         <TextAreaField
           id="descripcion"
           label="Descripción detallada de la solicitud"
@@ -1670,10 +1518,8 @@ function Paso3({ form, setForm, onBack, onContinue, wireframeMode }: {
           hint="Incluye antecedentes, fechas, lugares, personas involucradas y cualquier información que consideres relevante para su análisis y gestión."
         />
 
-        {/* Campos específicos por producto */}
         <CamposEspecificos form={form} setForm={setForm} />
 
-        {/* Anexos de soporte */}
         <Annotate id="anexos-soporte" active={!!wireframeMode}>
           <div className="flex flex-col gap-2">
             <p className="text-sm font-semibold text-foreground">
@@ -1690,7 +1536,6 @@ function Paso3({ form, setForm, onBack, onContinue, wireframeMode }: {
               </div>
             </div>
 
-            {/* Drop zone */}
             <button
               type="button"
               onClick={() => fileInputRef.current?.click()}
@@ -1711,7 +1556,6 @@ function Paso3({ form, setForm, onBack, onContinue, wireframeMode }: {
               onChange={handleFiles}
             />
 
-            {/* File list */}
             {form.archivos.length > 0 && (
               <div className="mt-2 rounded-xl border border-border bg-muted/20 p-3">
                 <div className="flex items-center justify-between gap-3 mb-2">
@@ -1762,6 +1606,160 @@ function Paso3({ form, setForm, onBack, onContinue, wireframeMode }: {
             )}
           </div>
         </Annotate>
+      </div>
+
+      <Annotate id="campos-obligatorios" active={!!wireframeMode}>
+        <p className="text-xs text-muted-foreground mt-6">
+          <span className="text-red-500 font-bold">*</span> Campos obligatorios
+        </p>
+      </Annotate>
+
+      <NavButtons canContinue={canContinue} onBack={onBack} onContinue={onContinue} wireframeMode={wireframeMode} />
+    </>
+  );
+}
+
+// ── Step 3 (Datos personales) ─────────────────────────────────────────────────
+
+function Paso3({ form, setForm, onBack, onContinue, wireframeMode }: {
+  form: FormState; setForm: (f: FormState) => void; onBack: () => void; onContinue: () => void; wireframeMode?: boolean;
+}) {
+  const formRef = useRef(form);
+  const [localCaptchaState, setLocalCaptchaState] = useState<"idle" | "loading" | "verified">("idle");
+  const isLocalHost = typeof window !== "undefined" && ["localhost", "127.0.0.1"].includes(window.location.hostname);
+  const useLocalAnimatedCaptcha = !wireframeMode && (isLocalHost || RECAPTCHA_SITE_KEY === DEFAULT_RECAPTCHA_TEST_SITE_KEY);
+
+  useEffect(() => {
+    formRef.current = form;
+  }, [form]);
+
+  useEffect(() => {
+    if (!useLocalAnimatedCaptcha || localCaptchaState !== "loading") return;
+
+    const timeout = window.setTimeout(() => {
+      setLocalCaptchaState("verified");
+      setForm({ ...formRef.current, captchaOk: true });
+    }, 900);
+
+    return () => window.clearTimeout(timeout);
+  }, [localCaptchaState, useLocalAnimatedCaptcha, setForm]);
+
+  const requiereAfectado = TIPOS_CON_AFECTADO.includes(form.tipoSolicitud);
+  const correoFisico = form.medio === "Correo físico";
+
+  const setPresenter = (k: keyof DatosPersona, v: string) =>
+    setForm({ ...form, presenter: { ...form.presenter, [k]: v } });
+  const setAfectado = (k: keyof DatosPersona, v: string) =>
+    setForm({ ...form, afectado: { ...form.afectado, [k]: v } });
+
+  const handleMismaPersona = (val: boolean) => {
+    if (val) setForm({ ...form, mismaPersonaAfectada: true, afectado: { ...form.presenter, telefono: "" } });
+    else setForm({ ...form, mismaPersonaAfectada: false, afectado: emptyPersona() });
+  };
+
+  const isNIT = form.presenter.tipoId === "NIT";
+  const presenterOk =
+    form.medio !== "" && form.presenter.tipoId !== "" && form.presenter.numId !== "" &&
+    form.presenter.nombre !== "" && form.presenter.celular !== "" && form.presenter.correo !== "" &&
+    (isNIT || form.sexo !== "") && form.grupoEspecial !== "" && (!correoFisico || form.direccion !== "");
+
+  const afectadoOk = !requiereAfectado || form.mismaPersonaAfectada === true ||
+    (form.mismaPersonaAfectada === false &&
+      form.afectado.tipoId !== "" && form.afectado.numId !== "" &&
+      form.afectado.nombre !== "" && form.afectado.celular !== "" && form.afectado.correo !== "");
+
+  const personalDataOk = presenterOk && (!requiereAfectado || form.mismaPersonaAfectada !== null) && afectadoOk;
+
+  const canContinue = personalDataOk && form.captchaOk && form.aceptaTratamiento;
+
+  return (
+    <>
+      <StepIndicator current={3} total={wireframeMode ? PASOS.length : PASOS_COLOR.length} label={wireframeMode ? PASOS[2].label : PASOS_COLOR[2].label} wireframeMode={wireframeMode} />
+      <p className="text-sm text-muted-foreground leading-relaxed mb-7">
+        Ingresa tus datos para que podamos gestionar y darte respuesta a tu solicitud.
+      </p>
+
+      <div className="flex flex-col gap-6">
+        {wireframeMode && (
+          <>
+            <MedioRespuesta value={form.medio} onChange={(v) => setForm({ ...form, medio: v })} wireframeMode={wireframeMode} />
+            <div className="border-t border-dashed border-border" />
+          </>
+        )}
+        <p className="text-xs font-bold tracking-widest text-muted-foreground uppercase">
+          {wireframeMode ? "Datos de quien presenta" : "Datos de quien presenta la solicitud"}
+        </p>
+        <PersonaFields prefix="presenter" datos={form.presenter} onChange={setPresenter} celularCorreoEnFila />
+
+        {!wireframeMode && (
+          <MedioRespuestaSmart
+            value={form.medio}
+            onChange={(v) => setForm({ ...form, medio: v })}
+            correo={form.presenter.correo}
+          />
+        )}
+
+        {correoFisico && (
+          <div className="flex flex-col gap-1.5 p-4 rounded-xl bg-white border border-blue-200">
+            <p className="text-xs text-blue-700 font-semibold mb-1">Requerido para respuesta por correo físico</p>
+            <DireccionField onChange={(v) => setForm({ ...form, direccion: v })} />
+          </div>
+        )}
+
+        <div className={`grid gap-4 ${isNIT ? "grid-cols-1" : "grid-cols-2"}`}>
+          {!isNIT && (
+            <SelectField id="sexo" label="Sexo" placeholder="Selecciona" options={SEXOS} value={form.sexo} onChange={(v) => setForm({ ...form, sexo: v })} />
+          )}
+          <SelectField id="grupo" label="Grupo o condición especial" placeholder="Selecciona" options={GRUPOS_ESPECIALES} value={form.grupoEspecial} onChange={(v) => setForm({ ...form, grupoEspecial: v })} />
+        </div>
+
+        {requiereAfectado && (
+          <>
+            <div className="border-t border-dashed border-border" />
+            <Annotate id="afectado-toggle" active={!!wireframeMode}>
+              <div className="flex flex-col gap-3">
+                <p className="text-sm font-semibold text-foreground flex items-center gap-1">
+                  ¿La persona que presenta la solicitud es la misma persona afectada?
+                  <span className="text-red-500 ml-0.5">*</span>
+                </p>
+                <div className="flex gap-3 flex-wrap">
+                  {[
+                    { val: true, label: "Sí", icon: <User size={15} /> },
+                    { val: false, label: "No, es otra persona", icon: <Users size={15} /> },
+                  ].map(({ val, label, icon }) => {
+                    const sel = form.mismaPersonaAfectada === val;
+                    return (
+                      <button key={String(val)} type="button" onClick={() => handleMismaPersona(val)}
+                        className={`flex items-center gap-2 px-5 py-2.5 rounded-full border-2 text-sm font-semibold transition-all cursor-pointer
+                          ${sel ? "border-primary bg-accent text-primary" : "border-border text-muted-foreground hover:border-primary/40 hover:text-foreground"}`}>
+                        {icon} {label}
+                        {sel && <CheckCircle2 size={13} className="text-primary ml-1" />}
+                      </button>
+                    );
+                  })}
+                </div>
+              </div>
+            </Annotate>
+
+            {form.mismaPersonaAfectada === false && (
+              <>
+                <div className="flex flex-col gap-5 p-5 rounded-xl border border-border bg-secondary/30">
+                  <p className="text-xs font-bold tracking-widest text-muted-foreground uppercase">Datos del afectado</p>
+                  <PersonaFields prefix="afectado" datos={form.afectado} onChange={setAfectado} celularCorreoEnFila />
+                </div>
+              </>
+            )}
+
+            {form.mismaPersonaAfectada === true && wireframeMode && (
+              <div className="flex gap-2.5 p-3.5 rounded-xl bg-green-50 border border-green-200">
+                <CheckCircle2 size={15} className="shrink-0 mt-0.5 text-green-600" />
+                <p className="text-xs text-green-800 leading-relaxed">
+                  Los datos del afectado se han diligenciado automáticamente con tu información.
+                </p>
+              </div>
+            )}
+          </>
+        )}
 
         {/* reCAPTCHA v2 */}
         <Annotate id="recaptcha" active={!!wireframeMode}>
