@@ -188,7 +188,7 @@ const LUGARES_SERVICIO_SALUD = [
 ];
 
 const PASOS = [
-  { num: 1, label: "Solicitud" },
+  { num: 1, label: "Requerimiento" },
   { num: 2, label: "Detalle" },
   { num: 3, label: "Datos personales" },
   { num: 4, label: "Confirmación" },
@@ -197,7 +197,7 @@ const PASOS = [
 // Etiquetas del stepper del prototipo a color — el paso 1 tiene otro nombre ahí,
 // el modo wireframe sigue usando PASOS sin tocar.
 const PASOS_COLOR = [
-  { num: 1, label: "Solicitud" },
+  { num: 1, label: "Requerimiento" },
   { num: 2, label: "Detalle" },
   { num: 3, label: "Datos personales" },
   { num: 4, label: "Confirmación" },
@@ -627,7 +627,7 @@ function TitulosCapitalizacionAlert({ wireframeMode }: { wireframeMode?: boolean
       <div className="flex flex-col items-center text-center gap-2 p-5 rounded-xl bg-blue-50 border border-blue-200">
         <AlertCircle size={16} className="shrink-0 text-blue-600" />
         <p className="text-xs text-blue-800 leading-6">
-          <span className="font-semibold">¿Solicitud sobre Títulos de Capitalización?</span>{" "}
+          <span className="font-semibold">¿Requerimiento sobre Títulos de Capitalización?</span>{" "}
           Comunícate con Credicorp Capital Fiduciaria S.A.:{" "}
           <span className="font-medium">(601) 2415420</span> Bogotá ·{" "}
           <span className="font-medium">018005190969</span> resto del país ·{" "}
@@ -830,7 +830,7 @@ function MedioRespuesta({ value, onChange, wireframeMode }: { value: string; onC
     <Annotate id="medio-respuesta" active={!!wireframeMode}>
       <div className="flex flex-col gap-1.5">
         <p className="text-sm font-semibold text-foreground flex items-center gap-1">
-          ¿Por cuál medio deseas recibir la respuesta a tu solicitud?
+          ¿Por cuál medio deseas recibir la respuesta a tu requerimiento?
           <span className="text-red-500 ml-0.5">*</span>
         </p>
         <div className="flex gap-2 mt-1">
@@ -889,7 +889,7 @@ function MedioRespuestaSmart({ value, onChange, correo }: {
   return (
     <div className="flex flex-col gap-1.5">
       <p className="text-sm font-semibold text-foreground flex items-center gap-1">
-        ¿Por cuál medio deseas recibir la respuesta a tu solicitud?
+        ¿Por cuál medio deseas recibir la respuesta a tu requerimiento?
         <span className="text-red-500 ml-0.5">*</span>
       </p>
       <div className="flex gap-2 mt-1">
@@ -1010,7 +1010,7 @@ function TipoSolicitudCards({ options, value, onChange, disabled }: {
   return (
     <div className="flex flex-col gap-1.5">
       <label className="text-sm font-semibold text-foreground flex items-center gap-1">
-        ¿Qué tipo de solicitud deseas radicar?
+        ¿Qué tipo de requerimiento deseas radicar?
         <span className="text-red-500 ml-0.5">*</span>
       </label>
       <p className="text-xs text-muted-foreground -mt-0.5">
@@ -1131,7 +1131,7 @@ function Paso1({ form, setForm, onContinue, wireframeMode }: { form: FormState; 
     <>
       <StepIndicator current={1} total={PASOS.length} label={PASOS[0].label} wireframeMode={wireframeMode} />
       <p className="text-sm text-muted-foreground leading-relaxed mb-7">
-        Selecciona el tipo de solicitud que deseas radicar y el producto correspondiente.
+        Selecciona el tipo de requerimiento que deseas radicar y el producto correspondiente.
       </p>
 
       <div className="flex flex-col gap-6">
@@ -1150,7 +1150,7 @@ function Paso1({ form, setForm, onContinue, wireframeMode }: { form: FormState; 
               <div className="flex gap-3 p-4 rounded-xl bg-amber-50 border border-amber-200">
                 <AlertCircle size={17} className="shrink-0 mt-0.5 text-amber-600" />
                 <div className="text-sm leading-relaxed text-amber-800">
-                  <p className="font-semibold mb-1">¿Tu solicitud está relacionada con un siniestro?</p>
+                  <p className="font-semibold mb-1">¿Tu requerimiento está relacionado con un siniestro?</p>
                   <p className="text-amber-700">
                     Si aún no has realizado el reporte, te invitamos a hacerlo antes de continuar.
                     Para Pérdida Total, Hurto o Responsabilidad Civil ingresa a{" "}
@@ -1166,8 +1166,8 @@ function Paso1({ form, setForm, onContinue, wireframeMode }: { form: FormState; 
         {wireframeMode ? (
           <SelectField
             id="tipo-solicitud"
-            label="¿Qué tipo de solicitud deseas radicar?"
-            placeholder="Selecciona el tipo de solicitud"
+            label="¿Qué tipo de requerimiento deseas radicar?"
+            placeholder="Selecciona el tipo de requerimiento"
             options={tiposSolicitudFiltrados}
             value={form.tipoSolicitud}
             onChange={(v) => setForm({ ...form, tipoSolicitud: v, tipologia: "", subtipologia: "" })}
@@ -1188,7 +1188,7 @@ function Paso1({ form, setForm, onContinue, wireframeMode }: { form: FormState; 
 
             <SelectField
               id="tipologia"
-              label="¿Cuál es el motivo de tu solicitud?"
+              label="¿Cuál es el motivo de tu requerimiento?"
               placeholder="Selecciona"
               options={TIPOLOGIAS_FIJAS}
               value={form.tipologia}
@@ -1198,7 +1198,7 @@ function Paso1({ form, setForm, onContinue, wireframeMode }: { form: FormState; 
 
             <SelectField
               id="subtipologia"
-              label="¿Cuál de las siguientes opciones describe mejor tu solicitud?"
+              label="¿Cuál de las siguientes opciones describe mejor tu requerimiento?"
               placeholder="Selecciona"
               options={SUBTIPOLOGIAS_FIJAS}
               value={form.subtipologia}
@@ -1226,7 +1226,7 @@ function Paso1({ form, setForm, onContinue, wireframeMode }: { form: FormState; 
               <div className="flex gap-3 p-4 rounded-xl bg-amber-50 border border-amber-200">
                 <AlertCircle size={17} className="shrink-0 mt-0.5 text-amber-600" />
                 <div className="text-sm leading-relaxed text-amber-800">
-                  <p className="font-semibold mb-1">¿Tu solicitud está relacionada con un siniestro?</p>
+                  <p className="font-semibold mb-1">¿Tu requerimiento está relacionado con un siniestro?</p>
                   <p className="text-amber-700">
                     Si aún no has realizado el reporte, te invitamos a hacerlo antes de continuar.
                     Para Pérdida Total, Hurto o Responsabilidad Civil ingresa a{" "}
@@ -1242,7 +1242,7 @@ function Paso1({ form, setForm, onContinue, wireframeMode }: { form: FormState; 
                 <AlertCircle size={17} className="shrink-0 mt-0.5 text-amber-600" />
                 <div className="text-sm leading-relaxed text-amber-800">
                   <p className="mb-2">
-                    Si deseas radicar una solicitud relacionada con Títulos de Capitalización, por favor comunícate
+                    Si deseas radicar un requerimiento relacionado con Títulos de Capitalización, por favor comunícate
                     con Credicorp Capital Fiduciaria S.A. a través de los siguientes canales de atención:
                   </p>
                   <p>Teléfono: <span className="font-medium">(601) 2415420</span> en Bogotá o al <span className="font-medium">018005190969</span> para el resto del país</p>
@@ -1476,7 +1476,7 @@ function Paso2({ form, setForm, onBack, onContinue, wireframeMode }: {
     <>
       <StepIndicator current={2} total={wireframeMode ? PASOS.length : PASOS_COLOR.length} label={wireframeMode ? PASOS[1].label : PASOS_COLOR[1].label} wireframeMode={wireframeMode} />
       <p className="text-sm text-muted-foreground leading-relaxed mb-7">
-        Cuéntanos con detalle tu solicitud y adjunta los documentos que la soporten.
+        Cuéntanos con detalle tu requerimiento y adjunta los documentos que lo soporten.
       </p>
 
       <div className="flex flex-col gap-6">
@@ -1484,7 +1484,7 @@ function Paso2({ form, setForm, onBack, onContinue, wireframeMode }: {
           <>
             <SelectField
               id="tipologia"
-              label="¿Cuál es el motivo de tu solicitud?"
+              label="¿Cuál es el motivo de tu requerimiento?"
               placeholder="Selecciona"
               options={TIPOLOGIAS_FIJAS}
               value={form.tipologia}
@@ -1494,7 +1494,7 @@ function Paso2({ form, setForm, onBack, onContinue, wireframeMode }: {
 
             <SelectField
               id="subtipologia"
-              label="¿Cuál de las siguientes opciones describe mejor tu solicitud?"
+              label="¿Cuál de las siguientes opciones describe mejor tu requerimiento?"
               placeholder="Selecciona"
               options={SUBTIPOLOGIAS_FIJAS}
               value={form.subtipologia}
@@ -1514,8 +1514,8 @@ function Paso2({ form, setForm, onBack, onContinue, wireframeMode }: {
 
         <TextAreaField
           id="descripcion"
-          label="Descripción detallada de la solicitud"
-          placeholder="Describe tu solicitud de la manera más detallada posible..."
+          label="Descripción detallada del requerimiento"
+          placeholder="Describe tu requerimiento de la manera más detallada posible..."
           value={form.descripcion}
           onChange={(v) => setForm({ ...form, descripcion: v })}
           hint="Incluye antecedentes, fechas, lugares, personas involucradas y cualquier información que consideres relevante para su análisis y gestión."
@@ -1530,7 +1530,7 @@ function Paso2({ form, setForm, onBack, onContinue, wireframeMode }: {
             </p>
             <div className="text-xs text-muted-foreground -mt-1 flex flex-col gap-2">
               <p>
-                Adjunta los documentos que ayuden a soportar o complementar tu solicitud.
+                Adjunta los documentos que ayuden a soportar o complementar tu requerimiento.
               </p>
               <div className="rounded-lg bg-blue-50 border border-blue-200 px-3 py-2.5 flex flex-col gap-1.5">
                 <p className="font-semibold text-blue-800">Si actúas en representación del asegurado, adjunta los documentos correspondientes:</p>
@@ -1679,7 +1679,7 @@ function Paso3({ form, setForm, onBack, onContinue, wireframeMode }: {
     <>
       <StepIndicator current={3} total={wireframeMode ? PASOS.length : PASOS_COLOR.length} label={wireframeMode ? PASOS[2].label : PASOS_COLOR[2].label} wireframeMode={wireframeMode} />
       <p className="text-sm text-muted-foreground leading-relaxed mb-7">
-        Ingresa tus datos para que podamos gestionar y darte respuesta a tu solicitud.
+        Ingresa tus datos para que podamos gestionar y darte respuesta a tu requerimiento.
       </p>
 
       <div className="flex flex-col gap-6">
@@ -1690,7 +1690,7 @@ function Paso3({ form, setForm, onBack, onContinue, wireframeMode }: {
           </>
         )}
         <p className="text-xs font-bold tracking-widest text-muted-foreground uppercase">
-          {wireframeMode ? "Datos de quien presenta" : "Datos de quien presenta la solicitud"}
+          {wireframeMode ? "Datos de quien presenta" : "Datos de quien presenta el requerimiento"}
         </p>
         <PersonaFields prefix="presenter" datos={form.presenter} onChange={setPresenter} celularCorreoEnFila />
 
@@ -1722,7 +1722,7 @@ function Paso3({ form, setForm, onBack, onContinue, wireframeMode }: {
             <Annotate id="afectado-toggle" active={!!wireframeMode}>
               <div className="flex flex-col gap-3">
                 <p className="text-sm font-semibold text-foreground flex items-center gap-1">
-                  ¿La persona que presenta la solicitud es la misma persona afectada?
+                  ¿La persona que presenta el requerimiento es la misma persona afectada?
                   <span className="text-red-500 ml-0.5">*</span>
                 </p>
                 <div className="flex gap-3 flex-wrap">
@@ -1975,7 +1975,7 @@ export default function App() {
       ? "¡Gracias por tu felicitación!"
       : activeForm.tipoSolicitud === "Sugerencias"
         ? "¡Gracias por tu sugerencia!"
-        : "¡Tu solicitud fue radicada!";
+        : "¡Tu requerimiento fue radicado!";
   const textoConfirmacion = esMensajeAgradecimiento
     ? "Hemos recibido tu mensaje y será compartido con las áreas correspondientes. Agradecemos el tiempo que dedicaste a reconocer nuestro servicio."
     : `Hemos recibido tu PQRS. Te notificaremos por ${activeForm.medio || "correo electrónico"} cuando tengamos una respuesta.`;
