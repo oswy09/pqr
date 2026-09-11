@@ -1107,14 +1107,8 @@ function Paso1({ form, setForm, onContinue, wireframeMode }: { form: FormState; 
     ? (form.producto !== "" && form.tipoSolicitud !== "" && form.tipologia !== "" && form.subtipologia !== "")
     : (form.tipoSolicitud !== "" && form.producto !== "" && !showTitulosAlert);
 
-  const isArlPeticion = !wireframeMode && form.tipoSolicitud === "Petición" && form.producto === "ARL";
-
   const handleContinue = () => {
-    if (isArlPeticion) {
-      window.open("https://www.axacolpatria.my.site.com/serviciosarl/s/", "_blank");
-    } else {
-      onContinue();
-    }
+    onContinue();
   };
 
   const handleTipologia = (v: string) =>
@@ -1265,17 +1259,6 @@ function Paso1({ form, setForm, onContinue, wireframeMode }: { form: FormState; 
           <span className="text-red-500 font-bold">*</span> Campos obligatorios
         </p>
       </Annotate>
-
-      {isArlPeticion && (
-        <div className="flex gap-3 p-4 rounded-xl bg-amber-50 border border-amber-200">
-          <AlertCircle size={17} className="shrink-0 mt-0.5 text-amber-600" />
-          <div className="text-sm leading-relaxed text-amber-800">
-            <p className="text-amber-700">
-              Una vez selecciones <span className="font-semibold">"continuar"</span>, serás remitido al radicador de ARL, donde podrás continuar con el proceso de radicación y seguimiento correspondiente.
-            </p>
-          </div>
-        </div>
-      )}
 
       <NavButtons canContinue={canContinue} onContinue={handleContinue} wireframeMode={wireframeMode} />
     </>
