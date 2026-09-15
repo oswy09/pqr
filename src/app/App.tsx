@@ -1869,16 +1869,16 @@ function Paso3({ form, setForm, onBack, onContinue, wireframeMode }: {
             className="mt-0.5 w-4 h-4 accent-primary cursor-pointer shrink-0"
           />
           <p className="text-xs text-muted-foreground leading-relaxed">
-            Al hacer clic en Enviar, se autoriza la remisión de la PQRS a AXA COLPATRIA y el
-            tratamiento de los datos personales conforme a la{" "}
+            Al hacer clic en el botón enviar, la persona autoriza a AXA COLPATRIA SEGUROS S.A., AXA COLPATRIA SEGUROS DE VIDA S.A., AXA COLPATRIA MEDICINA PREPAGADA S.A., FINANSEGURO S.A. y demás responsables del tratamiento, a usar sus datos personales para radicar, tramitar y gestionar sus solicitudes, quejas, peticiones o reclamos a través de este canal.
+            {" "}También reconoce que la información proporcionada es verídica y, en su caso, puede incluir datos sensibles, como información de salud, que entrega voluntariamente para dar trámite a lo solicitado. Además, le informamos que puede ejercer sus derechos de acceso, rectificación, actualización, supresión u oposición al tratamiento de sus datos en los canales dispuestos en la Política de Privacidad, disponible en el siguiente link{" "}
             <a
-              href="https://www.axacolpatria.co/es/sac/tratamiento-de-datos-personales"
+              href="/politica-de-tratamiento-de-la-informacion-personal.pdf"
               target="_blank"
               rel="noopener noreferrer"
               className="text-primary underline hover:text-primary/80"
               onClick={(e) => e.stopPropagation()}
             >
-              Política de Tratamiento de Datos Personales
+              politica-de-tratamiento-de-la-informacion-personal.pdf
             </a>
             .
           </p>
