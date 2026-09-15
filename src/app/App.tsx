@@ -1870,7 +1870,7 @@ function Paso3({ form, setForm, onBack, onContinue, wireframeMode }: {
           />
           <p className="text-xs text-muted-foreground leading-relaxed">
             Al hacer clic en el botón enviar, la persona autoriza a AXA COLPATRIA SEGUROS S.A., AXA COLPATRIA SEGUROS DE VIDA S.A., AXA COLPATRIA MEDICINA PREPAGADA S.A., FINANSEGURO S.A. y demás responsables del tratamiento, a usar sus datos personales para radicar, tramitar y gestionar sus solicitudes, quejas, peticiones o reclamos a través de este canal.
-            {" "}También reconoce que la información proporcionada es verídica y, en su caso, puede incluir datos sensibles, como información de salud, que entrega voluntariamente para dar trámite a lo solicitado. Además, le informamos que puede ejercer sus derechos de acceso, rectificación, actualización, supresión u oposición al tratamiento de sus datos en los canales dispuestos en la Política de Privacidad, disponible en el siguiente link{" "}
+            {" "}También reconoce que la información proporcionada es verídica y, en su caso, puede incluir datos sensibles, como información de salud, que entrega voluntariamente para dar trámite a lo solicitado. Además, le informamos que puede ejercer sus derechos de acceso, rectificación, actualización, supresión u oposición al tratamiento de sus datos en los canales dispuestos en la{" "}
             <a
               href="/politica-de-tratamiento-de-la-informacion-personal.pdf"
               target="_blank"
@@ -1878,7 +1878,7 @@ function Paso3({ form, setForm, onBack, onContinue, wireframeMode }: {
               className="text-primary underline hover:text-primary/80"
               onClick={(e) => e.stopPropagation()}
             >
-              politica-de-tratamiento-de-la-informacion-personal.pdf
+              Política de Privacidad
             </a>
             .
           </p>
