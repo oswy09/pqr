@@ -1878,7 +1878,7 @@ function Paso3({ form, setForm, onBack, onContinue, wireframeMode }: {
               className="text-primary underline hover:text-primary/80"
               onClick={(e) => e.stopPropagation()}
             >
-              Política de Privacidad
+              política de tratamiento de la información personal
             </a>
             .
           </p>
