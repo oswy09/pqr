@@ -212,7 +212,7 @@ export interface FormState {
   producto: string; subproducto: string; tipoSolicitud: string;
   tipologia: string; subtipologia: string;
   medio: string; presenter: DatosPersona;
-  direccion: string; sexo: string; grupoEspecial: string;
+  direccion: string; sexo: string; grupoEspecial: string[];
   mismaPersonaAfectada: boolean | null; afectado: DatosPersona;
   descripcion: string;
   // Campos específicos por producto
@@ -384,6 +384,118 @@ function SelectField({
         >
           <span className={value ? "text-foreground font-medium" : "text-muted-foreground"}>
             {value || placeholder}
+          </span>
+          <ChevronDown size={15} className={`text-muted-foreground transition-transform shrink-0 ${open ? "rotate-180" : ""}`} />
+        </button>
+      </div>
+      {dropdown}
+    </div>
+  );
+}
+
+function MultiSelectField({
+  id, label, placeholder, options = [], value, onChange, max = 2, optional,
+}: {
+  id: string; label: string; placeholder: string;
+  options?: string[]; value: string[]; onChange: (v: string[]) => void;
+  max?: number; optional?: boolean;
+}) {
+  const [open, setOpen] = useState(false);
+  const btnRef = useRef<HTMLButtonElement>(null);
+  const posRef = useRef({ top: 0, left: 0, width: 0, openUp: false });
+
+  const calcPos = () => {
+    if (!btnRef.current) return;
+    const r = btnRef.current.getBoundingClientRect();
+    const spaceBelow = window.innerHeight - r.bottom;
+    const openUp = spaceBelow < 260 && r.top > 260;
+    posRef.current = { top: openUp ? r.top - 4 : r.bottom + 4, left: r.left, width: r.width, openUp };
+  };
+
+  const handleToggle = () => { calcPos(); setOpen((o) => !o); };
+
+  useEffect(() => {
+    if (!open) return;
+    const close = () => setOpen(false);
+    const reposition = () => { calcPos(); };
+    document.addEventListener("mousedown", close);
+    window.addEventListener("scroll", reposition, true);
+    window.addEventListener("resize", close);
+    return () => {
+      document.removeEventListener("mousedown", close);
+      window.removeEventListener("scroll", reposition, true);
+      window.removeEventListener("resize", close);
+    };
+  }, [open]);
+
+  const toggle = (item: string) => {
+    if (value.includes(item)) {
+      onChange(value.filter((v) => v !== item));
+    } else if (value.length < max) {
+      onChange([...value, item]);
+    }
+  };
+
+  const { top, left, width, openUp } = posRef.current;
+  const displayText = value.length === 0 ? null : value.join(", ");
+
+  const dropdown = open ? createPortal(
+    <div
+      onMouseDown={(e) => e.stopPropagation()}
+      style={{ position: "fixed", top, left, width, zIndex: 99999 }}
+      className={`bg-white border border-border shadow-2xl overflow-hidden
+        ${openUp ? "rounded-t-xl rounded-b-md mb-1" : "rounded-xl mt-1"}`}
+    >
+      <div className="px-4 py-2 border-b border-border/50 flex items-center justify-between">
+        <span className="text-[11px] text-muted-foreground font-medium">
+          Selecciona hasta {max} opciones
+        </span>
+        <span className={`text-[11px] font-semibold ${value.length === max ? "text-primary" : "text-muted-foreground"}`}>
+          {value.length}/{max}
+        </span>
+      </div>
+      <ul role="listbox" style={{ maxHeight: 220 }} className="overflow-y-auto py-1">
+        {options.map((item) => {
+          const selected = value.includes(item);
+          const disabled = !selected && value.length >= max;
+          return (
+            <li
+              key={item} role="option" aria-selected={selected}
+              onClick={() => !disabled && toggle(item)}
+              className={`px-4 py-2.5 text-sm flex items-center gap-3 transition-colors
+                ${disabled ? "opacity-40 cursor-not-allowed" : "cursor-pointer"}
+                ${selected ? "bg-accent" : !disabled ? "hover:bg-muted" : ""}`}
+            >
+              <span className={`w-4 h-4 rounded border-2 flex items-center justify-center shrink-0 transition-colors
+                ${selected ? "bg-primary border-primary" : "border-muted-foreground/40"}`}>
+                {selected && <CheckCircle2 size={10} className="text-white" />}
+              </span>
+              <span className={`flex-1 ${selected ? "font-semibold text-foreground" : "text-foreground"}`}>{item}</span>
+            </li>
+          );
+        })}
+      </ul>
+    </div>,
+    document.body
+  ) : null;
+
+  return (
+    <div className="flex flex-col gap-1.5">
+      <label htmlFor={id} className="text-sm font-semibold text-foreground flex items-center gap-1">
+        {label}
+        {!optional && <span className="text-red-500 ml-0.5">*</span>}
+        {optional && <span className="text-xs font-normal text-muted-foreground ml-1">(opcional)</span>}
+      </label>
+      <div>
+        <button
+          ref={btnRef} id={id} type="button"
+          onClick={handleToggle}
+          aria-haspopup="listbox" aria-expanded={open}
+          className={`${inputBase} flex items-center justify-between text-left cursor-pointer
+            ${open ? "border-primary ring-2 ring-primary/20" : "hover:border-primary/50"}`}
+        >
+          <span className={displayText ? "text-foreground font-medium truncate pr-2" : "text-muted-foreground"}>
+            {displayText || placeholder}
           </span>
           <ChevronDown size={15} className={`text-muted-foreground transition-transform shrink-0 ${open ? "rotate-180" : ""}`} />
         </button>
@@ -1647,7 +1759,7 @@ function Paso3({ form, setForm, onBack, onContinue, wireframeMode }: {
   const presenterOk =
     form.medio !== "" && form.presenter.tipoId !== "" && form.presenter.numId !== "" &&
     form.presenter.nombre !== "" && form.presenter.celular !== "" && form.presenter.correo !== "" &&
-    (isNIT || form.sexo !== "") && form.grupoEspecial !== "" && (!correoFisico || form.direccion !== "");
+    (isNIT || form.sexo !== "") && form.grupoEspecial.length > 0 && (!correoFisico || form.direccion !== "");
 
   const afectadoOk = !requiereAfectado || form.mismaPersonaAfectada === true ||
     (form.mismaPersonaAfectada === false &&
@@ -1696,7 +1808,7 @@ function Paso3({ form, setForm, onBack, onContinue, wireframeMode }: {
           {!isNIT && (
             <SelectField id="sexo" label="Sexo" placeholder="Selecciona" options={SEXOS} value={form.sexo} onChange={(v) => setForm({ ...form, sexo: v })} />
           )}
-          <SelectField id="grupo" label="Grupo o condición especial" placeholder="Selecciona" options={GRUPOS_ESPECIALES} value={form.grupoEspecial} onChange={(v) => setForm({ ...form, grupoEspecial: v })} />
+          <MultiSelectField id="grupo" label="Grupo o condición especial" placeholder="Selecciona" options={GRUPOS_ESPECIALES} value={form.grupoEspecial} onChange={(v) => setForm({ ...form, grupoEspecial: v })} max={2} />
         </div>
 
         {requiereAfectado && (
@@ -1931,7 +2043,7 @@ export default function App() {
   const [paso, setPaso] = useState(1);
   const [form, setForm] = useState<FormState>({
     producto: "", subproducto: "", tipoSolicitud: "", tipologia: "", subtipologia: "",
-    medio: "Correo electrónico", presenter: emptyPersona(), direccion: "", sexo: "", grupoEspecial: "",
+    medio: "Correo electrónico", presenter: emptyPersona(), direccion: "", sexo: "", grupoEspecial: [],
     placa: "", terceroAfectado: "", placaTercero: "",
     pais: "", departamento: "", ciudad: "", lugarServicio: "", lugarServicioOtro: "",
     vidaAsociadaCredito: null, numCredito: "",
