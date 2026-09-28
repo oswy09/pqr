@@ -437,7 +437,6 @@ function MultiSelectField({
   };
 
   const { top, left, width, openUp } = posRef.current;
-  const displayText = value.length === 0 ? null : value.join(", ");
 
   const dropdown = open ? createPortal(
     <div
@@ -494,12 +493,30 @@ function MultiSelectField({
           className={`${inputBase} flex items-center justify-between text-left cursor-pointer
             ${open ? "border-primary ring-2 ring-primary/20" : "hover:border-primary/50"}`}
         >
-          <span className={displayText ? "text-foreground font-medium truncate pr-2" : "text-muted-foreground"}>
-            {displayText || placeholder}
-          </span>
+          <span className="text-muted-foreground">{placeholder}</span>
           <ChevronDown size={15} className={`text-muted-foreground transition-transform shrink-0 ${open ? "rotate-180" : ""}`} />
         </button>
       </div>
+      {value.length > 0 && (
+        <div className="flex flex-wrap gap-1.5 mt-0.5">
+          {value.map((item) => (
+            <span
+              key={item}
+              className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-semibold bg-[#EAF0FF] text-[#2E4EA8] border border-[#2E4EA8]/20"
+            >
+              {item}
+              <button
+                type="button"
+                onMouseDown={(e) => { e.preventDefault(); e.stopPropagation(); toggle(item); }}
+                className="ml-0.5 hover:text-[#00008F] transition-colors"
+                aria-label={`Quitar ${item}`}
+              >
+                <X size={11} />
+              </button>
+            </span>
+          ))}
+        </div>
+      )}
       {dropdown}
     </div>
   );
