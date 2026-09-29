@@ -1125,28 +1125,27 @@ function NavButtons({ canContinue, onBack, onContinue, readyLabel = "Todos los c
 
 // ── Breadcrumb ────────────────────────────────────────────────────────────────
 
-function Breadcrumb({ activePaso, onGoToPaso }: { activePaso: number; onGoToPaso: (n: number) => void }) {
+function Breadcrumb() {
   const crumbs = [
-    { label: "Inicio", paso: 0 },
-    ...PASOS_COLOR.slice(0, activePaso).map((p) => ({ label: p.label, paso: p.num })),
+    { label: "Home", icon: true },
+    { label: "Contáctanos" },
+    { label: "PQRS" },
+    { label: "Formulario de radicación" },
   ];
   return (
-    <nav aria-label="Miga de pan" className="flex items-center gap-1 text-xs text-muted-foreground mb-4 px-1 flex-wrap">
+    <nav aria-label="Miga de pan" className="flex items-center gap-1 text-xs text-muted-foreground mb-4 flex-wrap">
       {crumbs.map((crumb, i) => {
         const isLast = i === crumbs.length - 1;
         return (
           <Fragment key={crumb.label}>
-            {i > 0 && <ChevronRight size={12} className="shrink-0 text-muted-foreground/50" />}
+            {i > 0 && <ChevronRight size={11} className="shrink-0 text-muted-foreground/40" />}
             {isLast ? (
               <span className="font-semibold text-foreground">{crumb.label}</span>
             ) : (
-              <button
-                type="button"
-                onClick={() => crumb.paso > 0 && onGoToPaso(crumb.paso)}
-                className={`transition-colors ${crumb.paso === 0 ? "cursor-default" : "hover:text-primary hover:underline"}`}
-              >
-                {crumb.paso === 0 ? <Home size={12} className="inline -mt-0.5" /> : crumb.label}
-              </button>
+              <span className="flex items-center gap-1 cursor-default">
+                {crumb.icon && <Home size={11} className="inline -mt-0.5" />}
+                {!crumb.icon && crumb.label}
+              </span>
             )}
           </Fragment>
         );
@@ -2187,27 +2186,42 @@ export default function App() {
         </div>
       )}
 
-      {/* Intro text — between banner and form */}
-      {activePaso === 1 && (
-        <div className="w-full px-4 pt-6 pb-2">
-          <div className="max-w-[760px] mx-auto text-center">
-            {!wireframeMode && (
-              <h1 className="text-foreground mb-3">
-                Tu experiencia nos ayuda a mejorar
-              </h1>
-            )}
-            <Annotate id="intro-text" active={wireframeMode}>
-              <p className="text-base text-muted-foreground leading-relaxed">
-                En AXA COLPATRIA tu tranquilidad es nuestra prioridad. Queremos ofrecerte el mejor servicio posible; por eso, creamos este espacio para gestionar tus <strong className="font-semibold text-foreground">solicitudes</strong>, <strong className="font-semibold text-foreground">quejas</strong> o <strong className="font-semibold text-foreground">reclamos</strong>, resolver tus dudas y escuchar tus comentarios. Cuéntanos qué necesitas y te daremos una respuesta rápida y oportuna.
-              </p>
-            </Annotate>
-          </div>
-        </div>
-      )}
-
       {/* Main */}
       <main className="flex-1 flex justify-center px-4 py-6">
-        <div className="w-full max-w-[980px] flex flex-col lg:flex-row gap-6 items-start">
+        <div className="w-full max-w-[980px] flex flex-col gap-0">
+
+          {/* Intro text + breadcrumb — full width, fuera del flex-row para que el aside arranque al mismo nivel que el form card */}
+          {!wireframeMode && (
+            <>
+              {activePaso === 1 && (
+                <div className="text-center pt-2 pb-4">
+                  <h1 className="text-foreground mb-3">
+                    Tu experiencia nos ayuda a mejorar
+                  </h1>
+                  <p className="text-base text-muted-foreground leading-relaxed max-w-[620px] mx-auto">
+                    En AXA COLPATRIA tu tranquilidad es nuestra prioridad. Queremos ofrecerte el mejor servicio posible; por eso, creamos este espacio para gestionar tus <strong className="font-semibold text-foreground">solicitudes</strong>, <strong className="font-semibold text-foreground">quejas</strong> o <strong className="font-semibold text-foreground">reclamos</strong>, resolver tus dudas y escuchar tus comentarios. Cuéntanos qué necesitas y te daremos una respuesta rápida y oportuna.
+                  </p>
+                </div>
+              )}
+              <Breadcrumb />
+            </>
+          )}
+
+          {/* Wireframe intro text */}
+          {wireframeMode && activePaso === 1 && (
+            <div className="w-full pb-2">
+              <div className="max-w-[660px] mx-auto">
+                <Annotate id="intro-text" active={wireframeMode}>
+                  <p className="text-base text-muted-foreground leading-relaxed">
+                    En AXA COLPATRIA tu tranquilidad es nuestra prioridad. Queremos ofrecerte el mejor servicio posible; por eso, creamos este espacio para gestionar tus <strong className="font-semibold text-foreground">solicitudes</strong>, <strong className="font-semibold text-foreground">quejas</strong> o <strong className="font-semibold text-foreground">reclamos</strong>, resolver tus dudas y escuchar tus comentarios. Cuéntanos qué necesitas y te daremos una respuesta rápida y oportuna.
+                  </p>
+                </Annotate>
+              </div>
+            </div>
+          )}
+
+          {/* Flex row: form column + aside */}
+          <div className="flex flex-col lg:flex-row gap-6 items-start">
 
           <div className={wireframeMode ? "w-full max-w-[660px] mx-auto lg:mx-0" : "flex-1 min-w-0"}>
 
@@ -2241,10 +2255,6 @@ export default function App() {
                 <LineasNegocioPanel wireframeMode={wireframeMode} />
                 <TitulosCapitalizacionAlert wireframeMode={wireframeMode} />
               </div>
-            )}
-
-            {!wireframeMode && (
-              <Breadcrumb activePaso={activePaso} onGoToPaso={(n) => setPaso(n)} />
             )}
 
             <div className={wireframeMode ? "pointer-events-none select-none" : ""}>
@@ -2282,7 +2292,8 @@ export default function App() {
               <LineasAtencionPanel />
             </aside>
           )}
-        </div>
+          </div>{/* end flex-row */}
+        </div>{/* end max-w-980 */}
       </main>
 
       {/* Footer — solo en modo color */}
