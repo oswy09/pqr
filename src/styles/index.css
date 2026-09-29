@@ -3,6 +3,7 @@
 @import './tailwind.css';
 @import './theme.css';
 @import './wireframe.css';
+@import './globals.css';
 
 /* Error state — fuera de @layer para ganarle al reset * { border-color: var(--border) } de Tailwind v4 */
 input[data-error="true"],

@@ -15,7 +15,9 @@
   font-style: normal;
   font-weight: 700;
   font-display: swap;
-  src: url('https://res.cloudinary.com/ddqbnr9vo/raw/upload/v1750205338/PublicoHeadline-Bold-Web_nphjdn.woff2') format('woff2');
+  src:
+    url('https://res.cloudinary.com/ddqbnr9vo/raw/upload/v1750205338/PublicoHeadline-Bold-Web_nphjdn.woff2') format('woff2'),
+    url('https://res.cloudinary.com/ddqbnr9vo/raw/upload/v1750205331/PublicoHeadline-Bold-Web_nry0md.woff') format('woff');
 }
 
 /* Publico — Light (300) */

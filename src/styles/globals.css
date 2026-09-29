@@ -1,0 +1,25 @@
+/* Typography hierarchy — Publico Headline Bold for page titles */
+h1, h2 {
+  font-family: 'Publico', Georgia, serif;
+  font-size: 48px;
+  font-weight: 700;
+  line-height: 1.1;
+}
+
+h3 {
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 1.25;
+}
+
+h4 {
+  font-weight: 700;
+  font-size: 17px;
+  line-height: 1.3;
+}
+
+h5 {
+  font-weight: 700;
+  font-size: 15px;
+  line-height: 1.35;
+}

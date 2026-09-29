@@ -3,7 +3,7 @@ import { createPortal } from "react-dom";
 import ReCAPTCHA from "react-google-recaptcha";
 import {
   ChevronDown, AlertCircle, CheckCircle2, Check,
-  ChevronLeft, Mail, Home, User, Users,
+  ChevronLeft, ChevronRight, Mail, Home, User, Users,
   Paperclip, X, Send,
   LoaderCircle, Phone, MessageCircle,
   ClipboardList, MessageCircleWarning, Scale, Star, Lightbulb,
@@ -872,7 +872,7 @@ function LineasAtencionPanel() {
   return (
     <div className="rounded-[24px] border border-[#D9DEE7] bg-white overflow-hidden shadow-sm">
       <div className="bg-primary text-white px-5 py-4 flex items-start justify-between">
-        <p className="text-[17px] leading-[1.2] font-semibold tracking-wide max-w-[132px]">Líneas de atención</p>
+        <p className="text-[17px] leading-[1.2] font-semibold tracking-wide whitespace-nowrap">Líneas de atención</p>
       </div>
 
       <div className="px-5 py-4 flex flex-col gap-4">
@@ -1123,6 +1123,38 @@ function NavButtons({ canContinue, onBack, onContinue, readyLabel = "Todos los c
   );
 }
 
+// ── Breadcrumb ────────────────────────────────────────────────────────────────
+
+function Breadcrumb({ activePaso, onGoToPaso }: { activePaso: number; onGoToPaso: (n: number) => void }) {
+  const crumbs = [
+    { label: "Inicio", paso: 0 },
+    ...PASOS_COLOR.slice(0, activePaso).map((p) => ({ label: p.label, paso: p.num })),
+  ];
+  return (
+    <nav aria-label="Miga de pan" className="flex items-center gap-1 text-xs text-muted-foreground mb-4 px-1 flex-wrap">
+      {crumbs.map((crumb, i) => {
+        const isLast = i === crumbs.length - 1;
+        return (
+          <Fragment key={crumb.label}>
+            {i > 0 && <ChevronRight size={12} className="shrink-0 text-muted-foreground/50" />}
+            {isLast ? (
+              <span className="font-semibold text-foreground">{crumb.label}</span>
+            ) : (
+              <button
+                type="button"
+                onClick={() => crumb.paso > 0 && onGoToPaso(crumb.paso)}
+                className={`transition-colors ${crumb.paso === 0 ? "cursor-default" : "hover:text-primary hover:underline"}`}
+              >
+                {crumb.paso === 0 ? <Home size={12} className="inline -mt-0.5" /> : crumb.label}
+              </button>
+            )}
+          </Fragment>
+        );
+      })}
+    </nav>
+  );
+}
+
 // ── Tipo de solicitud — selector en tarjetas (prototipo a color) ──────────────
 
 const TIPO_SOLICITUD_INFO: Record<string, { icon: React.ReactNode; label: string; desc: string }> = {
@@ -1145,48 +1177,48 @@ function TipoSolicitudCards({ options, value, onChange, disabled }: {
       <p className="text-xs text-muted-foreground -mt-0.5">
         {disabled ? "Primero selecciona un producto." : "Selecciona una opción para continuar."}
       </p>
-      <div className={`grid grid-cols-6 gap-3 mt-1 ${disabled ? "opacity-50 pointer-events-none" : ""}`}>
+      <div className={`flex flex-col md:grid md:grid-cols-6 gap-3 mt-1 ${disabled ? "opacity-50 pointer-events-none" : ""}`}>
         {options.slice(0, 3).map((opt) => {
           const info = TIPO_SOLICITUD_INFO[opt];
           const sel = value === opt;
           return (
             <button
               key={opt} type="button" onClick={() => onChange(opt)}
-              className={`col-span-2 relative flex flex-col items-start text-left gap-2.5 p-4 rounded-2xl border-2 transition-all cursor-pointer
+              className={`md:col-span-2 relative flex flex-row md:flex-col items-center md:items-start text-left gap-3 md:gap-2.5 p-4 rounded-2xl border-2 transition-all cursor-pointer
                 ${sel ? "border-primary bg-accent" : "border-border bg-white hover:border-primary/40"}`}
             >
               {sel && <CheckCircle2 size={14} className="text-primary absolute top-2.5 right-2.5" />}
               <div
-                className="w-11 h-11 rounded-full flex items-center justify-center"
+                className="w-11 h-11 shrink-0 rounded-full flex items-center justify-center"
                 style={{ background: sel ? "rgba(0,0,143,.15)" : "#EAF0FF", color: sel ? "#00008F" : "#2E4EA8" }}
               >
                 {info?.icon}
               </div>
-              <div>
+              <div className="flex-1">
                 <p className={`text-sm font-bold leading-tight ${sel ? "text-primary" : "text-foreground"}`}>{info?.label ?? opt}</p>
                 <p className="text-[11px] text-muted-foreground leading-snug mt-0.5">{info?.desc}</p>
               </div>
             </button>
           );
         })}
-        <div className="col-span-1" />
+        <div className="hidden md:block md:col-span-1" />
         {options.slice(3).map((opt) => {
           const info = TIPO_SOLICITUD_INFO[opt];
           const sel = value === opt;
           return (
             <button
               key={opt} type="button" onClick={() => onChange(opt)}
-              className={`col-span-2 relative flex flex-col items-start text-left gap-2.5 p-4 rounded-2xl border-2 transition-all cursor-pointer
+              className={`md:col-span-2 relative flex flex-row md:flex-col items-center md:items-start text-left gap-3 md:gap-2.5 p-4 rounded-2xl border-2 transition-all cursor-pointer
                 ${sel ? "border-primary bg-accent" : "border-border bg-white hover:border-primary/40"}`}
             >
               {sel && <CheckCircle2 size={14} className="text-primary absolute top-2.5 right-2.5" />}
               <div
-                className="w-11 h-11 rounded-full flex items-center justify-center"
+                className="w-11 h-11 shrink-0 rounded-full flex items-center justify-center"
                 style={{ background: sel ? "rgba(0,0,143,.15)" : "#EAF0FF", color: sel ? "#00008F" : "#2E4EA8" }}
               >
                 {info?.icon}
               </div>
-              <div>
+              <div className="flex-1">
                 <p className={`text-sm font-bold leading-tight ${sel ? "text-primary" : "text-foreground"}`}>{info?.label ?? opt}</p>
                 <p className="text-[11px] text-muted-foreground leading-snug mt-0.5">{info?.desc}</p>
               </div>
@@ -2160,8 +2192,8 @@ export default function App() {
         <div className="w-full px-4 pt-6 pb-2">
           <div className="max-w-[760px] mx-auto text-center">
             {!wireframeMode && (
-              <h1 className="text-3xl md:text-4xl font-bold text-foreground mb-3" style={{ fontFamily: "'Publico', Georgia, serif" }}>
-                Te escuchamos: Tu experiencia nos ayuda a mejorar.
+              <h1 className="text-foreground mb-3">
+                Tu experiencia nos ayuda a mejorar
               </h1>
             )}
             <Annotate id="intro-text" active={wireframeMode}>
@@ -2211,14 +2243,18 @@ export default function App() {
               </div>
             )}
 
+            {!wireframeMode && (
+              <Breadcrumb activePaso={activePaso} onGoToPaso={(n) => setPaso(n)} />
+            )}
+
             <div className={wireframeMode ? "pointer-events-none select-none" : ""}>
               <div className="w-full bg-white rounded-2xl border border-border shadow-sm">
 
                 {/* Header band */}
                 <div className="bg-primary px-8 py-4 rounded-t-2xl">
-                  <h2 className="text-lg font-semibold text-primary-foreground" style={{ fontFamily: "'Source Sans 3', system-ui, sans-serif" }}>
+                  <p className="text-lg font-semibold text-primary-foreground" style={{ fontFamily: "'Source Sans 3', system-ui, sans-serif" }}>
                     Formulario de radicación
-                  </h2>
+                  </p>
                 </div>
 
                 <div className="px-8 py-8">
