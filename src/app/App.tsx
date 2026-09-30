@@ -2186,26 +2186,26 @@ export default function App() {
         </div>
       )}
 
+      {/* Hero band — título + descripción, solo modo color, paso 1 */}
+      {!wireframeMode && activePaso === 1 && (
+        <section className="w-full bg-[#FAFAFA] border-b border-border/40 py-10 px-4">
+          <div className="max-w-[980px] mx-auto text-center">
+            <h1 className="text-foreground mb-4">
+              Tu experiencia nos ayuda a mejorar
+            </h1>
+            <p className="text-base text-muted-foreground leading-relaxed max-w-[720px] mx-auto text-center">
+              En AXA COLPATRIA tu tranquilidad es nuestra prioridad. Queremos ofrecerte el mejor servicio posible; por eso, creamos este espacio para gestionar tus <strong className="font-semibold text-foreground">solicitudes</strong>, <strong className="font-semibold text-foreground">quejas</strong> o <strong className="font-semibold text-foreground">reclamos</strong>, resolver tus dudas y escuchar tus comentarios. Cuéntanos qué necesitas y te daremos una respuesta rápida y oportuna.
+            </p>
+          </div>
+        </section>
+      )}
+
       {/* Main */}
       <main className="flex-1 flex justify-center px-4 py-6">
         <div className="w-full max-w-[980px] flex flex-col gap-0">
 
-          {/* Intro text + breadcrumb — full width, fuera del flex-row para que el aside arranque al mismo nivel que el form card */}
-          {!wireframeMode && (
-            <>
-              {activePaso === 1 && (
-                <div className="text-center pt-2 pb-4">
-                  <h1 className="text-foreground mb-3">
-                    Tu experiencia nos ayuda a mejorar
-                  </h1>
-                  <p className="text-base text-muted-foreground leading-relaxed max-w-[620px] mx-auto">
-                    En AXA COLPATRIA tu tranquilidad es nuestra prioridad. Queremos ofrecerte el mejor servicio posible; por eso, creamos este espacio para gestionar tus <strong className="font-semibold text-foreground">solicitudes</strong>, <strong className="font-semibold text-foreground">quejas</strong> o <strong className="font-semibold text-foreground">reclamos</strong>, resolver tus dudas y escuchar tus comentarios. Cuéntanos qué necesitas y te daremos una respuesta rápida y oportuna.
-                  </p>
-                </div>
-              )}
-              <Breadcrumb />
-            </>
-          )}
+          {/* Breadcrumb */}
+          {!wireframeMode && <Breadcrumb />}
 
           {/* Wireframe intro text */}
           {wireframeMode && activePaso === 1 && (
