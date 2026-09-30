@@ -370,7 +370,7 @@ function SelectField({
         {!optional && <span className="text-red-500 ml-0.5">*</span>}
         {optional && <span className="text-xs font-normal text-muted-foreground ml-1">(opcional)</span>}
       </label>
-      {hint && <p className="text-xs text-muted-foreground -mt-0.5">{hint}</p>}
+      {hint && <p className="text-xs text-[#1A1D21] -mt-0.5">{hint}</p>}
       <div>
         <button
           ref={btnRef} id={id} type="button"
@@ -554,7 +554,7 @@ function TextField({
       />
       {hasError
         ? <p className="text-xs -mt-0.5" style={{ color: FIELD_ERROR_COLOR }}>Campo no cumple con el formato requerido</p>
-        : hint && <p className="text-xs text-muted-foreground -mt-0.5">{hint}</p>}
+        : hint && <p className="text-xs text-[#1A1D21] -mt-0.5">{hint}</p>}
     </div>
   );
 }
@@ -570,7 +570,7 @@ function TextAreaField({
       <label htmlFor={id} className="text-sm font-semibold text-foreground flex items-center gap-1">
         {label}<span className="text-red-500 ml-0.5">*</span>
       </label>
-      {hint && <p className="text-xs text-muted-foreground -mt-0.5 leading-relaxed">{hint}</p>}
+      {hint && <p className="text-xs text-[#1A1D21] -mt-0.5 leading-relaxed">{hint}</p>}
       <textarea
         id={id} value={value}
         onChange={(e) => onChange(e.target.value)}
@@ -1125,7 +1125,7 @@ function NavButtons({ canContinue, onBack, onContinue, readyLabel = "Todos los c
 
 // ── Breadcrumb ────────────────────────────────────────────────────────────────
 
-function Breadcrumb() {
+function Breadcrumb({ className = "mb-4" }: { className?: string }) {
   const crumbs = [
     { label: "Home", icon: true },
     { label: "Contáctanos" },
@@ -1133,19 +1133,24 @@ function Breadcrumb() {
     { label: "Formulario de radicación" },
   ];
   return (
-    <nav aria-label="Miga de pan" className="flex items-center gap-1 text-xs text-muted-foreground mb-4 flex-wrap">
+    <nav aria-label="Miga de pan" className={`flex items-center gap-1 text-sm text-[#606776] flex-wrap ${className}`}>
       {crumbs.map((crumb, i) => {
         const isLast = i === crumbs.length - 1;
         return (
           <Fragment key={crumb.label}>
-            {i > 0 && <ChevronRight size={11} className="shrink-0 text-muted-foreground/40" />}
+            {i > 0 && <ChevronRight size={12} className="shrink-0 text-[#606776]" />}
             {isLast ? (
-              <span className="font-semibold text-foreground">{crumb.label}</span>
+              <span aria-current="page" className="font-semibold text-[#1A1D21]">{crumb.label}</span>
             ) : (
-              <span className="flex items-center gap-1 cursor-default">
-                {crumb.icon && <Home size={11} className="inline -mt-0.5" />}
+              <a
+                href="#"
+                onClick={(e) => e.preventDefault()}
+                aria-label={crumb.icon ? crumb.label : undefined}
+                className="flex items-center gap-1 text-[#606776] hover:text-[#2B303B] hover:underline transition-colors"
+              >
+                {crumb.icon && <Home size={13} className="inline -mt-0.5" />}
                 {!crumb.icon && crumb.label}
-              </span>
+              </a>
             )}
           </Fragment>
         );
@@ -2186,16 +2191,28 @@ export default function App() {
         </div>
       )}
 
-      {/* Hero band — título + descripción, solo modo color, paso 1 */}
+      {/* Hero — imagen de fondo con miga de pan, título y descripción, solo modo color, paso 1 */}
       {!wireframeMode && activePaso === 1 && (
-        <section className="w-full bg-[#FAFAFA] border-b border-border/40 py-10 px-4">
-          <div className="max-w-[980px] mx-auto text-center">
-            <h1 className="text-foreground mb-4">
-              Tu experiencia nos ayuda a mejorar
-            </h1>
-            <p className="text-base text-muted-foreground leading-relaxed max-w-[720px] mx-auto text-center">
-              En AXA COLPATRIA tu tranquilidad es nuestra prioridad. Queremos ofrecerte el mejor servicio posible; por eso, creamos este espacio para gestionar tus <strong className="font-semibold text-foreground">solicitudes</strong>, <strong className="font-semibold text-foreground">quejas</strong> o <strong className="font-semibold text-foreground">reclamos</strong>, resolver tus dudas y escuchar tus comentarios. Cuéntanos qué necesitas y te daremos una respuesta rápida y oportuna.
-            </p>
+        <section
+          className="relative w-full overflow-hidden border-b border-border/40"
+          style={{
+            backgroundImage: "url('https://res.cloudinary.com/ddqbnr9vo/image/upload/v1790785394/IMG_2792_j0e6xc.jpg')",
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+          }}
+        >
+          {/* Velo claro para asegurar el contraste del texto oscuro sobre la imagen */}
+          <div className="absolute inset-0" style={{ background: "rgba(255,255,255,0.55)" }} aria-hidden="true" />
+          <div className="relative max-w-[980px] mx-auto px-4 pt-4 pb-12">
+            <Breadcrumb className="mb-10" />
+            <div className="text-center">
+              <h1 className="text-[#1A1D21] mb-4">
+                Tu experiencia nos ayuda a mejorar
+              </h1>
+              <p className="text-[#1A1D21] leading-relaxed max-w-[720px] mx-auto text-center" style={{ fontSize: 20 }}>
+                En AXA COLPATRIA tu tranquilidad es nuestra prioridad. Queremos ofrecerte el mejor servicio posible; por eso, creamos este espacio para gestionar tus <strong className="font-semibold">solicitudes</strong>, <strong className="font-semibold">quejas</strong> o <strong className="font-semibold">reclamos</strong>, resolver tus dudas y escuchar tus comentarios. Cuéntanos qué necesitas y te daremos una respuesta rápida y oportuna.
+              </p>
+            </div>
           </div>
         </section>
       )}
@@ -2205,7 +2222,8 @@ export default function App() {
         <div className="w-full max-w-[980px] flex flex-col gap-0">
 
           {/* Breadcrumb */}
-          {!wireframeMode && <Breadcrumb />}
+          {/* En el paso 1 vive dentro del hero */}
+          {!wireframeMode && activePaso !== 1 && <Breadcrumb />}
 
           {/* Wireframe intro text */}
           {wireframeMode && activePaso === 1 && (
