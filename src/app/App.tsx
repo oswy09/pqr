@@ -2202,7 +2202,7 @@ export default function App() {
           }}
         >
           {/* Velo claro para asegurar el contraste del texto oscuro sobre la imagen */}
-          <div className="absolute inset-0" style={{ background: "rgba(255,255,255,0.55)" }} aria-hidden="true" />
+          <div className="absolute inset-0" style={{ background: "rgba(255,255,255,0.15)" }} aria-hidden="true" />
           <div className="relative max-w-[980px] mx-auto px-4 pt-4 pb-12">
             <Breadcrumb className="mb-10" />
             <div className="text-center">
