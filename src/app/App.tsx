@@ -1125,15 +1125,15 @@ function NavButtons({ canContinue, onBack, onContinue, readyLabel = "Todos los c
 
 // ── Breadcrumb ────────────────────────────────────────────────────────────────
 
-function Breadcrumb({ className = "mb-4" }: { className?: string }) {
+function Breadcrumb() {
   const crumbs = [
-    { label: "Home", icon: true },
+    { label: "Home" },
     { label: "Contáctanos" },
     { label: "PQRS" },
     { label: "Formulario de radicación" },
   ];
   return (
-    <nav aria-label="Miga de pan" className={`flex items-center gap-1 text-sm text-[#606776] flex-wrap ${className}`}>
+    <nav aria-label="Miga de pan" className="flex items-center gap-1 text-sm text-[#606776] flex-wrap">
       {crumbs.map((crumb, i) => {
         const isLast = i === crumbs.length - 1;
         return (
@@ -1145,11 +1145,9 @@ function Breadcrumb({ className = "mb-4" }: { className?: string }) {
               <a
                 href="#"
                 onClick={(e) => e.preventDefault()}
-                aria-label={crumb.icon ? crumb.label : undefined}
-                className="flex items-center gap-1 text-[#606776] hover:text-[#2B303B] hover:underline transition-colors"
+                className="text-[#606776] hover:text-[#2B303B] hover:underline transition-colors"
               >
-                {crumb.icon && <Home size={13} className="inline -mt-0.5" />}
-                {!crumb.icon && crumb.label}
+                {crumb.label}
               </a>
             )}
           </Fragment>
@@ -2191,6 +2189,15 @@ export default function App() {
         </div>
       )}
 
+      {/* Miga de pan — franja propia sobre el hero, solo modo color */}
+      {!wireframeMode && (
+        <div className="w-full bg-white">
+          <div className="max-w-[980px] mx-auto px-4 py-3">
+            <Breadcrumb />
+          </div>
+        </div>
+      )}
+
       {/* Hero — imagen de fondo con miga de pan, título y descripción, solo modo color, paso 1 */}
       {!wireframeMode && activePaso === 1 && (
         <section
@@ -2203,8 +2210,7 @@ export default function App() {
         >
           {/* Velo claro para asegurar el contraste del texto oscuro sobre la imagen */}
           <div className="absolute inset-0" style={{ background: "rgba(255,255,255,0.15)" }} aria-hidden="true" />
-          <div className="relative max-w-[980px] mx-auto px-4 pt-4 pb-12">
-            <Breadcrumb className="mb-10" />
+          <div className="relative max-w-[980px] mx-auto px-4 py-12">
             <div className="text-center">
               <h1 className="text-[#1A1D21] mb-4">
                 Tu experiencia nos ayuda a mejorar
@@ -2222,8 +2228,6 @@ export default function App() {
         <div className="w-full max-w-[980px] flex flex-col gap-0">
 
           {/* Breadcrumb */}
-          {/* En el paso 1 vive dentro del hero */}
-          {!wireframeMode && activePaso !== 1 && <Breadcrumb />}
 
           {/* Wireframe intro text */}
           {wireframeMode && activePaso === 1 && (
