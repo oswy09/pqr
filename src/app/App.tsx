@@ -36,7 +36,6 @@ const PRODUCTOS = ["ARL", "Salud", "Autos", "SOAT", "Vida", "Otros Seguros"];
 const PRODUCTOS_COLOR = [
   "ARL",
   "Automóviles",
-  "Generales",
   "Salud",
   "SOAT",
   "Títulos de Capitalización",
@@ -52,7 +51,7 @@ const PRODUCTO_LINEAS_MAP: Record<string, string> = {
   "Automóviles": "Autos · Motos · Servicio público · Responsabilidad civil",
   "SOAT": "SOAT",
   "Vida": "Vida individual · Vida deudor · Grupo deudor",
-  "Generales": "Hogar · Incendio · Sustracción · AP",
+  "Otros seguros": "Hogar · Incendio · Sustracción · AP",
 };
 
 const TIPOS_SOLICITUD = ["Petición", "Queja", "Reclamo", "Felicitaciones", "Sugerencias"];
@@ -125,7 +124,7 @@ const TIPOLOGIAS_POR_PRODUCTO: Record<string, string[]> = {
 };
 // Alias para los nombres de producto del prototipo a color (mismos motivos que su equivalente).
 TIPOLOGIAS_POR_PRODUCTO["Automóviles"] = TIPOLOGIAS_POR_PRODUCTO.Autos;
-TIPOLOGIAS_POR_PRODUCTO["Generales"] = TIPOLOGIAS_POR_PRODUCTO["Otros Seguros"];
+TIPOLOGIAS_POR_PRODUCTO["Otros seguros"] = TIPOLOGIAS_POR_PRODUCTO["Otros Seguros"];
 
 const TIPOLOGIAS_FIJAS = [
   "Afiliación",
@@ -138,6 +137,14 @@ const SUBTIPOLOGIAS_FIJAS = [
   "Inconformidad con el uso de mis datos o canal de contacto",
   "Inconformidad con mi diagnóstico, tratamiento o concepto médico",
 ];
+
+// Opciones de tipo de seguro según producto (solo para Salud, Vida y Otros seguros)
+const TIPO_SEGURO_OPCIONES: Record<string, string[]> = {
+  "Salud": ["Póliza de Salud", "Medicina Prepagada"],
+  "Vida": ["Vida individual", "Vida deudor", "Grupo deudor"],
+  "Otros seguros": ["Incendio", "Hogar"],
+};
+const PRODUCTOS_CON_TIPO_SEGURO = new Set(["Salud", "Vida", "Otros seguros"]);
 
 
 const TIPOS_CON_AFECTADO = [...TIPOS_CON_AFECTADO_SET];
@@ -210,6 +217,7 @@ export interface DatosPersona {
 }
 export interface FormState {
   producto: string; subproducto: string; tipoSolicitud: string;
+  tipoSeguro: string;
   tipologia: string; subtipologia: string;
   medio: string; presenter: DatosPersona;
   direccion: string; sexo: string; grupoEspecial: string[];
@@ -1278,7 +1286,7 @@ function Paso1({ form, setForm, onContinue, wireframeMode }: { form: FormState; 
     setForm({ ...form, tipologia: v, subtipologia: "" });
 
   const resetProducto = (v: string) => ({
-    ...form, producto: v, subproducto: "", tipoSolicitud: wireframeMode ? "" : form.tipoSolicitud, tipologia: "", subtipologia: "",
+    ...form, producto: v, subproducto: "", tipoSolicitud: wireframeMode ? "" : form.tipoSolicitud, tipoSeguro: "", tipologia: "", subtipologia: "",
     placa: "", terceroAfectado: "", placaTercero: "",
     pais: "", departamento: "", ciudad: "", lugarServicio: "", lugarServicioOtro: "",
     vidaAsociadaCredito: null, numCredito: "",
@@ -1378,6 +1386,16 @@ function Paso1({ form, setForm, onContinue, wireframeMode }: { form: FormState; 
               onChange={(v) => setForm(resetProducto(v))}
             />
 
+            {PRODUCTOS_CON_TIPO_SEGURO.has(form.producto) && (
+              <SelectField
+                id="tipoSeguro"
+                label="Selecciona el tipo de seguro relacionado con tu PQRS"
+                placeholder="Selecciona un tipo de seguro"
+                options={TIPO_SEGURO_OPCIONES[form.producto] ?? []}
+                value={form.tipoSeguro}
+                onChange={(v) => setForm({ ...form, tipoSeguro: v })}
+              />
+            )}
 
             {showAutomovilesAlert && (
               <div className="flex gap-3 p-4 rounded-xl bg-amber-50 border border-amber-200">
@@ -2093,7 +2111,7 @@ function Paso3({ form, setForm, onBack, onContinue, wireframeMode }: {
 export default function App() {
   const [paso, setPaso] = useState(1);
   const [form, setForm] = useState<FormState>({
-    producto: "", subproducto: "", tipoSolicitud: "", tipologia: "", subtipologia: "",
+    producto: "", subproducto: "", tipoSolicitud: "", tipoSeguro: "", tipologia: "", subtipologia: "",
     medio: "Correo electrónico", presenter: emptyPersona(), direccion: "", sexo: "", grupoEspecial: [],
     placa: "", terceroAfectado: "", placaTercero: "",
     pais: "", departamento: "", ciudad: "", lugarServicio: "", lugarServicioOtro: "",
