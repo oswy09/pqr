@@ -138,13 +138,19 @@ const SUBTIPOLOGIAS_FIJAS = [
   "Inconformidad con mi diagnóstico, tratamiento o concepto médico",
 ];
 
-// Opciones de tipo de seguro según producto (solo para Salud, Vida y Otros seguros)
+// Opciones de tipo de seguro (solo para Salud y Otros seguros)
 const TIPO_SEGURO_OPCIONES: Record<string, string[]> = {
   "Salud": ["Póliza de Salud", "Medicina Prepagada"],
-  "Vida": ["Vida individual", "Vida deudor", "Grupo deudor"],
   "Otros seguros": ["Incendio", "Hogar"],
 };
-const PRODUCTOS_CON_TIPO_SEGURO = new Set(["Salud", "Vida", "Otros seguros"]);
+const PRODUCTOS_CON_TIPO_SEGURO = new Set(["Salud", "Otros seguros"]);
+
+// ¿Dónde adquiriste tu seguro? (Vida y Otros seguros)
+const DONDE_ADQUIRISTE_OPTS = [
+  "Falabella", "Davibank", "Davivienda", "Bancolombia",
+  "Banco de Bogotá", "BBVA", "Colpatria (banca)", "Otro",
+];
+const PRODUCTOS_CON_DONDE_ADQUIRISTE = new Set(["Vida", "Otros seguros"]);
 
 
 const TIPOS_CON_AFECTADO = [...TIPOS_CON_AFECTADO_SET];
@@ -217,7 +223,7 @@ export interface DatosPersona {
 }
 export interface FormState {
   producto: string; subproducto: string; tipoSolicitud: string;
-  tipoSeguro: string;
+  tipoSeguro: string; dondeAdquiriste: string;
   tipologia: string; subtipologia: string;
   medio: string; presenter: DatosPersona;
   direccion: string; sexo: string; grupoEspecial: string[];
@@ -1286,7 +1292,7 @@ function Paso1({ form, setForm, onContinue, wireframeMode }: { form: FormState; 
     setForm({ ...form, tipologia: v, subtipologia: "" });
 
   const resetProducto = (v: string) => ({
-    ...form, producto: v, subproducto: "", tipoSolicitud: wireframeMode ? "" : form.tipoSolicitud, tipoSeguro: "", tipologia: "", subtipologia: "",
+    ...form, producto: v, subproducto: "", tipoSolicitud: wireframeMode ? "" : form.tipoSolicitud, tipoSeguro: "", dondeAdquiriste: "", tipologia: "", subtipologia: "",
     placa: "", terceroAfectado: "", placaTercero: "",
     pais: "", departamento: "", ciudad: "", lugarServicio: "", lugarServicioOtro: "",
     vidaAsociadaCredito: null, numCredito: "",
@@ -1397,6 +1403,17 @@ function Paso1({ form, setForm, onContinue, wireframeMode }: { form: FormState; 
               />
             )}
 
+            {PRODUCTOS_CON_DONDE_ADQUIRISTE.has(form.producto) && (
+              <SelectField
+                id="dondeAdquiriste"
+                label="¿Dónde adquiriste tu seguro?"
+                placeholder="Selecciona una opción"
+                options={DONDE_ADQUIRISTE_OPTS}
+                value={form.dondeAdquiriste}
+                onChange={(v) => setForm({ ...form, dondeAdquiriste: v })}
+              />
+            )}
+
             {showAutomovilesAlert && (
               <div className="flex gap-3 p-4 rounded-xl bg-amber-50 border border-amber-200">
                 <AlertCircle size={17} className="shrink-0 mt-0.5 text-amber-600" />
@@ -1457,12 +1474,11 @@ function CamposEspecificos({ form, setForm }: { form: FormState; setForm: (f: Fo
   const esSoat = producto === "SOAT";
   const esSalud = producto === "Salud";
   const esArl = producto === "ARL";
-  const esVida = producto === "Vida";
   const requiere = TIPOS_CON_AFECTADO_SET.has(tipoSolicitud);
   const tieneUbicacion = esSoat || esSalud || esArl;
   const tienePlaca = esAutos || esSoat;
 
-  const hasContent = (requiere && tienePlaca) || (requiere && esSalud) || (requiere && esVida);
+  const hasContent = (requiere && tienePlaca) || (requiere && esSalud);
   if (!hasContent) return null;
 
   const set = (k: keyof FormState) => (v: string) => setForm({ ...form, [k]: v });
@@ -1497,40 +1513,6 @@ function CamposEspecificos({ form, setForm }: { form: FormState; setForm: (f: Fo
         </>
       )}
 
-      {/* VIDA: asociado a crédito */}
-      {requiere && esVida && (
-        <>
-          <div className="flex flex-col gap-2">
-            <p className="text-sm font-semibold text-foreground flex items-center gap-1">
-              ¿Tu seguro de vida está asociado a un crédito?
-              <span className="text-red-500 ml-0.5">*</span>
-            </p>
-            <div className="flex gap-3">
-              {[{ val: true, label: "Sí" }, { val: false, label: "No" }].map(({ val, label }) => {
-                const sel = form.vidaAsociadaCredito === val;
-                return (
-                  <button key={String(val)} type="button"
-                    onClick={() => setForm({ ...form, vidaAsociadaCredito: val, numCredito: "" })}
-                    className={`px-5 py-2 rounded-full border-2 text-sm font-semibold transition-all cursor-pointer flex items-center gap-2
-                      ${sel ? "border-primary bg-accent text-primary" : "border-border text-muted-foreground hover:border-primary/40"}`}>
-                    {label}
-                    {sel && <CheckCircle2 size={13} className="text-primary" />}
-                  </button>
-                );
-              })}
-            </div>
-          </div>
-          {form.vidaAsociadaCredito === true && (
-            <TextField
-              id="num-credito"
-              label="Número del crédito y/o Entidad con la que tienes el crédito"
-              placeholder="Ej. 123456789 - Banco XYZ"
-              value={form.numCredito}
-              onChange={set("numCredito")}
-            />
-          )}
-        </>
-      )}
     </div>
   );
 }
@@ -2111,7 +2093,7 @@ function Paso3({ form, setForm, onBack, onContinue, wireframeMode }: {
 export default function App() {
   const [paso, setPaso] = useState(1);
   const [form, setForm] = useState<FormState>({
-    producto: "", subproducto: "", tipoSolicitud: "", tipoSeguro: "", tipologia: "", subtipologia: "",
+    producto: "", subproducto: "", tipoSolicitud: "", tipoSeguro: "", dondeAdquiriste: "", tipologia: "", subtipologia: "",
     medio: "Correo electrónico", presenter: emptyPersona(), direccion: "", sexo: "", grupoEspecial: [],
     placa: "", terceroAfectado: "", placaTercero: "",
     pais: "", departamento: "", ciudad: "", lugarServicio: "", lugarServicioOtro: "",
