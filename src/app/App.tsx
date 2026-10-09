@@ -145,12 +145,11 @@ const TIPO_SEGURO_OPCIONES: Record<string, string[]> = {
 };
 const PRODUCTOS_CON_TIPO_SEGURO = new Set(["Salud", "Otros seguros"]);
 
-// ¿Dónde adquiriste tu seguro? (Vida y Otros seguros)
+// ¿Dónde adquiriste tu seguro? (Todos los productos en Petición, Queja o Reclamo)
 const DONDE_ADQUIRISTE_OPTS = [
   "Falabella", "Davibank", "Davivienda", "Bancolombia",
   "Banco de Bogotá", "BBVA", "Colpatria (banca)", "Otro",
 ];
-const PRODUCTOS_CON_DONDE_ADQUIRISTE = new Set(["Vida", "Otros seguros"]);
 
 
 const TIPOS_CON_AFECTADO = [...TIPOS_CON_AFECTADO_SET];
@@ -1273,6 +1272,7 @@ function Paso1({ form, setForm, onContinue, wireframeMode }: { form: FormState; 
   const showTitulosAlert = form.producto === "Títulos de Capitalización";
   const tipologiaOpts = getTipologiaOpts(form.producto);
   const subtipologiaOpts = getSubtipologiaOpts(form.tipologia);
+  const showDondeAdquiriste = Boolean(form.producto) && !showTitulosAlert && TIPOS_CON_AFECTADO_SET.has(form.tipoSolicitud);
 
   // Tipos disponibles según producto: ARL no aplica Felicitaciones ni Sugerencias
   // (solo aplica en modo wireframe, donde producto ya se conoce en este mismo paso)
@@ -1348,7 +1348,10 @@ function Paso1({ form, setForm, onContinue, wireframeMode }: { form: FormState; 
           <TipoSolicitudCards
             options={TIPOS_SOLICITUD}
             value={form.tipoSolicitud}
-            onChange={(v) => setForm({ ...form, tipoSolicitud: v })}
+            onChange={(v) => {
+              const resetDonde = !TIPOS_CON_AFECTADO_SET.has(v) ? "" : form.dondeAdquiriste;
+              setForm({ ...form, tipoSolicitud: v, dondeAdquiriste: resetDonde });
+            }}
             disabled={false}
           />
         )}
@@ -1403,7 +1406,7 @@ function Paso1({ form, setForm, onContinue, wireframeMode }: { form: FormState; 
               />
             )}
 
-            {PRODUCTOS_CON_DONDE_ADQUIRISTE.has(form.producto) && (
+            {showDondeAdquiriste && (
               <SelectField
                 id="dondeAdquiriste"
                 label="¿Dónde adquiriste tu seguro?"
