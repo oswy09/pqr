@@ -1272,7 +1272,7 @@ function Paso1({ form, setForm, onContinue, wireframeMode }: { form: FormState; 
   const showTitulosAlert = form.producto === "Títulos de Capitalización";
   const tipologiaOpts = getTipologiaOpts(form.producto);
   const subtipologiaOpts = getSubtipologiaOpts(form.tipologia);
-  const showDondeAdquiriste = Boolean(form.producto) && !showTitulosAlert && TIPOS_CON_AFECTADO_SET.has(form.tipoSolicitud);
+  const showDondeAdquiriste = Boolean(form.producto) && TIPOS_CON_AFECTADO_SET.has(form.tipoSolicitud);
 
   // Tipos disponibles según producto: ARL no aplica Felicitaciones ni Sugerencias
   // (solo aplica en modo wireframe, donde producto ya se conoce en este mismo paso)
