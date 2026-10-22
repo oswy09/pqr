@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef, useCallback } from "react";
 import { createPortal } from "react-dom";
-import { Layers, Code2 } from "lucide-react";
+import { Code2 } from "lucide-react";
 
 // ── CSS groups to display ─────────────────────────────────────────────────────
 
@@ -199,13 +199,12 @@ export function InspectorPanel() {
         data-inspector-ui
         onClick={() => setActive(p => !p)}
         style={{ fontFamily: "system-ui, sans-serif" }}
-        className={`fixed bottom-5 left-5 z-[9999] flex items-center gap-2 px-3.5 py-2 rounded-full text-xs font-semibold shadow-xl border-2 transition-all select-none ${
+        className={`fixed bottom-5 left-5 z-[9999] flex items-center px-3.5 py-2 rounded-full text-xs font-semibold shadow-xl border-2 transition-all select-none ${
           active
             ? "bg-[#00008F] text-white border-[#00008F]"
             : "bg-white text-[#00008F] border-[#00008F]/40 hover:border-[#00008F] hover:shadow-2xl"
         }`}
       >
-        <Layers size={13} />
         {active ? "Inspectando…" : "Inspeccionar"}
       </button>
 
