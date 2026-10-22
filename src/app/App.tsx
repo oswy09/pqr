@@ -1273,6 +1273,9 @@ function Paso1({ form, setForm, onContinue, wireframeMode }: { form: FormState; 
   const tipologiaOpts = getTipologiaOpts(form.producto);
   const subtipologiaOpts = getSubtipologiaOpts(form.tipologia);
   const showDondeAdquiriste = Boolean(form.producto) && TIPOS_CON_AFECTADO_SET.has(form.tipoSolicitud);
+  // Felicitaciones y Sugerencias no piden el tipo de seguro
+  const esFelicitacionOSugerencia = ["Felicitaciones", "Sugerencias"].includes(form.tipoSolicitud);
+  const showTipoSeguro = PRODUCTOS_CON_TIPO_SEGURO.has(form.producto) && !esFelicitacionOSugerencia;
 
   // Tipos disponibles según producto: ARL no aplica Felicitaciones ni Sugerencias
   // (solo aplica en modo wireframe, donde producto ya se conoce en este mismo paso)
@@ -1350,7 +1353,8 @@ function Paso1({ form, setForm, onContinue, wireframeMode }: { form: FormState; 
             value={form.tipoSolicitud}
             onChange={(v) => {
               const resetDonde = !TIPOS_CON_AFECTADO_SET.has(v) ? "" : form.dondeAdquiriste;
-              setForm({ ...form, tipoSolicitud: v, dondeAdquiriste: resetDonde });
+              const resetTipoSeguro = ["Felicitaciones", "Sugerencias"].includes(v) ? "" : form.tipoSeguro;
+              setForm({ ...form, tipoSolicitud: v, dondeAdquiriste: resetDonde, tipoSeguro: resetTipoSeguro });
             }}
             disabled={false}
           />
@@ -1395,7 +1399,7 @@ function Paso1({ form, setForm, onContinue, wireframeMode }: { form: FormState; 
               onChange={(v) => setForm(resetProducto(v))}
             />
 
-            {PRODUCTOS_CON_TIPO_SEGURO.has(form.producto) && (
+            {showTipoSeguro && (
               <SelectField
                 id="tipoSeguro"
                 label="Selecciona el tipo de seguro relacionado con tu PQRS"
