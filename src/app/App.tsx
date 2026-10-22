@@ -139,6 +139,7 @@ const SUBTIPOLOGIAS_FIJAS = [
 ];
 
 // Opciones de tipo de seguro (solo para Salud, Vida y Otros seguros)
+const TIPO_SEGURO_OTRO = "Otro seguro"; // habilita el campo "¿Cuál?"
 const TIPO_SEGURO_OPCIONES: Record<string, string[]> = {
   "Salud": ["Póliza de Salud", "Medicina Prepagada"],
   "Vida": [
@@ -151,7 +152,31 @@ const TIPO_SEGURO_OPCIONES: Record<string, string[]> = {
     "Seguro colectivo de Vida",
     "Seguro de pensiones ley 100",
   ],
-  "Otros seguros": ["Incendio", "Hogar"],
+  "Otros seguros": [
+    "Seguro todo riesgo contratista",
+    "Póliza de cumplimiento",
+    "Póliza de manejo",
+    "Póliza de responsabilidad civil",
+    "Seguro de Incendio",
+    "Seguro de Sustracción - PIT",
+    "Seguro de aviación",
+    "Seguro de minas y petróleos",
+    "Seguro de lucro cesante",
+    "Seguro de terremoto",
+    "Seguro de transporte",
+    "Seguro de vidrios",
+    "Seguro de accidentes personales",
+    "Póliza vida grupo",
+    "Seguro de navegación y casco",
+    "Seguro de desempleo",
+    "Seguro agropecuario",
+    "Seguro decenal",
+    "Seguro de montaje y rotura de máquina",
+    "Seguro de enfermedades de alto costo",
+    "Seguro de hogar",
+    "Seguro de corriente débil",
+    TIPO_SEGURO_OTRO,
+  ],
 };
 const PRODUCTOS_CON_TIPO_SEGURO = new Set(Object.keys(TIPO_SEGURO_OPCIONES));
 
@@ -232,7 +257,7 @@ export interface DatosPersona {
 }
 export interface FormState {
   producto: string; subproducto: string; tipoSolicitud: string;
-  tipoSeguro: string; dondeAdquiriste: string;
+  tipoSeguro: string; tipoSeguroOtro: string; dondeAdquiriste: string;
   tipologia: string; subtipologia: string;
   medio: string; presenter: DatosPersona;
   direccion: string; sexo: string; grupoEspecial: string[];
@@ -1305,7 +1330,7 @@ function Paso1({ form, setForm, onContinue, wireframeMode }: { form: FormState; 
     setForm({ ...form, tipologia: v, subtipologia: "" });
 
   const resetProducto = (v: string) => ({
-    ...form, producto: v, subproducto: "", tipoSolicitud: wireframeMode ? "" : form.tipoSolicitud, tipoSeguro: "", dondeAdquiriste: "", tipologia: "", subtipologia: "",
+    ...form, producto: v, subproducto: "", tipoSolicitud: wireframeMode ? "" : form.tipoSolicitud, tipoSeguro: "", tipoSeguroOtro: "", dondeAdquiriste: "", tipologia: "", subtipologia: "",
     placa: "", terceroAfectado: "", placaTercero: "",
     pais: "", departamento: "", ciudad: "", lugarServicio: "", lugarServicioOtro: "",
     vidaAsociadaCredito: null, numCredito: "",
@@ -1364,7 +1389,8 @@ function Paso1({ form, setForm, onContinue, wireframeMode }: { form: FormState; 
             onChange={(v) => {
               const resetDonde = !TIPOS_CON_AFECTADO_SET.has(v) ? "" : form.dondeAdquiriste;
               const resetTipoSeguro = ["Felicitaciones", "Sugerencias"].includes(v) ? "" : form.tipoSeguro;
-              setForm({ ...form, tipoSolicitud: v, dondeAdquiriste: resetDonde, tipoSeguro: resetTipoSeguro });
+              const resetTipoSeguroOtro = resetTipoSeguro === TIPO_SEGURO_OTRO ? form.tipoSeguroOtro : "";
+              setForm({ ...form, tipoSolicitud: v, dondeAdquiriste: resetDonde, tipoSeguro: resetTipoSeguro, tipoSeguroOtro: resetTipoSeguroOtro });
             }}
             disabled={false}
           />
@@ -1416,7 +1442,17 @@ function Paso1({ form, setForm, onContinue, wireframeMode }: { form: FormState; 
                 placeholder="Selecciona un tipo de seguro"
                 options={TIPO_SEGURO_OPCIONES[form.producto] ?? []}
                 value={form.tipoSeguro}
-                onChange={(v) => setForm({ ...form, tipoSeguro: v })}
+                onChange={(v) => setForm({ ...form, tipoSeguro: v, tipoSeguroOtro: v === TIPO_SEGURO_OTRO ? form.tipoSeguroOtro : "" })}
+              />
+            )}
+
+            {showTipoSeguro && form.tipoSeguro === TIPO_SEGURO_OTRO && (
+              <TextField
+                id="tipoSeguroOtro"
+                label="¿Cuál?"
+                placeholder="Escribe el tipo de seguro"
+                value={form.tipoSeguroOtro}
+                onChange={(v) => setForm({ ...form, tipoSeguroOtro: v })}
               />
             )}
 
@@ -2110,7 +2146,7 @@ function Paso3({ form, setForm, onBack, onContinue, wireframeMode }: {
 export default function App() {
   const [paso, setPaso] = useState(1);
   const [form, setForm] = useState<FormState>({
-    producto: "", subproducto: "", tipoSolicitud: "", tipoSeguro: "", dondeAdquiriste: "", tipologia: "", subtipologia: "",
+    producto: "", subproducto: "", tipoSolicitud: "", tipoSeguro: "", tipoSeguroOtro: "", dondeAdquiriste: "", tipologia: "", subtipologia: "",
     medio: "Correo electrónico", presenter: emptyPersona(), direccion: "", sexo: "", grupoEspecial: [],
     placa: "", terceroAfectado: "", placaTercero: "",
     pais: "", departamento: "", ciudad: "", lugarServicio: "", lugarServicioOtro: "",
