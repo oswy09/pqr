@@ -138,12 +138,22 @@ const SUBTIPOLOGIAS_FIJAS = [
   "Inconformidad con mi diagnóstico, tratamiento o concepto médico",
 ];
 
-// Opciones de tipo de seguro (solo para Salud y Otros seguros)
+// Opciones de tipo de seguro (solo para Salud, Vida y Otros seguros)
 const TIPO_SEGURO_OPCIONES: Record<string, string[]> = {
   "Salud": ["Póliza de Salud", "Medicina Prepagada"],
+  "Vida": [
+    "Seguro educativo",
+    "Póliza vida individual",
+    "Seguro de accidentes personales",
+    "Póliza vida grupo",
+    "Seguro de invalidez y sobrevivencia",
+    "Pensiones voluntarias y rentas vitalicias",
+    "Seguro colectivo de Vida",
+    "Seguro de pensiones ley 100",
+  ],
   "Otros seguros": ["Incendio", "Hogar"],
 };
-const PRODUCTOS_CON_TIPO_SEGURO = new Set(["Salud", "Otros seguros"]);
+const PRODUCTOS_CON_TIPO_SEGURO = new Set(Object.keys(TIPO_SEGURO_OPCIONES));
 
 // ¿Dónde adquiriste tu seguro? (Todos los productos en Petición, Queja o Reclamo)
 const DONDE_ADQUIRISTE_OPTS = [
